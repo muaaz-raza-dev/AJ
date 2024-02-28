@@ -1,0 +1,4 @@
+./aj-client/node_modules
+./aj-client/.env
+./aj-server/node_modules
+./aj-server/.env
