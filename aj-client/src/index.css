@@ -1,0 +1,164 @@
+@import url('https://fonts.googleapis.com/css2?family=K2D:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=Share+Tech+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+  --primary:#F3F4FF;
+  --bg:#F3F4FF;
+  --darker:#333C74;
+  --secondary:#a098ae;
+  --box:#ffffff;
+  --dark:#4D44B5;
+  --HeadingFont: "Lexend", sans-serif;;
+  --Regular-Font:  "K2D", sans-serif;
+}
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 20 14.3% 4.1%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 20 14.3% 4.1%;
+ 
+    --popover: 0 0% 100%;
+    --popover-foreground: 20 14.3% 4.1%;
+ 
+    --primary: 24 9.8% 10%;
+    --primary-foreground: 60 9.1% 97.8%;
+ 
+    --secondary: 60 4.8% 95.9%;
+    --secondary-foreground: 24 9.8% 10%;
+ 
+    --muted: 60 4.8% 95.9%;
+    --muted-foreground: 25 5.3% 44.7%;
+ 
+    --accent: 60 4.8% 95.9%;
+    --accent-foreground: 24 9.8% 10%;
+ 
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 60 9.1% 97.8%;
+
+    --border: 20 5.9% 90%;
+    --input: 20 5.9% 90%;
+    --ring: 20 14.3% 4.1%;
+ 
+    --radius: 0.5rem;
+  }
+ 
+  .dark {
+    --background: 20 14.3% 4.1%;
+    --foreground: 60 9.1% 97.8%;
+ 
+    --card: 20 14.3% 4.1%;
+    --card-foreground: 60 9.1% 97.8%;
+ 
+    --popover: 20 14.3% 4.1%;
+    --popover-foreground: 60 9.1% 97.8%;
+ 
+    --primary: 60 9.1% 97.8%;
+    --primary-foreground: 24 9.8% 10%;
+ 
+    --secondary: 12 6.5% 15.1%;
+    --secondary-foreground: 60 9.1% 97.8%;
+ 
+    --muted: 12 6.5% 15.1%;
+    --muted-foreground: 24 5.4% 63.9%;
+ 
+    --accent: 12 6.5% 15.1%;
+    --accent-foreground: 60 9.1% 97.8%;
+ 
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 60 9.1% 97.8%;
+ 
+    --border: 12 6.5% 15.1%;
+    --input: 12 6.5% 15.1%;
+    --ring: 24 5.7% 82.9%;
+  }
+}
+ 
+html {
+  font-size: 95%;
+  font-family: "K2D", sans-serif;
+}
+.hFont{
+  font-family: "Lexend", sans-serif;
+  font-optical-sizing: auto;
+}
+@media screen and (width <=786px) {
+  html {
+    font-size: 85%;
+  } 
+}
+ .center {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+ }
+
+ .GlassBackgroundLogin{
+background: rgba(255, 255, 255, 0.07);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(6px);
+-webkit-backdrop-filter: blur(6px);
+ }
+ .data-\[state\=checked\]\:text-primary-foreground[data-state=checked] {
+  color: black !important;
+}
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+
+.primaryText{
+color: var(--primary);
+}
+.DarkText{
+color: var(--dark);
+}
+.secondaryText{
+color: var(--secondary);
+}
+.dark{
+  background-color: var(--dark);
+}
+.boxColor{
+  background-color: var(--box);
+}
+.primary{
+  background-color: var(--primary);
+}
+html::-webkit-scrollbar{
+  width: 0.2rem;
+  background-color: var(--box);
+ color: var(--box);
+
+}
+html::-webkit-scrollbar-thumb{
+  border-radius: 12px;
+  background-color: var(--dark);
+ color: var(--dark);
+}
+html::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+:where(.css-dev-only-do-not-override-1uweeqc).ant-float-btn-primary .ant-float-btn-body{
+  background-color: #4D44B5;
+}
+:where(.css-dev-only-do-not-override-1uweeqc).ant-float-btn-primary .ant-float-btn-body:hover{
+  background-color: #4D44B5;
+
+
+}
+
+.DisableShdcnInputRing {
+  @apply  focus-visible:ring-offset-0 focus:ring-0 focus:ring-offset-0 focus-visible:ring-transparent ring-offset-0 ring-0 outline-none ;
+}
