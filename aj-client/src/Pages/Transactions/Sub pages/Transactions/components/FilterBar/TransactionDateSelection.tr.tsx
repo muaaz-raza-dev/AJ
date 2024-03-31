@@ -1,3 +1,5 @@
+import { useAppDispatch, useAppSelector } from "@/app/ReduxHooks"
+import { RedTransactionsFilters } from "@/app/Slices/TransactionReadSlice"
 import {
     Select,
     SelectContent,
@@ -7,50 +9,72 @@ import {
     SelectTrigger,
     SelectValue,
   } from "@/shdcn/components/ui/select"
+  import Skeleton from "react-loading-skeleton"
 import moment from "moment"
-   
+import { FC, useEffect, useMemo } from "react"
+   import L from "lodash"
 const TransactionDateSelection = () => {
-    
+  let {Dates,Filters,TransactionStats:{isLoading}} = useAppSelector(state=>state.transactions)
+  let dispatch = useAppDispatch()
+  let CurrentYear = useMemo(()=>moment().year().toString(),[]) 
+  useEffect(() => {
+    if (L(Dates).size()!=0&&Filters.month=="") {
+      dispatch(RedTransactionsFilters({month:Dates[CurrentYear][Dates[CurrentYear].length-1]}))
+    }
+  }, [Dates]);
       return (
     <div className="flex gap-x-2">
-    <Select>
+      {
+        isLoading?
+        <div className="w-[120px]">
+        <Skeleton count={1} baseColor="#4D44B5" className="w-full py-3"/>
+        </div>:
+    <Select value={Filters.year} onValueChange={(e)=>dispatch(RedTransactionsFilters({year:e}))}>
     <SelectTrigger className="w-[80px] outline-none bg-transparent rounded-lg border-2 border-[var(--dark)] focus:ring-0 outline-0 relative">
       <p className="absolute -top-1 text-[0.6rem] text-[var(--dark)]  font-bold">Year</p>
-
       <SelectValue placeholder={moment().year().toString()} defaultValue={moment().year().toString()}  />
     </SelectTrigger>
     <SelectContent >
       <SelectGroup className="flex flex-col justify-center">
         <SelectLabel>Year</SelectLabel>
-        <SelectItem value="2024">2024</SelectItem>
-        <SelectItem value="2025">2025</SelectItem>
-        <SelectItem value="2026">2026</SelectItem>
+        {
+          Object.keys(Dates)?.map(year=>{
+      return <SelectItem value={year}>{year}</SelectItem>
+          })
+        }
       </SelectGroup>
     </SelectContent>
+  </Select>}
+  {
+    isLoading?
+    <div className="w-[120px]">
+    <Skeleton count={1} baseColor="#4D44B5" className="w-full py-3"/>
+    </div>:
+  <Select value={Filters.month} onValueChange={(e)=>dispatch(RedTransactionsFilters({month:e}))}>
+  <TransactionMonthSelection months={Dates[Filters.year]||[]}/>
   </Select>
-  <TransactionMonthSelection/>
+}
     </div>
   )
 }
 
-const TransactionMonthSelection=()=>{
-return (
-    <Select>
+const TransactionMonthSelection:FC<{months:string[]}>=({months})=>{
+return (<>
     <SelectTrigger className="w-[110px] outline-none bg-transparent rounded-lg border-2 border-[var(--dark)] focus:ring-0 outline-0 relative">
       <p className="absolute -top-1 text-[0.6rem] text-[var(--dark)]  font-bold">Month</p>
-      <SelectValue placeholder={moment().format("MMMM")} defaultValue={moment().format("MMMM")}  />
+      <SelectValue placeholder={months[months.length-1]}   />
     </SelectTrigger>
     <SelectContent >
       <SelectGroup className="flex flex-col justify-center">
         <SelectLabel>Month</SelectLabel>
         {
-            moment.months().map(m=>{
+            months.map(m=>{
                 return <SelectItem value={m} key={m}>{m}</SelectItem>
             })
         }
       </SelectGroup>
     </SelectContent>
-  </Select>
+  </>
 )
 }
 export default TransactionDateSelection

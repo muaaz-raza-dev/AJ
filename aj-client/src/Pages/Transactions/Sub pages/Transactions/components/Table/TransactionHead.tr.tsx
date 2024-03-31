@@ -17,7 +17,7 @@ const TransactionHead = () => {
             Name
         </TableHead>
         <TableHead className="!h-[3.5rem] text-md text-[var(--darker)] hFont font-bold">
-          Purpose
+          Recieved By
         </TableHead>
         <TableHead className="!h-[3.5rem] text-md text-left text-[var(--darker)] hFont font-bold">
             Amount

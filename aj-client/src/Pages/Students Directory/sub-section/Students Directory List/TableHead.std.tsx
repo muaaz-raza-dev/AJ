@@ -1,9 +1,11 @@
 import { TableHead, TableHeader, TableRow } from '@/shdcn/components/ui/table'
+import { useNavigate } from 'react-router-dom'
 
 const StudentsTableHead = () => {
+  let navigate=useNavigate()
   return (
     <TableHeader className=''>
-      <TableRow className=' '>
+      <TableRow className=' ' >
         <TableHead className="!h-[3.5rem] text-md text-[var(--darker)] hFont font-bold">Name</TableHead>
         <TableHead className="!h-[3.5rem] text-md text-[var(--darker)] hFont font-bold">GR</TableHead>
         <TableHead className="!h-[3.5rem] text-md text-[var(--darker)] hFont font-bold">Father Name</TableHead>

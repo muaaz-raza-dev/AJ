@@ -2,10 +2,12 @@ import { Route, Routes } from "react-router-dom"
 import SidebarFile from "../Sidebar/SidebarFile"
 import Header from "../Header/Header"
 import RegisterationFile from "@/Pages/Registeration/RegisterationFile.reg"
-import StudentsDirectoryFile from "@/Pages/Students Directory/StudentsDirFile.std"
 import TransactionsFile from "@/Pages/Transactions/TransactionsFile.tr"
+import StudentsDirectoryFile from "@/Pages/Students Directory/StudentDirectoryFile.std"
+
 
 const MainLayout = () => {
+
   return (
     <main className=" flex max-md:flex-col-reverse min-h-screen">
       <aside className="md:w-[20%] max-md:w-[100%]  sticky left-0  top-0 bg-[var(--dark)]  max-md:h-26 md:h-screen"><SidebarFile/></aside>

@@ -11,7 +11,7 @@ const TransactionSchema = new mongoose.Schema({
  Transaction:{type:{},required:true},
  Time:{type:Date,default:Date.now},
  Type: {type: [String],required: true},
- Invoice:{type:Number},
+ Invoice:{type:Number,unique:true},
  Note:{type:String}
 },{timestamps:true});
 TransactionSchema.plugin(AutoIncrement, { inc_field: 'Invoice' });

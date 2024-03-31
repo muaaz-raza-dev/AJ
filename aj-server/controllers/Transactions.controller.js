@@ -49,23 +49,31 @@ if (students) {
 
 async function ReadTransactions(req,res){
   let Limit = process.env.TransactionPerRequest
-  let {transactionType, searchMode, year, month, Input, count ,q} = req.body
+  let {transactionType, searchMode, year, month,  count ,Input:q} = req.body
   try {
     let date = moment(`${month} ${year}`, "MMMM YYYY");
     const formattedDate = date.toISOString()
-    const LastDate = date.day(30).toISOString()
+    const LastDate =  moment(`${month+1} ${year}`, "MMMM YYYY").toISOString();
     let Query= {}
-    Query["Time"] = { $gte:formattedDate,$lte:LastDate }; //* To make sure it will only returns the treansactions of this month
+    Query["Time"] = { $gte:formattedDate,
+      // $lt:LastDate //todo: Temporary deisabled
+     }; //* To make sure it will only returns the treansactions of this month
     if (q) {
       if (searchMode =="Invoice")Query["Invoice"] =q
-      else Query["GRNO"]={ $regex: q, $options: "i" };
+      else {
+        let std = await Students.findOne({GRNO:q})
+        Query["Student"]= std?std?._id:"123456789123456789123456"
+      }
     }
     else{
       if (transactionType) Query["Transaction"] = { $elemMatch: { purpose: transactionType } };
     }
-    let transactions = await TransactionsScema.find(Query).skip(Limit*(count-1)).limit(Limit).sort("-Time")
-    res.json({success:true,payload:transactions,count})
+    console.log(Query);
+ let DataLength = await TransactionsScema.countDocuments(Query)
+    let transactions = await TransactionsScema.find(Query).populate({path:"Student",select:"FirstName LastName GRNO"}).populate({path:"RecievedBy",select:"Name"}).skip(Limit*(count-1)).limit(Limit).sort("-Time")
+    res.json({success:true,payload:transactions,DataLength,count})
   } catch (error) {
+    console.log(error);
     res.status(400).json({ message: error.message,success:false });
   }
 }
@@ -100,6 +108,26 @@ let numberOfTransactions = await TransactionsScema.aggregate([
     path: "$_id",
   }
 }
+])
+let TransactionTypes = await TransactionsScema.aggregate([{
+  $unwind: {
+    path: "$Transaction",
+  }
+},{$group: {
+  _id: "$Transaction.purpose",
+  numberOfTransactions: {
+    $sum:1 
+  }
+}},{$project: {
+  "type":"$_id",
+  "numberOfTransactions":1,
+  "_id":0
+}},{
+  $sort: {
+    "numberOfTransactions": -1
+  }
+}
+
 ])
 //* This data is only restricted for current month only.
 let amountRecieved = await TransactionsScema.aggregate([  {
@@ -138,9 +166,28 @@ let PendingAmount = totalAmount[0].total-amountRecieved[0].total
 res.json({ message: "Transactions for current month", payload:{
   Stats:{
     totalTransactions:numberOfTransactions,RecievedAmount:amountRecieved[0].total,PendingAmount ,totalTransactions,PendingTransactions:totalStudents-totalTransactions,
-  },
+  },TransactionTypes,
   Dates} });
 
 }
-
-module.exports = {CreateTransaction: CreateTransaction,SearchStudent,ReadTransactionsMeta};
+async function SetTransactionConfig (req,res){
+  let {Monthly,Annual,dueDate} = req.body
+  try {
+    let Find ={Year:moment().year().toString()}
+    let payload  = {Monthly,Annual,dueDate}
+    let month = moment().format("MMMM")
+    // let Config = Global_Fee_Preferences.findOne({Year:moment().year().toString,Months:{$elemMatch:{month}}})
+    if(!req.body.month){
+     let updated= await Global_Fee_Preferences.findOneAndUpdate(Find,{$push:{Months:{...payload,month}}})
+     console.log(updated)
+    }
+    else{
+      await Global_Fee_Preferences.updateOne({...Find,Months:{$elemMatch:{month:req.body.month}}},{"Months.$":payload}) 
+    }
+    res.json({success:true, message: "updated successfully" });
+  } catch (error) {
+    console.error("Error setting transaction config:", error);
+    res.status(500).json({sucsess:false, message: "Error setting transaction config" });
+  }
+}
+module.exports = {CreateTransaction: CreateTransaction,ReadTransactions,SearchStudent,ReadTransactionsMeta,SetTransactionConfig};

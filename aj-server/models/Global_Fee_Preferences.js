@@ -4,9 +4,10 @@ const TransactionSchema = new mongoose.Schema({
     Year :{type:String,required:true},
     Months:{type:[{
         month:String,
-        Fee:Boolean,
+        Monthly:Boolean,
+        dueDate:String,
         Annual:Boolean,
-        Extra:String
+        Extra:String,
     }]}
 },{timestamps:true});
 

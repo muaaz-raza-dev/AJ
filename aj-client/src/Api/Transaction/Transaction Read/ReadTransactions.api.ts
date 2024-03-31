@@ -1,7 +1,9 @@
 
 import Axios from "@/app/Common/Axios"
-const ReadTransactions =async (filters:any) => {
-    let response = await Axios.post("/transactions/",filters)
+import { ItransactionReadFilters } from "@/app/Types/ItransactionsRead"
+const ReadTransactions =async (filters:ItransactionReadFilters) => {
+
+    let response = await Axios.post("/transactions/read",filters)
     return response.data
 }
 

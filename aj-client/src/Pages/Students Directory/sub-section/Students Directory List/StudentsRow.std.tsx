@@ -4,10 +4,12 @@ import { Mail, Phone } from 'lucide-react'
 import { FC } from 'react'
 import { FaWhatsapp } from 'react-icons/fa'
 import { IoEllipsisHorizontalSharp } from 'react-icons/io5'
+import { useNavigate } from 'react-router-dom'
 
-const StudentsTableRow :FC<{data:IstudentShort}> = ({data}) => {
+const StudentsTableRow :FC<{data:IstudentShort}> = ({data}) => { 
+    let navigate = useNavigate()
   return (
-    <TableRow>
+    <TableRow onClick={()=>navigate(data.GRNO)}>
         <TableCell className='text-[var(--darker)] text-base font-bold'>{data.FirstName} {data.LastName}</TableCell>
         <TableCell className='text-[var(--dark)] font-bold'>#{data.GRNO}</TableCell>
         <TableCell className='text-[var(--darker)] font-semibold'>{data.fatherName}</TableCell>
@@ -15,7 +17,6 @@ const StudentsTableRow :FC<{data:IstudentShort}> = ({data}) => {
         <TableCell className='text-[gray] font-medium'>{data.DOA}</TableCell>
         <TableCell className='flex gap-x-4 justify-start'>
             <a href={`https://mail.google.com/mail/?view=cm&to=${data?.email}`} target="_blank" className="p-2 cursor-pointer transition-colors hover:bg-[var(--dark)] hover:text-white bg-[var(--bg)] text-[var(--dark)] rounded-full aspect-square">
-                
                 <Mail  size={18}/>
             </a>
             <a  href={data.WA?`https://wa.me/+92${data?.WA?.split("+92")[1]}`:`tel:+92${ 
