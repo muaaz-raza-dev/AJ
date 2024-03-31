@@ -1,16 +1,12 @@
-// import StudentProfileHeader from "./Components/StudentProfileOverView.std.pf"
-
-import StudentProfileOverView from "./Components/Profile Overview/StudentsOverViewHeader.std.pf"
-
-
+import StudentProfileOverviewSection from "./Components/Profile Overview/StudentProfileOverviewSection.std.pf"
 const StudentDetailedPage = () => {
   return (
     <div className="flex gap-x-3">
-      <div className="w-[60%]">
+      <div className="w-[65%]">
         {/* <StudentProfileHeader/> */}
       </div>
-      <div className="w-[40%] bg-slate-50">
-<StudentProfileOverView/>
+      <div className="w-[35%] bg-slate-50 ">
+        <StudentProfileOverviewSection/>
       </div>
     </div>
   )
