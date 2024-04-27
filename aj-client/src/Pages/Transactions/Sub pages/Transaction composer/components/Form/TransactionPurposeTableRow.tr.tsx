@@ -70,7 +70,7 @@ const TransactionPurposeTableRow: FC<{ i: number; ObjectKey: string }> = ({
       <TableCell>
         <AutoComplete
           className="w-full"
-          disabled={Invoice==0}
+          disabled={Invoice==null}
           onChange={(e) => setInputs({ ...Inputs, purpose: e })}
           options={[
             { label: "Monthly Fee", value: "Monthly Fee" },

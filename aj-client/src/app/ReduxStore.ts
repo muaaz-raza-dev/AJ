@@ -5,6 +5,7 @@ import { studentsDir } from "./Slices/StudentDirSlice";
 import { globalState } from "./Slices/globalSlice";
 import { TransactionCompose } from "./Slices/TransactionComposeSlice";
 import { TransactionRead } from "./Slices/TransactionReadSlice";
+import { studentsExclusive } from "./Slices/StdExclusiveSlice";
 
 
 
@@ -15,7 +16,8 @@ reducer:{
     StudentsDir:studentsDir,
     global:globalState,
     transactions:TransactionRead,
-    trCompose:TransactionCompose //tr =transaction
+    trCompose:TransactionCompose ,//tr =transaction
+    stdExclusive:studentsExclusive //student detailed page state
 }
 });
 

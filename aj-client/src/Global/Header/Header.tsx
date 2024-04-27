@@ -1,13 +1,21 @@
-import { Avatar, Badge, Space } from "antd";
+import { Avatar, Badge, Button, Space } from "antd";
 import { FaRegBell } from "react-icons/fa6";
 import { FiSettings } from "react-icons/fi";
 import { UserOutlined } from '@ant-design/icons';
 import useHeaderLabel from "@/Hooks/Common/useHeaderLabel";
+import { FaAngleLeft } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 const Header = () => {
   const {ActiveLabel} =useHeaderLabel()
+  let navigate = useNavigate()
   return (
     <header className="w-full flex justify-between py-4">
+      <div className="flex gap-x-2 items-center">
+      <Button className="bg-[var(--darker)] p-1 text-white" onClick={()=>navigate(-1)}>
+      <FaAngleLeft size={24}/>
+      </Button>
       <h1 className=" font-black text-3xl text-[var(--darker)]">{ActiveLabel}</h1>
+      </div>
       <div className="flex gap-x-2 items-center">
         <div className="flex  items-center">
             <button className="p-1 h-fit aspect-square px-2  shadow-sm ">

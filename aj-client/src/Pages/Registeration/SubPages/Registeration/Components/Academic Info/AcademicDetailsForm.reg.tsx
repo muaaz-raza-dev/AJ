@@ -5,15 +5,16 @@ import PolioandVaccineConfirmationField from "./PolioandVaccineConfirmationField
 import DateOfAdmissionField from "./DateOfAdmissionField.reg"
 import GRnoRegisterationFormField from "./GRnoField.reg"
 import { useAppSelector } from "@/app/ReduxHooks"
+import { FC } from "react"
 
 
-const RegAcademicDetailsForm = () => {
+const RegAcademicDetailsForm:FC<{edit?:boolean}> = ({edit}) => {
   const {control} = useFormContext()
   let {classes} = useAppSelector(state=>state.global)
 
   return (
     <div className="flex w-full flex-wrap gap-x-4 gap-y-6">
-       <GRnoRegisterationFormField/>
+       <GRnoRegisterationFormField edit={edit}/>
     <RegLabelWrapper className="w-[48%]" title="Roll no">
       <Controller rules={{required:"Roll no is required"}} name="RollNo" control={control} render={({field,fieldState:{error}})=>
        ( 
@@ -25,6 +26,9 @@ const RegAcademicDetailsForm = () => {
        </>
   )}/>
     </RegLabelWrapper>
+
+    {!edit 
+    &&
     <RegLabelWrapper className="w-[48%]" title="Class">
       <Controller rules={{required:"Class is Required"}} name="Class" control={control} render={({field,fieldState:{error}})=>(
         <>
@@ -35,7 +39,7 @@ const RegAcademicDetailsForm = () => {
         </>
         )
       }/>
-    </RegLabelWrapper>
+    </RegLabelWrapper>}
     <RegLabelWrapper className="w-[48%]" title="Section">
       <Controller name="Section" control={control} render={({field})=>(
        <Input {...field}  placeholder="A"  className="active:border-[var(--dark)]"/>
@@ -53,7 +57,7 @@ const RegAcademicDetailsForm = () => {
           )}
         />
     </RegLabelWrapper>
- <DateOfAdmissionField/>
+ <DateOfAdmissionField edit={edit}/>
 <PolioandVaccineConfirmationField/>
    
    

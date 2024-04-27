@@ -116,6 +116,9 @@ backdrop-filter: blur(6px);
     @apply bg-background text-foreground;
   }
 }
+.data-\[state\=checked\]\:bg-primary[data-state=checked] {
+  background-color:  var(--dark) !important;
+}
 
 
 .primaryText{
@@ -137,7 +140,7 @@ color: var(--secondary);
   background-color: var(--primary);
 }
 html::-webkit-scrollbar{
-  width: 0.2rem;
+  width: 0.7rem;
   background-color: var(--box);
  color: var(--box);
 

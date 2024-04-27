@@ -23,6 +23,8 @@ const TransactionSelectType = () => {
       dispatch (RedTransactionsFilters({transactionType:TransactionTypes[0].type}))
   }
   }, [Filters.transactionType,TransactionTypes]);
+  console.log(TransactionTypes);
+  
   return (
     <>
     {isLoading?
@@ -30,7 +32,7 @@ const TransactionSelectType = () => {
     <Skeleton count={1} baseColor="#4D44B5" className="w-full py-3"/>
     </div>:
     
-    <Select value={Filters.transactionType} 
+    <Select value={Filters.transactionType } 
     onValueChange={(e)=>dispatch(RedTransactionsFilters({transactionType:e}))}>
     <SelectTrigger className="w-[150px]  outline-none border-2 text-white bg-[var(--dark)] border-[var(--dark)] focus:ring-0 outline-0 relative rounded-lg">
 

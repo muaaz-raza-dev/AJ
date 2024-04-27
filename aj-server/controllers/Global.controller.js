@@ -5,11 +5,10 @@ const moment = require("moment");
     async function LoadGlobalValues  (req,res){
         
         try {
+            // let CruicialUpdates = false;
             let FeeRecord = await FeePref.findOne({Year:moment().year()})
-            let Fee_Pref_update_required = false
-            if (FeeRecord) {
-                if(!FeeRecord.Months[moment().month()])  Fee_Pref_update_required=true
-            }
+let Fee_Pref_update_required = false
+            if (FeeRecord) { if(!FeeRecord.Months[moment().month()])  Fee_Pref_update_required=true}
             else {
                 Fee_Pref_update_required=true
                 months = []
@@ -17,7 +16,7 @@ const moment = require("moment");
                     if(index >= moment().month()){
                     }
                     else{
-                        months.push({month:elm,Fee:true,Annual:false})
+                        months.push({month:elm,Fee:true,Annual:false,Monthly:true})
                     }
                 }) 
 

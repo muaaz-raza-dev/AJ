@@ -42,8 +42,8 @@ if (students) {
     }
   })
 
-  res.json({message:"Students fonud",payload:{Dates,std:students,Invoice:InvoiceNumber[0].Invoice?InvoiceNumber[0].Invoice+1:0}}) } 
-  else {res.status(404).json({ message: "Student not found" ,payload:{Dates,Invoice:InvoiceNumber[0].Invoice?InvoiceNumber[0].Invoice+1:0}});}
+  res.json({message:"Students fonud",payload:{Dates,std:students,Invoice:InvoiceNumber[0]?.Invoice?InvoiceNumber[0].Invoice+1:0}}) } 
+  else {res.status(404).json({ message: "Student not found" ,payload:{Dates,Invoice:InvoiceNumber[0]?.Invoice?InvoiceNumber[0].Invoice+1:0}});}
 
 }
 
@@ -68,7 +68,6 @@ async function ReadTransactions(req,res){
     else{
       if (transactionType) Query["Transaction"] = { $elemMatch: { purpose: transactionType } };
     }
-    console.log(Query);
  let DataLength = await TransactionsScema.countDocuments(Query)
     let transactions = await TransactionsScema.find(Query).populate({path:"Student",select:"FirstName LastName GRNO"}).populate({path:"RecievedBy",select:"Name"}).skip(Limit*(count-1)).limit(Limit).sort("-Time")
     res.json({success:true,payload:transactions,DataLength,count})
@@ -161,11 +160,11 @@ let x= (await Global_Fee_Preferences.find({})).forEach(elm=>
   )         
   // totalTransactions:number,PendingAmount:number,RecievedAmount:number,PendingTransactions:number
 let totalStudents = await Students.countDocuments()
-let totalTransactions  = numberOfTransactions.length
-let PendingAmount = totalAmount[0].total-amountRecieved[0].total
+let totalTransactions  = numberOfTransactions?.length ??0
+let PendingAmount = totalAmount[0]?.total-amountRecieved[0]?.total??0
 res.json({ message: "Transactions for current month", payload:{
   Stats:{
-    totalTransactions:numberOfTransactions,RecievedAmount:amountRecieved[0].total,PendingAmount ,totalTransactions,PendingTransactions:totalStudents-totalTransactions,
+    totalTransactions:numberOfTransactions,RecievedAmount:amountRecieved[0]?.total??0,PendingAmount ,totalTransactions,PendingTransactions:totalStudents-totalTransactions,
   },TransactionTypes,
   Dates} });
 

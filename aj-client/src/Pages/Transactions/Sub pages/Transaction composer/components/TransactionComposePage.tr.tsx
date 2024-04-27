@@ -6,7 +6,6 @@ const TransactionComposePage = () => {
     <div className=" center ">
 <div className="w-[95%] p-8 aspect rounded-lg bg-[var(--box)] shadow flex">
 <TransactionDetailSection/>
-
 </div>
     </div>
   )

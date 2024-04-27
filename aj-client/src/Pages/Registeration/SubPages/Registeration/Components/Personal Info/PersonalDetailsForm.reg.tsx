@@ -93,7 +93,6 @@ const RegPersonalDetailsForm = () => {
             <Input
               {...field}
               placeholder="XXXXX-XXXXXXX-X"
-              type="number"
               className="active:border-[var(--dark)] px-2"
               
             />
@@ -108,7 +107,6 @@ const RegPersonalDetailsForm = () => {
             <Input
               {...field}
               placeholder="XXXXX-XXXXXXX-X"
-              type="number"
               className="active:border-[var(--dark)] px-2"
               
             />
@@ -123,7 +121,6 @@ const RegPersonalDetailsForm = () => {
             <Input
               {...field}
               placeholder="XXXXX-XXXXXXX-X"
-              type="number"
               className="active:border-[var(--dark)] px-2"
               
             />
@@ -156,7 +153,6 @@ const RegPersonalDetailsForm = () => {
       <RegLabelWrapper className="w-[48%]" title="WhatsApp number">
         <Controller
           name="WA"
-          
           control={control}
           render={({ field }) => (
             <Input

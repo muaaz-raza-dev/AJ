@@ -7,30 +7,24 @@ import {  useDebouncedCallback } from "use-debounce"
 import useValidateGRno from "@/Hooks/Registeration/useValdiateGR"
 import { FaBan } from "react-icons/fa"
 import { MdVerified } from "react-icons/md"
-const GRnoRegisterationFormField = () => {
+import { FC } from "react"
+const GRnoRegisterationFormField:FC<{edit?:boolean}> = ({edit}) => {
   const {control,getValues} = useFormContext()
   let {mutate,error:Error,data,isError,isSuccess}=useValidateGRno(getValues("GR"))
-  const debounced = useDebouncedCallback(
-    // function
-    (value) => {
-        
-    mutate(value)
-    },
-    // delay in ms
-    1500
-  );
+  const debounced = useDebouncedCallback((value) => {mutate(value)},1500);
 function GRSuffix(){
+  if(!edit){
+
     return !isSuccess&&!isError?<RequestLoading size="20" stroke="2" dark/>:
     isError?
     <Tooltip title={Error.response.data.message}>
     <FaBan />
     </Tooltip>
-
     :
     <Tooltip title={data.message}>
     <MdVerified  />
     </Tooltip>
-    
+  }
     
 }
 
@@ -39,9 +33,10 @@ function GRSuffix(){
     <Controller
   name="GRNO"
   rules={{required:"GRno is Required"}}
-  control={control}
+ control={control}
+ disabled={edit}
   render={({ field ,fieldState:{error}}) => (<>
-  <Input  {...field} onChange={(e)=>{field.onChange(e);debounced(e.target.value)}} placeholder="189305" suffix={<GRSuffix/>} className="active:border-[var(--dark)]" />
+  <Input  {...field} type="number" onChange={(e)=>{field.onChange(e);debounced(e.target.value)}} placeholder="189305" suffix={<GRSuffix/>} className="active:border-[var(--dark)]" />
   {
     isError&&
   <div className="absolute -bottom-12 w-full border border-[var(--primary)] rounded-md flex bg-[var(--bg)] shadow-lg p-2 px-4 gap-x-1 cursor-pointer">

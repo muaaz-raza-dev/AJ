@@ -4,12 +4,11 @@ import { Mail, Phone } from 'lucide-react'
 import { FC } from 'react'
 import { FaWhatsapp } from 'react-icons/fa'
 import { IoEllipsisHorizontalSharp } from 'react-icons/io5'
-import { useNavigate } from 'react-router-dom'
+import { Link} from 'react-router-dom'
 
 const StudentsTableRow :FC<{data:IstudentShort}> = ({data}) => { 
-    let navigate = useNavigate()
   return (
-    <TableRow onClick={()=>navigate(data.GRNO)}>
+    <TableRow >
         <TableCell className='text-[var(--darker)] text-base font-bold'>{data.FirstName} {data.LastName}</TableCell>
         <TableCell className='text-[var(--dark)] font-bold'>#{data.GRNO}</TableCell>
         <TableCell className='text-[var(--darker)] font-semibold'>{data.fatherName}</TableCell>
@@ -34,9 +33,11 @@ const StudentsTableRow :FC<{data:IstudentShort}> = ({data}) => {
             </div>
             </TableCell>
         <TableCell className=' '>
-            <div className="center">
+                <Link to={`/students/${data.GRNO}`} className="center bg-black">
+           
         <IoEllipsisHorizontalSharp size={22}/>
-            </div>
+          
+                </Link>
 </TableCell>
       </TableRow>
   )

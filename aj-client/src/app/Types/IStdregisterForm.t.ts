@@ -8,22 +8,21 @@ fatherName:string;
 DOB:string;
 Gender:string;
 Address:string;
-GRNO:string;
+GRNO:number;
 RollNo:number|null;
 Section:string;
 NewAdmission:boolean;
-WA:number|null;
-fCNIC:number |null;
-mCNIC:number |null;
-sCNIC:number |null;
+WA:string|null;
+fCNIC:string |null;
+mCNIC:string |null;
+sCNIC:string |null;
 Class:string;
 DOA:string //Date of Admission
 PolioPermission?:boolean;
 CovidVaccine?:boolean;
 FinancialDetails :{
-    AdmissionFee:number|null;
+    AdmissionFee:{amount:number,paid:boolean};
     MonthlyFee:number|null;
-    AnnualCharges?:number|null;
 }
 }
 export const defaultRegisterFormState: IRegisterFormState = {
@@ -40,7 +39,7 @@ sCNIC:null,
     DOB: '',
     Gender: 'male',
     Address: '',
-    GRNO: '',
+    GRNO: 0,
     RollNo: null,
     Section: '',
     NewAdmission: false,
@@ -49,9 +48,8 @@ sCNIC:null,
     PolioPermission: true,
     CovidVaccine:false,
     FinancialDetails:{
-        AdmissionFee:null,
-        MonthlyFee:null,
-        AnnualCharges:null,
+        AdmissionFee:{amount:0,paid:true},
+        MonthlyFee:0,
     }
   };
 
