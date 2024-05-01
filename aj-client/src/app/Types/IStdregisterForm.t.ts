@@ -1,7 +1,7 @@
 export interface IRegisterFormState {
 FirstName:string;
 LastName:string;
-photo:string;
+photo:string|File;
 email:string;
 contact:string[]
 fatherName:string;

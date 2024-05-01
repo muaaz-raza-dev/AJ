@@ -15,11 +15,12 @@ import { Controller, useFormContext } from "react-hook-form";
 
 function TransactionPurposeSectionFooter() {
   let dispatch = useAppDispatch();
-  let { totalAmount } = useAppSelector((state) => state.trCompose);
+  let { totalAmount ,discountedTotal} = useAppSelector((state) => state.trCompose);
   return (
     <div className="border-y py-6 items-center border-[#80808037] flex justify-between">
       <div className="flex items-end gap-x-2">
         <Button
+          type="button"
           onClick={() => dispatch(RedAddTransactionPurpose())}
           className="border-[var(--dark)] border text-[var(--dark)] hover:bg-[var(-dark)] active:scale-95 transition-transform hover:text-[var(--dark)]"
         >
@@ -28,7 +29,15 @@ function TransactionPurposeSectionFooter() {
       </div>
       <div className=" hFont ">
         <div className="flex font-medium tracking-tight justify-between gap-x-2 text-lg">
-          <h2 className="">Total :</h2> <p> {totalAmount}.00 Pkr</p>
+          {discountedTotal?
+          <div className="hFont ">
+            <div className="flex mx-4 justify-between text-sm  w-full"><h2>Total</h2> <p>{totalAmount}</p></div>
+            <div className="flex mx-4 justify-between text-sm text-red-700 w-full"><h2>Discount</h2> <p>{totalAmount-discountedTotal}</p></div>
+            <div className="flex mx-4 justify-between text-[1rem] gap-x-2 w-full"><h2>Grand Total</h2> <b className="text-green-700">{discountedTotal}.00 </b></div>
+            </div>
+          :
+          <><h2 className="">Total :</h2> <p> {totalAmount}.00 Pkr</p></>
+          }
         </div>
       </div>
     </div>
@@ -71,11 +80,17 @@ const TransactionPurposeSection = () => {
             <TableHead className="text-[var(--dark)] hFont">
               Payment Month-Year
             </TableHead>
-            <TableHead className="text-[var(--dark)] hFont w-[20%]">
+            <TableHead className="text-[var(--dark)] hFont w-[10%]">
               Amount
             </TableHead>
             <TableHead
-              className="text-[var(--dark)] hFont w-[10%]
+              className="text-[var(--dark)] hFont w-[20%]
+            "
+            >
+              Discount
+            </TableHead>
+            <TableHead
+              className="text-[var(--dark)] hFont w-[15%]
             "
             >
               Actions

@@ -6,7 +6,7 @@ import MonthlyTransactionConfigModal from "./Sub pages/MonthlyTransactionConfig.
 const TransactionsFile = () => {
   return (
     <>
-    <MonthlyTransactionConfigModal/>
+    {/* <MonthlyTransactionConfigModal/> */}
     <Routes>
       <Route element={<TransactionPage/>} path="/"/> 
       <Route element={<TransactionComposePage/>} path="/create"/> 

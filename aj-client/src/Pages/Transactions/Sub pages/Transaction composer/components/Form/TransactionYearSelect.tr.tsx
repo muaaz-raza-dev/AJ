@@ -14,8 +14,6 @@ const TransactionMonthSelect:FC<{onValueChange:(e:string)=>void,months?:string[]
   </Select>)}
   
 export const TransactionYearSelect:FC<{onValueChange:(e:string)=>void,years:string[]}> = ({onValueChange,years}) => {
-  console.log(years);
-  
   return (
     <Select onValueChange={onValueChange}>
     <SelectTrigger className="w-[100%]">
