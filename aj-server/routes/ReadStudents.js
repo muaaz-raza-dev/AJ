@@ -1,6 +1,6 @@
 const express = require('express');
 const { ReadStudents,SearchStudents,FilterStudents} = require('../controllers/Students.controller');
-const Authenticate  = require('../middlewares/Authenticate');
+const Authenticate  = require('../middlewares/Authenticate.middleware');
 const router = express.Router();
 // Write your routes here
 router.post("/",Authenticate,ReadStudents)

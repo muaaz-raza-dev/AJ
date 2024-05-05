@@ -3,6 +3,8 @@ const Global_Fee_Preferences = require("../models/Global_Fee_Preferences");
 const Students = require("../models/Students");
 const TransactionsScema = require("../models/Transactions");
 const Students_Finance = require("../models/Students_Finance");
+const  CalculateMonthlyFeeRespectToDues  = require("./utils/CalculateMonthlyFeeRespectToDues");
+const Respond = require("../Helpers/ResponseHandler");
 
 async function CreateTransaction (req,res){
 let  { Transactions  , totalAmount ,PaidAmount,student,PayorsName,Note} =req.body
@@ -11,6 +13,7 @@ try {
     Student:student._id, Transaction:Object.values(Transactions),
     totalAmount,
     PaidAmount,
+    discountedTotal:req.body.discountedTotal,
     PayorsName,Note,
     RecievedBy:req.AdminId
     // Assuming other required fields are handled or defaulted
@@ -24,13 +27,14 @@ try {
 }
 
 async function SearchStudent(req,res){
-let students = await Students.findOne({GRNO: req.body.GRNO }).select("FirstName LastName email fatherName photo GRNO DOA")
+let student = await Students.findOne({GRNO: req.body.GRNO }).select("FirstName LastName email fatherName photo GRNO DOA")
 let Dates = {}
 let InvoiceNumber = await TransactionsScema.find({}).sort({Invoice:-1})
-if (students) {
-  let Fee_Pref =(await Global_Fee_Preferences.find({})).forEach(elm=>{
-    let MOA = moment(students.DOA).month()
-    let YOA =  moment(students.DOA).year()
+if (student) {
+  let SortedFee_History = await CalculateMonthlyFeeRespectToDues(student._id)
+ let b= (await Global_Fee_Preferences.find({})).forEach(elm=>{
+    let MOA = moment(student.DOA).month()
+    let YOA =  moment(student.DOA).year()
     if (+elm.Year>=YOA ) {
       Dates[elm.Year] = []
       Object.values(elm.Months).map(pre=>{
@@ -41,9 +45,11 @@ if (students) {
       })
     }
   })
-
-  res.json({message:"Students fonud",payload:{Dates,std:students,Invoice:InvoiceNumber[0]?.Invoice?InvoiceNumber[0].Invoice+1:0}}) } 
-  else {res.status(404).json({ message: "Student not found" ,payload:{Dates,Invoice:InvoiceNumber[0]?.Invoice?InvoiceNumber[0].Invoice+1:0}});}
+  Respond({res,payload:{
+    Dates,std:student,Invoice:InvoiceNumber[0]?.Invoice?InvoiceNumber[0].Invoice+1:1,MonthlyFee_history:SortedFee_History
+  },})
+} 
+  else {res.status(404).json({ message: "Student not found" ,payload:{Dates,Invoice:InvoiceNumber[0]?.Invoice?InvoiceNumber[0].Invoice+1:1}});}
 
 }
 

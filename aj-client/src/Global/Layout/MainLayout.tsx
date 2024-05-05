@@ -4,6 +4,7 @@ import Header from "../Header/Header"
 import RegisterationFile from "@/Pages/Registeration/RegisterationFile.reg"
 import TransactionsFile from "@/Pages/Transactions/TransactionsFile.tr"
 import StudentsDirectoryFile from "@/Pages/Students Directory/StudentDirectoryFile.std"
+import ClassesFile from "@/Pages/Classes/Dashboard.dash"
 
 
 const MainLayout = () => {
@@ -15,12 +16,10 @@ const MainLayout = () => {
 <Header/>
         <Routes>
             <Route index element={<h1>I am landing Page</h1>} path="/"/> 
-            <Route element={<RegisterationFile/>}
-             path="/registeration/*"/> 
-                       <Route element={<StudentsDirectoryFile/>}
-             path="/students/*"/> 
-             <Route element={<TransactionsFile/>}
-             path="/transactions/*"/> 
+            <Route element={<RegisterationFile/>} path="/registeration/*"/> 
+            <Route element={<StudentsDirectoryFile/>} path="/students/*"/> 
+             <Route element={<TransactionsFile/>} path="/transactions/*"/> 
+             <Route element={<ClassesFile/>} path="/dashboard/*"/> 
         </Routes>
       </main>
     </main>

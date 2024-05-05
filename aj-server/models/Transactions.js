@@ -5,6 +5,7 @@ const TransactionSchema = new mongoose.Schema({
  Student:{type:ObjectId,ref:"Students",required:true},
  totalAmount:{type:Number,required:true},
  PaidAmount:{type:Number,required:true},
+ discountedTotal:{type:Number},
  PayorsName:{type:String},
  Note:{type:String},
  RecievedBy:{ref:"User",type:ObjectId,required:true},

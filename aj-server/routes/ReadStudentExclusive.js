@@ -5,7 +5,7 @@ const {
   StudentInformationExclusive,
   EditStudent,
 } = require("../controllers/ReadStudentsExclusive.controller");
-const Authenticate = require("../middlewares/Authenticate");
+const Authenticate = require("../middlewares/Authenticate.middleware");
 const router = express.Router();
 router.get("/:GRNO", Authenticate, StudentOverview);
 router.get("/Fees/:GRNO/:FeeType/:Year", Authenticate, StudentFeesDetails);

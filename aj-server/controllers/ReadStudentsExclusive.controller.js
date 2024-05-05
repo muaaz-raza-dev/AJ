@@ -76,20 +76,20 @@ Respond({res,payload:Response,message:"Student Fetched",})
 
 
 async function EditStudent(req,res) {
-  let {payload,GRNO} = req.body
+  let {payload} = req.body
 try{  let FD = payload.FinancialDetails
   delete FD["AdmissionFee"]["_id"]
   delete payload["FinancialDetails"]
-  let StudentExists = await Students.findOne({GRNO})
+  let StudentExists = await Students.findOne({GRNO:+payload.GRNO})
   if(!StudentExists){Respond({res, message: "Student not found", status: 404, success: false});}
   else{
-    let Student =await Students.findOneAndUpdate({GRNO},{payload})
+    let Student = await Students.findOneAndUpdate({GRNO: +payload.GRNO}, {$set: payload});
     let Std_Fin =await Students_Finance.findOne({Student:Student?._id}).select("-Student -_v -createdAt -updatedAt -_id")
-    if(Object.keys(Std_Fin).some(field=>JSON.stringify(field[Std_Fin])==JSON.stringify(FD[field]) )){ 
-      Finance.findOneAndUpdate({Student:Student?._id},{FD})
+    if(Std_Fin&& Object.keys(Std_Fin).some(field=>JSON.stringify(field[Std_Fin])==JSON.stringify(FD[field]))){ 
+      Students_Finance.findOneAndUpdate({Student:Student?._id},{$set:FD})
       if(Std_Fin.MonthlyFee!==FD.MonthlyFee){
         let HistoryQuery= {MonthlyFee:{$push:{Fee:FD.MonthlyFee}}}
-        let History = StudentsHistory.findOneAndUpdate({Student:Student._id},HistoryQuery)
+         StudentsHistory.findOneAndUpdate({Student:Student._id},{$set:HistoryQuery})
       }
     } 
     Respond({res,message:"updated Successfully",success:true})

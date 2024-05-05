@@ -165,3 +165,11 @@ html::-webkit-scrollbar-track {
 .DisableShdcnInputRing {
   @apply  focus-visible:ring-offset-0 focus:ring-0 focus:ring-offset-0 focus-visible:ring-transparent ring-offset-0 ring-0 outline-none ;
 }
+
+
+.ClassBG{
+  background-image: url("/public/images/ClassBg.jpeg") ;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}

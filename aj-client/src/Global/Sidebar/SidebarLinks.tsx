@@ -1,4 +1,5 @@
 import {  User2Icon } from "lucide-react"
+import { SiGoogleclassroom } from "react-icons/si";
 import { Link } from "react-router-dom"
 import useActiveRoute  from "@/Hooks/Common/ActiveRoute"
 import {  IoHome } from "react-icons/io5";
@@ -23,10 +24,16 @@ const SidebarLinks = () => {
          Registeration
         </p>
         </Link>
-        <Link to={"/students"} className={`md:w-full transition-colors hover:bg-[var(--primary)] hover:border-transparent hover:text-[var(--dark)] text-[var(--primary)] hover:rounded   items-center px-4   border-[var(--primary)] md:py-3 max-md:py-1 ${ValidateRoute({toCompare:"/students",classesToApply:"!bg-[var(--primary)] !text-[var(--dark)] border-none rounded-md"})}  flex gap-x-4`}>
+        <Link to={"/students"} className={`md:w-full transition-colors hover:bg-[var(--primary)] hover:border-transparent hover:text-[var(--dark)] text-[var(--primary)] hover:rounded   items-center px-4   border-[var(--primary)] md:py-3 max-md:py-1 ${ValidateRoute({toCompare:"/students",exact:false,classesToApply:"!bg-[var(--primary)] !text-[var(--dark)] border-none rounded-md"})}  flex gap-x-4`}>
             <User2Icon/>
             <p className="max-md:hidden">
              Students
+            </p>
+        </Link>
+        <Link to={"/dashboard"} className={`md:w-full transition-colors hover:bg-[var(--primary)] hover:border-transparent hover:text-[var(--dark)] text-[var(--primary)] hover:rounded   items-center  px-4  border-[var(--primary)] md:py-3 max-md:py-1 ${ValidateRoute({toCompare:"/dashboard",exact:false,classesToApply:"bg-[var(--primary)] !text-[var(--dark)] border-none rounded-md"})}  flex gap-x-4`}>
+        <SiGoogleclassroom />
+            <p className="max-md:hidden">
+             Classes & Teachers
             </p>
         </Link>
         <Link to={"/transactions"} className={`md:w-full transition-colors hover:bg-[var(--primary)] hover:border-transparent hover:text-[var(--dark)] text-[var(--primary)] hover:rounded   items-center px-4  border-[var(--primary)] md:py-3 max-md:py-1 ${ValidateRoute({toCompare:"/transactions",exact:false,classesToApply:"bg-[var(--primary)] !text-[var(--dark)] border-none rounded-md"})}  flex gap-x-4 items-center`}>

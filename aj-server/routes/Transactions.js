@@ -1,5 +1,5 @@
 const express = require('express');
-const Authenticate = require('../middlewares/Authenticate');
+const Authenticate = require('../middlewares/Authenticate.middleware');
 const { CreateTransaction, SearchStudent, ReadTransactionsMeta, ReadTransactions, SetTransactionConfig } = require('../controllers/Transactions.controller');
 const router = express.Router();
 router.post("/",Authenticate,CreateTransaction)
