@@ -2,7 +2,7 @@ import ClassActions from "./ClassActions.dash"
 import DetailFields from "./DetailFields.dash"
 import RecentAdmissions from "./RecentAdmissions.dash"
 
-const SideDetailsSection = () => {
+const ClassSideDetailsSection = () => {
   return (
     <div className="w-[30%] h-full bg-[var(--box)]  rounded-md p-1 px-2 flex flex-col gap-1">
         <div className=" flex justify-between p-2 rounded-md items-center text-2xl">
@@ -12,10 +12,8 @@ const SideDetailsSection = () => {
   <DetailFields/>
   <RecentAdmissions/>
   <ClassActions/>
-
-
     </div>
   )
 }
 
-export default SideDetailsSection
+export default ClassSideDetailsSection

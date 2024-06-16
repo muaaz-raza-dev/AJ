@@ -33,7 +33,7 @@ const StudentsTableRow :FC<{data:IstudentShort}> = ({data}) => {
             </div>
             </TableCell>
         <TableCell className=' '>
-                <Link to={`/students/${data.GRNO}`} className="center bg-black">
+                <Link to={`/students/${data.GRNO}`} className="center">
            
         <IoEllipsisHorizontalSharp size={22}/>
           

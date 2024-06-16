@@ -4,7 +4,7 @@ const ClassCard = () => {
   return (
     <div className="rounded overflow-hidden shadow flex flex-col w-[31%] h-max">
         <div className="h-[5rem] w-full ClassBG">
-   <div className="bg-dark hover:bg-opacity-60 transition-colors rounded-md h-full w-full center  bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-30">
+   <div className="bg-dark hover:bg-opacity-60 transition-colors rounded-md h-full w-full center  bg-clip-padding backdrop-filter backdrop-blur-xs bg-opacity-0">
     <h1 className="text-4xl font-bold hFont">1st</h1>
 </div>
     </div>

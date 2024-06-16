@@ -173,3 +173,11 @@ html::-webkit-scrollbar-track {
   background-position: center;
   background-repeat: no-repeat;
 }
+.TeacherBg{
+  background-image: url("/public/images/Teacher.jpeg") ;
+
+}
+
+.toFront{
+  transform: translateZ(0); 
+}

@@ -5,7 +5,7 @@ import { Avatar, Badge, Space, Tooltip } from 'antd';
 import { CiLogin,  CiSettings } from 'react-icons/ci';
 const SidebarAdminProfile = () => {
   let {logOut} =useLogout()
-  let {Info:{Name,Role}} = useAppSelector(s=>s.credits)
+let {Info:{Name,Role}} = useAppSelector(s=>s.credits)
   return (
     <div className="md:w-full   flex gap-x-2 md:py-5 justify-between items-center">
        <Space size={24}>
@@ -13,6 +13,7 @@ const SidebarAdminProfile = () => {
       <Avatar shape="circle" icon={<UserOutlined />} src="/images/sample.png" />
     </Badge>
   </Space>
+
   <div className="flex w-full items-center max-md:hidden justify-between">
     <div className="">
     <h1 className='hFont'>{Name}</h1>
@@ -27,6 +28,7 @@ const SidebarAdminProfile = () => {
         </Tooltip>
     </div>
   </div>
+  
     </div>
   )
 }

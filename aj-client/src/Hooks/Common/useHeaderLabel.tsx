@@ -1,44 +1,57 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
-let RouteForLabel : {[key:string]:string} ={
-    "/registeration":"Student Registeration",
-    "/registeration/import":"Student Registeration",
-    "/":"Home",
-    "/students":"Student's Directory",
-    "/transactions":"Transactions",
-    "/transactions/create":"Create transaction",
-    "/students/*/*":"Student Profile",
-    
-}
+let RouteForLabel: { [key: string]: string } = {
+  "/registeration": "Student Registeration",
+  "/registeration/import": "Student Registeration",
+  "/": "Academic Stats",
+  "/students": "Student's Directory",
+  "/transactions": "Transactions",
+  "/transactions/create": "Create transaction",
+  "/students/*/*": "Student Profile",
+  "/dashboard": "Classes & Teachers",
+};
 const useHeaderLabel = () => {
-    let {pathname} = useLocation()
-    const [ActiveLabel, setActiveLabel] = useState<string>("Home");
-   useEffect(() => {
-    let settled  =false
-        Object.keys(RouteForLabel).map(elm=>{
-            let routeResult = RouteForLabel[pathname]
-            if(settled ==false) {
-                if (elm.includes('*')) {
-                    let route = `${pathname.split('/').slice(0,pathname.split('/').length-1).join('/')}/*`
-                    let routeResult = RouteForLabel[route]
-                    let splittedPath  =pathname.split('/')
-                    if(route.split('*')[0]==`${splittedPath.slice(0,splittedPath.length-1).join('/')}/`) { 
-                        routeResult&&setActiveLabel(routeResult)
-                        settled=true
+  let { pathname } = useLocation();
+  const [ActiveLabel, setActiveLabel] = useState<string>("");
+  let Validate = () => {
+    let route_exists = RouteForLabel[pathname];
+    if(route_exists) { setActiveLabel(route_exists) }
+    else{
+      
+      let isRouteSelected = false;
+      Object.keys(RouteForLabel).map((elm) => {
+        if(!isRouteSelected){
+          
+          let Route_Stored = elm.split("/")
+          let Route_Real = pathname.split("/")
+          if(elm.includes("*")){
+            let Route_Flags :number[] = [] //to get the *th indexes
+            Route_Stored.forEach((value,i)=>{ if(value=="*") Route_Flags.push(i)})
+              
+              Route_Stored.map((route,i)=>{ 
+                if (!Route_Flags.includes(i)) {
+                  if (route == Route_Real[i]) {
+                    console.log(RouteForLabel[elm] , route);
+                        setActiveLabel(RouteForLabel[elm])
+                        isRouteSelected =true
+                      }
                     }
-                }
-                else if(routeResult) {
-                    settled=true
-                    setActiveLabel(routeResult)
-                }
+                  })  
+              }
             }
-        })
+    
 
-    }, [pathname]);
-return {ActiveLabel}
-
-
+    });
 }
+};
+useEffect(() => {
+  Validate();
+}, []);
+  useEffect(() => {
+    Validate();
+  }, [pathname]);
+  return { ActiveLabel  };
+};
 
-export default useHeaderLabel
+export default useHeaderLabel;
