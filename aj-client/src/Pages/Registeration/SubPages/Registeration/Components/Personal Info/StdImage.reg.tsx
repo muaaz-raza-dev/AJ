@@ -16,7 +16,7 @@ const RegStdImage = () => {
     setValue("photo",acceptedFiles[0])
     }
 }});
-let Photo =watch("photo")
+let Photo = watch("photo")
   useEffect(() => {
     if(!(Photo instanceof File)) {
     setFileState(a=>({...a,Preview:Photo}))

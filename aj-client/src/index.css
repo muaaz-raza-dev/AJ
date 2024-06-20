@@ -186,3 +186,6 @@ html::-webkit-scrollbar-track {
 .toFront{
   transform: translateZ(0); 
 }
+.resize-none{
+  resize: none;
+}
