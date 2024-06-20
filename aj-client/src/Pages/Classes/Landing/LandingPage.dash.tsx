@@ -1,3 +1,4 @@
+import ClassDivision from "./ClassDivision.dash"
 import HeaderSection from "./Components/Header/HeaderSection.dash"
 import TeacherDivision from "./TeacherDivision.dash"
 const LandingPage = () => {

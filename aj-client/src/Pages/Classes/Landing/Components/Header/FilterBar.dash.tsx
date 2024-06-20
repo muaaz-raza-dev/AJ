@@ -6,18 +6,21 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/shdcn/components/ui/select"
-import { Button } from "@/shdcn/components/ui/button"
+import {Button} from "@/shdcn/components/ui/button"
 import { Input } from "@/shdcn/components/ui/input"
 import { MdFormatListBulletedAdd } from "react-icons/md"
+import { Link } from "react-router-dom"
 const FilterBar = () => {
   return (
     <div className='flex  gap-4'>
             <Input className="rounded-lg border-2 bg-transparent border-[var(--dark)]  focus:ring-0 focus-visible:ring-0 outline-0" placeholder="Search for Class & Teacher"/>
             <FilterBarYearSelect/>
-            <Button className="flex gap-2 bg-dark rounded-lg text-white hover:bg-darker transition-colors">
+            <Link to={"teacher/register"}>
+            <Button  className="flex gap-2 bg-dark rounded-lg text-white hover:bg-darker transition-colors">
             <MdFormatListBulletedAdd color="white" />
                 <p>Initialize new</p>
             </Button>
+            </Link>
 
     </div>
   )

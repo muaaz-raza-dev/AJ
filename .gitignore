@@ -2,3 +2,4 @@
 ./aj-client/.env
 ./aj-server/node_modules
 *.env
+/Copied Content

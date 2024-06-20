@@ -5,7 +5,7 @@ const ClassDivision = () => {
   return (
     <>
    <ClassCardsSection/>
-      <ClassSideDetailsSection/>
+      {/* <ClassSideDetailsSection/> */}
      </>
   )
 }

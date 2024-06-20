@@ -4,7 +4,7 @@ import Header from "../Header/Header"
 import RegisterationFile from "@/Pages/Registeration/RegisterationFile.reg"
 import TransactionsFile from "@/Pages/Transactions/TransactionsFile.tr"
 import StudentsDirectoryFile from "@/Pages/Students Directory/StudentDirectoryFile.std"
-import ClassesFile from "@/Pages/Classes/Dashboard.dash"
+import ClassesFile from "@/Pages/Classes/DashboardFile.dash"
 import { useAppSelector } from "@/app/ReduxHooks"
 
 

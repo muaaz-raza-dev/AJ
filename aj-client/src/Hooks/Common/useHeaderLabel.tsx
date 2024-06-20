@@ -10,6 +10,8 @@ let RouteForLabel: { [key: string]: string } = {
   "/transactions/create": "Create transaction",
   "/students/*/*": "Student Profile",
   "/dashboard": "Classes & Teachers",
+  "/dashboard/class/*" :" Class Overview",
+  "/dashboard/teacher/register":"Teacher Registeration"
 };
 const useHeaderLabel = () => {
   let { pathname } = useLocation();
@@ -32,10 +34,10 @@ const useHeaderLabel = () => {
               Route_Stored.map((route,i)=>{ 
                 if (!Route_Flags.includes(i)) {
                   if (route == Route_Real[i]) {
-                    console.log(RouteForLabel[elm] , route);
                         setActiveLabel(RouteForLabel[elm])
                         isRouteSelected =true
                       }
+                      else isRouteSelected=false
                     }
                   })  
               }
