@@ -1,26 +1,21 @@
+import Teacher_Schedule from "../Components/Teacher_Schedule.ts.reg";
+import Teaching_Subjects from "../Components/Teaching_Subjects.ts.reg";
+import { schoolRoles } from "../Data/Roles";
 import CustomInputs_Reg from "../Helpers/CustomInputs_Reg.dash";
+import CustomSelect_Reg from "../Helpers/CustomSelect_Reg.dash";
 import LabelWrapper from "../Helpers/LabelWrapper.dash";
 import RegSectionHeader from "../Helpers/RegSectionHeader.dash";
 const Academic_Details_Teacher = () => {
   return (
     <RegSectionHeader label={"Academic Details"}>
-    <LabelWrapper required label="First Name">
-      <CustomInputs_Reg placeholder="James" id="First Name" />
+    <LabelWrapper required label="Role">
+      <CustomSelect_Reg data={schoolRoles} placeholder={"Teacher"}/>
     </LabelWrapper>
-    <LabelWrapper label="Last Name">
-      <CustomInputs_Reg placeholder="Wadck" id="LastName" />
-    </LabelWrapper>
-    <LabelWrapper required label="CNIC">
-      <CustomInputs_Reg placeholder="xxxxx-xxxxxxx-x" id="CNIC" type="number" />
-    </LabelWrapper>
-    <LabelWrapper required label="Email">
-      <CustomInputs_Reg placeholder="James@gmail.com" id="Email" type="email" />
-    </LabelWrapper>
-    <LabelWrapper label="Phone Number">
-      <CustomInputs_Reg placeholder="+923xxxxxxxx" id="Phone Number" type="number"/>
-    </LabelWrapper>
-    <LabelWrapper required label="WhatsApp Number">
-      <CustomInputs_Reg  placeholder="+923xxxxxxxx" id="WhatsApp Number" type="number" />
+    <Teacher_Schedule/>
+  
+     <Teaching_Subjects/>
+    <LabelWrapper required label="Salary">
+      <CustomInputs_Reg  placeholder={"Salary"} type="number"/>
     </LabelWrapper>
     </RegSectionHeader>
   )
