@@ -9,8 +9,14 @@ import {
   PopoverTrigger,
 } from "@/shdcn/components/ui/popover"
 import { CalendarIcon } from "lucide-react"
+import { useFormContext } from "react-hook-form"
+import moment from "moment"
 const CustomDateSelector_Reg:React.FC<{className:string,label?:string}> = ({className,label}) => {
     const [date, setDate] = React.useState<Date>()
+    let {setValue} = useFormContext()
+    React.useEffect(() => {
+      setValue("qualification.End_Date",moment(date).calendar("MMM"))
+    }, [date])
   return (
     <Popover>
       <PopoverTrigger asChild>

@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom"
 import SidebarFile from "../Sidebar/SidebarFile"
 import Header from "../Header/Header"
-import RegisterationFile from "@/Pages/Registeration/RegisterationFile.reg"
+import RegisterationFile from "@/Pages/Registeration/RegisterationFile.reg.std"
 import TransactionsFile from "@/Pages/Transactions/TransactionsFile.tr"
 import StudentsDirectoryFile from "@/Pages/Students Directory/StudentDirectoryFile.std"
 import ClassesFile from "@/Pages/Classes/DashboardFile.dash"

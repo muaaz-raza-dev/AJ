@@ -2,8 +2,7 @@ export const schoolRoles: string[] = [
     "Teacher",
     "Principal",
     "Vice Principal",
-    "School Counselor",
-    "School Nurse"
+    "School Nurse" ,
 ];
 export const commonSubjects: string[] = [
     "Mathematics",

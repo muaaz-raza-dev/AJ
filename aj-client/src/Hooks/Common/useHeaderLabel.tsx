@@ -11,7 +11,7 @@ let RouteForLabel: { [key: string]: string } = {
   "/students/*/*": "Student Profile",
   "/dashboard": "Classes & Teachers",
   "/dashboard/class/*" :" Class Overview",
-  "/dashboard/teacher/register":"Teacher Registeration"
+  "/dashboard/teacher/register":"Member Registeration"
 };
 const useHeaderLabel = () => {
   let { pathname } = useLocation();

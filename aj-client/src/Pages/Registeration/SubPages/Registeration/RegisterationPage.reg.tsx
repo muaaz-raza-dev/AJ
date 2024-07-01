@@ -1,4 +1,3 @@
-// import RegImportData from "./Components/ImportData.reg"
 import { useAppSelector } from "@/app/ReduxHooks"
 import RegisterationFormFile from "./RegisterationFormFile.reg"
 
@@ -11,7 +10,6 @@ const StudentRegisterationPage = () => {
         {totalStudents} students registered
         </span>
         </b>
-     {/* <RegImportData/> */}
   <RegisterationFormFile/>
     </main>
   )

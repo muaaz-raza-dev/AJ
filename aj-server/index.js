@@ -19,6 +19,7 @@ app.use("/api/students",require("./routes/ReadStudents"))
 app.use("/api/student",require("./routes/ReadStudentExclusive"))
 app.use("/api/global",require("./routes/Global"))
 app.use("/api/transactions",require("./routes/Transactions"))
+app.use("/api/dashboard",require("./routes/Teacher&Classes"))
 
 
 

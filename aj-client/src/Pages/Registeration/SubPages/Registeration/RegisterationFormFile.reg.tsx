@@ -10,7 +10,6 @@ import { useAppSelector } from "@/app/ReduxHooks"
 import { useEditStudentInformationExclusive } from "@/Hooks/Read Student Exclusive/useFetchStudentsInformationExclusive"
 import ImageUpload from "./util/ImageUpload.middleware"
 
-
 const RegisterationFormFile:FC<{edit?:boolean}> = ({edit}) => {
   let state = useAppSelector(s=>s.stdExclusive.Information.Details)
   const [Loading, setLoading] = useState(false)

@@ -19,7 +19,6 @@ UpdateState(Init.Details)
       <button type="submit" className={`rounded-xl transition-colors duration-150 w-28 py-1.5 bg-[var(--dark)] border-[var(--dark)] border text-white hFont 
         hover:text-[var(--dark)] hover:bg-[var(--box)] ${edit&&!changes&&"grayscale"} `} disabled={edit&&!changes}>
         {isLoading? <RequestLoading/>:edit?"Save":"Register"}
-
       </button>
     </div>
   );
