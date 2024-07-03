@@ -10,16 +10,15 @@ phone:string; //phone_number
 qualification:{
     [key:string]:string ;
     Degree:string;
-    End_Date:string;
     Experience:string;
 },
+Date_Hire:string;
 courses : string[] ,
 schedule:{Start:string,End:string},
 teaching_subjects : string[]
 salary:number,
-account_Details:{username:string;password:string,
-    role:string
-}
+account_Details:{username:string;password:string,role:string},
+acedmic_role:string
 }
 export const default_teacherReg:Iteacher = {
 firstName:"",
@@ -29,13 +28,15 @@ email:"",
 wa:"",
 phone:"",
 photo:"",
-qualification:{College:"",Degree:"",End_Date:"",Experience:""},
+qualification:{College:"",Degree:"",Experience:""},
+Date_Hire:"",
 courses:[],
 teaching_subjects:[],
     account_Details:{username:"",password:'',role:""},
-salary:0,
+salary:1500,
 address:"",
-schedule:{Start:"",End:""}
+schedule:{Start:"",End:""} ,
+acedmic_role:"Teacher"
 }
 
 

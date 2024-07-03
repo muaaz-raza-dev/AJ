@@ -1,10 +1,45 @@
-const Menubar = () => {
-  return (
-    <div className='  border-2 bg-[var(--box)] p-1 text-black rounded-lg gap-3 flex w-1/2'>
-        <button className="p-2 bg-[var(--dark)] w-1/2 center shadow-md  rounded-md text-white ">Classes</button>
-        <button className=" center p-2 w-1/2 font-bold text-gray-600 bg-[var(--box)] rounded-md ">Teachers</button>
-        </div>
-  )
-}
+import { useAppDispatch, useAppSelector } from "@/app/ReduxHooks";
+import { RedDashFilters } from "@/app/Slices/DashboardSlice";
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
-export default Menubar
+const Menubar = () => {
+  let { Sections } = useAppSelector((s) => s.dashboard.Filters);
+  let dispatch = useAppDispatch();
+  const SelectSection = (value: string) => {
+    dispatch(RedDashFilters({ fields_name: "Sections", selected: value }));
+    //Also run the fetch command to fetch another's type data
+  };
+  useEffect(() => {
+    let route = location.pathname.split("/")[2]
+    dispatch(RedDashFilters({ fields_name: "Sections", selected:(route =="classes" || !route)?"Classes":"Teachers" }));
+  }, [])
+  return (
+    <div className="  border-2 bg-[var(--box)] p-1 text-black rounded-lg gap-3 flex w-1/2">
+      {Sections.available.map((s) => {
+        if (s == Sections.selected) {
+          return (
+            <Link to={`/dashboard/${s.toLowerCase()}`}
+              className={` p-2 bg-[var(--dark)] w-1/2 center shadow-md  rounded-md text-white `}
+              onClick={() => SelectSection(s)}
+            >
+
+                {s}
+            </Link>
+          );
+        } else {
+          return (
+            <Link to={`/dashboard/${s.toLowerCase()}`}
+              className=" center p-2 w-1/2 font-bold text-black bg-[var(--box)] rounded-md "
+              onClick={() => SelectSection(s)}
+            >
+                {s}
+            </Link>
+          );
+        }
+      })}
+    </div>
+  );
+};
+
+export default Menubar;

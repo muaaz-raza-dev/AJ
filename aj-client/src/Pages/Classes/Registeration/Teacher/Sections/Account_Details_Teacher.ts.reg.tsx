@@ -4,6 +4,7 @@ import LabelWrapper from '../Helpers/LabelWrapper.dash'
 import CustomInputs_Reg from '../Helpers/CustomInputs_Reg.dash'
 import { Input } from 'antd'
 import { useFormContext } from 'react-hook-form'
+import Account_Role from '../Components/Account_Role.ts.reg'
 
 const Account_Details_Teacher = () => {
   let form =useFormContext()
@@ -15,6 +16,8 @@ const Account_Details_Teacher = () => {
     <LabelWrapper required label="Password">
       <Input.Password onChange={(e)=>form.setValue("account_Details.password",e.target.value)}  placeholder="Password" className="h-full"/>
     </LabelWrapper>
+    
+    <Account_Role/>
     </RegSectionHeader>
   )
 }

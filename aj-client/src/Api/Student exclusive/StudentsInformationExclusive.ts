@@ -6,8 +6,6 @@ const StudentsInformation = async(GRNO:string|number) => {
         return response.data
 }
 export const EditStudentInformation = async(payload:any)=>{
-    console.log(payload);
-    
     let response = await Axios.post<{payload:IRegisterFormState}>(`/student/Info/${payload.GRNO}`,{payload})
     return response.data
 }

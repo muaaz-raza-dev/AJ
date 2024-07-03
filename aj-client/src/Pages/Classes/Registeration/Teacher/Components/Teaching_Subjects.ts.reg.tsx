@@ -8,10 +8,8 @@ import { useEffect, useState } from "react"
 
 const Teaching_Subjects = () => {
     let {setValue} = useFormContext()
-    const [Options , setOptions] =useState<{input:string,selected:string[]}>({input:"",selected:[]})
+    const [Options , setOptions] =useState<{input:string,selected:string[]}>({input:"Science",selected:[]})
     const handleInput = (value:string)=>{
-        console.log(value);
-        
         setOptions(prev_value=>({...prev_value,input:value}))
     }
     const handleOptions = () =>{

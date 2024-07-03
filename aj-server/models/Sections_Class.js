@@ -5,13 +5,11 @@ const SectionSchema = new mongoose.Schema({
     name: { type: String, required: true },
     Class: { type: ObjectId, ref: "Class", required: true },
     ClassTeacher: { type: ObjectId, ref: "Teacher", required: true },
-    Capacity  : Number,
+    Students:{type: [ObjectId], ref: "Students",  },
+    capacity  : Number,
     schedule: [{
-        day: { type: String, required: true },
-        period : {type:String,required:true},
-        Teacher :{type:ObjectId,required:true , ref:"Teacher "} , //! Teacher shema needs to be created!
-        startTime: { type: String, required: true },
-        endTime: { type: String, required: true }
+        period : String,
+        Teachers :{type:[ObjectId] , ref:"Teacher "} , //! Teacher shema needs to be created!
     }]
 }, { timestamps: true });
 

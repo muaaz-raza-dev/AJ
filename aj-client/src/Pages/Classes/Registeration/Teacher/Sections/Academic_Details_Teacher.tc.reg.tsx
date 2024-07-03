@@ -5,6 +5,7 @@ import CustomInputs_Reg from "../Helpers/CustomInputs_Reg.dash";
 import LabelWrapper from "../Helpers/LabelWrapper.dash";
 import RegSectionHeader from "../Helpers/RegSectionHeader.dash";
 import Role_Select from "../Components/Role_Select.ts.reg";
+import CustomDateSelector_Reg from "../Helpers/CustomDateSelector_Reg.dash";
 const Academic_Details_Teacher = () => {
   let form = useFormContext()
   return (
@@ -13,6 +14,9 @@ const Academic_Details_Teacher = () => {
     <Teacher_Schedule/>
     <LabelWrapper required label="Salary">
       <CustomInputs_Reg  formContext={form} field_name="salary" placeholder={"Salary"} type="number"/>
+    </LabelWrapper>
+     <LabelWrapper required label="Date of hire" >
+  <CustomDateSelector_Reg className="w-full" label="Pick date of hire" />
     </LabelWrapper>
      <Teaching_Subjects/>
     </RegSectionHeader>

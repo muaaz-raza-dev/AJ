@@ -15,7 +15,7 @@ const CustomDateSelector_Reg:React.FC<{className:string,label?:string}> = ({clas
     const [date, setDate] = React.useState<Date>()
     let {setValue} = useFormContext()
     React.useEffect(() => {
-      setValue("qualification.End_Date",moment(date).calendar("MMM"))
+      setValue("Date_Hire",moment(date).calendar("MMM"))
     }, [date])
   return (
     <Popover>

@@ -1,11 +1,11 @@
-  import TeacherCardsSection from './Components/Cards/Teacher/TeacherCardsSection.dash'
-import TeacherSideDetailSection from './Components/SideDetails/Teacher/TeacherSideDetailSection.dash'
+import useReadTeachers from '@/Hooks/Teacher&Class/useReadTeachers'
+import TeacherCardsSection from './Components/Cards/Teacher/TeacherCardsSection.dash'
 
 const TeacherDivision = () => {
+   useReadTeachers() //* to fetch read all teachers
   return (
     <>
           <TeacherCardsSection/>
-          <TeacherSideDetailSection/>
     </>
   )
 }

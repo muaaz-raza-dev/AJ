@@ -25,7 +25,7 @@ const useTeacherRegsiter = (reset:()=>any) => {
               
             },{position:"bottom-left"})
   }
-,onError(err) {
+,onError() {
   toast("Somthing went wrong , try again later")
 }
 }
