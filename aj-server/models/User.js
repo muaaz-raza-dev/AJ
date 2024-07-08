@@ -2,11 +2,11 @@ const mongoose= require("mongoose");
 const {ObjectId} = require("mongodb")
 const UserSchema = new mongoose.Schema({
   username:{type:String,unique:true,trim:true,required:true},
-  Role:{type: {
+  Role:{ 
     type: String,
     enum: ['admin', 'chief admin', 'teacher',"student"],
     default: 'admin'
-  }},
+  },
   email:{type:String},
   password:{type:String, required: true },
   Name:String,

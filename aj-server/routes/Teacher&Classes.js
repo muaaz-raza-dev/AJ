@@ -1,22 +1,44 @@
-
-const express = require('express');
-const Authenticate = require('../middlewares/Authenticate.middleware');
-const {ValidateUserName,RegsiterMember, ReadTeachers_short, ReadTeachers_detailed, ReadTeachers_Filtered, FetchTeachers_Names} =require("../controllers/Teacher.controller");
-const { ClassRegisteration, Read_all_Classes, Read_Class_details } = require('../controllers/Classes.controller');
+const express = require("express");
+const Authenticate = require("../middlewares/Authenticate.middleware");
+const {
+  ValidateUserName,
+  RegsiterMember,
+  ReadTeachers_short,
+  ReadTeachers_detailed,
+  ReadTeachers_Filtered,
+  FetchRequiredInformation_Class,
+  EditMember_Admin,
+  FetchTeacherRaw,
+} = require("../controllers/Teacher.controller");
+const {
+  ClassRegisteration,
+  Read_all_Classes,
+  Read_Class_details,
+  Filter_Read_Classes,
+  Edit_Class,
+  FetchClassInformation_Raw,
+} = require("../controllers/Classes.controller");
 const router = express.Router();
 
-
 //? Teachers
-router.post("/teacher_registeration",Authenticate,RegsiterMember)
-router.get("/teachers",Authenticate,ReadTeachers_short)
-router.post("/teachers/filtered",Authenticate,ReadTeachers_Filtered)
-router.get("/teacher/:id",Authenticate,ReadTeachers_detailed)
-router.get("/teachers/all",Authenticate,FetchTeachers_Names)
-router.get("/validate_username/:username",Authenticate,ValidateUserName) 
+router.post("/teacher_registeration", Authenticate, RegsiterMember);
+router.get("/teachers", Authenticate, ReadTeachers_short);
+router.post("/teachers/filtered", Authenticate, ReadTeachers_Filtered);
+router.get("/teacher/:id", Authenticate, ReadTeachers_detailed);
+router.post("/validate/username", Authenticate, ValidateUserName);
+router.put("/teacher/edit",Authenticate,EditMember_Admin)
+router.get("/teacher/raw/:id",Authenticate,FetchTeacherRaw)
 
-//?Classes 
-router.post("/class/register",Authenticate,ClassRegisteration) 
-router.get("/classes/",Authenticate ,Read_all_Classes )
-router.get("/classes/:id",Authenticate , Read_Class_details)
+//?Classes
+router.get("/class/required", Authenticate, FetchRequiredInformation_Class);
+router.get("/class/raw/:id" , Authenticate , FetchClassInformation_Raw)
+router.post("/classes/filtered", Authenticate, Filter_Read_Classes);
+//Create
+router.post("/class/register", Authenticate, ClassRegisteration);
+//update
+router.post("/class/edit", Authenticate, Edit_Class);
 
-module.exports = router
+router.get("/classes/", Authenticate, Read_all_Classes);
+router.get("/class/:id", Authenticate, Read_Class_details);
+
+module.exports = router;

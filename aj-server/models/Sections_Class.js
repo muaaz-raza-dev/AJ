@@ -7,9 +7,11 @@ const SectionSchema = new mongoose.Schema({
     ClassTeacher: { type: ObjectId, ref: "Teacher", required: true },
     Students:{type: [ObjectId], ref: "Students",  },
     capacity  : Number,
-    schedule: [{
-        period : String,
-        Teachers :{type:[ObjectId] , ref:"Teacher "} , //! Teacher shema needs to be created!
+    start_date : {type:String,required:true},
+    end_date : {type:String,},
+    Subjects_teachers: [{
+        subject : String,
+        Teachers :{type:[mongoose.Schema.Types.ObjectId] , ref:"Teacher"} , //! Teacher shema needs to be created!
     }]
 }, { timestamps: true });
 

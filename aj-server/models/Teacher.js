@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const { ObjectId } = require("mongodb");
 const TeacherSchema = new mongoose.Schema({
     firstName: { type: String, required: true  },
     lastName: { type: String,  },
