@@ -11,7 +11,13 @@ let RouteForLabel: { [key: string]: string } = {
   "/students/*/*": "Student Profile",
   "/dashboard": "Classes & Teachers",
   "/dashboard/class/*" :" Class Overview",
-  "/dashboard/teacher/register":"Member Registeration"
+  "/dashboard/teacher/register":"Member Registeration",
+  "/sessions" :"Yearly session & Year cycle",
+  "/sessions/registeration" : "Session Registeration",
+  "/dashboard/class/edit/*" : "Edit class details",
+  "/dashboard/classes":"Classes",
+  "/dashboard/teachers":"Teachers & Staffs",
+
 };
 const useHeaderLabel = () => {
   let { pathname } = useLocation();
@@ -24,13 +30,11 @@ const useHeaderLabel = () => {
       let isRouteSelected = false;
       Object.keys(RouteForLabel).map((elm) => {
         if(!isRouteSelected){
-          
           let Route_Stored = elm.split("/")
           let Route_Real = pathname.split("/")
-          if(elm.includes("*")){
+          if(elm.includes("*") && Route_Stored.length == Route_Real.length){
             let Route_Flags :number[] = [] //to get the *th indexes
             Route_Stored.forEach((value,i)=>{ if(value=="*") Route_Flags.push(i)})
-              
               Route_Stored.map((route,i)=>{ 
                 if (!Route_Flags.includes(i)) {
                   if (route == Route_Real[i]) {

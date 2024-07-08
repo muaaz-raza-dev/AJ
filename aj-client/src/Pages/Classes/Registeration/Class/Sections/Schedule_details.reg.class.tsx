@@ -9,7 +9,7 @@ const Schedule_details_Reg: FC<{ index: number }> = ({ index:index_section }) =>
   const [subjectTeachers, setSubjectTeachers] = useState<SubjectsTeacher>({});
   let subjects = useFormContext().watch("subjects");
   let form = useFormContext()
-  let teachers =useAppSelector(s=>s.dashboard.Teachers_value_pairs)
+  let teachers =useAppSelector(s=>s.dashboard.RequiredInfo.Teachers)
   let debounced  =useDebouncedCallback((_)=>{
     form.setValue(`sections[${index_section}].Subjects_teachers`,subjectTeachers)
   },1000)
@@ -31,6 +31,7 @@ const Schedule_details_Reg: FC<{ index: number }> = ({ index:index_section }) =>
         <EachSubjectTeacher_Comp
           key={index}
           setState={setSubjectTeachers}
+          index_section={index_section}
           State={subjectTeachers}
           subject={subject}
         />
@@ -43,7 +44,8 @@ const EachSubjectTeacher_Comp: FC<{
   subject: string;
   State: SubjectsTeacher;
   setState: any;
-}> = ({ subject, State: state, setState }) => {
+  index_section:number;
+}> = ({ subject, State: state, setState ,index_section }) => {
     
   return (
     <LabelWrapper label={subject} className="w-full">
@@ -54,18 +56,21 @@ const EachSubjectTeacher_Comp: FC<{
           index_Teacher_number={0}
           subject={subject}
           state = {state}
+          index_section={index_section}
           />
     <EachSubjectTeacherSelect 
           setState={setState}
           index_Teacher_number={1}
           subject={subject}
           state = {state}
+          index_section={index_section}
           />          
              <EachSubjectTeacherSelect 
           setState={setState}
           index_Teacher_number={2}
           subject={subject}
           state = {state}
+          index_section={index_section}
           />  
         </div>
     </LabelWrapper>
@@ -77,9 +82,10 @@ const EachSubjectTeacherSelect: FC<{
   subject: string; //the subject's name i.e Science
   index_Teacher_number: number; //the index of the teacher number
   state: SubjectsTeacher; //the state of the subject teachers
-}> = ({ subject,  setState, index_Teacher_number: i ,state }) => {
-  let teachers =useAppSelector(s=>s.dashboard.Teachers_value_pairs)
-  const [TeachersName, setTeachersName] = useState(i==0 ?Object.keys(teachers)[0]  ||"":"none")
+  index_section:number; //the index of the section 
+}> = ({ subject,  setState, index_Teacher_number: i ,state  }) => {
+  let teachers =useAppSelector(s=>s.dashboard.RequiredInfo.Teachers)
+  const [TeacherName, setTeachersName] = useState(i==0 ?Object.keys(teachers)[0]  ||"":"none")
   function handleSelection(value: string) {
     setTeachersName(value)
     let updatedValue = state[subject].Teachers.map((val,index)=>{
@@ -100,7 +106,7 @@ const EachSubjectTeacherSelect: FC<{
       setState={handleSelection}
       placeholder={`Teacher ${i + 1}`}
       nosearch
-      state={TeachersName}
+      state={TeacherName}
       />
   );
 };

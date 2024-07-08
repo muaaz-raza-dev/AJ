@@ -1,8 +1,19 @@
+import { Isessions } from "./Isessions";
+import { IstudentShort } from "./IstudentsDir.t";
+import { Iteacher } from "./ITeacherRegisteration";
+export interface defaultId {
+    _id?:string
+}
+export interface Iclass extends defaultId{
 
-export interface Iclass {
     name:string,
     sections:Array<Iclass_section>;
     subjects :string[]
+    start_date : string;
+    end_date?:string ;
+    Students?:IstudentShort[]
+    Session?:Isessions;
+    SessionId:string ;   // * Yearly Session
 }
 
 export interface SubjectsTeacher {
@@ -12,26 +23,29 @@ export interface SubjectsTeacher {
     }
 }
 
-export interface Iclass_section  {
+export interface Iclass_section  extends defaultId{
     name: string;
     Class: string ; //Object Id
-    ClassTeacher: string;//Object Id
+    ClassTeacher?: Iteacher;//Object Id
     Students: Array<string >;  //Object Id
     capacity: number;
     Subjects_teachers:SubjectsTeacher;
+    start_date : string;
+    end_date?:string ;
 }
 
 export const defaultSection_Class :Iclass_section = {
         name: "", 
         Class: "",
-        ClassTeacher: "",
         Students: [],
         capacity: 0,
-        Subjects_teachers:{}
-    
+        Subjects_teachers:{},
+        start_date : "" ,
 }
 export const defaultClass: Iclass = {
     name: "",
+    SessionId:"",
     sections: [defaultSection_Class],
-    subjects: []
+    subjects: [] ,
+    start_date : "" ,
 };

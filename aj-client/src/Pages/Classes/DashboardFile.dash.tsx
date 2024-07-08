@@ -8,7 +8,9 @@ const DashboardFile = () => {
     <Routes>
         <Route path='/teacher/register' element={<TeacherRegisteration/>}/>
         <Route path='/class/register' element={<ClassRegisterationFile/>}/>
-        <Route path='/class/*' element={<ClassDetailsPage/>}/>
+        <Route path='/class/edit/:id' element={<ClassRegisterationFile edit={true} />}/>
+        <Route path='/teacher/edit/:id' element={<TeacherRegisteration edit={true} />}/>
+        <Route path='/class/:id' element={<ClassDetailsPage/>}/>
         <Route path='/*' index element={<LandingPage/>}/>
     </Routes>
   )

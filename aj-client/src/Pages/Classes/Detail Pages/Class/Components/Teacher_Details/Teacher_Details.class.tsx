@@ -1,14 +1,31 @@
-import { GoClock } from "react-icons/go"
-
+import { useAppSelector } from "@/app/ReduxHooks"
+import Notes_send from "./Notes_send.class"
+import { ArrowRight, EditIcon, UserPlus } from "lucide-react"
+import { FC } from "react"
+import { IstudentShort } from "@/app/Types/IstudentsDir.t"
 const Teacher_Details = () => {
+  let Students = useAppSelector(s=>s.classDetailed.payload.Students)
   return (
-    <div className='w-[25%] flex flex-col gap-2 '>
-      <div className="flex flex-col h-12 bg-dark items-center justify-center text-white hFont font-bold text-xl bg-[var(--primary)] rounded-md shadow ">
-        <h1>Teacher Details</h1>
+    <div className='w-[35%] flex flex-col gap-2 '>
+    <Notes_send/>
+    <div className="flex bg-[var(--box)] rounded-md flex-col gap-7 p-4">
+
+      <div className="flex  items-center justify-between  hFont font-bold text-xl  rounded-md  ">
+        <h1>Recent Admissions</h1>
+      <button className="text-dark font-medium flex gap-1 text-sm"><UserPlus size={18}/> Add Students</button>
+
 </div>
+<div className="flex flex-col gap-2">
  {
-  Array(5).fill("").map(_=><Each_Teacher_Deatail_Block/>)
- }
+  Students.length ==0 ?
+  <p className="center text-gray-500 text-xl font-black">
+    No Admissions yet. 
+  </p>
+  :
+   Students.map(data=><EachStudent_Comp data={data}/>)
+  }
+  </div>
+  </div>
 
 
                 
@@ -16,40 +33,21 @@ const Teacher_Details = () => {
   )
 }
 
-const Each_Teacher_Deatail_Block= ()=>{
-  return       <div className="flex flex-col  bg-[var(--box)] rounded-md shadow ">
-  <div  className={`w-full h-2 bg-dark rounded-tl-md rounded-tr-md `}></div>
-  <div className="flex w-full gap-2 flex-wrap">
-  <div className="p-2 flex flex-col gap-1 w-full">
-    <div className="flex justify-between w-full">
+const EachStudent_Comp :FC<{data:IstudentShort}>= ({data})=>{
+  return       <div className="flex justify-between border-b py-3 ">
 
-    <div className="flex gap-1 items-center">
-<img src="/images/teacher_sample.jpg" alt="" className="w-8 h-8 rounded-full"/>
 <div className="">
-
-    <h2 className="hFont  font-semibold leading-tight">Kayley Watson</h2>
-    <p className="text-dark text-sm leading-tight">Class Teacher</p>
+  <div className="flex gap-4 items-center">
+    {/* <img src="/images/teacher_sample.jpg" alt="" className="w-6 h-6 rounded-full"/> */}
+    <h1 className="font-medium">{data.FirstName} {data.LastName}</h1>
 </div>
-    </div>
-    <div className="flex gap-2  text-sm h-max  items-center">
-      <GoClock size={15}/>
-      <p>120 minutes</p>
-    </div>
-    </div>
-    <div className="">
-<h3 className="font-bold my-1">Subjects :</h3>
-<div className="flex flex-wrap gap-1">
-<p className="p-1 text-[0.82rem] rounded-md  border-2 border-dark_dimmer ">Chemistry</p>
-<p className="p-1 text-[0.82rem] rounded-md  border-2 border-dark_dimmer ">Chemistry</p>
 </div>
-      <div>
-        <img src="images/avatar/1.jpg" className="avatar avatar-lg" alt=""/>
-      </div>
+<div className="text-gray-600 flex gap-3 ">
+  <button><EditIcon size={16}   className="hover:text-dark transition-colors"/></button>
+  <button><ArrowRight size={16} className="hover:text-dark transition-colors"/></button>
+</div>
 
-    </div>
   
-    </div>
-    </div>
 </div>
 }
 

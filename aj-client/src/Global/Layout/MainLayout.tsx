@@ -6,6 +6,7 @@ import TransactionsFile from "@/Pages/Transactions/TransactionsFile.tr"
 import StudentsDirectoryFile from "@/Pages/Students Directory/StudentDirectoryFile.std"
 import ClassesFile from "@/Pages/Classes/DashboardFile.dash"
 import { useAppSelector } from "@/app/ReduxHooks"
+import YearSessionsFile from "@/Pages/Year Sessions/YearSessionsFile.session"
 
 
 const MainLayout = () => {
@@ -23,6 +24,7 @@ const MainLayout = () => {
             <Route element={<StudentsDirectoryFile/>} path="/students/*"/> 
              <Route element={<TransactionsFile/>} path="/transactions/*"/> 
              <Route element={<ClassesFile/>} path="/dashboard/*"/> 
+             <Route element={<YearSessionsFile/>} path="/sessions/*"/> 
         </Routes>
       </main>
     </main>

@@ -2,6 +2,7 @@ import { Iteacher } from "@/app/Types/ITeacherRegisteration";
 import moment from "moment";
 import { FC } from "react";
 import Teaceher_CardLinks from "./Card/Teaceher_CardLinks.dash";
+import { Link } from "react-router-dom";
 
 const TeacherCard:FC<{data:Iteacher}> = ({data}) => {
   return (
@@ -28,12 +29,14 @@ const TeacherCard:FC<{data:Iteacher}> = ({data}) => {
           </div>
           </div>
           <div className="flex gap-2">
-          <button className="border-dark border text-dark text-sm  px-3 py-1 rounded-md hover:bg-transparent font-bold hover:scale-95 transition-transform border-[var(--dark)] border transition-colors">
+          <button className="border-dark  text-dark text-sm  px-3 py-1 rounded-md hover:bg-transparent font-bold hover:scale-95  border-[var(--dark)] border transition-colors">
             Details
           </button>
-          <button className="bg-dark text-sm text-white px-3 py-1 rounded-md  hover:scale-95 transition-transform border-[var(--dark)] border transition-colors flex gap-1 items-center">
+          <Link to={`/dashboard/teacher/edit/${data?._id}`}>
+          <button className="bg-dark text-sm text-white px-3 py-1 rounded-md  hover:scale-95 border-[var(--dark)] border transition-colors flex gap-1 items-center">
             Edit
           </button>
+          </Link>
           </div>
         </div>
       </main>

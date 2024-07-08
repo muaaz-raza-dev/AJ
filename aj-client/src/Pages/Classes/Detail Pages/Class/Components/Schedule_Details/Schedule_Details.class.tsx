@@ -1,9 +1,13 @@
-import { Clock } from "lucide-react";
 import FilterBar from "./FilterBar.class"
 import { Separator } from "@/shdcn/components/ui/separator";
-import RandomColors from "@/Pages/Classes/Landing/Components/Cards/Class/data/ColorCombos.class";
-
+import { useAppSelector } from "@/app/ReduxHooks";
+import { Iteacher } from "@/app/Types/ITeacherRegisteration";
+import { Iclass_section_teachers } from "@/app/Types/Iclass_detailed";
 const Schedule_Details = () => {
+  let {sections} =useAppSelector(s=>s.classDetailed.payload)
+  let {selected_index:i} =useAppSelector(s=>s.classDetailed.Filters.Sections)
+  let ClassTeacher =useAppSelector(s=>s.classDetailed.payload?.sections[i]?.ClassTeacher) as Iteacher
+  let payload:Iclass_section_teachers[] = [{Teachers:[ClassTeacher ],subject:"Class Teacher"} ,...(sections[i]?.Subjects_teachers||[]) ]
   return (
     <div className="flex flex-col w-full bg-[var(--box)] rounded-md p-6 gap-4">
           {/* Filter Bar */}
@@ -13,28 +17,24 @@ const Schedule_Details = () => {
 		  <div className="flex gap-4 flex-wrap">
 
         {
-          Array(7).fill("as_s").map((_,i)=>{
-            return <div className="flex flex-col w-[30%] bg-[var(--primary)] rounded-md shadow ">
-                  <div style={{backgroundColor:RandomColors[i%RandomColors.length]}} className={`w-full h-2  rounded-tl-md rounded-tr-md `}></div>
+
+          payload.map((data)=>{
+            return <div className=" flex flex-col w-[30%] rounded-md  ">
                   <div className="flex w-full gap-2 flex-wrap">
 									<div className="p-2">
-										<h1 className="hFont text-lg font-semibold leading-tight">Basic Algorithm</h1>
-										<p className="text-dark font-medium mb-1">Kayley watson</p>
-										<div className="d-flex align-items-center justify-content-between">
-											<div>
-												<ul>
-												
-													<li className="flex gap-2 text-sm items-center">
-											<Clock size={16} className="text-danger"/>
-                      <p> 09.00 - 10.00 AM </p>
-                      
-                      </li>
-												</ul>
-											</div>
-											<div>
-												<img src="images/avatar/1.jpg" className="avatar avatar-lg" alt=""/>
-											</div>
-										</div>
+										<h1 className="hFont text-lg font-semibold text-gray-600">{data.subject}</h1>
+                    {
+                      data.Teachers.map((teacher:Iteacher)=>{
+                        return <div className="flex gap-2 items-center">
+                          <div className="flex  gap-1">
+                            <h1 className="hFont  font-semibold leading-tight">{teacher?.firstName}</h1>
+                            <h1 className="hFont  font-semibold leading-tight">{teacher?.lastName}</h1>
+                          </div>
+                          <img src={teacher?.photo} className="avatar avatar-sm w-6 h-6 rounded-full" alt=""/>
+                        </div>
+                      })
+                    }
+							
                     </div>
                     </div>
 								</div>

@@ -1,11 +1,10 @@
-import { useFetchTeacherNames } from "@/Hooks/Teacher&Class/useReadTeachers"
 import ClassRegisterationForm from "./Form/ClassRegisterationForm.class"
+import { FC } from "react"
 
-const ClassRegisterationFile = () => {
-  useFetchTeacherNames()
+const ClassRegisterationFile :FC<{edit?:boolean}>= ({edit}) => {
   return (
     <div className="w-full flex flex-col gap-y-4">
-        <ClassRegisterationForm/>
+        <ClassRegisterationForm edit ={edit}/>
         </div>
   )
 }

@@ -1,22 +1,19 @@
 import * as React from "react"
-import { format } from "date-fns"
 import { cn } from "@/shdcn/lib/utils"
 import { Button } from "@/shdcn/components/ui/button"
-import { Calendar } from "@/shdcn/components/ui/calendar"
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/shdcn/components/ui/popover"
 import { CalendarIcon } from "lucide-react"
-import { useFormContext } from "react-hook-form"
 import moment from "moment"
-const CustomDateSelector_Reg:React.FC<{className:string,label?:string}> = ({className,label}) => {
-    const [date, setDate] = React.useState<Date>()
-    let {setValue} = useFormContext()
+const CustomDateSelector_Reg:React.FC<{className:string,formValue:string,label?:string,onChange:(value:string)=>void}> = ({className,formValue,label,onChange}) => {
+    const [date, setDate] = React.useState<string>(formValue||"")
     React.useEffect(() => {
-      setValue("Date_Hire",moment(date).calendar("MMM"))
+     date!=""&& onChange(moment(date).calendar("MMM"))
     }, [date])
+    
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -28,16 +25,12 @@ const CustomDateSelector_Reg:React.FC<{className:string,label?:string}> = ({clas
           )}
         >
           <CalendarIcon className="mr-2 h-4 w-4" />
-          {date ? format(date, "PPP") : <span>{label||"Pick a date"}</span>}
+          {formValue ?  moment(formValue).format("D MMMM Y") : <span>{label||"Pick a date"}</span>}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0" align="start">
-        <Calendar
-          mode="single"
-          selected={date}
-          onSelect={setDate}
-          initialFocus
-        />
+       <input type="date" value={!formValue?"":moment(formValue).format("YYYY-MM-DD")} onChange={(e)=>{setDate(e.target.value); 
+       }}/>
       </PopoverContent>
     </Popover>
   )

@@ -3,10 +3,17 @@ import LabelWrapper from "../Helpers/LabelWrapper.dash"
 import { MdCancel } from "react-icons/md"
 import React, { useEffect, useState } from "react"
 import { useFormContext } from "react-hook-form"
-
+import lod from "lodash"
 const Certification_Select = () => {
-    let {setValue} = useFormContext()
+    let {setValue,watch} = useFormContext()
     const [Options , setOptions] =useState<{input:string,selected:string[]}>({input:"",selected:[]})
+    const options:string[] = watch("courses")  // parent form state
+    useEffect(() => {
+    if(!lod.isEqual(options,Options.selected)) { // to keep sync with global state
+        setOptions(e=>({...e,selected:options}))
+    }
+    }, [options])
+
     const handleInput = ({target:{value}}:React.ChangeEvent <HTMLInputElement>)=>{
         setOptions(prev_value=>({...prev_value,input:value}))
     }
@@ -31,7 +38,7 @@ const Certification_Select = () => {
         </div>
         <div className=" w-full rounded flex gap-2 ">
              {
-                Options.selected.map((e,id)=>{
+                options.map((e,id)=>{
                     return <div className="border-2 rounded-md border-dark text-dark w-max px-3 py-1 flex gap-2">
                 <p>
                 {e}

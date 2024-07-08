@@ -5,10 +5,16 @@ import LabelWrapper from "../Helpers/LabelWrapper.dash"
 import { MdCancel } from "react-icons/md"
 import { useFormContext } from "react-hook-form"
 import { useEffect, useState } from "react"
-
+import lod from "lodash"
 const Teaching_Subjects = () => {
-    let {setValue} = useFormContext()
+    let {setValue,watch} = useFormContext()
     const [Options , setOptions] =useState<{input:string,selected:string[]}>({input:"Science",selected:[]})
+    const subjects:string[] = watch("teaching_subjects")
+    useEffect(() => {
+    if(!lod.isEqual(subjects,Options.selected)) {
+        setOptions(e=>({...e,selected:subjects}))
+    }
+    }, [subjects])
     const handleInput = (value:string)=>{
         setOptions(prev_value=>({...prev_value,input:value}))
     }
@@ -30,7 +36,7 @@ const Teaching_Subjects = () => {
         </div>
         <div className=" w-full rounded flex gap-2 flex-wrap">
              {
-                Options.selected.map((e,id)=>{
+                subjects.map((e,id)=>{
                     return <div className="border-2 rounded-md border-dark text-dark w-max px-3 py-1 flex gap-2">
                 <p>
                 {e}

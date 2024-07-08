@@ -8,6 +8,8 @@ import { TransactionRead } from "./Slices/TransactionReadSlice";
 import { studentsExclusive } from "./Slices/StdExclusiveSlice";
 import { Teacher_Details } from "./Slices/Teacher_Registeration_Edit_Slice";
 import { dashboardSlice } from "./Slices/DashboardSlice";
+import { LandingSessions } from "./Slices/SessionSlice";
+import { Class_detailed } from "./Slices/ClassDetailedSlice";
 
 
 
@@ -21,7 +23,9 @@ reducer:{
     trCompose:TransactionCompose ,    // tr =transaction
     stdExclusive:studentsExclusive,  //  student detailed page state
     teacher_details:Teacher_Details ,
-    dashboard:dashboardSlice
+    dashboard:dashboardSlice,
+    sessions:LandingSessions ,
+    classDetailed:Class_detailed
 }
 });
 

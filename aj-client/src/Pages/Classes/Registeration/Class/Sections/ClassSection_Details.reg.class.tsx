@@ -10,13 +10,14 @@ const ClassSection_Details = () => {
         setValue("sections",[...sections,defaultSection_Class])
     }
   return (
-        sections.map(( _:any,index:number)=>{
+        sections?.map(( _:any,index:number)=>{
           return<>
              <ClassSections_Block index={index} /> 
               {
           index == sections.length-1 &&
              <div className='w-full flex items-center px-4 my-1 '>
-                <Button className="bg-dark text-white border shadow border-dark hover:text-dark" type='button' onClick={handleSectionAddition}>
+                <Button className="bg-dark text-white border shadow border-dark hover:text-dark" type='button' 
+                onClick={handleSectionAddition}>
                  Add Section
                 </Button>
       </div>

@@ -12,9 +12,26 @@ export const ReadTeachers_detailed = async (teacherId: string) => {
     let response = await Axios.get(`/dashboard/teacher/${teacherId}`, { headers: { token: Cookies.get(Secretkey) } })
     return response.data
 }
-export const Fetch_Teachers_Names = async () => { //fetching names with its ids as value pairs
+export const Fetch_Required_Info = async () => { //fetching names with its ids as value pairs
     let Secretkey = import.meta.env.VITE_APP_SECRET_COOKIE_KEY
-    let response = await Axios.get(`/dashboard/teachers/all`, { headers: { token: Cookies.get(Secretkey) } })
+    let response = await Axios.get(`/dashboard/class/required`, { headers: { token: Cookies.get(Secretkey) } })
     return response.data
 }
+
+export const Fetch_Class_Raw= async (id?:string) => {      //!fetching class pre written details for edit feature
+    if(id){
+        let Secretkey = import.meta.env.VITE_APP_SECRET_COOKIE_KEY
+        let response = await Axios.get(`/dashboard/class/raw/${id}`, { headers: { token: Cookies.get(Secretkey) } })
+        return response.data
+    }
+}
+export const Fetch_Teacher_Raw= async (id?:string) => {      //!fetching class pre written details for edit feature
+    if(id){
+        let Secretkey = import.meta.env.VITE_APP_SECRET_COOKIE_KEY
+        let response = await Axios.get(`/dashboard/teacher/raw/${id}`, { headers: { token: Cookies.get(Secretkey) } })
+        return response.data
+    }
+}
+
+
 export default ReadTeachers_short

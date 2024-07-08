@@ -12,6 +12,7 @@ import { MdFormatListBulletedAdd } from "react-icons/md"
 import { Link } from "react-router-dom"
 import useFilterTeachers from "@/Hooks/Teacher&Class/useFilterTeachers"
 import { RedDashFilters } from "@/app/Slices/DashboardSlice"
+import { useReadFilteredClasses } from "@/Hooks/Teacher&Class/useReadClasses"
 const SpecialFilters = () => {
     let {selected} =useAppSelector(s=>s.dashboard.Filters.Sections)
   return (
@@ -31,19 +32,24 @@ const SpecialFilters = () => {
 }
 
 const FilterBarClasses=()=>{
-    let {Year} =useAppSelector(s=>s.dashboard.Filters)
-
+  let {mutate,isLoading } =useReadFilteredClasses()
+    let {Session} =useAppSelector(s=>s.dashboard.Filters)
+    let dispatch =useAppDispatch()
+  let handleFilter = (value:string)=>{
+    dispatch(RedDashFilters({fields_name:"Session",selected:value,isLoading}))
+    mutate(value)
+  }
     return  (  
-        <Select value={Year.selected}>
+        <Select value={Session.selected} onValueChange={handleFilter}>
           <SelectTrigger className="w-[180px] focus:ring-0 border-2 bg-[var(--box)] border-[var(--dark)] relative" >
-            <p className="absolute -top-1  text-[0.67rem] font-medium text-dark text-center "> Year </p>
-            <SelectValue defaultValue={Year.selected} className="border-0 focus:ring-0"  />
+            <p className="absolute -top-1  text-[0.67rem] font-medium text-dark text-center "> Session </p>
+            <SelectValue defaultValue={Session.selected} className="border-0 focus:ring-0"  />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
                 {
-                    Year.available.map(year=>{
-                        return <SelectItem value={year}>{year}</SelectItem>
+                    Session.available.map(year=>{
+                        return <SelectItem value={Object.values(year)[0]}>{Object.keys(year)[0]}</SelectItem>
                     })
                 }
             </SelectGroup>

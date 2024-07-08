@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from '@/app/ReduxHooks'
-import { RedDashPayloadReset, RedDashSearch } from '@/app/Slices/DashboardSlice'
+import { RedDashPayloadReset, RedDashSearch, RedDashSearchClassFilter } from '@/app/Slices/DashboardSlice'
 import RequestLoading from '@/Global/Loaders/RequestLoding'
 import { Input } from '@/shdcn/components/ui/input'
 import { ChangeEventHandler, useState } from 'react'
@@ -8,12 +8,25 @@ import { useDebouncedCallback } from 'use-debounce'
 const SearchBar = () => {
   let dispatch = useAppDispatch()
   const [loading,setLoading]=useState(false)
-  let defaultState =useAppSelector(s=>s.dashboard.payload.Teachers.Original)
+  let defaultState_teacher =useAppSelector(s=>s.dashboard.payload.Teachers.Original)
+  let defaultState_class =useAppSelector(s=>s.dashboard.payload.Classes.Original)
+  let mode =useAppSelector(s=>s.dashboard.Filters.Sections.selected)
   let debounced = useDebouncedCallback((value)=>{
-    if(!value){dispatch(RedDashPayloadReset({type:"Teachers",defaultState}))}
-    else { dispatch(RedDashSearch({value})) }
+    if(!value){
+      if(mode =="Teachers"){ dispatch(RedDashPayloadReset({type:mode,defaultState:defaultState_teacher})) } 
+      else { dispatch(RedDashPayloadReset({type:"Classes",defaultState: defaultState_class})) } 
+        }
+
+    else { 
+      if(mode == "Classes") {
+dispatch (RedDashSearchClassFilter({input:value}))
+      }
+      else{
+        dispatch(RedDashSearch({value}))
+      }
+     }
     setLoading(false)    
-  },1000)
+  },250)
   const handleSearch:ChangeEventHandler<HTMLInputElement> = ({target:{value}})=>{
     setLoading(true)
     debounced(value)

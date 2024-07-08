@@ -10,17 +10,24 @@ const Academic_Details_Teacher = () => {
   let form = useFormContext()
   return (
     <RegSectionHeader label={"Academic Details"}>
-  <Role_Select/>
+    <Role_Select/>
     <Teacher_Schedule/>
     <LabelWrapper required label="Salary">
       <CustomInputs_Reg  formContext={form} field_name="salary" placeholder={"Salary"} type="number"/>
     </LabelWrapper>
      <LabelWrapper required label="Date of hire" >
-  <CustomDateSelector_Reg className="w-full" label="Pick date of hire" />
+      <HireDate/>
     </LabelWrapper>
      <Teaching_Subjects/>
     </RegSectionHeader>
   )
 }
-
+const HireDate = ()=>{
+  let form= useFormContext()
+  let handleDate = (value:string)=>{
+    form.setValue("Date_Hire",value)
+  }
+  let value = form.watch("Date_Hire")
+  return <CustomDateSelector_Reg  formValue={value} className="w-full" label="Pick date of hire" onChange={handleDate}/>
+}
 export default Academic_Details_Teacher

@@ -5,14 +5,17 @@ import CustomSelect_Reg from "../../Teacher/Helpers/CustomSelect_Reg.dash"
 import { Button } from "@/shdcn/components/ui/button"
 import { commonSubjects } from "../../Teacher/Data/Roles"
 import { MdCancel } from "react-icons/md"
+import { isFormReset } from "../Sections/Class_Basic_Details.reg.class"
+
 const Subjects_Selection = () => {
-    let {setValue} = useFormContext()
-    const [Options , setOptions] =useState<{input:string,selected:string[]}>({input:"Science",selected:[]})
+    let {setValue,watch} = useFormContext()
+    let selected =watch("subjects") as string[]
+    const [Options , setOptions] =useState<{input:string,selected:string[]}>({input:"Science",selected:selected})
     const handleInput = (value:string)=>{
-        console.log(value)
         setOptions(prev_value=>({...prev_value,input:value}))
     }
     const handleOptions = () =>{
+        
         setOptions(prev_value=>({input:"",selected:[...prev_value.selected,prev_value.input]}))
         }
     const handleDelete = (id:number)=> {
@@ -21,8 +24,15 @@ const Subjects_Selection = () => {
     useEffect(() => {
         setValue("subjects",Options.selected)
     }, [Options.selected])
+    
+ 
+    useEffect(() => {  //To sync the reset of form with the fields
+        if(isFormReset(selected,Options.selected)){
+            setOptions(prev_value=>({...prev_value,selected:selected}))
+        }
+    }, [selected])
   return (
-    <LabelWrapper required label="Subjects " >
+    <LabelWrapper required label="Subjects " className="w-full">
         <section className="w-full flex gap-2 flex-col">
         <div className="flex gap-x-2 w-full">
     <CustomSelect_Reg data={commonSubjects} placeholder="Teaching Subjects" setState={handleInput} state={Options.input}  />

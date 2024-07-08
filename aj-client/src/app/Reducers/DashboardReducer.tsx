@@ -5,6 +5,7 @@ import { Idashboard } from "../Types/Idashboard";
 
 interface IdashboardPayload {
   //* dashboard = classes and teachers page
+  detailed_payload?:{Class:{},Teacher:{}},
   payload?: {
     Teachers:{
       Original : {docs:Iteacher[],acedmic_role:string}[]
@@ -17,30 +18,38 @@ interface IdashboardPayload {
     };
     Filters?: {
       Sections: {
-        available: string[];
-        selected: string;
+        available: ["Classes","Teachers"];
+        selected: "Classes";
       };
       EmployementStatus: {
       available: string[];
       selected: string;
     };
-    Year: {
+    Session: {
       available: string[];
       selected: string;
     };
   };
   Detailed_Teacher ?:Iteacher|null;
-  Teachers_value_pairs?:{[key:string]:string}
-
+  RequiredInfo ?: {
+    Teachers ? :{[key:string]:string}
+    Sessions ?:{[key:string] :{_id:string,isActive:boolean}}
+  }
+  RequiredPayload ?: {
+    Teachers  :{[key:string]:string}
+    Sessions :{[key:string] :{_id:string,isActive:boolean}}
+  }
 }
 
 export const InsertBulkDashValuesFn = (
   state: Idashboard,
-  { payload: {  payload, Filters ,Teachers_value_pairs} }: PayloadAction<IdashboardPayload>
+  { payload: {  payload, Filters ,RequiredInfo,RequiredPayload} }: PayloadAction<IdashboardPayload>
 ) => {
   if (payload) state.payload = payload;
   if (Filters) state.Filters = Filters;
-  if(Teachers_value_pairs) state.Teachers_value_pairs =Teachers_value_pairs
+  if(RequiredPayload) state.RequiredInfo =RequiredPayload
+  if(RequiredInfo?.Teachers) state.RequiredInfo.Teachers =RequiredInfo.Teachers
+  if(RequiredInfo?.Sessions) state.RequiredInfo.Sessions =RequiredInfo.Sessions
 };
 
 export const InsertDashPayloadFn = (
@@ -73,7 +82,7 @@ export const InsertDashFiltersFn = (
     {
       payload: { fields_name,available,selected,isLoading},
      }: PayloadAction<{
-      fields_name: "Year" | "EmployementStatus" |"Sections"
+      fields_name: "Session" | "EmployementStatus" |"Sections"
       available?: string[];
       selected?: string;
       isLoading?:boolean
@@ -128,3 +137,17 @@ export const ResetFiltersStateFn = (
 ) =>{
 state.payload[type].Filtered =defaultState
 }
+
+
+export const InputClassFilterFn = (
+  state: Idashboard ,
+  {
+    payload: {input }
+  }: PayloadAction<{
+     input:string ,
+  }
+   > ) =>{
+            state.payload.Classes.Filtered = state.payload.Classes.Original.filter(e=>e.name.toLowerCase().includes(input.toLowerCase()))
+          
+      
+   }

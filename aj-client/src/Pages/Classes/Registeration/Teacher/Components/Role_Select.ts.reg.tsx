@@ -6,13 +6,14 @@ import { useFormContext } from 'react-hook-form'
 
 const Role_Select = () => {
     const [state,setState] =useState("Teacher")
-    let {setValue} =useFormContext()
+    let {setValue,watch} =useFormContext()
+  let value = watch("acedmic_role")
     useEffect(() => {
-    setValue("account_Details.role",state)
+    setValue("acedmic_role",state)
     }, [state])
   return (
     <LabelWrapper required label="Acedmic Role">
-    <CustomSelect_Reg   data={schoolRoles} state={state} setState={setState} placeholder={"Teacher"}/>
+    <CustomSelect_Reg   data={schoolRoles} state={value} setState={setState} placeholder={"Teacher"}/>
   </LabelWrapper>
   )
 }

@@ -1,4 +1,4 @@
-import { User2Icon } from "lucide-react";
+import { CalendarMinus2, User2Icon } from "lucide-react";
 import { SiGoogleclassroom } from "react-icons/si";
 import { Link } from "react-router-dom";
 import useActiveRoute from "@/Hooks/Common/ActiveRoute";
@@ -35,6 +35,23 @@ const SidebarLinks = () => {
           {Expanded && <p className="max-md:hidden">Home</p>}
         </Link>
       </SubSidebarLinks_Shrinked>
+      <SubSidebarLinks_Shrinked label="Yearly Sessions and Year cycles">
+        <Link
+          to={"/sessions"}
+          className={`md:w-full transition-colors hover:bg-[var(--primary)] hover:border-transparent hover:text-[var(--dark)] text-[var(--primary)] hover:rounded   items-center  ${
+            Expanded ? "px-4" : "justify-center"
+          } border-[var(--primary)] md:py-3 max-md:py-1 ${ValidateRoute({
+            toCompare: "/sessions",
+            exact: false,
+            classesToApply:
+              "bg-[var(--primary)] !text-[var(--dark)] border-none rounded-md",
+          })}  flex gap-x-4`}
+        >
+          <CalendarMinus2 size={24} />
+          {Expanded && <p className="max-md:hidden">Yearly Sessions</p>}
+        </Link>
+      </SubSidebarLinks_Shrinked>
+
       <SubSidebarLinks_Shrinked label="Classes & Teachers ">
         <Link
           to={"/dashboard"}

@@ -1,7 +1,13 @@
 import { Iclass } from "./Iclass";
 import { Iteacher } from "./ITeacherRegisteration";
 
-export interface Idashboard {                                   //* dashboard = classes and teachers page
+export interface Idashboard {  
+  detailedPayload:{
+    Class:{
+
+    },
+    Teacher:{},
+  }         ,                        //* dashboard = classes and teachers page
     payload:{
       Teachers:{
         Original : {docs:Iteacher[],acedmic_role:string}[]
@@ -15,24 +21,29 @@ export interface Idashboard {                                   //* dashboard = 
     Detailed_Teacher :Iteacher|null;
     Filters :{
     Sections : {
-        available:string[],
-        selected:string
+        available:["Classes","Teachers"],
+        selected:"Teachers"|"Classes"
     },
     EmployementStatus : {
         available:string[] ,
         selected:string
     } ,
-    Year:{
+    Session:{
         available:string[] ,
         selected:string
     },
     
 },
-Teachers_value_pairs :{[key:string]:string}
+RequiredInfo : {
+  Teachers :{[key:string]:string}
+  Sessions:{[key:string] :{_id:string,isActive:boolean}}
+}
 isLoading:boolean
 }
 
 export const defaultDashboard: Idashboard = {
+  detailedPayload:{
+    Class:{},Teacher:{}},
     payload: {
       Teachers: {
         Original: [], // Initially empty
@@ -44,17 +55,17 @@ export const defaultDashboard: Idashboard = {
       }
     },
     Detailed_Teacher : null,
-    Teachers_value_pairs:{},
+    RequiredInfo : {Teachers:{},Sessions:{}},
     Filters: {
         Sections: {
-          available: [ 'Classes',"Teachers"],
+          available: ["Classes","Teachers"],
           selected: 'Classes', // Default selection
         },
       EmployementStatus: {
         available: ['Current', 'Past'],
         selected: 'Current', // Default selection
       },
-      Year: {
+      Session: {
         available: [],
         selected: '', // Default selection
       },

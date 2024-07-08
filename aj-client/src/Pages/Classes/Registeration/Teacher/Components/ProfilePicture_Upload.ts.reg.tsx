@@ -1,16 +1,18 @@
 import { Button } from "@/shdcn/components/ui/button"
 import LabelWrapper from "../Helpers/LabelWrapper.dash"
 import { useDropzone } from "react-dropzone";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import useUploadMedia from "@/Hooks/Common/useUploadMedia";
 import RequestLoading from "@/Global/Loaders/RequestLoding";
+import { useFormContext } from "react-hook-form";
 
 const ProfilePicture_Upload = () => {
   const [loading,setLoading] =useState(false)
   let {upload} =useUploadMedia()
-  const [ImageState,setImageState] =useState<{error:boolean,file:File|null,url:string,sample:string}>({error:false,file:null,url:"",sample:""})
-    let { getRootProps, getInputProps, } = useDropzone({
+  let photo = useFormContext().watch("photo")
+  const [ImageState,setImageState] =useState<{error:boolean,file:File|null,url:string,sample:string}>({error:false,file:null,url:photo,sample:""})
+let { getRootProps, getInputProps, } = useDropzone({
         maxSize: 1024 * 1024* 10,
         multiple: false,
         accept:{'image/*':[".png",".jpg",".jpeg"]},
@@ -20,9 +22,11 @@ const ProfilePicture_Upload = () => {
             let sample = URL.createObjectURL(acceptedFiles[0])
             setImageState(e=>({...e,file:acceptedFiles[0],sample}))
           }
-          
     }
 });
+useEffect(() => {
+      setImageState(a=>({...a,url:photo}))
+}, [photo])
 const Remove = () =>{
 setImageState(e=>({...e,file:null,url:"",error:false,sample:""}))  
 }
@@ -64,7 +68,7 @@ const AnalyzeDescription_Class = ()=>{
            ` dropzone w-[16%] rounded  aspect-square   border-2 center `,
         })}>
         <input {...getInputProps({ type: "file", })} />
-        <img src={ImageState.url||ImageState.sample||"/images/upload_image.png"} alt="" className="w-full rounded h-full object-cover" />
+        <img src={photo||ImageState.sample||"/images/upload_image.png"} alt="" className="w-full rounded h-full object-cover" />
             </div>
             <AnalyzeDescription_Class/>
                 <div className="flex gap-x-3">

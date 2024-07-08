@@ -16,7 +16,7 @@ const CustomInputs_Reg:FC<CustomInputProps> = ({ formContext,field_name,required
     <input
     {...formContext?.register(field_name,required?{required:"This field is required"}:{})}
     {...props}
-    className=" border rounded-md  w-[95%] p-2  border-[#8080806b] focus:border-dark  transition-all outline-none "
+    className=" border rounded-md  w-full p-2  border-[#8080806b] focus:border-dark  transition-all outline-none "
     />
   )
 }
