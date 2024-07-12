@@ -12,11 +12,12 @@ let RouteForLabel: { [key: string]: string } = {
   "/dashboard": "Classes & Teachers",
   "/dashboard/class/*" :" Class Overview",
   "/dashboard/teacher/register":"Member Registeration",
-  "/sessions" :"Yearly session & Year cycle",
+  "/sessions" :"Yearly session & Fee Configrations",
   "/sessions/registeration" : "Session Registeration",
   "/dashboard/class/edit/*" : "Edit class details",
   "/dashboard/classes":"Classes",
   "/dashboard/teachers":"Teachers & Staffs",
+  "/payment-settings" : "Payment Configurations"
 
 };
 const useHeaderLabel = () => {

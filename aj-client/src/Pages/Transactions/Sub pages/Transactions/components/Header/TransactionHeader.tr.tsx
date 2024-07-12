@@ -7,7 +7,7 @@ import { useReadTransactionsMeta } from "@/Hooks/Transactions/useReadTransaction
 
 
 const TransactionHeader = () => {
-  let {data} = useReadTransactionsMeta()
+  useReadTransactionsMeta()
   return (
     <div className="flex gap-x-2">
       <TransactionEstimateStats />

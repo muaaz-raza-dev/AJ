@@ -8,7 +8,7 @@ import {
 } from "@/shdcn/components/ui/popover"
 import { CalendarIcon } from "lucide-react"
 import moment from "moment"
-const CustomDateSelector_Reg:React.FC<{className:string,formValue:string,label?:string,onChange:(value:string)=>void}> = ({className,formValue,label,onChange}) => {
+const CustomDateSelector_Reg:React.FC<{className?:string,formValue:string,label?:string,onChange:(value:string)=>void}> = ({className,formValue,label,onChange}) => {
     const [date, setDate] = React.useState<string>(formValue||"")
     React.useEffect(() => {
      date!=""&& onChange(moment(date).calendar("MMM"))

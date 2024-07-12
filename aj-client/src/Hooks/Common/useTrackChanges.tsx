@@ -1,27 +1,29 @@
-import { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 function useTrackChanges(stateToCompare: any) {
-  const [InititalState, setInititalState] = useState<any>(null);
+  const [initialState, setInitialState] = useState<any>(null);
   const [changes, setChanges] = useState(false);
+  
   useEffect(() => {
-    if (InititalState == null) {
- 
-        setInititalState(stateToCompare);
-      
+    if (stateToCompare !== null&&initialState!=null) {
+      const sortedInitialState = sortObjectKeys(DeepCopy(initialState));
+      const sortedCompareableState = sortObjectKeys(DeepCopy(stateToCompare));
+      setChanges(!(JSON.stringify(sortedInitialState)==JSON.stringify(sortedCompareableState)));
     }
-  }, []);
+  },[DeepCopy(stateToCompare)]); 
 
-  useEffect(() => {
-    if (stateToCompare!=null&&InititalState!=null) {
-      setChanges(!(JSON.stringify(sortObjectKeys(InititalState))==JSON.stringify(sortObjectKeys(stateToCompare))));
-    }
-  }, [stateToCompare, ]);
-  let UpdateState = (updatedState: any) => {
-    setInititalState(updatedState);
-  };
-  return { changes, UpdateState }; //! Change Initialstate to set the updated state which will use in tracking
+
+const UpdateState = (updatedState: any) => {
+    setInitialState(DeepCopy(updatedState));
+};
+
+  return { changes, UpdateState };
 }
-export { useTrackChanges };
 
+
+export { useTrackChanges };
+const DeepCopy = (obj:{[key:string]:any})=>{
+  return JSON.parse(JSON.stringify(obj))
+}
 const sortObjectKeys = (obj:any) => {
   if(obj){
     const sortedKeys = Object.keys(obj).sort();

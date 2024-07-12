@@ -14,7 +14,7 @@ type CustomTextAreaProps = React.InputHTMLAttributes<HTMLTextAreaElement> & {
 const CustomInputs_Reg:FC<CustomInputProps> = ({ formContext,field_name,required,...props }) => {
   return (
     <input
-    {...formContext?.register(field_name,required?{required:"This field is required"}:{})}
+    {...formContext.register(field_name,required?{required:"This field is required"}:{})}
     {...props}
     className=" border rounded-md  w-full p-2  border-[#8080806b] focus:border-dark  transition-all outline-none "
     />
@@ -24,7 +24,7 @@ const CustomInputs_Reg:FC<CustomInputProps> = ({ formContext,field_name,required
 export const CustomTextArea_Reg:FC<CustomTextAreaProps> = ({formContext,field_name,required,...props}) => {
   return (
     <textarea
-    {...formContext?.register(field_name,required?{required:"This field is required"}:{})}
+    {...formContext.register(field_name,required?{required:"This field is required"}:{})}
     {...props}
     className=" border rounded-md  w-[95%] p-2  border-[#8080806b] focus:border-dark  transition-all outline-none "
     />

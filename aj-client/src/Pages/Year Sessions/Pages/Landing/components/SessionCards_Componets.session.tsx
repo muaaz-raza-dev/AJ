@@ -4,7 +4,8 @@ import SessionCard from './SessionCard.session'
 const SessionCards_Componets = () => {
   let sessions  = useAppSelector(s=>s.sessions.payload.Sessions.Filtered)
   return (
-    <main className="flex gap-4  w-full flex-col min-h-[70vh] overflow-y-auto">
+    <main className="flex gap-3  w-full flex-col min-h-[70vh] overflow-y-auto">
+      <h1 className='font-bold text-gray-800 text-2xl'>Yearly Sessions</h1>
     <div className="flex gap-4  w-full flex-wrap ">
       {
         sessions.length === 0 &&(

@@ -5,7 +5,6 @@ import RegSectionHeader from '@/Pages/Classes/Registeration/Teacher/Helpers/RegS
 import { useFormContext } from 'react-hook-form'
 
 const SessionDetails = () => {
-    
     let form = useFormContext()
     let handleStartDate = (value:string)=>{
       form.setValue("start_date",value)
@@ -23,10 +22,10 @@ const SessionDetails = () => {
       <CustomInputs_Reg placeholder="2024-2025" required formContext={form} id="Acedmic Year"  field_name="acedmic_year"/>
     </LabelWrapper>
     <LabelWrapper required label="Start Date">
-      <CustomDateSelector_Reg label="pick session start date" onChange={handleStartDate} className="w-full" />
+      <CustomDateSelector_Reg formValue={form.watch("start_date")} label="pick session start date" onChange={handleStartDate} className="w-full" />
     </LabelWrapper>
     <LabelWrapper required label="End Date">
-      <CustomDateSelector_Reg label="pick session end date" onChange={handleEndDate} className="w-full" />
+      <CustomDateSelector_Reg formValue={form.watch("end_date")} label="pick session end date" onChange={handleEndDate} className="w-full" />
     </LabelWrapper>
     <LabelWrapper required label="Description session">
         <CustomTextArea_Reg placeholder="write the goals of the whole sessions..." required formContext={form} id="Session Description"  field_name="session_description"/>

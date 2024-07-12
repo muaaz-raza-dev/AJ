@@ -2,17 +2,15 @@ import { CalendarMinus2, User2Icon } from "lucide-react";
 import { SiGoogleclassroom } from "react-icons/si";
 import { Link } from "react-router-dom";
 import useActiveRoute from "@/Hooks/Common/ActiveRoute";
-import { FaMoneyCheckAlt, FaRegChartBar, FaUsersCog } from "react-icons/fa";
-import { Badge } from "antd";
+import {  FaRegChartBar, FaUsersCog } from "react-icons/fa";
 import { useAppSelector } from "@/app/ReduxHooks";
 import SubSidebarLinks_Shrinked from "./SubSidebarLinks";
+import { MdCurrencyExchange, MdOutlinePayments } from "react-icons/md";
 
 const SidebarLinks = () => {
   let { ValidateRoute } = useActiveRoute();
   let Expanded = useAppSelector((e) => e.global.Expand_Navbar);
-  let { Transaction_Config_update: TransactionUpdate } = useAppSelector(
-    (s) => s.global
-  );
+  
   return (
     <ul
       className={`flex w-full  items-center h-full flex-col max-md:flex-row ${
@@ -101,32 +99,38 @@ const SidebarLinks = () => {
         </Link>
       </SubSidebarLinks_Shrinked>
       <SubSidebarLinks_Shrinked label="Transactions">
-        <Link
+      <Link
           to={"/transactions"}
-          className={`md:w-full transition-colors hover:bg-[var(--primary)] hover:border-transparent hover:text-[var(--dark)] text-[var(--primary)] hover:rounded   items-center ${
+          className={`md:w-full transition-colors hover:bg-[var(--primary)] hover:border-transparent hover:text-[var(--dark)] text-[var(--primary)] hover:rounded   items-center  ${
             Expanded ? "px-4" : "justify-center"
           } border-[var(--primary)] md:py-3 max-md:py-1 ${ValidateRoute({
             toCompare: "/transactions",
             exact: false,
             classesToApply:
               "bg-[var(--primary)] !text-[var(--dark)] border-none rounded-md",
-          })} group  flex gap-x-4 items-center`}
+          })}  flex gap-x-4`}
         >
-          <Badge dot={TransactionUpdate}>
-            <FaMoneyCheckAlt
-              size={24}
-              stroke="2"
-              className={`group-hover:border-transparent group-hover:text-[var(--dark)] text-[var(--primary)] group-hover:rounded ${ValidateRoute(
-                {
-                  toCompare: "/transactions",
-                  exact: false,
-                  classesToApply:
-                    "bg-[var(--primary)] !text-[var(--dark)] border-none rounded-md",
-                }
-              )}`}
-            />
-          </Badge>
+          <MdCurrencyExchange
+          size={24}
+              stroke="2" className=""
+          />
           {Expanded && <p className="max-md:hidden">Transactions</p>}
+        </Link>
+      </SubSidebarLinks_Shrinked> 
+      <SubSidebarLinks_Shrinked label="Payment Configurations ">
+        <Link
+          to={"/payment-settings"}
+          className={`md:w-full transition-colors hover:bg-[var(--primary)] hover:border-transparent hover:text-[var(--dark)] text-[var(--primary)] hover:rounded   items-center  ${
+            Expanded ? "px-4" : "justify-center"
+          } border-[var(--primary)] md:py-3 max-md:py-1 ${ValidateRoute({
+            toCompare: "/payment-settings",
+            exact: false,
+            classesToApply:
+              "bg-[var(--primary)] !text-[var(--dark)] border-none rounded-md",
+          })}  flex gap-x-4`}
+        >
+          <MdOutlinePayments size={24} stroke="2"  />
+          {Expanded && <p className="max-md:hidden">Classes & Teachers</p>}
         </Link>
       </SubSidebarLinks_Shrinked>
     </ul>
