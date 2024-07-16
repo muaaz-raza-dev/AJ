@@ -1,13 +1,15 @@
 export interface IglobalState  {
-    totalStudents:number;
-    classes:string[];
-    Transaction_Config_update:boolean;
+    Classes:{[key:string]:string} 
+    Sections:{[key:string]:{[key:string]:string}}
+    Sessions:{[key:string]:string} ;
+    GlobalFees:{[key:string]:string} ;
     Expand_Navbar:boolean
 }
 export let DefaultGlobalState :IglobalState  = {
-    totalStudents:0,
-    Transaction_Config_update:false,
-    classes:[],
-    Expand_Navbar:false
+    Expand_Navbar:false ,
+    Classes: {},
+    Sections:{},
+    Sessions:{} ,
+    GlobalFees:{}
 
 }

@@ -1,22 +1,21 @@
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form"
-import { ItransactionForm } from "@/app/Types/ItransactionForm"
+import { defaultTransactionForm, ItransactionForm } from "@/app/Types/ItransactionForm"
 import TransactionFeeDetailsForm from "./TransactionFeeDetailsForm.tr"
-import { useAppDispatch, useAppSelector } from "@/app/ReduxHooks"
-import { RedInsertTransactionCompose } from "@/app/Slices/TransactionComposeSlice"
+import useCreateTransaction from "@/Hooks/Transactions/useCreateTransaction"
 
 const TransactionComposeForm = () => {
-    let form = useForm<ItransactionForm>()
-    let  {Transactions,student,} = useAppSelector(state=>state.trCompose)
-    let dispatch = useAppDispatch()
-    let FormHandler:SubmitHandler<ItransactionForm> = ({PaidAmount,PayorsName,Note})=>{
-      if(Object.keys(Transactions).length!=0&&student){
-        dispatch(RedInsertTransactionCompose({Errors:false,PaidAmount,PayorsName,Note}))
-      }
+    let form = useForm<ItransactionForm>({defaultValues:defaultTransactionForm})
+    let {mutate,isLoading}= useCreateTransaction(form.reset)
+    let handleTransaction: SubmitHandler<ItransactionForm> = (payload)=>{
+      mutate(payload)
+    }
+    let PrintAndConfirmTransaction = ()=>{
+
     }
   return (
     <FormProvider {...form}>
-    <form className="flex flex-wrap w-full" onSubmit={form.handleSubmit(FormHandler)}>
-        <TransactionFeeDetailsForm/>
+    <form className="flex flex-wrap w-full" onSubmit={form.handleSubmit(handleTransaction)}>
+        <TransactionFeeDetailsForm isLoading={isLoading} PrintFn={PrintAndConfirmTransaction}/>
     </form>
     </FormProvider>
   )

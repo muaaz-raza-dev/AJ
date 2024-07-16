@@ -2,7 +2,7 @@ import { CalendarMinus2, User2Icon } from "lucide-react";
 import { SiGoogleclassroom } from "react-icons/si";
 import { Link } from "react-router-dom";
 import useActiveRoute from "@/Hooks/Common/ActiveRoute";
-import {  FaRegChartBar, FaUsersCog } from "react-icons/fa";
+import {  FaRegChartBar } from "react-icons/fa";
 import { useAppSelector } from "@/app/ReduxHooks";
 import SubSidebarLinks_Shrinked from "./SubSidebarLinks";
 import { MdCurrencyExchange, MdOutlinePayments } from "react-icons/md";
@@ -66,23 +66,8 @@ const SidebarLinks = () => {
           {Expanded && <p className="max-md:hidden">Classes & Teachers</p>}
         </Link>
       </SubSidebarLinks_Shrinked>
-      <SubSidebarLinks_Shrinked label="Student's Registeration">
-        <Link
-          to={"/registeration"}
-          className={`md:w-full transition-colors hover:bg-[var(--primary)] hover:border-transparent hover:text-[var(--dark)] text-[var(--primary)] hover:rounded   items-center  ${
-            Expanded ? "px-4" : "justify-center"
-          } border-[var(--primary)] md:py-3 max-md:py-1 ${ValidateRoute({
-            toCompare: "/registeration",
-            exact: false,
-            classesToApply:
-              "!bg-[var(--primary)] !text-[var(--dark)] border-none rounded-md",
-          })}  flex gap-x-4`}
-        >
-          <FaUsersCog size={24} />
-          {Expanded && <p className="max-md:hidden">Registeration</p>}
-        </Link>
-      </SubSidebarLinks_Shrinked>
-      <SubSidebarLinks_Shrinked label="Student's Details">
+   
+      <SubSidebarLinks_Shrinked label="Students">
         <Link
           to={"/students"}
           className={`md:w-full transition-colors hover:bg-[var(--primary)] hover:border-transparent hover:text-[var(--dark)] text-[var(--primary)] hover:rounded    items-center ${

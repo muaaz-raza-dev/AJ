@@ -1,7 +1,5 @@
 const Respond = require("../Helpers/ResponseHandler")
-const Global_Fee_Preferences = require("../models/Global_Fee_Preferences")
 const Students = require("../models/Students")
-const Students_Finance = require("../models/Students_Finance")
 const Transactions = require("../models/Transactions")
 const TotalRecordedAmount = require("./utils/CalculateDueAmount.utils")
 const moment = require("moment")
@@ -11,8 +9,8 @@ let GRNO = req.params.GRNO
 try {
 let Student =await Students.findOne({GRNO}).select(" DOA FirstName LastName fatherName photo GRNO Class")
 if(!Student) return res.status(404).json({message:"Student Not Found"})
-let StudentFinance = await Students_Finance.findOne({Student:Student._id})
-let AcademicFee = await Global_Fee_Preferences.find({})
+let StudentFinance = []
+let AcademicFee =[]
 let TotalPaidAmount = await Transactions.aggregate([
     {$match: {
       'Student':Student._id
@@ -67,7 +65,7 @@ else{
 async function StudentInformationExclusive(req,res){
   let {GRNO} = req.params
 let Student = await Students.findOne({GRNO}).select("-__v -createdAt -updatedAt ")
-let StudentFinance = await Students_Finance.findOne({Student:Student._doc._id}).select("-__v -createdAt -updatedAt -Student")
+let StudentFinance = []
 let Response = {...(Student?._doc||Student), FinancialDetails:{...(StudentFinance?._doc||StudentFinance)}}
 delete Response["_id"]
 delete Response["FinancialDetails"]["_id"]

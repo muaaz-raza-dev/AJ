@@ -1,10 +1,9 @@
 import { PayloadAction } from "@reduxjs/toolkit"
 import { IShortTransactions, ItransactionRead } from "../Types/ItransactionsRead"
 interface  ItransactionReadOptional {
-    Dates?:{[key:string]:string[]};
     TransactionStats?:{totalTransactions:number,PendingAmount:number,RecievedAmount:number,PendingTransactions:number,isLoading:boolean};
     SearchModes?: string[];
-    TransactionTypes?: {type:string,numberOfTransactions:number}[];
+    TransactionTypes?: {value:string,label:string}[];
     Transactions?: IShortTransactions[];
     Filters?: ItransactionsFilters,
   isLoadingTransactions?:boolean,
@@ -17,11 +16,10 @@ interface ItransactionsFilters{
     month?: string;
     Input?: string;
     count?: number;}
-const InsertTransactionsStateFn = (state:ItransactionRead,{payload:{DataLength,isLoadingTransactions,Dates,TransactionStats,SearchModes,TransactionTypes,Transactions}}:PayloadAction<ItransactionReadOptional>)=>{
+const InsertTransactionsStateFn = (state:ItransactionRead,{payload:{DataLength,isLoadingTransactions,TransactionStats,SearchModes,TransactionTypes,Transactions}}:PayloadAction<ItransactionReadOptional>)=>{
     if(isLoadingTransactions!=undefined) state.isLoadingTransactions = isLoadingTransactions
     if(DataLength!=undefined) state.DataLength = DataLength
     if(TransactionStats!=undefined) state.TransactionStats=TransactionStats
-    if(Dates!=undefined) state.Dates = Dates 
     if(SearchModes!=undefined) state.SearchModes = SearchModes
     if(TransactionTypes!=undefined) state.TransactionTypes = TransactionTypes
     if(Transactions!=undefined) state.Transactions = Transactions

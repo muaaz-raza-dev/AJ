@@ -1,198 +1,209 @@
 const moment = require("moment");
-const Global_Fee_Preferences = require("../models/Global_Fee_Preferences");
 const Students = require("../models/Students");
+const Classes = require("../models/Class");
 const TransactionsScema = require("../models/Transactions");
-const Students_Finance = require("../models/Students_Finance");
-const  CalculateMonthlyFeeRespectToDues  = require("./utils/CalculateMonthlyFeeRespectToDues");
+// const Students_Finance = require("../models/Students_Finance");
+const CalculateMonthlyFeeRespectToDues = require("./utils/CalculateMonthlyFeeRespectToDues");
 const Respond = require("../Helpers/ResponseHandler");
+const PaymentConfig = require("../models/SchoolPayments");
+const { CalculateFeeDues } = require("./utils/CalculateFeeDues.utils");
+const Session = require("../models/Session");
+const {
+  CalculatePaymentConfigs,
+} = require("./utils/Transaction/CalculateReadTransactionMetaFilters");
 
-async function CreateTransaction (req,res){
-let  { Transactions  , totalAmount ,PaidAmount,student,PayorsName,Note} =req.body
-try {
-  const newTransaction = new TransactionsScema({
-    Student:student._id, Transaction:Object.values(Transactions),
-    totalAmount,
-    PaidAmount,
-    discountedTotal:req.body.discountedTotal,
-    PayorsName,Note,
-    RecievedBy:req.AdminId
-    // Assuming other required fields are handled or defaulted
-  });
-  const savedTransaction = await newTransaction.save();
-  res.status(201).json(savedTransaction);
-} catch (error) {
-  res.status(400).json({ message: error.message });
-}
-
-}
-
-async function SearchStudent(req,res){
-let student = await Students.findOne({GRNO: req.body.GRNO }).select("FirstName LastName email fatherName photo GRNO DOA")
-let Dates = {}
-let InvoiceNumber = await TransactionsScema.find({}).sort({Invoice:-1})
-if (student) {
-  let SortedFee_History = await CalculateMonthlyFeeRespectToDues(student._id)
- let b= (await Global_Fee_Preferences.find({})).forEach(elm=>{
-    let MOA = moment(student.DOA).month()
-    let YOA =  moment(student.DOA).year()
-    if (+elm.Year>=YOA ) {
-      Dates[elm.Year] = []
-      Object.values(elm.Months).map(pre=>{
-        console.log(pre.month);
-        if(moment.months().indexOf(pre.month)>=MOA){
-          Dates[elm.Year].push(pre.month)
-        }
-      })
-    }
-  })
-  Respond({res,payload:{
-    Dates,std:student,Invoice:InvoiceNumber[0]?.Invoice?InvoiceNumber[0].Invoice+1:1,MonthlyFee_history:SortedFee_History
-  },})
-} 
-  else {res.status(404).json({ message: "Student not found" ,payload:{Dates,Invoice:InvoiceNumber[0]?.Invoice?InvoiceNumber[0].Invoice+1:1}});}
-
-}
-
-async function ReadTransactions(req,res){
-  let Limit = process.env.TransactionPerRequest
-  let {transactionType, searchMode, year, month,  count ,Input:q} = req.body
+async function CreateTransaction(req, res) {
+  let { payload } = req.body;
   try {
-    let date = moment(`${month} ${year}`, "MMMM YYYY");
-    const formattedDate = date.toISOString()
-    const LastDate =  moment(`${month+1} ${year}`, "MMMM YYYY").toISOString();
-    let Query= {}
-    Query["Time"] = { $gte:formattedDate,
-      // $lt:LastDate //todo: Temporary deisabled
-     }; //* To make sure it will only returns the treansactions of this month
-    if (q) {
-      if (searchMode =="Invoice")Query["Invoice"] =q
-      else {
-        let std = await Students.findOne({GRNO:q})
-        Query["Student"]= std?std?._id:"123456789123456789123456"
-      }
+    let Payload = { ...payload, RecievedBy: req.AdminId };
+    let paymentConfigIds = await Payload.Transactions.map((e) => {
+      if (e.paymentType == "Registered") return e.paymentConfigId;
+    });
+    if (paymentConfigIds.length != 0) {
+      await Students.findOneAndUpdate(
+        {
+          _id: Payload.Student,
+          FinancialDetails: {
+            $elemMatch: {
+              paymentConfigId: { $in: paymentConfigIds },
+            },
+          },
+        },
+        { $set: { "FinancialDetails.$.paid": true } }
+      );
     }
-    else{
-      if (transactionType) Query["Transaction"] = { $elemMatch: { purpose: transactionType } };
-    }
- let DataLength = await TransactionsScema.countDocuments(Query)
-    let transactions = await TransactionsScema.find(Query).populate({path:"Student",select:"FirstName LastName GRNO"}).populate({path:"RecievedBy",select:"Name"}).skip(Limit*(count-1)).limit(Limit).sort("-Time")
-    res.json({success:true,payload:transactions,DataLength,count})
+    const newTransaction = new TransactionsScema(Payload);
+    const savedTransaction = await newTransaction.save();
+    res.json(savedTransaction);
   } catch (error) {
     console.log(error);
-    res.status(400).json({ message: error.message,success:false });
+    res.status(400).json({ message: error.message });
   }
 }
 
-async function ReadTransactionsMeta(req,res){
-  const currentMonth = new Date().getMonth() ;
-  const currentYear = new Date().getFullYear();
-  let startOfMonth = new Date(currentYear, currentMonth , 1);
-let numberOfTransactions = await TransactionsScema.aggregate([
-  {
-    $match: {
-      Time: { $gte: startOfMonth, }
-    }
-  },
-{
-  $lookup: {
-    from: "students",
-    localField: "Student",
-    foreignField: "_id",
-    as: "Student"
-  }
-},
- {
-  $group: {
-  _id: "$Student.GRNO",
-  Transactions: {
-    $push: "$$ROOT"
-  },
-}} ,
-{
-  $unwind: {
-    path: "$_id",
-  }
-}
-])
-let TransactionTypes = await TransactionsScema.aggregate([{
-  $unwind: {
-    path: "$Transaction",
-  }
-},{$group: {
-  _id: "$Transaction.purpose",
-  numberOfTransactions: {
-    $sum:1 
-  }
-}},{$project: {
-  "type":"$_id",
-  "numberOfTransactions":1,
-  "_id":0
-}},{
-  $sort: {
-    "numberOfTransactions": -1
+async function SearchStudent(req, res) {
+  let student = await Students.findOne({ GRNO: req.body.GRNO }).select(
+    "FirstName LastName email fatherName photo GRNO DOA Class FinancialDetails"
+  );
+  let InvoiceNumber = await TransactionsScema.find({}).sort({ Invoice: -1 });
+  if (student) {
+    let studentClass = await Classes.findById(student.Class).select(
+      "SessionId"
+    );
+    let paymentDetails = await PaymentConfig.find({
+      isDeprecated: false,
+      feeScope: "Session-based",
+      session: studentClass?.SessionId,
+    }).select("feeTitle classes");
+    let ClassbasedFeeInfo = {};
+    JSON.parse(JSON.stringify(paymentDetails)).forEach((elm) => {
+      ClassbasedFeeInfo[elm.feeTitle] = elm.classes.find(
+        (pre) => pre.classId == student.Class
+      )?.amount;
+    });
+    let { Dues, FeeInfo } = await CalculateFeeDues(student);
+    Respond({
+      res,
+      payload: {
+        Dues_details: Dues,
+        StudentInfo: student,
+        FeeInfo,
+        Invoice: InvoiceNumber[0]?.Invoice ? InvoiceNumber[0].Invoice + 1 : 1,
+        ClassbasedFeeInfo,
+      },
+    });
+  } else {
+    res
+      .status(404)
+      .json({
+        message: "Student not found",
+        payload: {
+          Invoice: InvoiceNumber[0]?.Invoice ? InvoiceNumber[0].Invoice + 1 : 1,
+        },
+      });
   }
 }
 
-])
-//* This data is only restricted for current month only.
-let amountRecieved = await TransactionsScema.aggregate([  {
-  $match: {
-    Time: { $gte: startOfMonth, }
-  }}
-,{$unwind: {path: "$Transaction",}},{$match: {"Transaction.purpose":"Monthly Fee"
-  }} ,
-  {
-    $group: {
-      _id: "",
-      total: {
-        $sum: "$Transaction.amount"
+async function ReadTransactions(req, res) {
+  let Limit = process.env.TransactionPerRequest;
+  let { transactionType, searchMode, count, Input: q } = req.body;
+  try {
+    let Query = {};
+
+    if (q) {
+      if (searchMode == "Invoice") Query["Invoice"] = q;
+      else {
+        let std = await Students.findOne({ GRNO: q });
+        Query["Student"] = std ? std?._id : "123456789123456789123456";
+      }
+    } else {
+      if (transactionType != "Custom") {
+        if (transactionType)
+          Query["Transactions"] = {
+            $elemMatch: {
+              paymentType: "Registered",
+              paymentConfigId: transactionType,
+            },
+          };
+      } else {
+        if (transactionType)
+          Query["Transactions"] = { $elemMatch: { paymentType: "Custom" } };
       }
     }
+    let DataLength = await TransactionsScema.countDocuments(Query);
+    let transactions = await TransactionsScema.find(Query)
+      .populate({ path: "Student", select: "FirstName LastName GRNO" })
+      .populate({ path: "RecievedBy", select: "Name" })
+      .skip(Limit * (count - 1))
+      .limit(Limit)
+      .sort("-Time");
+    res.json({ success: true, payload: transactions, DataLength, count });
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({ message: error.message, success: false });
   }
-])
-
-let totalAmount = await Students_Finance.aggregate([{$group: {
-  _id: "",
-  total: {
-    $sum: "$MonthlyFee"
-  }
-}}])
-//*To fetch the dates from which it is originated
-let Dates = {}
-let x= (await Global_Fee_Preferences.find({})).forEach(elm=>
-  {
-     Dates[elm.Year]=elm.Months.map(month=>month.month)
-  }
-  )         
-  // totalTransactions:number,PendingAmount:number,RecievedAmount:number,PendingTransactions:number
-let totalStudents = await Students.countDocuments()
-let totalTransactions  = numberOfTransactions?.length ??0
-let PendingAmount = totalAmount[0]?.total-amountRecieved[0]?.total??0
-res.json({ message: "Transactions for current month", payload:{
-  Stats:{
-    totalTransactions:numberOfTransactions,RecievedAmount:amountRecieved[0]?.total??0,PendingAmount ,totalTransactions,PendingTransactions:totalStudents-totalTransactions,
-  },TransactionTypes,
-  Dates} });
-
 }
-async function SetTransactionConfig (req,res){
-  let {Monthly,Annual,dueDate} = req.body
+
+async function ReadTransactionsMeta(req, res) {
+  let paymentConfigs = await CalculatePaymentConfigs();
+  res.json({ payload: { paymentConfigs } });
+}
+async function SetTransactionConfig(req, res) {
+  let { Monthly, Annual, dueDate } = req.body;
   try {
-    let Find ={Year:moment().year().toString()}
-    let payload  = {Monthly,Annual,dueDate}
-    let month = moment().format("MMMM")
+    let Find = { Year: moment().year().toString() };
+    let payload = { Monthly, Annual, dueDate };
+    let month = moment().format("MMMM");
     // let Config = Global_Fee_Preferences.findOne({Year:moment().year().toString,Months:{$elemMatch:{month}}})
-    if(!req.body.month){
-     let updated= await Global_Fee_Preferences.findOneAndUpdate(Find,{$push:{Months:{...payload,month}}})
-     console.log(updated)
+    if (!req.body.month) {
+      let updated = await Global_Fee_Preferences.findOneAndUpdate(Find, {
+        $push: { Months: { ...payload, month } },
+      });
+      console.log(updated);
+    } else {
+      await Global_Fee_Preferences.updateOne(
+        { ...Find, Months: { $elemMatch: { month: req.body.month } } },
+        { "Months.$": payload }
+      );
     }
-    else{
-      await Global_Fee_Preferences.updateOne({...Find,Months:{$elemMatch:{month:req.body.month}}},{"Months.$":payload}) 
-    }
-    res.json({success:true, message: "updated successfully" });
+    res.json({ success: true, message: "updated successfully" });
   } catch (error) {
     console.error("Error setting transaction config:", error);
-    res.status(500).json({sucsess:false, message: "Error setting transaction config" });
+    res
+      .status(500)
+      .json({ sucsess: false, message: "Error setting transaction config" });
   }
 }
-module.exports = {CreateTransaction: CreateTransaction,ReadTransactions,SearchStudent,ReadTransactionsMeta,SetTransactionConfig};
+
+async function getDetailedTransactions(req, res) {
+  let { id } = req.params;
+  let Transaction = await TransactionsScema.findById(id)
+    .populate({ path: "Student", select: "FirstName LastName GRNO" })
+    .populate({ path: "RecievedBy", select: "Name" })
+    .populate({
+      path: "Transactions.paymentConfigId",
+      select: "session",
+      populate: { path: "session", select: "acedmic_year session_name" },
+    });
+  if (!Transaction)
+    return res.status(404).json({ message: "Transaction Not Found" });
+  let Payload = JSON.parse(JSON.stringify(Transaction));
+  Payload.Transactions.forEach((tr, i) => {
+    if (tr.paymentType == "Registered") {
+      Payload.Transactions[i]["session"] =
+        tr.paymentConfigId.session?.session_name +
+        " " +
+        tr.paymentConfigId.session?.acedmic_year;
+    }
+  });
+  Respond({ res, payload: Payload });
+}
+
+async function CancelnRestoreTransaction(req, res) {
+  let { id } = req.params;
+  try {
+    let Transaction = await TransactionsScema.findById(id).select("isCancelled")
+    if(Transaction){
+      await TransactionsScema.findByIdAndUpdate(id, {
+        isCancelled: !Transaction.isCancelled,
+      });
+      Respond({ res, message: ` ${!Transaction.isCancelled? "Cancelled":"Restored"} successfully !` });
+    }else{
+      Respond({ res,error:"Transaction not found", message: "Transaction not found",status:401 });
+    }
+  } catch (error) {
+    res
+      .status(500)
+      .json({ success: false, message: "Error cancelling transaction" });
+  }
+}
+
+module.exports = {
+  CreateTransaction: CreateTransaction,
+  ReadTransactions,
+  SearchStudent,
+  ReadTransactionsMeta,
+  SetTransactionConfig,
+  getDetailedTransactions,
+  CancelnRestoreTransaction,
+};

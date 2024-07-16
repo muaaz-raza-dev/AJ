@@ -10,7 +10,7 @@ import {
     SelectValue,
   } from "@/shdcn/components/ui/select"
 const StudentClassSelect = () => {
-  let {classes} =useAppSelector(state=>state.global)
+  let {Classes} =useAppSelector(state=>state.global)
   let dispatch = useAppDispatch()
   let {Filters} =useAppSelector(state=>state.StudentsDir)
   let {mutate:MutateForClass}  =useFilterStdByClass()
@@ -34,7 +34,7 @@ const StudentClassSelect = () => {
     <SelectContent>
     <SelectItem value="All">All </SelectItem>
       {
-        classes.map(elm=><SelectItem value={elm}>{elm}</SelectItem>)
+        Object.entries(Classes).map(elm=><SelectItem value={elm[0]}>{elm[1]}</SelectItem>)
       }
 
     </SelectContent>

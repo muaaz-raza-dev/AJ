@@ -5,7 +5,6 @@ export interface defaultId {
     _id?:string
 }
 export interface Iclass extends defaultId{
-
     name:string,
     sections:Array<Iclass_section>;
     subjects :string[]

@@ -1,14 +1,14 @@
-import {createSlice} from "@reduxjs/toolkit"
-import { defaultTransactionComposeState, ItransactionComposeState } from "../Types/IcomposeTransaction"
-import InsertInsertTransactionComposeFn, { AddTransactionPurposeFn, DeleteTransactionPurposeFn, InsertTransactionPurposeValuesFn, ResetTransactionComposeFn } from "../Reducers/TransactionComposeReducer"
+import { createSlice } from "@reduxjs/toolkit"
+
+import { defaultTransactionFilters, IcomposeTransactionFilters } from "../Types/IcomposeTransactionFilters"
+import { CalculateDiscountedTotalFn, InsertTrComposeFiltersFn } from "../Reducers/TransactionComposeReducer"
 
 
-export const TransactionComposeState :ItransactionComposeState =defaultTransactionComposeState
+export const TransactionComposeState: IcomposeTransactionFilters = defaultTransactionFilters
 export const StudentRegSlice = createSlice({
-    name:"Student Registeration",
-    initialState:TransactionComposeState,
-    reducers:{RedInsertTransactionCompose:InsertInsertTransactionComposeFn,RedAddTransactionPurpose:AddTransactionPurposeFn,RedDeleteTransactionPurpose:DeleteTransactionPurposeFn ,
-    RedInsertTransactionPurpose:InsertTransactionPurposeValuesFn ,RedResetTransactionCompose:ResetTransactionComposeFn}
+    name: "Student Registeration",
+    initialState: TransactionComposeState,
+    reducers: { RedTrcInsertFilters:InsertTrComposeFiltersFn ,RedTrcDiscountedTotal:CalculateDiscountedTotalFn}
 })
-export const {RedInsertTransactionCompose,RedAddTransactionPurpose,RedDeleteTransactionPurpose,RedInsertTransactionPurpose ,RedResetTransactionCompose} = StudentRegSlice.actions
+export const {RedTrcInsertFilters,RedTrcDiscountedTotal} = StudentRegSlice.actions
 export const TransactionCompose = StudentRegSlice.reducer

@@ -1,20 +1,14 @@
-import {Table,TableBody,} from "@/shdcn/components/ui/table"
+import {Table,TableBody} from "@/shdcn/components/ui/table"
 import TransactionHead from "./TransactionHead.tr"
 import TransactionRow from "./TransactionRow.tr"
 import RequestLoading from "@/Global/Loaders/RequestLoding"
 import { useAppSelector } from "@/app/ReduxHooks"
 
-  
-
-
-
-
-
 const TransactionTable = () => {
   let {Transactions}= useAppSelector(s=>s.transactions)
   return (
     <>
-    <Table className="bg-[var(--box)] rounded-lg shadow">
+    <Table className="bg-[var(--box)] rounded-md">
     <TransactionHead/>
     <TableBody>
       {Transactions.map(tr=><TransactionRow data={tr}/>)}

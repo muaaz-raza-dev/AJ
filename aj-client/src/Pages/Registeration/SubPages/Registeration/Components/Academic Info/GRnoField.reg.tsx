@@ -10,21 +10,22 @@ import { MdVerified } from "react-icons/md"
 import { FC } from "react"
 const GRnoRegisterationFormField:FC<{edit?:boolean}> = ({edit}) => {
   const {control,getValues} = useFormContext()
-  let {mutate,error:Error,data,isError,isSuccess}=useValidateGRno(getValues("GR"))
+  let {mutate,error:Error,isError,isSuccess,isLoading}=useValidateGRno(getValues("GR"))
   const debounced = useDebouncedCallback((value) => {mutate(value)},1500);
 function GRSuffix(){
-  if(!edit){
 
-    return !isSuccess&&!isError?<RequestLoading size="20" stroke="2" dark/>:
-    isError?
-    <Tooltip title={Error.response.data.message}>
-    <FaBan />
+    if(isLoading) {
+      return <RequestLoading size="20" stroke="2" dark/>
+    }
+    if(isError) {
+    return <Tooltip title={Error.response.data.message}>
+    <FaBan size={18}/>
+    </Tooltip> }
+  if(isSuccess) {
+return  <Tooltip title={"GRNO is availble"}>
+    <MdVerified color="green"  size={18} />
     </Tooltip>
-    :
-    <Tooltip title={data.message}>
-    <MdVerified  />
-    </Tooltip>
-  }
+    }
     
 }
 

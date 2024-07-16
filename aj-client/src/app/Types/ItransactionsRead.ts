@@ -1,22 +1,24 @@
 import moment from "moment";
 
 export interface IShortTransactions {
+  _id:string;
   Invoice: number;
   Time: string;
   Student:{
     GRNO: string;
     FirstName: string;
-  }
+  },
+  PayorsName:string;
   RecievedBy:{Name:string},
-  totalAmount: number;
-  Transactions: [{ [key: string]: any }];
+  amount:{totalAmount: number};
+  Transactions: [{ paymentTitle:string;paymentType:"Custom"|"Registered";paymentConfigId:string }];
 }
 
 export interface ItransactionRead {
   q: string;
-  Dates: { [key: string]: string[] };
+  // Dates: { [key: string]: string[] };
   SearchModes: string[];
-  TransactionTypes: { type: string; numberOfTransactions: number }[];
+  TransactionTypes: {value:string,label:string}[];
   Transactions: IShortTransactions[];
   isLoadingTransactions:boolean;
   DataLength:number,
@@ -38,7 +40,6 @@ export interface ItransactionReadFilters {
   count: number;
 }
 export const defaultTransactionRead: ItransactionRead = {
-  Dates: {},
   DataLength:0,
   isLoadingTransactions:true,
   TransactionStats: {

@@ -1,7 +1,7 @@
 import PhotoUploadCloudinary from "@/Api/Photo/PhotoUploadCloudinary.api";
 import { IRegisterFormState } from "@/app/Types/IStdregisterForm.t";
 import { UseFormReturn } from "react-hook-form";
-import toast from "react-hot-toast";
+
 
 const ImageUpload = (
   Cb: (state: any) => any,
@@ -13,13 +13,11 @@ const ImageUpload = (
     setLoading(true);
     PhotoUploadCloudinary(PhotoFile)
       .then((res) => {
-        Cb({ ...Form.getValues(), photo: res.url });
-        console.log(res.url);
+        Cb({payload:{ ...Form.getValues(), photo: res.url }});
         Form.setValue("photo", res.url);
       })
       .catch((err) => {
         console.log(err);
-        toast.error("Something went wrong try again later");
       })
       .finally(() => setLoading(false));
   } else {

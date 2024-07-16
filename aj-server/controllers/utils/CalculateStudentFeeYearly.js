@@ -1,4 +1,3 @@
-const Global_Fee_Preferences = require("../../models/Global_Fee_Preferences");
 const Transactions = require("../../models/Transactions");
 const moment = require("moment");
 async function EvaluateFeeYearly(Year, FeeType, StudentId, DOA) {
@@ -48,7 +47,7 @@ async function EvaluateFeeYearly(Year, FeeType, StudentId, DOA) {
       },
     },
   ]);
-  let FeePreferences = await Global_Fee_Preferences.findOne({ Year });
+  let FeePreferences ={}
   let AYear = moment(DOA).year(); //admission Year
   let AMonth = moment(DOA).month(); //admission Month
   const Result = moment.months().map((month, monthIndex) => {

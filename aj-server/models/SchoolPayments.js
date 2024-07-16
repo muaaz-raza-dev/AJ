@@ -22,7 +22,7 @@ const AnnualFeeSchema = new mongoose.Schema({
         },
         "feeFrequency": {
           "type": "String",
-          "enum": ["Monthly", "Yearly", "One Time"],
+          "enum": ["Monthly", "Yearly", "One Time","Custom"],
           "required": true,
           "description": "Type of the fee"
         },
@@ -84,8 +84,8 @@ const AnnualFeeSchema = new mongoose.Schema({
         paymentDate:String,
         dueDate:String ,
         deprecateDate:String , 
-        isDeprecated:{type:Boolean,default:false }
-
+        isDeprecated:{type:Boolean,default:false},
+        newVersionId:{type:ObjectId,ref:"PaymentConfig"}
       
 },{timestamps:true});
 const PaymentConfig = mongoose.model('PaymentConfig', AnnualFeeSchema);

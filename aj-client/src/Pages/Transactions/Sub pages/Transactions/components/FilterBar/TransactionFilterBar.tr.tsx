@@ -1,26 +1,25 @@
 import { useEffect } from "react";
-import TransactionDateSelection from "./TransactionDateSelection.tr"
 import TransactionFilterSearch from "./TransactionFilterSearch.tr"
 import TransactionSelectType from "./TransactionSelectType.tr"
 import useReadPageTransactions from "@/Hooks/Transactions/useReadPageTransactions";
 import { useAppSelector } from "@/app/ReduxHooks";
+import { Link } from "react-router-dom";
 
 const TransactionFilterBar = () => {
-  let {Filters} = useAppSelector(s=>s.transactions)
+  let {Filters ,TransactionTypes} = useAppSelector(s=>s.transactions)
   let {mutate} = useReadPageTransactions(Filters.count)
  useEffect(() => {
-  let {month,year,transactionType}= Filters
-  if(transactionType!=""&&month!=""&&year!=""){
-    
+  let {transactionType}= Filters
+  if(transactionType!=""){
     mutate(Filters)
   }
-}, [Filters.transactionType,Filters.month,Filters.year]);
+}, [Filters.transactionType,TransactionTypes]);
   return (
     <div className="w-full flex gap-x-4">
       <TransactionFilterSearch/>
       <div className="w-full flex gap-x-4 justify-end">
       <TransactionSelectType/>
-      <TransactionDateSelection/>
+      <Link to={"create"} className="bg-gradient-to-bl to-dark from-indigo-900 h-full text-white center px-3 transition-colors hover:bg-dark  rounded-lg">New Transaction</Link>
       </div>
     </div>
   )

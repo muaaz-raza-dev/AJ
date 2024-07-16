@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const {ObjectId} = require("mongodb")
 const registerFormSchema = new mongoose.Schema({
   FirstName: { type: String, required: true ,text:true},
   LastName: { type: String, },
@@ -11,16 +12,17 @@ const registerFormSchema = new mongoose.Schema({
   Address: { type: String },
   GRNO: { type: Number,unique:true},
   RollNo: { type: Number,required:true},
-  Section: { type: String },
+  Section: { type: ObjectId , ref:"Section" },
   NewAdmission: { type: Boolean, },
   CovidVaccine: { type: Boolean, },
   sCNIC: { type: String, },
   fCNIC: { type: String, },
   mCNIC: { type: String, },
   WA:{type:String},
-  Class: { type: String, required: true },
   DOA: { type: String, required: true }, // Consider using Date type if you store actual dates
-  PolioPermission: { type: Boolean, }
+  Class: { type: ObjectId, required: true , ref:"Classes" },
+  PolioPermission: { type: Boolean, } ,
+  FinancialDetails : [{paymentConfigId:{type:ObjectId,ref:"PaymentConfig"},paid:Boolean}]
 }, { timestamps: true });
 
 module.exports = mongoose.model('Students', registerFormSchema);

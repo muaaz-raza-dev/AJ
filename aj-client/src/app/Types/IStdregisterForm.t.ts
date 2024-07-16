@@ -20,13 +20,11 @@ Class:string;
 DOA:string //Date of Admission
 PolioPermission?:boolean;
 CovidVaccine?:boolean;
-FinancialDetails :{
-    AdmissionFee:{amount:number,paid:boolean};
-    MonthlyFee:number|null;
-}
+FinancialDetails:{paymentConfigId:string;paid:boolean}[]
 }
 export const defaultRegisterFormState: IRegisterFormState = {
     FirstName: '',
+    FinancialDetails:[],
     WA:null,
     LastName: '',
     photo: '',
@@ -47,10 +45,6 @@ sCNIC:null,
     DOA: '',
     PolioPermission: true,
     CovidVaccine:false,
-    FinancialDetails:{
-        AdmissionFee:{amount:0,paid:true},
-        MonthlyFee:0,
-    }
   };
 
 

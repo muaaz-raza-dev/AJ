@@ -1,15 +1,14 @@
 import { Route, Routes } from "react-router-dom"
 import TransactionPage from "./Sub pages/Transactions/TransactionPage.tr"
 import TransactionComposePage from "./Sub pages/Transaction composer/components/TransactionComposePage.tr"
-import MonthlyTransactionConfigModal from "./Sub pages/MonthlyTransactionConfig.tr"
-
+import TransactionDetailsPage from "./Sub pages/Detail Page/TransactionDetailsPage.tr.d"
 const TransactionsFile = () => {
   return (
     <>
-    {/* <MonthlyTransactionConfigModal/> */}
     <Routes>
-      <Route element={<TransactionPage/>} path="/"/> 
+      <Route element={<TransactionPage/>} index /> 
       <Route element={<TransactionComposePage/>} path="/create"/> 
+      <Route element={<TransactionDetailsPage/>} path="/transaction/:id"/> 
     </Routes>
     </>
   )

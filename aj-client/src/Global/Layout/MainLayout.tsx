@@ -1,7 +1,6 @@
 import { Route, Routes } from "react-router-dom"
 import SidebarFile from "../Sidebar/SidebarFile"
 import Header from "../Header/Header"
-import RegisterationFile from "@/Pages/Registeration/RegisterationFile.reg.std"
 import TransactionsFile from "@/Pages/Transactions/TransactionsFile.tr"
 import StudentsDirectoryFile from "@/Pages/Students Directory/StudentDirectoryFile.std"
 import ClassesFile from "@/Pages/Classes/DashboardFile.dash"
@@ -21,7 +20,6 @@ const MainLayout = () => {
 <Header/>
         <Routes>
             <Route index element={<h1>I am landing Page</h1>} path="/"/> 
-            <Route element={<RegisterationFile/>} path="/registeration/*"/> 
             <Route element={<StudentsDirectoryFile/>} path="/students/*"/> 
              <Route element={<TransactionsFile/>} path="/transactions/*"/> 
              <Route element={<PaymentFile/>} path="/payment-settings/*"/>

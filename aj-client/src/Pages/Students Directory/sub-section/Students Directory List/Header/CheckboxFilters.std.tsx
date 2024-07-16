@@ -4,8 +4,7 @@ import { useAppDispatch, useAppSelector } from '@/app/ReduxHooks';
 import { InsertStudentsDir, StudentsDirDefault } from '@/app/Slices/StudentDirSlice';
 import {  Badge, Checkbox } from 'antd';
 import { useState } from 'react';
-import { IoFilter } from 'react-icons/io5';
-
+import { FaFilter } from 'react-icons/fa6';
 
 const StudentCheckBoxFilters = () => {
     let dispatch = useAppDispatch()
@@ -27,9 +26,11 @@ const StudentCheckBoxFilters = () => {
   return (
     <div className="relative " >
 <Badge color="#4D44B5"  dot={Filters.Polio||Filters.Covid} >
-    <button onClick={()=>setToggleSelect(!ToggleSelect)}  className='cursor-pointer text-sm   gap-x-2 justify-center  relative bg-[var(--dark)] text-white flex    p-2 rounded-full aspect-square  items-center'>
-        <IoFilter size={22}/>
-
+    <button onClick={()=>setToggleSelect(!ToggleSelect)}  className='cursor-pointer font-medium   gap-x-2 justify-center   bg-[var(--dark)] text-white flex    p-2 px-4 rounded-md items-center'>
+        <FaFilter/>
+        <p>
+        Advanced Options
+        </p>
     </button>
     </Badge>
     {

@@ -3,32 +3,30 @@ import RequestLoading from "@/Global/Loaders/RequestLoding";
 import { useDebouncedCallback } from "use-debounce";
 import { FaBan } from "react-icons/fa";
 import { MdVerified } from "react-icons/md";
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import useSearchStudentswithGRNO from "@/Hooks/Transactions/useSearchStudentswithGRNO";
 import RegLabelWrapper from "@/Pages/Registeration/SubPages/Registeration/Components/LabelWrapper.reg";
-import { useAppSelector } from "@/app/ReduxHooks";
 
 const TransactionSearchStudentsField: FC<{ transaction?: boolean }> = () => {
   let {
     mutate: Search,
-    isError,
     isSuccess,
     data,
+    isLoading
   } = useSearchStudentswithGRNO();
-  let GRNO = useAppSelector((state) => state.trCompose)?.student?.GRNO;
-  const [Inputed, setInputed] = useState(GRNO || "");
-  useEffect(() => setInputed(GRNO || ""), [GRNO]);
-  let Error =
-    useAppSelector((state) => state.trCompose)?.Errors && Inputed == "";
+
+  const [Inputed, setInputed] = useState("");
+
   const debounced = useDebouncedCallback((value) => {
     Search(value);
   }, 1500);
+  
   function GRSuffix() {
     return (
       <div className=" flex justify-end">
-        {!isSuccess && !isError ? (
+        {isLoading  ? (
           <RequestLoading size="20" stroke="2" dark />
-        ) : isError ? (
+        ) : !isSuccess ? (
           <Tooltip title={"Not exists"}>
             <FaBan />
           </Tooltip>
@@ -46,7 +44,7 @@ const TransactionSearchStudentsField: FC<{ transaction?: boolean }> = () => {
       <div className="flex  justify-between items-center">
         <Input
           value={Inputed}
-          defaultValue={GRNO || ""}
+          defaultValue={""}
           onChange={(e) => {
             debounced(e.target.value);
             setInputed(e.target.value);
@@ -56,7 +54,7 @@ const TransactionSearchStudentsField: FC<{ transaction?: boolean }> = () => {
         />
         <GRSuffix />
       </div>
-      {Error && <p className="text-red-500 text-xs">GR no. is required</p>}
+      {!Inputed && isSuccess && <p className="text-red-500 text-xs">GR no. is required</p>}
     </RegLabelWrapper>
   );
 };

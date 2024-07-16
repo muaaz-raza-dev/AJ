@@ -1,11 +1,11 @@
-import { useAppSelector } from "@/app/ReduxHooks";
+
 import RequestLoading from "@/Global/Loaders/RequestLoding";
 import useTransactionConfig from "@/Hooks/Transactions/useTransactionConfig";
 import { Input, Switch } from "antd";
 import moment from "moment";
 import { useState } from "react";
 const MonthlyTransactionConfigModal = () => {
-  let { Transaction_Config_update } = useAppSelector((state) => state.global);
+  // let { Transaction_Config_update } = useAppSelector((state) => state.global);
   let {mutate,isLoading}= useTransactionConfig()
   const [Inputs, setInputs] = useState<{
     Monthly: boolean;
@@ -13,7 +13,7 @@ const MonthlyTransactionConfigModal = () => {
     dueDate: string;
     Error?:boolean;
   }>({ Monthly: true, Annual: false, dueDate: "" ,Error:false});
-  if (Transaction_Config_update) {
+  // if (Transaction_Config_update) {
     function SubmitHandler (){
       if (Inputs.dueDate!="")mutate(Inputs)
       else setInputs({...Inputs,Error:true})
@@ -83,7 +83,7 @@ const MonthlyTransactionConfigModal = () => {
         </form>
       </div>
     );
-  }
+  
 };
 
 export default MonthlyTransactionConfigModal;

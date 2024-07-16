@@ -1,31 +1,35 @@
-const Students = require("../models/Students");
-const FeePref = require("../models/Global_Fee_Preferences");
 const moment = require("moment");
+const Class = require("../models/Class");
+const Session = require("../models/Session");
+const Sections_Class = require("../models/Sections_Class");
+const PaymentConfig = require("../models/SchoolPayments");
 
     async function LoadGlobalValues  (req,res){
-        
         try {
-            // let CruicialUpdates = false;
-            let FeeRecord = await FeePref.findOne({Year:moment().year()})
-let Fee_Pref_update_required = false
-            if (FeeRecord) { if(!FeeRecord.Months[moment().month()])  Fee_Pref_update_required=true}
-            else {
-                Fee_Pref_update_required=true
-                months = []
-                moment.months().forEach((elm,index)=>{
-                    if(index >= moment().month()){
-                    }
-                    else{
-                        months.push({month:elm,Fee:true,Annual:false,Monthly:true})
-                    }
-                }) 
+            let currentSession = await Session.findOne({isActive:true}).select("_id")
+            let sessions = await Session.find()
+            let classes = await Class.find({SessionId:currentSession._id})
+            let sections  =await Sections_Class.find({Class:{$in:classes.map(e=>e._id)}})
+            let Fees = await PaymentConfig.find({feeFrequency:"One Time"}).select("feeTitle")
+            let Classes =  {} // { ClassId:Class name}
+            let Sections = {} // Class : {Section_Id :Section name}
+            let Sessions = {} // SessionId :Session name
+            let GlobalFees = {} //GlobalFeeId : FeeTitle
+            Fees.forEach(fee=>{
+                GlobalFees[fee._id] = fee.feeTitle
+            })
+            sessions.forEach((e,)=>{
+                Sessions[e._id] = e.session_name+" "+e.acedmic_year
+            })
+            sections.forEach((e,i)=>{
+                if(Sections[e.Class])Sections[e.Class] = {}
+                Sections[e.Class]={[e._id]:e.name} 
+            })
+            classes.forEach((e,i)=>{
+                Classes[e._id] = e.name ;
+            })
 
-                await FeePref.create({Year:moment().year(),Months:months})
-            }
-            let classes = (await Students.aggregate([{$group: {_id: "$Class",}}])).map(elm=>elm._id)
-            let totalStudents = await  Students.countDocuments();
-            
-            res.json({success:true,totalStudents,classes,Fee_Pref_Update_Req:Fee_Pref_update_required})
+            res.json({success:true,Classes , Sessions , Sections,GlobalFees})
         }
         catch (err){
         res.status(500).json({success:false, message:"Failed to register student", error: err.message});

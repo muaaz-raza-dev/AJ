@@ -46,8 +46,8 @@ const GetSessions = async(req,res)=>{
 
 const GetConfigs =  async(req,res)=>{
 let { session , feeScope} = req.body
-let query = {session,feeScope}
-if(!session) {delete query.session}
+let query = {session,feeScope,isDeprecated:false}
+if(!session||feeScope=="Global") {delete query.session}
 let Configs = await PaymentConfig.find(query).populate({path:"session",select:"session_name acedmic_year"})
 .populate({path:"classes",populate:{path:"classId",select:"name"}})
 let payload = JSON.parse(JSON.stringify(Configs))
@@ -71,10 +71,10 @@ Respond({res,payload})
 
 const UpdateConfig = async(req,res)=>{ 
     let {id, payload} = req.body
-    let config = await PaymentConfig.findByIdAndUpdate(id,{isDeprecated:true,deprecatedDate:new Date().toISOString()},{new:true})
     delete payload._id
     let feeScope = payload?.session ? "Session-based" : "Global";
-    let new_config = await PaymentConfig.create({...payload,feeScope})
+    let new_config = await PaymentConfig.create({...payload,feeScope,isDeprecated:false})
+    let config = await PaymentConfig.findByIdAndUpdate(id,{isDeprecated:true,deprecatedDate:new Date().toISOString(),newVersionId:new_config._id})
     Respond({res,payload:config,message:"Config Updated",payload:new_config})
 }
 module.exports = {RegisterPayment,GetSessions,GetConfigs,FetchConfigDetails,UpdateConfig}

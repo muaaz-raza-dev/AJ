@@ -1,69 +1,19 @@
 const Students = require("../models/Students");
-const Finance = require("../models/Students_Finance");
-const StudentsHistory = require("../models/Student_History");
 const Respond = require("../Helpers/ResponseHandler");
+const Sections_Class = require("../models/Sections_Class");
 async function RegisterStudent(req, res) {
-  let {
-    FirstName,
-    LastName,
-    photo,
-    email,
-    contact,
-    fatherName,
-    DOB,
-    Gender,
-    Address,
-    GRNO,
-    RollNo,
-    Section,
-    NewAdmission,
-    Class,
-    DOA,
-    PolioPermission,
-    CovidVaccine,
-    sCNIC,
-    fCNIC,
-    mCNIC,
-    WA,
-    FinancialDetails,
-  } = req.body;
+  let { payload  } = req.body;
   try {
-    let student = await Students.create({
-      FirstName,
-      LastName,
-      photo,
-      email,
-      contact,
-      fatherName,
-      DOB,
-      Gender,
-      Address,
-      GRNO: +GRNO,
-      RollNo: +RollNo,
-      Section,
-      NewAdmission,
-      Class,
-      DOA,
-      PolioPermission,
-      CovidVaccine,
-      sCNIC,
-      fCNIC,
-      mCNIC,
-      WA,
-    });
-    await Finance.create({ Student: student._id, ...FinancialDetails });
-    await StudentsHistory.create({
-      Student: student._id,
-      ClassHistory: [{ Class: Class}],
-      AnnualFee: [ { Fee: FinancialDetails.AnnualFee } ],
-      MonthlyFee: [  { Fee: FinancialDetails.MonthlyFee } ],
-    });
+    let student = await Students.create(payload); 
+    await Sections_Class.findByIdAndUpdate(payload.Section,{$addToSet:{Students:student._id}})  
+    // to register the student to section to keep the history and records
     res.json({
       success: true,
-      messge: `Student with ${GRNO} is registered`,
+      messge: `Student becomes the part of your organization successfully `,
       payload: student,
     });
   } catch (err) {
+    console.log(err);
     res
       .status(500)
       .json({

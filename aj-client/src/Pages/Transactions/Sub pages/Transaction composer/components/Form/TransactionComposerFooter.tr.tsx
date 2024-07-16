@@ -1,6 +1,4 @@
-import { useAppSelector } from "@/app/ReduxHooks";
 import RequestLoading from "@/Global/Loaders/RequestLoding";
-import useCreateTransaction from "@/Hooks/Transactions/useCreateTransaction";
 import { Button } from "@/shdcn/components/ui/button";
 import {
   Dialog,
@@ -12,19 +10,20 @@ import {
   DialogTrigger,
 } from "@/shdcn/components/ui/dialog";
 import { DialogClose } from "@radix-ui/react-dialog";
-import { FC } from "react";
+import { FC, useRef } from "react";
 import { useFormContext } from "react-hook-form";
 
-const FormDialogComponents:FC<{elm:string}>=({elm})=> {
-  let {reset} =useFormContext()
-  let FormState =useAppSelector(state=>state.trCompose)
-  let {mutate,isLoading}= useCreateTransaction(reset)
+const FormDialogComponents:FC<{elm:string;submitCb:any ;isLoading:boolean,PrintFn:()=>void}>=({elm,isLoading,PrintFn,submitCb})=> {
+ let {formState:{isValid}} =useFormContext()
+ let isPrint = elm.toLowerCase().includes("print")
   return (
-    <Dialog>
-      <DialogTrigger>
+    <Dialog >
+      <DialogTrigger disabled={!isValid}>
         <Button
-          type="submit"
-          className="active:scale-95 transition-all  text-white hover:text-white hover:bg-[var(--darker)] bg-[var(--dark)]"
+        disabled={!isValid}
+          type="button"
+          className={`active:scale-95 transition-all  text-white hover:text-white hover:bg-[var(--darker)] ${isPrint?"bg-dark hover:bg-dark":"bg-[var(--primary)] text-dark hover:text-dark border-2 border-dark hover:bg-[var(--primary)]"}
+           `}
         >
           {elm}
         </Button>
@@ -38,7 +37,6 @@ const FormDialogComponents:FC<{elm:string}>=({elm})=> {
         </DialogHeader>
         <DialogFooter>
      <DialogClose>
-
             <Button
               type="button"
               className="active:scale-95 transition-all  text-black hover:text-black border-2 hover:border-[var(--darker)] border-[var(--dark)]"
@@ -47,18 +45,11 @@ const FormDialogComponents:FC<{elm:string}>=({elm})=> {
             </Button>
               </DialogClose>
        
-     
             <Button
-            onClick={()=>{
-              if (elm.includes("Print")) {
-                
-              }
-              else{
-                mutate(FormState)
-              }
-            }}
-              type="button"
               className="active:scale-95 transition-all  text-white hover:text-white hover:bg-[var(--darker)] bg-[var(--dark)]"
+              onClick={()=>{if(isPrint) {PrintFn()}
+            else submitCb.click()
+            }}
             >
               {isLoading? <RequestLoading size="12"/>:"Confirm Transaction"
             }
@@ -70,18 +61,14 @@ const FormDialogComponents:FC<{elm:string}>=({elm})=> {
   );
 }
 
-const TransactionComposerFooter = () => {
-  let {Errors} =useAppSelector(state=>state.trCompose)
+const TransactionComposerFooter :FC<{isLoading:boolean,PrintFn:()=>void}> = ({isLoading,PrintFn}) => {
+  let button = useRef<HTMLButtonElement>(null)
   return (
     <div className="pt-5 flex justify-end gap-x-4">
       {["Confirm and Print ", "Confirm transaction"].map((elm) => {
-        return (Errors? <Button
-          type="submit"
-          className="active:scale-95 transition-all  text-white hover:text-white hover:bg-[var(--darker)] bg-[var(--dark)]"
-        >
-          {elm}
-        </Button> :<FormDialogComponents key={elm} elm={elm}></FormDialogComponents>);
+        return <FormDialogComponents submitCb={button.current} elm={elm} key={elm} isLoading={isLoading} PrintFn={PrintFn}/>
       })}
+      <button ref={button} hidden></button>
     </div>
   );
 };

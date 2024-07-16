@@ -1,11 +1,9 @@
 const moment = require("moment");
-const Student_History = require("../../models/Student_History");
+// const Student_History = require("../../models/Student_History");
 // AcademicFee : academic fee holds the academic preferences i.e: in may 2023 academy charge monthlyFee
 const TotalRecordedAmount = async (StudentFinance, AcademicFee, DOA) => {
   let Total = 0;
-  let FeeRecord = await Student_History.findOne({
-    Student: StudentFinance.Student,
-  });
+  let FeeRecord = [] 
   AcademicFee.map((item) => {
     let Year = +item.Year;
     let DYear = moment(DOA).year();
@@ -31,7 +29,6 @@ const TotalRecordedAmount = async (StudentFinance, AcademicFee, DOA) => {
   if (StudentFinance._doc.AdmissionFee.paid == false) {
     Total += StudentFinance._doc.AdmissionFee.amount;
   }
-console.log(Total);
   return Total;
 };
 

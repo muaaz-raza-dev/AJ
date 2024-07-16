@@ -1,23 +1,24 @@
 import CreateTransaction from "@/Api/Transaction/Transaction Compose/CreateTransaction.api"
-import { useAppDispatch } from "@/app/ReduxHooks"
-import { RedResetTransactionCompose } from "@/app/Slices/TransactionComposeSlice"
-import { ItransactionComposeState } from "@/app/Types/IcomposeTransaction"
+import { useAppSelector } from "@/app/ReduxHooks"
+import { ItransactionForm } from "@/app/Types/ItransactionForm"
 import toast from "react-hot-toast"
 import { useMutation } from "react-query"
 import { useNavigate } from "react-router-dom"
 
 
 const useCreateTransaction = (reset:any) => {
-    let dispatch = useAppDispatch()
     let navigate= useNavigate()
+    let Student = useAppSelector(s=>s.trComposeFilters.StudentInfo)
 return useMutation({mutationKey:"Transaction",
-mutationFn:(payload:ItransactionComposeState)=>CreateTransaction(payload),
-onSuccess(state) {
+mutationFn:(payload:ItransactionForm)=>CreateTransaction({...payload,Student :Student?._id}),
+onSuccess() {
     reset()
-    dispatch(RedResetTransactionCompose()) 
     navigate("/transactions")
     toast.success("Transaction created !")
 },
+onError(){
+    toast.error("An error occured while creating transaction. Please try again .")
+}
 })
 }
 
