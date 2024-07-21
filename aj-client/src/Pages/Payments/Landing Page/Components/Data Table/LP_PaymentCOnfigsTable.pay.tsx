@@ -9,7 +9,7 @@ const LP_PaymentConfigsTable = () => {
   let isLoading= useAppSelector(s=>s.paymentConfigsL.isLoading)
   return (
     <>
-<Table className="bg-[var(--box)] rounded-lg shadow">
+<Table className="bg-[var(--box)] rounded-lg shadow text-nowrap overflow-auto customscrollbarTable "  >
     <LP_configHeaderTable/>
     <TableBody>
       {payload?.map(data=>< LP_EachConfigRowTable data={data}/>)}

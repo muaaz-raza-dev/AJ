@@ -5,24 +5,22 @@ import { useAppSelector } from "@/app/ReduxHooks";
 import { useFormContext } from "react-hook-form";
 
 const Session_Selection = () => {
-  let sessions = useAppSelector((s) => s.dashboard.RequiredInfo.Sessions);
+  let Sessions =useAppSelector(s=>s.global.Sessions)
   let session_value = useFormContext().watch("SessionId");
   let [state, setState] = React.useState(session_value);
   let { setValue } = useFormContext();
   useEffect(() => {
-    setValue("SessionId", sessions[state]?._id);
+    setValue("SessionId", state);
   }, [state]);
-  console.log(session_value,sessions ,sessions[session_value]?._id);
   
   return (
     <LabelWrapper required label="Pick Session" className="w-full">
       <CustomSelect_Reg
-        data={[]}
-      optimumData={Object.entries(sessions).map(e=>({label:e[0],value:e[1]._id}))}
+      optimumData={Object.entries(Sessions).map(e=>({label:e[1],value:e[0]}))}
         nosearch
         placeholder="Session"
         setState={setState}
-        state={session_value || sessions[0]?._id }
+        state={session_value}
       />
     </LabelWrapper>
   );

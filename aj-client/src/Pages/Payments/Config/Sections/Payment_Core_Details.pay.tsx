@@ -9,7 +9,7 @@ const Payment_Core_Details:FC<{loading:boolean,edit?:boolean}> = ({loading,edit}
   let form = useFormContext();
   let feeFrequecy = form.watch("payload.feeFrequency");
   return (
-    <div className={`${feeFrequecy!="One Time"?"w-[40%] flex-col":"w-full "} transition-all flex flex-col gap-4 rounded-lg  `}>
+    <div className={`${feeFrequecy!="One Time"?"w-[40%] flex-col":"w-[70%] "} transition-all flex flex-col gap-4 rounded-lg  `}>
       <div className="w-full rounded-lg bg-[var(--box)] px-4 py-3 flex flex-col gap-3">
         <div className=" py-2 font-bold text-xl text-black hFont  ">
           Payment title & description
@@ -32,7 +32,7 @@ const Payment_Core_Details:FC<{loading:boolean,edit?:boolean}> = ({loading,edit}
           Payment Core details
         </div>
         <FeeFrequency />   {/*Monthly  */}
-        <FeeStatus />  {/* SessionBased */}
+        <FeeStatus />  {/* Same/diffesrent for everyone */}
         <SessionSelection/>
         <FeeAmount />
     <PaymentConfigFormSubmit loading={loading} edit ={edit}/>
@@ -75,19 +75,16 @@ const SessionSelection = ()=>{
   let values  = form.watch("filters.sessions.available") 
   let feeFrequecy = form.watch("payload.feeFrequency")
   let handleSessionSelection=(val:string)=>{
-    if((!form.watch("payload.classes")||form.watch("payload.classes")?.length==0 )&& form.watch("payload.session") ) {
+    if( form.watch("payload.session") ) {
       form.setValue("payload.classes",form.watch("filters.sessions.Classes")[val])
       form.setValue("payload.paymentMonths",form.watch("filters.paymentMonths")[val])
     }
   }
   useEffect(() => {
   if(feeFrequecy=="One Time"){
-    form.setValue("payload.session",null)
-    form.setValue("payload.classes",[])
     form.setValue("payload.paymentMonths",[])
   }
   }, [feeFrequecy])
-  if(feeFrequecy!="One Time") {
     return <LabelWrapper
     className="w-full"
     labelClassName="text-base font-semibold "
@@ -100,7 +97,7 @@ const SessionSelection = ()=>{
       placeholder="i.e 2024-2025"
       />
     </LabelWrapper>
-}
+
 }
 
 
@@ -125,10 +122,7 @@ const FeeFrequency = () => {
 };
 
 const FeeStatus = () => {
-  let form =useFormContext()
   let value = useFormContext().watch("filters.feeStatuses");
-  let feeFrequecy = form.watch("payload.feeFrequency")
-  if(feeFrequecy!="One Time") {
   return (
     <LabelWrapper
       className="w-full"
@@ -141,7 +135,7 @@ const FeeStatus = () => {
         placeholder="i.e Same for every class"
       />
     </LabelWrapper>
-  );}
+  );
 };
 
 export default Payment_Core_Details;

@@ -35,21 +35,16 @@ export interface IstudentExclusive{
         Address: string;
         GRNO: number;
         RollNo: number;
-        Section: string;
+        CurrentSection:string;
         NewAdmission: boolean;
         CovidVaccine: boolean;
         sCNIC: number;
         fCNIC: number;
         mCNIC: number;
         WA: string;
-        Class: string;
+        CurrentClass:string;
         DOA: string; // Consider using Date if you plan to work with date objects
         PolioPermission: boolean;
-        FinancialDetails :{
-            AdmissionFee:{amount:number|null,paid:boolean};
-            MonthlyFee:number|null;
-            AnnualCharges:number|null;
-        }
  }
 export interface IstdExclusive {
     overview: IstdExclusiveOverview;
@@ -73,16 +68,11 @@ export interface IfeeDoc {
 
 const DefaultStudentExclusiveDetail:IRegisterFormState ={
     FirstName: '',
-    FinancialDetails:{
-        AdmissionFee:{amount:null,paid:true},
-        MonthlyFee:null,
-        AnnualCharges:null,
-    },
     fatherName: '',
     DOB: '', // Consider using new Date().toISOString() if working with Date objects
     GRNO: 0,
     RollNo: 0,
-    Class: '',
+    CurrentClass:'',
     DOA: '', // Consider using new Date().toISOString() if working with Date objects
     LastName: '', // Optional, provided for completeness
     photo: '', // Optional
@@ -90,12 +80,12 @@ const DefaultStudentExclusiveDetail:IRegisterFormState ={
     contact: [], // Optional, empty array as default
     Gender: '', // Optional
     Address: '', // Optional
-    Section: '', // Optional
+    CurrentSection:'',
+    fCNIC:"",
+    mCNIC:"",
+    sCNIC:"",
     NewAdmission: false, // Optional, defaulting to false
     CovidVaccine: false, // Optional, defaulting to false
-    sCNIC: 0, // Optional
-    fCNIC: 0, // Optional
-    mCNIC: 0, // Optional
     WA: null, // Optional
     PolioPermission: false ,
 }

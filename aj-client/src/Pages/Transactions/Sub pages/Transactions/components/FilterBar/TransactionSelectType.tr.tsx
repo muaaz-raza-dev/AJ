@@ -17,7 +17,7 @@ const TransactionSelectType = () => {
   let dispatch =useAppDispatch()
   useEffect(() => {
     if(tr.length!=0&&transactionType==""){
-      dispatch (RedTransactionsFilters({transactionType:tr[1].value}))
+      dispatch (RedTransactionsFilters({transactionType:tr[1]?.value}))
   }
   }, [tr]);
   

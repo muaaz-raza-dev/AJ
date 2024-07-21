@@ -6,11 +6,11 @@ const TransactionsScema = require("../models/Transactions");
 const CalculateMonthlyFeeRespectToDues = require("./utils/CalculateMonthlyFeeRespectToDues");
 const Respond = require("../Helpers/ResponseHandler");
 const PaymentConfig = require("../models/SchoolPayments");
-const { CalculateFeeDues } = require("./utils/CalculateFeeDues.utils");
 const Session = require("../models/Session");
 const {
   CalculatePaymentConfigs,
 } = require("./utils/Transaction/CalculateReadTransactionMetaFilters");
+const { CalculateFeeDues } = require("./utils/Transaction/CalculateFeeDues.utils");
 
 async function CreateTransaction(req, res) {
   let { payload } = req.body;
@@ -42,39 +42,35 @@ async function CreateTransaction(req, res) {
 }
 
 async function SearchStudent(req, res) {
-  let student = await Students.findOne({ GRNO: req.body.GRNO }).select(
-    "FirstName LastName email fatherName photo GRNO DOA Class FinancialDetails"
-  );
+  let student = await Students.findOne({ GRNO: req.body.GRNO }).select("-sCNIC -fCNIC -mCNIC -WA -contacts")
   let InvoiceNumber = await TransactionsScema.find({}).sort({ Invoice: -1 });
   if (student) {
-    let studentClass = await Classes.findById(student.Class).select(
-      "SessionId"
-    );
+    let sessionId = await Session.findOne({isActive:true}).select("_id")
     let paymentDetails = await PaymentConfig.find({
       isDeprecated: false,
-      feeScope: "Session-based",
-      session: studentClass?.SessionId,
+      session: sessionId._id,
     }).select("feeTitle classes");
     let ClassbasedFeeInfo = {};
     JSON.parse(JSON.stringify(paymentDetails)).forEach((elm) => {
       ClassbasedFeeInfo[elm.feeTitle] = elm.classes.find(
-        (pre) => pre.classId == student.Class
+        (pre) => pre.classId.toString() == student.CurrentClass
       )?.amount;
     });
-    let { Dues, FeeInfo } = await CalculateFeeDues(student);
+
+    let { Dues, FeeInfo} = await CalculateFeeDues(student);
     Respond({
       res,
       payload: {
-        Dues_details: Dues,
+        Dues: Dues,
         StudentInfo: student,
         FeeInfo,
         Invoice: InvoiceNumber[0]?.Invoice ? InvoiceNumber[0].Invoice + 1 : 1,
         ClassbasedFeeInfo,
       },
     });
-  } else {
-    res
-      .status(404)
+  } 
+  else {
+    res.status(404)
       .json({
         message: "Student not found",
         payload: {
@@ -171,9 +167,9 @@ async function getDetailedTransactions(req, res) {
   Payload.Transactions.forEach((tr, i) => {
     if (tr.paymentType == "Registered") {
       Payload.Transactions[i]["session"] =
-        tr.paymentConfigId.session?.session_name +
+        tr.paymentConfigId?.session?.session_name +
         " " +
-        tr.paymentConfigId.session?.acedmic_year;
+        tr.paymentConfigId?.session?.acedmic_year;
     }
   });
   Respond({ res, payload: Payload });

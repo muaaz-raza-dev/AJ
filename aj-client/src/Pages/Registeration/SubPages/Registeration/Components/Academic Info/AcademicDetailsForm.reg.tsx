@@ -9,9 +9,8 @@ import { FC } from "react";
 
 const RegAcademicDetailsForm: FC<{ edit?: boolean }> = ({ edit }) => {
   const { control ,watch } = useFormContext();
-  let Class  = watch("Class")
+  let Class  = watch("CurrentClass")
   let { Classes , Sections} = useAppSelector((state) => state.global);
-
   return (
     <div className="flex w-full flex-wrap gap-x-4 gap-y-6">
       <GRnoRegisterationFormField edit={edit} />
@@ -33,10 +32,10 @@ const RegAcademicDetailsForm: FC<{ edit?: boolean }> = ({ edit }) => {
         />
       </RegLabelWrapper>
 
-      <RegLabelWrapper className="w-[48%]" title="Class">
+      <RegLabelWrapper className="w-[48%]" title="Current Class">
         <Controller
           rules={{ required: "Class is Required" }}
-          name="Class"
+          name="CurrentClass"
           control={control}
           render={({ field, fieldState: { error } }) => (
             <>
@@ -55,9 +54,9 @@ const RegAcademicDetailsForm: FC<{ edit?: boolean }> = ({ edit }) => {
         />
       </RegLabelWrapper>
 
-      <RegLabelWrapper className="w-[48%]" title="Section">
+      <RegLabelWrapper className="w-[48%]" title="Current Section">
         <Controller
-          name="Section"
+          name="CurrentSection"
           control={control}
           render={({ field }) => (
             <Select
@@ -76,7 +75,7 @@ const RegAcademicDetailsForm: FC<{ edit?: boolean }> = ({ edit }) => {
           )}
         />
       </RegLabelWrapper>
-      <RegLabelWrapper className="w-[48%]" title="Admission">
+      <RegLabelWrapper className="w-[48%]" title="Admission Type">
         <Controller
           name="NewAdmission"
           control={control}

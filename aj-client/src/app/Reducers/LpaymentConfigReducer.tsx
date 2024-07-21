@@ -4,7 +4,7 @@ import {
   IpaymentconfigLanding,
 } from "../Types/IpaymentLanding";
 interface IconfigFilters {
-  label: "sessions" | "feeScopes";
+  label: "sessions" | "feeTypes";
   available?: string[];
   selected?: string;
   register?:{isLoading:boolean} ;

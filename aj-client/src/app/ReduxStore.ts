@@ -11,6 +11,7 @@ import { dashboardSlice } from "./Slices/DashboardSlice";
 import { LandingSessions } from "./Slices/SessionSlice";
 import { Class_detailed } from "./Slices/ClassDetailedSlice";
 import { lpaymentconfig } from "./Slices/LPaymentConfigSlice";
+import { studentHist } from "./Slices/StudentHistorySlice";
 
 
 
@@ -27,7 +28,8 @@ reducer:{
     dashboard:dashboardSlice,
     sessions:LandingSessions ,
     classDetailed:Class_detailed ,
-    paymentConfigsL:lpaymentconfig
+    paymentConfigsL:lpaymentconfig ,
+    studentHistory:studentHist
 }
 });
 

@@ -10,19 +10,21 @@ const registerFormSchema = new mongoose.Schema({
   DOB: { type: String, required: true }, // Consider using Date type if you store actual dates
   Gender: { type: String },
   Address: { type: String },
-  GRNO: { type: Number,unique:true},
+  GRNO: { type: String,unique:true},
   RollNo: { type: Number,required:true},
-  Section: { type: ObjectId , ref:"Section" },
+  CurrentSection: { type: ObjectId , ref:"Section" },
   NewAdmission: { type: Boolean, },
   CovidVaccine: { type: Boolean, },
   sCNIC: { type: String, },
   fCNIC: { type: String, },
   mCNIC: { type: String, },
-  WA:{type:String},
+  WA:{type:String}, //whastapp number
+  firstSession:{type:ObjectId,ref:"YearlySession"},
+  firstClass:{type:ObjectId,ref:"Class"},
+  ConsiderOneTimeFee:Boolean,
   DOA: { type: String, required: true }, // Consider using Date type if you store actual dates
-  Class: { type: ObjectId, required: true , ref:"Classes" },
+  CurrentClass: { type: ObjectId, required: true , ref:"Classes" },
   PolioPermission: { type: Boolean, } ,
-  FinancialDetails : [{paymentConfigId:{type:ObjectId,ref:"PaymentConfig"},paid:Boolean}]
 }, { timestamps: true });
 
 module.exports = mongoose.model('Students', registerFormSchema);

@@ -37,7 +37,7 @@ return  <Tooltip title={"GRNO is availble"}>
  control={control}
  disabled={edit}
   render={({ field ,fieldState:{error}}) => (<>
-  <Input  {...field} type="number" onChange={(e)=>{field.onChange(e);debounced(e.target.value)}} placeholder="189305" suffix={<GRSuffix/>} className="active:border-[var(--dark)]" />
+  <Input  {...field} type="number"  onChange={(e)=>{field.onChange(e);debounced(e.target.value)}} placeholder="189305" suffix={<GRSuffix/>} className="active:border-[var(--dark)]" />
   {
     isError&&
   <div className="absolute -bottom-12 w-full border border-[var(--primary)] rounded-md flex bg-[var(--bg)] shadow-lg p-2 px-4 gap-x-1 cursor-pointer">

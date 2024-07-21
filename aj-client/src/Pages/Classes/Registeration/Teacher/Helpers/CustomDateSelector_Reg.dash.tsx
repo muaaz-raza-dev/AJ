@@ -8,7 +8,7 @@ import {
 } from "@/shdcn/components/ui/popover"
 import { CalendarIcon } from "lucide-react"
 import moment from "moment"
-const CustomDateSelector_Reg:React.FC<{className?:string,formValue:string,label?:string,onChange:(value:string)=>void}> = ({className,formValue,label,onChange}) => {
+const CustomDateSelector_Reg:React.FC<{className?:string;required?:boolean,formValue:string,label?:string,onChange:(value:string)=>void}> = ({className,formValue,label,onChange,required}) => {
     const [date, setDate] = React.useState<string>(formValue||"")
     React.useEffect(() => {
      date!=""&& onChange(moment(date).calendar("MMM"))
@@ -29,7 +29,7 @@ const CustomDateSelector_Reg:React.FC<{className?:string,formValue:string,label?
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0" align="start">
-       <input type="date" value={!formValue?"":moment(formValue).format("YYYY-MM-DD")} onChange={(e)=>{setDate(e.target.value); 
+       <input type="date" required={required||false} value={!formValue?"":moment(formValue).format("YYYY-MM-DD")} onChange={(e)=>{setDate(e.target.value); 
        }}/>
       </PopoverContent>
     </Popover>

@@ -74,7 +74,7 @@ const Payment_Dates_Yearly = () => {
   label="Payment Date"
 >
 <div className="flex gap-2 w-full">
-    <CustomDateSelector_Reg  className='w-[83%]'  formValue={paymentDate} label='Pick the date of when payment is started'  onChange={onChangePaymentDate}/>
+    <CustomDateSelector_Reg required className='w-[83%]'  formValue={paymentDate} label='Pick the date of when payment is started'  onChange={onChangePaymentDate}/>
     <Button type='button' onClick={()=>Reset("paymentDate")} className='bg-[var(--primary)] w-[15%] text-dark'>Reset</Button>
     </div>
     {Error.isError&&Error.type=="start" && <p className='text-red-600 text-sm font-medium'>{Error.error}</p>}
@@ -106,24 +106,25 @@ const Payment_Dates_Monthly = () => {
     let session = form.watch("payload.session")
     const ProcessDateforEveryMonth =()=>{
         let payload = paymentMonths?.map((month:IpaymentMonths)=>{
-            let monthNumber = new Date(Date.parse(`${month.month} 1, 2022`)).getMonth()
+            let monthNumber = moment.months().indexOf(month.month)
             let payload ={...month ,paymentDate:"",dueDate:""}
             if(month.isPayment){
                 if(Start =="1st of the month"){
-                    payload.paymentDate =moment(`1/${monthNumber+1}/${month.year}`).toISOString()}
-                    
+                    payload.paymentDate =moment(`1-${monthNumber+1}-${month.year}`,"D-M-YYYY").toISOString()}
                     else {
-                        payload.paymentDate =moment(`10/${monthNumber+1}/${month.year}`).toISOString()
+                        payload.paymentDate =moment(`10-${monthNumber+1}-${month.year}`,"D-M-YYYY").toISOString()
                     }
                     if(End =="last day of the month") {
-                        payload.dueDate =moment(`1/${monthNumber+1}/${month.year}`).endOf('month').toISOString()
+                        payload.dueDate =moment(`1-${monthNumber+1}-${month.year}`,"D-M-YYYY").endOf('month').toISOString()
                     }
                     else {
-                        payload.dueDate =moment(`10/${monthNumber+2}/${month.year}`).toISOString()
+                        payload.dueDate =moment(`10-${monthNumber!=11?monthNumber+2:1}-${monthNumber!=11?month.year:month.year+1}`,"D-M-YYYY").toISOString()
                     }
                 }
             return payload
         })
+        console.log(payload);
+        
         setPayload(payload)
         if(!lod.isEqual (payload ,  paymentMonths)) {
             form.setValue("payload.paymentMonths",payload)

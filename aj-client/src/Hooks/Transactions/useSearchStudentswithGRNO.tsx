@@ -14,7 +14,7 @@ const useSearchStudentswithGRNO = () => {
       return SearchStudentsForTransaction(GRNO)},
     onSuccess({payload}) {
       form.setValue("Invoice",payload.Invoice)
-      dispatch( RedTrcInsertFilters({FeeInfo:payload.FeeInfo,StudentInfo:payload.StudentInfo,ClassbasedFeeInfo:payload.ClassbasedFeeInfo ,Invoice:payload.Invoice,isLoading:false}) );
+      dispatch( RedTrcInsertFilters({FeeInfo:payload.FeeInfo,StudentInfo:payload.StudentInfo,ClassbasedFeeInfo:payload.ClassbasedFeeInfo ,Invoice:payload.Invoice,isLoading:false ,Dues:payload.Dues}) );
     },
     onError(err:any) {
       form.setValue("Invoice",err.response.data.payload.Invoice)

@@ -1,7 +1,7 @@
 import { useAppSelector } from '@/app/ReduxHooks'
 import { IstudentShort } from '@/app/Types/IstudentsDir.t'
 import { TableCell, TableRow } from '@/shdcn/components/ui/table'
-import { Mail, Phone } from 'lucide-react'
+import { History, Mail, Phone } from 'lucide-react'
 import { FC } from 'react'
 import { FaWhatsapp } from 'react-icons/fa'
 import { FaArrowRight } from 'react-icons/fa6'
@@ -9,6 +9,8 @@ import { Link} from 'react-router-dom'
 
 const StudentsTableRow :FC<{data:IstudentShort}> = ({data}) => { 
     let {Classes,Sections} = useAppSelector(s=>s.global)
+    console.log(Sections[data.CurrentClass][data?.CurrentSection]);
+    
   return (
     <TableRow >
         <TableCell className='text-[var(--darker)] text-base font-bold'>{data.FirstName} {data.LastName}</TableCell>
@@ -31,19 +33,24 @@ const StudentsTableRow :FC<{data:IstudentShort}> = ({data}) => {
         </TableCell>
         <TableCell className=''>
             <Link to={"/dashboard"} className="bg-dark center text-white rounded-full px-2 py-1.5">
-                {Classes[data.Class]}
+                {Classes[data.CurrentClass]}
             </Link>
             </TableCell>
-            <TableCell className=''>
-                 {Sections[data.Class][data.Section]}
+            <TableCell className='font-bold'>
+                 {Sections[data.CurrentClass][data?.CurrentSection]}
             </TableCell>
 
 
         <TableCell className=' '>
+            <div className="flex gap-2">
+
+        <Link to={`/students/history/${data._id}`} className="center text-dark">
+                <History size={22}/>
+                </Link>
                 <Link to={`/students/${data.GRNO}`} className="center text-dark">
                 <FaArrowRight size={22}/>
-          
                 </Link>
+            </div>
 </TableCell>
       </TableRow>
   )

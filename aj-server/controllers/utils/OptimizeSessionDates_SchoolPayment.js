@@ -9,10 +9,10 @@ let end = {year:endD.year(),month:endD.month()}
 
 Array(12).fill(12).map((_,i)=>{
 let month = i
-if(start.month < month) {
+if(start.month <= month) {
 payload.push({year:start.year,month:moment.months()[month],paymentDate:'',dueDate:"" ,isPayment:true,})
 }
-if(end.month >= month) {
+if(end.month > month) {
 payload.push({year:end.year,month:moment.months()[month],paymentDate:'',dueDate:"" ,isPayment:true,})
 }
 })

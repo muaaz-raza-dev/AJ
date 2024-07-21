@@ -8,7 +8,7 @@ async function ReadStudents(req, res) {
       .limit(Limit)
       .skip((count == 0 ? count : count - 1) * Limit)
       .select(
-        "LastName FirstName fatherName DOA Section GRNO contact RollNo Class WA email"
+        "LastName FirstName fatherName DOA CurrentSection GRNO contact RollNo CurrentClass WA email"
       );
     res.json({ success: true, payload: students, totalStudents, count });
   } catch (err) {

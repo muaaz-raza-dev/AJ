@@ -13,7 +13,7 @@ const ImageUpload = (
     setLoading(true);
     PhotoUploadCloudinary(PhotoFile)
       .then((res) => {
-        Cb({payload:{ ...Form.getValues(), photo: res.url }});
+        Cb({ ...Form.getValues(), photo: res.url ,ConsiderOneTimeFee:Form.watch("NewAdmission") });
         Form.setValue("photo", res.url);
       })
       .catch((err) => {
@@ -21,7 +21,7 @@ const ImageUpload = (
       })
       .finally(() => setLoading(false));
   } else {
-    Cb({ ...Form.getValues() });
+    Cb({ ...Form.getValues(),ConsiderOneTimeFee:Form.watch("NewAdmission") });
   }
 };
 

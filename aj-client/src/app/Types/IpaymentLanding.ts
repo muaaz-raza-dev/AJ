@@ -17,7 +17,7 @@ export interface IpaymentconfigLanding {
     payload : Ipayment_config_short[] ;
     isLoading: boolean;
     register:{isLoading:boolean} // for the edit and register payment page
-    filters: {sessions:{available:{label:string,value:string}[],selected:string} ; feeScopes:{available:string[],selected:string}}
+    filters: {sessions:{available:{label:string,value:string}[],selected:string} ; feeTypes:{available:string[],selected:string}}
 }
 
 export const defaultIpaymentconfigLanding: IpaymentconfigLanding = {
@@ -26,6 +26,6 @@ export const defaultIpaymentconfigLanding: IpaymentconfigLanding = {
     isLoading: false,
     filters: {
       sessions: { available: [], selected: '' },
-      feeScopes: { available: ["Global","Session-based"], selected: 'Session-based' },
+      feeTypes: { available: ["One Time","Other"], selected: 'Other' },
     },
   };

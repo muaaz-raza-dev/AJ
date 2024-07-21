@@ -26,10 +26,10 @@ const SectionRegisteration = async (sections) => {
 const ClassRegisteration = async (req, res) => {
   let { payload } = req.body;
   try {
+    let sections = payload.sections;
+    delete payload.sections;
     let Class_exist = await Class.findOne(payload);
     if (!Class_exist) {
-      let sections = payload.sections;
-      delete payload.sections;
       let newClass = await Class.create(payload);
       await Session.findByIdAndUpdate(payload.SessionId, {
         $push: { Classes: newClass._id || newClass._doc._id },
@@ -40,7 +40,7 @@ const ClassRegisteration = async (req, res) => {
       }));
       let section_response = await SectionRegisteration(Sections);
       if (section_response) {
-        let updatedClass = await Class.findByIdAndUpdate(newClass._doc._id, {
+         await Class.findByIdAndUpdate(newClass._doc._id, {
           sections: section_response,
         });
         Respond({
@@ -57,7 +57,7 @@ const ClassRegisteration = async (req, res) => {
           message: "Something went wrong,try again later!",
           status: 401,
         });
-    } 
+     }
     else{
       Respond({
         res,
@@ -116,15 +116,22 @@ const Filter_Read_Classes = async (req, res) => {
   let { SessionId } = req.body;
   try {
     let Classes = await Class.find({ SessionId })
-      .populate("sections SessionId")
-      .select("session_name acedmic_year _id");
-    console.log(SessionId);
+    .populate("sections SessionId")
+    .select(" name sections  subjects  start_date end_date");
+  let payload = JSON.parse(JSON.stringify(Classes));
+  payload.forEach((elm, index) => {
+    payload[index].Students = [];
+    payload[index].Session = payload[index].SessionId;
+    elm.sections.forEach((section) => {
+      payload[index].Students.push(...section.Students);
+    });
+  });
     Respond({
       res,
       success: true,
       message: "Classes fetched",
       status: 200,
-      payload: Classes,
+      payload,
     });
   } catch (err) {
     Respond({

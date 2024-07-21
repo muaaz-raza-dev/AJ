@@ -1,25 +1,28 @@
 import { PayloadAction } from "@reduxjs/toolkit";
-import { IstudentShort } from "../Types/IstudentsDir.t";
 import { ClassBasedFeeDetails, IcomposeTransactionFilters } from "../Types/IcomposeTransactionFilters";
+import { IstudentExclusive } from "../Types/IStudentExclusive";
 interface ItrComposeFilterInsert {
     isLoading?:boolean , 
-    StudentInfo?:IstudentShort ,
+    StudentInfo?:IstudentExclusive ,
     ClassbasedFeeInfo ?: ClassBasedFeeDetails ,
     FeeInfo?:{
-        Purposes:{value:string,label:string}[] ,
+    Purposes:{value:string,label:string,feeFrequency:"One Time"|"Custom"|"Yearly"|"Monthly"}[] ,
         Dates : {[key:string]:{[key:string]: string[] }} ,
         Amounts : {[key:string]:number}
-    },Invoice?:string
+    },Invoice?:string ,
+    Dues?: {_id:string, feeTitle:string, dueDate:string,feeFrequency:string,
+        amount:number,session:string,class:string;month:string,year:string}[]
     
 }
 
 export const InsertTrComposeFiltersFn = (state:IcomposeTransactionFilters,{payload}:PayloadAction<ItrComposeFilterInsert>)=>{
-let {isLoading,StudentInfo,ClassbasedFeeInfo,FeeInfo,Invoice} = payload
+let {isLoading,StudentInfo,ClassbasedFeeInfo,FeeInfo,Invoice ,Dues} = payload
 if(isLoading!=undefined) state.isLoading = isLoading
 if(StudentInfo!=undefined) state.StudentInfo = StudentInfo
 if(ClassbasedFeeInfo!=undefined) state.ClassbasedFeeInfo = ClassbasedFeeInfo
 if(FeeInfo!=undefined) state.FeeInfo = FeeInfo
 if(Invoice!=undefined) state.Invoice = Invoice
+if(Dues) state.Dues = Dues
 }
 
 interface IcalculateDiscountedTotal {

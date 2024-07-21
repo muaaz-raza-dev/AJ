@@ -8,7 +8,7 @@ const useFetchConfigs = () => {
   let dispatch = useAppDispatch()
     let Registeration = useMutation({
         mutationKey: ["Fetch", "Configs" ],
-        mutationFn: ({session,feeScope}: {session:string,feeScope:string}) => FetchConfigs(session,feeScope),
+        mutationFn: ({session,feeTypes}: {session:string,feeTypes:string}) => FetchConfigs(session,feeTypes),
         onSuccess({payload}) {
           dispatch(RedLPpayload({payload,isLoading:false}))
         },
@@ -22,7 +22,7 @@ export const useFetchConfigDetailed = (reset:(payload:any)=>void) => {
     let Registeration = useQuery({
       queryKey: ["Fetch", "Config" , id],
       queryFn: () =>{
-        dispatch (RedLPFilters({label:"feeScopes",register:{isLoading:true}}))
+        dispatch (RedLPFilters({label:"feeTypes",register:{isLoading:true}}))
         return FetchConfigDetailed(id)
       },
       refetchOnWindowFocus:false,
@@ -30,7 +30,7 @@ export const useFetchConfigDetailed = (reset:(payload:any)=>void) => {
       onSuccess({payload}) {
         setTimeout(() => {
           reset((e:any)=>({...e,payload}))
-          dispatch (RedLPFilters({label:"feeScopes",register:{isLoading:false}}))
+          dispatch (RedLPFilters({label:"feeTypes",register:{isLoading:false}}))
         }, 100);
         
       },

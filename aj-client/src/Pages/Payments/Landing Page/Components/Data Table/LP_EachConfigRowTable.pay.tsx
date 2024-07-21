@@ -6,6 +6,7 @@ import { FC } from "react"
 import { Link } from "react-router-dom"
 
 const LP_EachConfigRowTable:FC<{data:Ipayment_config_short}> = ({data}) => {
+  
   return (
     <TableRow>
               <TableCell className='text-dark font-bold text-base'>
@@ -26,8 +27,7 @@ const LP_EachConfigRowTable:FC<{data:Ipayment_config_short}> = ({data}) => {
                 </Tooltip>
                 </TableCell>
               <TableCell className=' font-bold'>{data.Installments||"-"}</TableCell>
-              <TableCell className=' font-bold'>{data.feeScope||"-"}</TableCell>
-                <TableCell className=' font-bold'>{moment(data.createdAt).format("D MMMM Y")||"-"}</TableCell>
+                <TableCell className=' font-bold'>{moment(data.createdAt).format("D MMMM Y").toString()}</TableCell>
               <TableCell className='text-[var(--dark)] flex-wrap items-end ml-auto flex gap-1  font-bold'>
                 { 
                 data.classes ?

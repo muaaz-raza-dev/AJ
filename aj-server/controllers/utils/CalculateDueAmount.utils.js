@@ -32,4 +32,6 @@ const TotalRecordedAmount = async (StudentFinance, AcademicFee, DOA) => {
   return Total;
 };
 
+
+
 module.exports = TotalRecordedAmount;

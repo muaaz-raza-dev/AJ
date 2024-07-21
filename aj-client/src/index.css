@@ -8,13 +8,13 @@
 :root{
   --primary:#F3F4FF;
   --bg:#F3F4FF;
-  --darker:#333C74;
+  --darker:#3a3374;
   --secondary:#a098ae;
   --box:#ffffff;
   --dark:#4D44B5;
   --HeadingFont: "Lexend", sans-serif;;
   --Regular-Font:  "K2D", sans-serif;
-    --success: #1EBA62;
+    --success: #3ec579;
     --info: #00ADA3;
     --warning: #FCC43E;
     --danger: #fd5353;
@@ -197,3 +197,12 @@ html::-webkit-scrollbar-track {
   background-repeat: no-repeat;
   
 }
+.customscrollbarTable::-webkit-scrollbar-thumb{
+height: 0.5rem;
+width: 0.5rem;
+}
+.customscrollbarTable::-webkit-scrollbar{
+  height: 0.5rem;
+width: 0.5rem;
+
+  }

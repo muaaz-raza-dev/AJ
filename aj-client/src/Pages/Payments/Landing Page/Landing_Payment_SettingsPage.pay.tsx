@@ -14,7 +14,7 @@ const Landing_Payment_SettingsPage = () => {
   function handleFilters (payload:any){
     dispatch(RedLPFilters({label:"sessions",selected:payload.Sessions[0].value,
     available:payload.Sessions.map((e:any)=>({label:e.label,value:e.value})),isLoading:true}))
-    mutate({session:payload.Sessions[0].value,feeScope:"Session-based"})
+    mutate({session:payload.Sessions[0].value,feeTypes:"Other"})
   }
   return (
     <section className="w-full flex flex-col gap-4">

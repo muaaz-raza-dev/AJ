@@ -17,7 +17,6 @@ const ClassRegisterationForm:FC<{edit?:boolean}> = ({edit}) => {
   let formSubmit  :SubmitHandler<Iclass> = (data) =>{
     if (edit) editMutatate(data)
     else mutate(data);
-    form.reset()
  } 
  
   return (

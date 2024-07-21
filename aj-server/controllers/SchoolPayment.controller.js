@@ -1,26 +1,43 @@
 const Respond = require("../Helpers/ResponseHandler");
+const OneTimeFee = require("../models/OneTimeFee");
 const PaymentConfig = require("../models/SchoolPayments");
 const Session = require("../models/Session");
 const { OptimizeDates } = require("./utils/OptimizeSessionDates_SchoolPayment");
 const RegisterPayment = async(req,res)=>{
     let {payload} = req.body;
-    let isExist = await PaymentConfig.findOne(payload)
-    if(isExist) {
-        Respond({
-            res,
-            message: 'Already exists',
-            success:false
-        })
-    } else {
-    let feeScope = payload.session ? "Session-based" : "Global";
-    let payment = await PaymentConfig.create({...payload,feeScope})
+    try{
+        
+        if(payload.feeFrequency == "One Time") {
+            delete payload.feeFrequency
+            await RegisterOneTimeConfig(payload)
+        }
+        else {
+            let payment = await PaymentConfig.create({...payload})
+        }
+        
         Respond({res,
             message: 'Payment Registered successfully',
-            payload:payment
         })
     }
+    catch(err){
+        console.log(err);
+        Respond({res,
+            message: 'Somethig went wrong.',
+            status:500,
+            success:false
+        })  
+    }
 }
-
+const RegisterOneTimeConfig = async(payload)=>{
+let ParentPayload = JSON.parse(JSON.stringify(payload))
+delete ParentPayload.classes
+delete ParentPayload.session
+let parent = await OneTimeFee.create({...ParentPayload,isParent:true})
+let childPayload = {...payload, Parent: parent._id || parent._doc._id}
+let child = await OneTimeFee.create(childPayload)
+await OneTimeFee.findByIdAndUpdate(parent._id,{$push:{Children:child._id||child._doc._id}})
+return child
+}
 
 const GetSessions = async(req,res)=>{
     let sessions = await Session.find().populate("Classes").select("-createdBy ").sort("isActive")
@@ -45,20 +62,26 @@ const GetSessions = async(req,res)=>{
 }
 
 const GetConfigs =  async(req,res)=>{
-let { session , feeScope} = req.body
-let query = {session,feeScope,isDeprecated:false}
-if(!session||feeScope=="Global") {delete query.session}
-let Configs = await PaymentConfig.find(query).populate({path:"session",select:"session_name acedmic_year"})
-.populate({path:"classes",populate:{path:"classId",select:"name"}})
+let { session , feeTypes} = req.body
+let query = {session,isDeprecated:false}
+let Configs = [] ;
+if(feeTypes=="Other"){
+    Configs = await PaymentConfig.find(query).populate({path:"session",select:"session_name acedmic_year"})
+    .populate({path:"classes",populate:{path:"classId",select:"name"}})
+}
+else {
+    Configs = await OneTimeFee.find({session,isDeprecated:false}).populate({path:"session",select:"session_name acedmic_year"})
+    .populate({path:"classes",populate:{path:"classId",select:"name"}})
+}
 let payload = JSON.parse(JSON.stringify(Configs))
 payload.forEach((config,i)=>{
     payload[i].classes = config?.classes.map(e=>({amount:e.amount,name:e.classId?.name}))
     payload[i].session = config.session.session_name + " " +config.session.acedmic_year
-    let times =  config ?.paymentMonths.filter(pay=>pay.isPayment).length
-    payload[i].Installments = `${times} times in a Session`
+    let times =  config ?.paymentMonths?.filter(pay=>pay.isPayment).length
+    payload[i].Installments = feeTypes =="One Time" ? "One time in the admission" : `${times} times in a Session`
+    payload[i].feeFrequency = "One Time"
 })
-console.log(payload);
-Respond({res,payload:payload})
+Respond({res,payload})
 }
 
 const FetchConfigDetails = async(req,res)=>{
@@ -72,8 +95,7 @@ Respond({res,payload})
 const UpdateConfig = async(req,res)=>{ 
     let {id, payload} = req.body
     delete payload._id
-    let feeScope = payload?.session ? "Session-based" : "Global";
-    let new_config = await PaymentConfig.create({...payload,feeScope,isDeprecated:false})
+    let new_config = await PaymentConfig.create({...payload,isDeprecated:false})
     let config = await PaymentConfig.findByIdAndUpdate(id,{isDeprecated:true,deprecatedDate:new Date().toISOString(),newVersionId:new_config._id})
     Respond({res,payload:config,message:"Config Updated",payload:new_config})
 }

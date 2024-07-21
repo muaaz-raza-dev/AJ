@@ -9,12 +9,8 @@ const AnnualFeeSchema = new mongoose.Schema({
         "session": {
           "type": ObjectId,
           "ref": "YearlySession",
+          required:true,
           "description": "Reference to the yearly session"
-        },
-        "feeScope": {
-          "type": "String",
-          "enum": ["Global", "Session-based"],
-          "description": "Scope of the fee"
         },
         "feeDescription": {
           "type": "String",
@@ -22,7 +18,7 @@ const AnnualFeeSchema = new mongoose.Schema({
         },
         "feeFrequency": {
           "type": "String",
-          "enum": ["Monthly", "Yearly", "One Time","Custom"],
+          "enum": ["Monthly", "Yearly", "Custom"],
           "required": true,
           "description": "Type of the fee"
         },
@@ -48,10 +44,6 @@ const AnnualFeeSchema = new mongoose.Schema({
             }
           ],
           "description": "List of classes with their respective fee amounts"
-        },
-        "feeAmount": {
-          "type": "Number",
-          "description": "It will be there if the type is one time etc"
         },
         "paymentMonths": {
           "type": [

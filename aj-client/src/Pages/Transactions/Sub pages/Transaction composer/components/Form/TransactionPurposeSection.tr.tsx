@@ -61,9 +61,9 @@ function TransactionComposeAdditionalInputs() {
   return (
     <div className="flex flex-wrap gap-3">
       <RegLabelWrapper title="Amount Paid" className="w-[33%]">
-
-      <Controller control={control} rules={{ required:"The payment amount is required",min:{value:totalAmount-1 ,message:"Can't be less than total Amount"}}} name='PaidAmount' render={({field,fieldState:{error}})=>
-{return(<> <Input placeholder="4000" {...field} type="number"  />
+      <Controller control={control} rules={{ required:"The payment amount is required",min:{value:totalAmount-1 ,message:"Can't be less than total Amount"}}} name='PaidAmount'
+     render={({field,fieldState:{error}})=>
+{return(<> <Input placeholder="4000" {...field} type="number" />
  {error && <p className="text-red-500 text-xs">{error.message}</p>}</>)
  }}/>
       </RegLabelWrapper>
@@ -83,6 +83,7 @@ return (
 
 const TransactionPurposeSection = () => {
   let Transactions  =useFormContext().watch("Transactions")
+  
   return (
     <div className=" py-2 flex flex-col gap-y-3">
       <Table>
@@ -91,7 +92,7 @@ const TransactionPurposeSection = () => {
             <TableHead className="text-[var(--dark)] hFont">Custom </TableHead>
             <TableHead className="text-[var(--dark)] hFont">Purpose</TableHead>
             <TableHead className="text-[var(--dark)] hFont">
-              Month - Year
+              Fee period / Session
             </TableHead>
             <TableHead className="text-[var(--dark)] hFont w-[10%]">
                Amount

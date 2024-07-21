@@ -11,13 +11,15 @@ const Class_Teacher_Selections:FC<{index:number}> = ({index}) => {
     useEffect(() => {
     setValue(`sections[${index}].ClassTeacher`,teachers[state])
     }, [state])
+    useEffect(() => {
+    setState(Object.keys(teachers)[0])
+    }, [teachers])
     
   return (
     <LabelWrapper required label="Class Teacher " >
         <section className="w-full flex gap-2 flex-col h-full">
-    <CustomSelect_Reg data={Object.keys(teachers)} nosearch placeholder="ClassTeacher" setState={setState} state={
-     ClassTeacher ? Object.entries(teachers).find(e=>e[1]==ClassTeacher)?.[0] ||"" :""
-      } />
+    <CustomSelect_Reg optimumData={Object.entries(teachers).map(e=>({label:e[0],value:e[1]}))} nosearch placeholder="ClassTeacher" setState={setState}
+     state={ ClassTeacher } />
         </section>
   </LabelWrapper>
   )

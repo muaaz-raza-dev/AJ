@@ -1,15 +1,17 @@
 const Students = require("../models/Students");
 const Respond = require("../Helpers/ResponseHandler");
 const Sections_Class = require("../models/Sections_Class");
+const Session = require("../models/Session");
 async function RegisterStudent(req, res) {
   let { payload  } = req.body;
   try {
-    let student = await Students.create(payload); 
-    await Sections_Class.findByIdAndUpdate(payload.Section,{$addToSet:{Students:student._id}})  
+    let currentSession =await Session.findOne({isActive:true}).select("_id")
+    let student = await Students.create({...payload,firstSession:currentSession._id,firstClass:payload.CurrentClass}); 
+    await Sections_Class.findByIdAndUpdate(payload.CurrentSection,{$addToSet:{Students:student._id}})  
     // to register the student to section to keep the history and records
     res.json({
       success: true,
-      messge: `Student becomes the part of your organization successfully `,
+      message: `Student becomes the part of your organization successfully `,
       payload: student,
     });
   } catch (err) {

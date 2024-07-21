@@ -7,10 +7,10 @@ export interface IstudentShort {
     RollNo:number;
     GRNO:string;
     DOA:string;
-    Section:string;
+    CurrentSection:string;
     email:string;
     contact:string[]
-    Class:string;
+    CurrentClass:string;
     WA:string
 
 }

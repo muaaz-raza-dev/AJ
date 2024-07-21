@@ -9,7 +9,7 @@ const StudentsDirectoryFile = () => {
         <Route index path='/' element={<StudentsDirListPage/>} />
         <Route path='/registeration' element={<StudentRegisterationPage/>} />
         <Route path='/:student/*' element={<StudentDetailedPage/>}/>
-        <Route path='/history' element={<StudentHistoryFile/>}/>
+        <Route path='/history/:id' element={<StudentHistoryFile/>}/>
    </Routes>
   )
 }

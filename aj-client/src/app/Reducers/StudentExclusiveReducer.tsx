@@ -1,5 +1,5 @@
 import { PayloadAction } from "@reduxjs/toolkit"
-import { IfeeDoc, IstdExclusive, IstdExclusiveOverview, IstudentExclusive } from "../Types/IStudentExclusive"
+import { IfeeDoc, IstdExclusive, IstdExclusiveOverview } from "../Types/IStudentExclusive"
 import { IRegisterFormState } from "../Types/IStdregisterForm.t";
 interface IstdExclusiveAction{
     overview?:IstdExclusiveOverview;

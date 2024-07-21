@@ -8,40 +8,39 @@ fatherName:string;
 DOB:string;
 Gender:string;
 Address:string;
-GRNO:number;
+GRNO:number|string;
 RollNo:number|null;
-Section:string;
+CurrentSection:string;
 NewAdmission:boolean;
 WA:string|null;
 fCNIC:string |null;
 mCNIC:string |null;
 sCNIC:string |null;
-Class:string;
+CurrentClass:string;
 DOA:string //Date of Admission
 PolioPermission?:boolean;
 CovidVaccine?:boolean;
-FinancialDetails:{paymentConfigId:string;paid:boolean}[]
+ConsiderOneTimeFee?:boolean;
 }
 export const defaultRegisterFormState: IRegisterFormState = {
     FirstName: '',
-    FinancialDetails:[],
     WA:null,
     LastName: '',
     photo: '',
     fCNIC:null,
-mCNIC:null,
-sCNIC:null,
+    mCNIC:null, 
+    sCNIC:null,
     email: '',
     contact: [],
     fatherName: '',
     DOB: '',
     Gender: 'male',
     Address: '',
-    GRNO: 0,
+    GRNO: '',
     RollNo: null,
-    Section: '',
+    CurrentSection: '',
     NewAdmission: false,
-    Class: '',
+    CurrentClass: '',
     DOA: '',
     PolioPermission: true,
     CovidVaccine:false,

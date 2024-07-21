@@ -22,9 +22,7 @@ const LP_configHeaderTable = () => {
       <TableHead className="!h-[3.5rem] text-md text-left text-[var(--darker)] hFont font-bold">
           Installments
       </TableHead>
-      <TableHead className="!h-[3.5rem] text-md text-[var(--darker)] hFont font-bold">
-          Fee Scope
-      </TableHead>
+  
       <TableHead className="!h-[3.5rem] text-md text-[var(--darker)] hFont font-bold">
             Created at
       </TableHead>

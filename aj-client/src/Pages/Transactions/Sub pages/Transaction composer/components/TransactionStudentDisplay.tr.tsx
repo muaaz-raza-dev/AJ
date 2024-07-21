@@ -8,7 +8,7 @@ const TransactionStudentDisplay = () => {
     (state) => state.trComposeFilters
   );
   let {Classes }= useAppSelector(s=>s.global)
-  let Class = Classes[student?.Class||""] ||""
+  let Class = Classes[student?.CurrentClass||""] ||""
   return (
     <>
       {!isLoading && Ld.size(student) != 0 ? (

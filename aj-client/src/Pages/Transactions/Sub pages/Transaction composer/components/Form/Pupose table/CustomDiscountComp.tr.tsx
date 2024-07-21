@@ -29,15 +29,15 @@ const CustomDiscountComp:FC<{fieldName:string}> = ({fieldName}) => {
 
   return (
     <>
-         <input type="number" placeholder={`${discounts.type} of amount`} 
+         <input type="number" placeholder={`${discounts.type}`} 
          maxLength={3}
          max={100}
          value={discounts.value||""}
          className=' 
-         border rounded-md  w-full p-2  border-[#8080806b] focus:border-dark  transition-all outline-none '
+         border w-1/2 rounded-md   px-2 h-full py-1.5  border-[#8080806b]  transition-all outline-none '
          onChange={(value)=>handleAmountChange({val:value})}
          />
-<CustomSelect_Reg state={discounts.type} setState={handleTypeChange} data={["amount","%"]} />
+<CustomSelect_Reg state={discounts.type} className="!w-3/4" setState={handleTypeChange} data={["amount","%"]} />
     </>
   )
 }

@@ -6,7 +6,7 @@ const TransactionFeeDetailsForm:FC<{isLoading:boolean,PrintFn:()=>void}> = ({isL
   return (
 <div className="flex flex-col gap-y-3 w-full">
   <TransactionsBasicDetailsSection/>
-  < TransactionPurposeSection/>
+  <TransactionPurposeSection/>
   <TransactionComposerFooter isLoading={isLoading} PrintFn={PrintFn} />
 </div>
   )

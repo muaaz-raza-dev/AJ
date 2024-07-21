@@ -8,9 +8,7 @@ const DynamicCLass_Reg = () => {
   let form = useFormContext()
   let Classes  =  form.watch("payload.classes")
   let session = form.watch("payload.session")
-  let feeFrequecy = form.watch("payload.feeFrequency")
   
-  if(feeFrequecy!="One Time") {
   return (
     <section className="flex flex-col gap-1 px-2 bg-[var(--box)] py-2">
       <HeaderClassSection/>
@@ -32,7 +30,7 @@ const DynamicCLass_Reg = () => {
         }
  </div>
         </section>
-  ) }
+  ) 
 }
 
 const HeaderClassSection = ()=>{

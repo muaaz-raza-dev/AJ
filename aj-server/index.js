@@ -22,6 +22,7 @@ app.use("/api/transactions",require("./routes/Transactions"))
 app.use("/api/dashboard",require("./routes/Teacher&Classes"))
 app.use("/api/session" ,require("./routes/Yearly_sesstion"))
 app.use("/api/payments/config",require("./routes/SchoolPayments"))
+app.use("/api/history",require("./routes/StudentHistroy"))
 
 
 MongoConnection()

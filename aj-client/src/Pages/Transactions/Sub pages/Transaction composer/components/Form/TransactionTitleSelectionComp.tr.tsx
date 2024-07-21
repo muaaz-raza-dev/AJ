@@ -17,13 +17,16 @@ const TransactionTitleSelectionComp:FC<{fieldName:string}> = ({fieldName}) => {
            setValue(`${fieldName}.paymentTitle`,val)
           }
           else{
-          setValue(`${fieldName}.amount.realAmount`,Amounts[val])
-          setValue(`${fieldName}.amount.totalAmount`,Amounts[val])
-          setValue(`${fieldName}.paymentConfigId`,val)
-          setValue(`${fieldName}.paymentTitle`,Purposes.find(e=>e.value==val)?.label)
+            let purpose =Purposes.find(e=>e.value==val)
+            if(purpose?.feeFrequency=="One Time") setValue(`${fieldName}.sessionId`,purpose.sessionId)
+              setValue(`${fieldName}.amount.realAmount`,Amounts[val])
+              setValue(`${fieldName}.amount.totalAmount`,Amounts[val])
+              setValue(`${fieldName}.paymentConfigId`,val)
+              setValue(`${fieldName}.paymentTitle`,purpose?.feeTitle)
+            }
+            setValue(`${fieldName}.paymentType`,paymentType)
         }
-        setValue(`${fieldName}.paymentType`,paymentType)
-      }
+      
 if(paymentType=="Custom"){
     return (
         <input type="text" placeholder="Enter custom payment title" className='
@@ -36,10 +39,10 @@ if(paymentType=="Custom"){
     )
 }
 else{
-
+    console.log("I am here" ,watch());
     return (
         <CustomSelect_Reg className=''
-        setState={handlePurposeSelection} state={paymentType=="Registered"?paymentConfigId:paymentTitle} optimumData={Purposes} />)
+        setState={handlePurposeSelection} state={paymentConfigId} optimumData={Purposes} />)
     }
 }
 
