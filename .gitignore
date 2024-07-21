@@ -1,5 +1,6 @@
 ./aj-client/node_modules
+aj-client/node_modules
 ./aj-client/.env
 ./aj-server/node_modules
+aj-server/node_modules/
 *.env
-/Copied Content
