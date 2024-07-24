@@ -18,7 +18,7 @@ useEffect(() => {
        render={({field,fieldState:{error}})=>{
          return <>
           <Input {...field}
-className="active:border-[var(--dark)]"  type="date"/>
+className="active:border-[var(--dark)] dark:bg-dark dark:border-darker dark:text-white dark:placeholder:text-gray-600"  type="date"/>
             { error && <p className="text-red-500 text-xs">{error.message}</p>}
 </>
         }}/>

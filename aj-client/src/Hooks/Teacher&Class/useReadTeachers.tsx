@@ -69,7 +69,8 @@ return useQuery({
   queryKey: ["Teacher" , id , "Edit"],
   queryFn:()=>Fetch_Teacher_Raw(id),
   refetchOnWindowFocus:false,
-  staleTime: 1000 * 60 * 100,
+  staleTime: 1000 ,
+  refetchOnMount:true,
   onSuccess(data) {
   data&&  reset(data.payload);
     }

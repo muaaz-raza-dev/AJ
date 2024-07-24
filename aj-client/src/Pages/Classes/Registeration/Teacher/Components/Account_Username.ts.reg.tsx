@@ -18,9 +18,7 @@ const Account_Username:FC<{edit?:boolean}> = ({edit}) => {
         form.setValue("account_Details.username",value)
     },1000)
     const ValidationComp = ()=>{
-        console.log("I am under",username);
-        if(username) {
-            
+        if(username&&!edit) {
             if(isLoading) {
                 return <RequestLoading  dark  size="20" stroke="3" />
             }
@@ -44,10 +42,11 @@ const Account_Username:FC<{edit?:boolean}> = ({edit}) => {
      <input
     onChange={({target:{value}})=>debounced(value)}
     className="  p-2 w-[85%]  outline-none "
-    placeholder="james" id="username" 
+    {...(edit?{value:username}:{})}
+    id="username" 
     disabled={edit?true:false}/>
     <div className="flex w-[15%] items-center justify-end px-6">
-    <ValidationComp/>
+    <ValidationComp />
     </div>
     </div>
   )

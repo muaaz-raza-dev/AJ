@@ -21,8 +21,8 @@ const PolioandVaccineConfirmationField = () => {
           control={control}
           render={({ field }) => (
               <Radio.Group {...field}  defaultValue={true}>
-      <Radio value={true}>Yes</Radio>
-      <Radio value={false}>No</Radio>
+      <Radio value={true} className="dark:text-white">Yes</Radio>
+      <Radio value={false}className="dark:text-white">No</Radio>
     </Radio.Group>
           )}
           />

@@ -33,5 +33,11 @@ export const Fetch_Teacher_Raw= async (id?:string) => {      //!fetching class p
     }
 }
 
+export const Fetch_PersonalInfo= async (id?:string) => {       
+        let Secretkey = import.meta.env.VITE_APP_SECRET_COOKIE_KEY
+        let response = await Axios.get(`/dashboard/staff/raw/${id}`, { headers: { token: Cookies.get(Secretkey) } })
+        return response.data
+}
+
 
 export default ReadTeachers_short

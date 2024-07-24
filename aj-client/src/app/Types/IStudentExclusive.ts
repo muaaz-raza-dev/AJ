@@ -1,18 +1,9 @@
-import moment from "moment";
 import { IShortTransactions } from "./ItransactionsRead";
 import { IRegisterFormState } from "./IStdregisterForm.t";
 export interface IstdExclusiveOverview {
     Transactions: IShortTransactions[],
     Dues: number;
-    FeeCleared: boolean;//Fee clear for this month
-    Student: {
-        Class: string;
-        GRNO: number;
-        FirstName: string;
-        LastName: string;
-        DOA: string;
-        photo: string;
-    },
+    Student:IstudentExclusive; 
 }
 export interface IstdExFeeSection {
     Filters: {
@@ -28,6 +19,7 @@ export interface IstudentExclusive{
         LastName: string;
         photo: string;
         email: string;
+        _id:string;
         contact: string[];
         fatherName: string;
         DOB: string; // Consider using Date if you plan to work with date objects
@@ -48,8 +40,7 @@ export interface IstudentExclusive{
  }
 export interface IstdExclusive {
     overview: IstdExclusiveOverview;
-    Fees: IstdExFeeSection;
-    Information : {isLoading:boolean,isError:string;Details:IRegisterFormState};
+    Information : {isLoading:boolean,isError:string;Details:IRegisterFormState}; //edit part
     isLoading: boolean;
     isFetched: boolean;
     isError: string;
@@ -95,22 +86,31 @@ const DefaultStudentExclusiveDetail:IRegisterFormState ={
 export const defaultStudentExclusiveDetails: IstdExclusive = {
     overview: {
         Transactions: [],
-        Dues: 0,
-        FeeCleared: false,
+        Dues: 0, 
         Student: {
+            FirstName: '',
+            LastName: '',
             photo: '',
-            DOA: '',
-            Class: '',
+            email: '',
+            contact: [],
+            fatherName: '',
+            DOB: '',
+            Gender: '',
+            Address: '',
             GRNO: 0,
-            FirstName: "",
-            LastName: ""
-        },
-    },
-    Fees: {
-        Filters: { Filters: { Years: [], FeeTypes: [] }, AppliedFilters: { Year: moment().year().toString(), FeeType: "" } } ,
-        FeeCollection:[],
-        isLoading:false,
-        isError:"",
+            RollNo: 0,
+            CurrentSection: '',
+            NewAdmission: false,
+            CovidVaccine: false,
+            sCNIC: 0,
+            fCNIC: 0,
+            _id:'',
+            mCNIC: 0,
+            WA: '',
+            CurrentClass: '',
+            DOA: '',
+            PolioPermission: false,
+        }
     },
     Information:{isLoading:true,isError:"",Details:DefaultStudentExclusiveDetail},
     isLoading: true,

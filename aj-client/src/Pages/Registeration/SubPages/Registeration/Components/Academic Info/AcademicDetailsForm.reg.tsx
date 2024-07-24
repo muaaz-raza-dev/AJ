@@ -24,7 +24,7 @@ const RegAcademicDetailsForm: FC<{ edit?: boolean }> = ({ edit }) => {
               <Input
                 {...field}
                 placeholder="003923"
-                className="active:border-[var(--dark)]"
+                className="active:border-[var(--dark)] dark:bg-dark dark:border-darker dark:text-white dark:placeholder:text-gray-600"
               />
               {error && <p className="text-red-500 text-xs">{error.message}</p>}
             </>
@@ -41,6 +41,7 @@ const RegAcademicDetailsForm: FC<{ edit?: boolean }> = ({ edit }) => {
             <>
               <Select
                 showSearch={false}
+                className="dark:bg-dark  rounded-md antd-selectBar dark:border-darker dark:text-white dark:placeholder:text-gray-600"
                 {...field}
                 placeholder="7th"
                 options={Object.entries(Classes).map((elm) => ({
@@ -59,13 +60,14 @@ const RegAcademicDetailsForm: FC<{ edit?: boolean }> = ({ edit }) => {
           name="CurrentSection"
           control={control}
           render={({ field }) => (
-            <Select
+            <Select 
+             className="antd-selectBar rounded-md  custom-select dark:bg-dark dark:border-darker dark:text-white dark:placeholder-gray-600"
                 showSearch={false}
                 {...field}
                 placeholder="A"
                 options={
                   Class?
-                  Object.entries(Sections[Class]).map((elm) => ({
+                  Object?.entries(Sections?.[Class]||{})?.map((elm) => ({
                   label: elm[1],
                   value: elm[0],
                 })
@@ -81,8 +83,8 @@ const RegAcademicDetailsForm: FC<{ edit?: boolean }> = ({ edit }) => {
           control={control}
           render={({ field }) => (
             <Radio.Group {...field} defaultValue={false}>
-              <Radio value={true}>New Admission</Radio>
-              <Radio value={false}>Past Admission</Radio>
+              <Radio value={true}  className="dark:text-white ">New Admission</Radio>
+              <Radio value={false} className="dark:text-white ">Past Admission</Radio>
             </Radio.Group>
           )}
         />

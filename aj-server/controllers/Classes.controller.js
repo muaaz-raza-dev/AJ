@@ -146,12 +146,14 @@ const Filter_Read_Classes = async (req, res) => {
 const Read_Class_details = async (req, res) => {
   let { id } = req.params;
   try {
+    if(id.length!=24) return res.status(404).json({message:"Invalid Class Id"})
     let class_payload = await Class.findById(id)
       .populate({
         path: "sections",
         populate: { path: "ClassTeacher Students Subjects_teachers.Teachers" },
       })
       .populate("SessionId");
+      if(!class_payload) return res.status(404).json({message:"Class Not Found"})
   let payload = OptimizeExclusiveReadClass_payload(class_payload)
     Respond({
       res,

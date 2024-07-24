@@ -14,7 +14,7 @@ const Teaching_Subjects = () => {
     if(!lod.isEqual(subjects,Options.selected)) {
         setOptions(e=>({...e,selected:subjects}))
     }
-    }, [subjects])
+    }, [])
     const handleInput = (value:string)=>{
         setOptions(prev_value=>({...prev_value,input:value}))
     }

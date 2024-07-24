@@ -11,6 +11,11 @@ const SidebarFile = () => {
     dispatch(InsertGlobalValues({Expand_Navbar:!toggle}))
   }
   return (
+    <aside
+    className={`${
+      toggle ? "md:w-[20%]" : "md:w-[6%]"
+    } max-md:w-[100%]  sticky left-0 transition-all duration-100   top-0 bg-[var(--dark)]  max-md:h-26 md:h-screen`}
+  >
     <div className="w-full h-full sticky p-2 text-white flex flex-col max-md:flex-row justify-between">
       <div className="max-md:w-full">
         <div className="flex gap-x-2  max-md:hidden py-8 items-center justify-center text-xl">
@@ -21,8 +26,9 @@ const SidebarFile = () => {
         </div>
         <SidebarLinks />
       </div>
-      {toggle&&<SidebarAdminProfile />}
+      <SidebarAdminProfile />
     </div>
+    </aside>
   );
 };
 

@@ -2,23 +2,28 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
 let RouteForLabel: { [key: string]: string } = {
-  "/registeration": "Student Registeration",
-  "/registeration/import": "Student Registeration",
-  "/": "Academic Stats",
-  "/students": "Student's Directory",
+  "/students/*/edit": "Student Registeration",
+  "/": "Students Directory",
+  "/students": "Students Directory",
   "/transactions": "Transactions",
   "/transactions/create": "Create transaction",
-  "/students/*/*": "Student Profile",
+  "/transactions/transaction/*": "Invoice details",
+  "/students/*": "Student Profile",
   "/dashboard": "Classes & Teachers",
   "/dashboard/class/*" :" Class Overview",
   "/dashboard/teacher/register":"Member Registeration",
-  "/sessions" :"Yearly session & Fee Configrations",
+  "/sessions" :"Yearly Session",
+  "/sessions/edit/*" :"Update Session",
   "/sessions/registeration" : "Session Registeration",
-  "/dashboard/class/edit/*" : "Edit class details",
+  "/dashboard/class/edit/*" : "Update class details",
   "/dashboard/classes":"Classes",
   "/dashboard/teachers":"Teachers & Staffs",
-  "/payment-settings" : "Payment Configurations"
-
+  "/payment-settings" : "Payment Configurations",
+  "/students/history/*" : "Classes and Fees history",
+  "/settings" : "Personal Information ",
+  "/settings/accounts" : "Accounts Settings ",
+  "/settings/advanced" : "Advanced Settings ",
+  "/stats" : "Acedmic Stats"
 };
 const useHeaderLabel = () => {
   let { pathname } = useLocation();

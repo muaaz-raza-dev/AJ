@@ -6,19 +6,20 @@
 @tailwind utilities;
 
 :root{
-  --primary:#F3F4FF;
+  --dark:#2f1660;
+  --bg-dark:#1b0c39;
   --bg:#F3F4FF;
-  --darker:#3a3374;
-  --secondary:#a098ae;
+  --light:#F3F4FF;
+  --darker:#23104a;
+  --secondary:#F3F4FF;
   --box:#ffffff;
-  --dark:#4D44B5;
   --HeadingFont: "Lexend", sans-serif;;
   --Regular-Font:  "K2D", sans-serif;
     --success: #3ec579;
     --info: #00ADA3;
     --warning: #FCC43E;
     --danger: #fd5353;
-    --dark-dimmer:#4d44b59a;
+    --dark-dimmer:#23104adc;
 }
 @layer base {
   :root {
@@ -113,14 +114,7 @@ backdrop-filter: blur(6px);
  .data-\[state\=checked\]\:text-primary-foreground[data-state=checked] {
   color: black !important;
 }
-@layer base {
-  * {
-    /* @apply border-border; */
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-}
+
 .data-\[state\=checked\]\:bg-primary[data-state=checked] {
   background-color:  var(--dark) !important;
 }
@@ -172,17 +166,6 @@ html::-webkit-scrollbar-track {
 }
 
 
-.ClassBG{
-  background-image: url("/public/images/ClassBg.jpeg") ;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-.TeacherBg{
-  background-image: url("/public/images/Teacher.jpeg") ;
-
-}
-
 .toFront{
   transform: translateZ(0); 
 }
@@ -191,8 +174,8 @@ html::-webkit-scrollbar-track {
 }
 
 .SessionBg{
-  background-image: url("/public/images/sessions.png") ;
-  background-size: cover;
+  background: url("/public/images/Sessions.svg") var(--darker);
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
   
@@ -206,3 +189,9 @@ width: 0.5rem;
 width: 0.5rem;
 
   }
+
+
+  .antd-selectBar .ant-select-selector {
+@apply dark:bg-dark dark:border-darker rounded-md dark:text-white ring-0 border-transparent outline-none dark:placeholder:text-gray-600
+}
+

@@ -8,8 +8,6 @@ const Menubar = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   let section = searchParams.get("section") ||""
   let location =useLocation()
-  console.log(location.pathname);
-  
   useEffect(() => {
     dispatch(RedDashFilters({ fields_name: "Sections", selected: section }));
   }, [section])

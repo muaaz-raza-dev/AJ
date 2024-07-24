@@ -1,8 +1,8 @@
 import { FC } from "react";
-import { FieldValues, UseFormReturn } from "react-hook-form";
+import {  UseFormReturn } from "react-hook-form";
 
 type CustomInputProps = React.InputHTMLAttributes<HTMLInputElement> & {
-formContext:UseFormReturn<FieldValues, any, undefined>,
+formContext:UseFormReturn<any, any, undefined>,
 field_name:string ,
 required?:boolean
 };

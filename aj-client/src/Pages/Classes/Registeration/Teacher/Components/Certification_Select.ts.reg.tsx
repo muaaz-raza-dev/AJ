@@ -12,7 +12,7 @@ const Certification_Select = () => {
     if(!lod.isEqual(options,Options.selected)) { // to keep sync with global state
         setOptions(e=>({...e,selected:options}))
     }
-    }, [options])
+    }, [])
 
     const handleInput = ({target:{value}}:React.ChangeEvent <HTMLInputElement>)=>{
         setOptions(prev_value=>({...prev_value,input:value}))

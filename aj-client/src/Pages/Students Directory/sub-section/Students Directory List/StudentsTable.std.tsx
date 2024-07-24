@@ -11,7 +11,7 @@ const StudentsTable = () => {
   let {isLoading,MutableData,isNotFound}= useAppSelector(state=>state.StudentsDir)
   return (
     <>
-    <Table className="bg-[var(--box)] rounded-lg shadow">
+    <Table className="bg-[var(--box)] dark:bg-dark dark:text-white rounded-lg shadow">
     <StudentsTableHead/>
     <TableBody>
       {MutableData?.map(data=><StudentsTableRow data={data}/>)}

@@ -1,35 +1,32 @@
-import { BsThreeDots } from "react-icons/bs"
-import moment from "moment"
 import { useAppSelector } from "@/app/ReduxHooks"
 
 const StudentsOverViewHeader = () => {
-  let {Student:{DOA,Class,GRNO,FirstName,LastName,photo},Dues} = useAppSelector(s=>s.stdExclusive.overview) //React Context
+  let {Classes,Sections} =useAppSelector(s=>s.global)
+  let {Student:{CurrentClass,CurrentSection,FirstName,LastName,GRNO,photo},Dues} = useAppSelector(s=>s.stdExclusive.overview) //React Context
   return (
-    <div className='flex flex-col rounded-lg overflow-hidden bg-[var(--box)]  items-center justify-center pb-2 gap-y-3'>
-      <div className="w-full h-20 bg-[var(--dark)] flex justify-end ">
-        <button className="hover:bg-[var(--box)] transition-colors center  group w-8 h-9 m-3 rounded-md ">
-      <BsThreeDots className=" text-white group-hover:text-[var(--darker)]" size={24}/>
-        </button>
+    <div className='flex  py-2  from-darker to-darker  bg-gradient-to-r rounded-lg overflow-hidden bg-[var(--box)]  items-center justify-between gap-6 px-4 gap-y-3'>
+      <div className="flex gap-6 items-center">
+      <div className="flex w-20  aspect-square  border rounded-md">
+      <img className='rounded-md' src={photo||"/images/sample.png"} />
       </div>
-      <div className="flex w-24 -mt-14 aspect-square rounded-full bg-[var(--primary)] border-2  p-0.5">
-      <img className='rounded-full border-emerald-600 border' src={photo||"/images/sample.png"} />
+      <div className="flex gap-5 text-3xl text-white">
+      <p className='text-gray-200  text-center  font-bold hFont '>#{GRNO}</p>
+      <h1 className='hFont font-bold '>{FirstName+ ' '+ LastName}</h1>
       </div>
-      <div className="">
-      <h1 className='hFont font-bold text-lg'>{FirstName+ ' '+ LastName}</h1>
-      <p className='text-[var(--dark)] text-center text-sm font-extrabold hFont '>{GRNO}</p>
       </div>
-      <div className="flex gap-x-6 justify-between px-4 py-1 bg-[var(--primary)]  rounded">
+      
+      <div className="flex gap-x-6 justify-between px-4 py-1 text-white  rounded">
       <div className="flex items-center flex-col">
-        <p className="text-xs text-[gray]">Class</p>
-        <b className="font-extrabold">{Class}</b>
+        <p className="text-sm font-medium text-gray-200">Current Class</p>
+        <b className="font-extrabold">{Classes[CurrentClass]}</b>
       </div>
       <div className="flex items-center flex-col">
-        <p className="text-xs text-[gray]">Student For</p>
-        <b className="font-extrabold">{moment(DOA).fromNow()}</b>
+        <p className="text-sm font-medium text-gray-200">Current Section</p>
+        <b className="font-extrabold">{Sections?.[CurrentClass]?.[CurrentSection]}</b>
       </div>
       <div className="flex items-center flex-col">
-        <p className="text-xs text-[gray]">Dues</p>
-        <b className="font-extrabold text-red-800">{Dues}</b>
+        <p className="text-sm font-medium text-red-200">Dues</p>
+        <b className="font-extrabold">{Dues} PkR</b>
       </div>
       </div>
     </div>

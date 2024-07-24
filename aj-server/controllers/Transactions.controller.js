@@ -2,7 +2,6 @@ const moment = require("moment");
 const Students = require("../models/Students");
 const Classes = require("../models/Class");
 const TransactionsScema = require("../models/Transactions");
-// const Students_Finance = require("../models/Students_Finance");
 const CalculateMonthlyFeeRespectToDues = require("./utils/CalculateMonthlyFeeRespectToDues");
 const Respond = require("../Helpers/ResponseHandler");
 const PaymentConfig = require("../models/SchoolPayments");
@@ -153,6 +152,7 @@ async function SetTransactionConfig(req, res) {
 
 async function getDetailedTransactions(req, res) {
   let { id } = req.params;
+  if (!id||id.length!=24) return res.status(404).json({ message: "Invalid ID" });
   let Transaction = await TransactionsScema.findById(id)
     .populate({ path: "Student", select: "FirstName LastName GRNO" })
     .populate({ path: "RecievedBy", select: "Name" })

@@ -4,15 +4,16 @@ const Teacher = require("../models/Teacher");
 const User = require("../models/User");
 const Session = require("../models/Session");
 
-const CreateMemberAccount = async (Credentials, Teacher_Id) => {
+const CreateMemberAccount = async (Credentials, StaffId) => {
   let { username, password, Role } = Credentials;
   bcryptjs.hash(password, 8, function (err, hash) {
     if (!err) {
-      User.create({ username, password: hash, Role, Teacher_Id });
+      User.create({ username, password: hash, Role, StaffId });
       return true;
     } else false;
   });
 };
+
 const RegsiterMember = async (req, res) => {
   const { payload } = req.body;
   if (payload?.firstName) {
@@ -39,49 +40,45 @@ const RegsiterMember = async (req, res) => {
   }
 };
 
-const updateMember_credentials = async (payload,Teacher_Id) =>{
+const updateMember_credentials = async (payload,StaffId) =>{
 const Payload = payload 
 delete Payload.username 
+
 try {
-  let MemberAccount = User.findOne({Teacher_Id:Id})
-  let password = bcryptjs.compare(password,MemberAccount.password)
-  if(! Payload.password || password) {  User.findOneAndUpdate({Teacher_Id:Teacher_Id },Payload)
+  let MemberAccount =await User.findOne({StaffId})
+  let password =await bcryptjs.compare(Payload.password,MemberAccount.password)
+  console.log(password,Payload);
+if(!Payload.password||password) { await User.findOneAndUpdate({StaffId},Payload)
     return true
 }
 else {
-  bcryptjs.hash(password, 8, function (err, hash) {
-    return  User.findOneAndUpdate({Teacher_Id:Teacher_Id },{...Payload,password:hash})
+  bcryptjs.hash(Payload.password, 8, async function (err, hash) {
+    if(!err){
+      return await  User.findOneAndUpdate({StaffId},{...Payload,password:hash})
+    }
+    else Respond({ res, message: "Error while updating . Try again later", success: false, status:501 });
   })
   return true
 }
 } catch (error) {
-  return false
   console.log(error);
+  return false
 }
 }
+
 const EditMember_Admin = async (req,res)=>{
   let { payload ,Id } = req.body;
-  let MemberAccount = User.findOne({Teacher_Id:Id})
-  if (MemberAccount) {
-    let Credentials = {...payload.account_Details ,email:payload.email , Name:payload.firstName};
-    let Payload = payload;
-    delete Payload.account_Details;
-    let account_details = updateMember_credentials(Credentials,Id)
-    
-    if(account_details) {
-      let teacher =  Teacher.findByIdAndUpdate(Id, payload, { new: true } )
-      if (teacher) {
-        Respond({ res, message: "Error while updating", success: false,  });
-      } else {
-        Respond({ res, message: "Teacher updated successfully", success: true });
-      }
-    }
-    else {
-      Respond({ res, message: "Something went wrong,try again later!", success: false });
-    }
+  let teacher = await  Teacher.findById(Id)
+  if (!teacher) {
+    Respond({ res, message: "Teacher not found", success: false, status:404 });
   } else {
-    Respond({ res, message: "Required Payload", success: false });
-  }
+    await Teacher.findByIdAndUpdate(Id, payload, { new: true } )
+    let Credentials = {...payload.account_Details ,email:payload.email , Name:payload.firstName};
+    let Payload = JSON.parse(JSON.stringify(payload));
+    delete Payload.account_Details;
+    await updateMember_credentials(Credentials,Id)
+    Respond({ res, message: "Credentials updated successfully", success: true,  });
+    }
 }
 
 
@@ -166,9 +163,21 @@ const FetchRequiredInformation_Class = async(req,res)=>{
 
 const FetchTeacherRaw = async (req,res)=>{
   let { id } = req.params;
-  let teacher = await Teacher.findById(id).select("-__v -createdAt -updatedAt");
+  if(!id||id.length!=24) return res.status(404).json({message:"Invlaid Id"})
+    let teacher = await Teacher.findById(id).select("-__v -createdAt -updatedAt ");
+if(!teacher) return res.status(404).json({message:"Teacher not found"})
   let user = await User.findOne({Teacher_Id:id}).select("-password -__v -createdAt -updatedAt")
   Respond({ res, message: "All teachers", payload:{...teacher._doc,account_Details:user}, success: true });
+}
+
+const FetchStaffRaw = async (req,res)=>{
+  let { id } = req.params;
+  if(!id||id.length!=24) return res.status(404).json({message:"Invlaid Id"})
+  let account = await User.findById(id)
+  if(!account) return res.status(404).json({message:"Invalid Credentials"})
+  let teacher = await Teacher.findById(account.StaffId).select("-__v -createdAt -updatedAt -salary -schedule -courses -qualification");
+if(!teacher) return res.status(404).json({message:"Teacher not found"})
+  Respond({ res,  payload:teacher, success: true });
 }
 
 const ReadTeachers_Filtered = async(req,res) =>{
@@ -211,14 +220,48 @@ let Teachers=  await Teacher.aggregate([
 
 }
 
+const EditMember_Personal_Photo = async(req,res)=>{
+  let {photo} = req.body
+  try {
+    let user = await  User.findByIdAndUpdate(req.AdminId,{photo},{new: true} )
+    if(user.Role!="cheif admin"){
+      await  Teacher.findByIdAndUpdate(user.StaffId,{photo},{new: true} )
+    }
+    Respond({ res, message: "Photo updated successfully", success: true,  });
+  } 
+  catch (error) {
+    console.log(error);
+    Respond({ res, message: "Error while updating . Try again later", success: false, status:501 });
+  }
+}
+
+const UpdateInfo_Personal = async(req,res)=>{ 
+  let { payload } = req.body;
+    try {
+      let user = await  User.findById(req.AdminId)
+      console.log(user,payload);
+      if(user.Role!="cheif admin"){
+        await  Teacher.findByIdAndUpdate(user.StaffId,payload,{new: true} )
+      }
+      Respond({ res, message: "Credentials updated successfully", success: true,  });
+    } 
+    catch (error) {
+      console.log(error);
+      Respond({ res, message: "Error while updating . Try again later", success: false, status:501 });
+    }
+}
+
 module.exports = {
+  UpdateInfo_Personal,
   RegsiterMember,
   FetchTeacherRaw,
   EditMember_Admin,
   ValidateUserName,
+  EditMember_Personal_Photo,
   ReadTeachers_short,
   ReadTeachers_detailed,
   ReadTeachers_Filtered,
   FetchRequiredInformation_Class,
-  EditMember_Admin
+  EditMember_Admin ,
+  FetchStaffRaw
 };

@@ -1,20 +1,20 @@
-import {  helix ,ring } from 'ldrs'
+import {momentum ,ring } from 'ldrs'
 import { useEffect } from 'react';
 
 const AppLoader = () => {
 useEffect(() => {
-    helix.register()
+    momentum.register()
     }
 , []);
     
     // Default values shown
     return (
-        <div className="w-screen h-screen z-10 fixed top-0 bg-gradient-to-tl center  to-[var(--darker)] from-[var(--darker)] center overflow-hidden">
-        <l-helix
+        <div className="w-screen h-screen z-10 fixed top-0 bg-dark_dimmer center  center overflow-hidden">
+        <l-momentum
         size="200"
         speed="1" 
-        color="white" 
-        ></l-helix>
+        color="black" 
+        ></l-momentum>
         </div>
     )
 

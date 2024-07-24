@@ -9,6 +9,9 @@ const {
   FetchRequiredInformation_Class,
   EditMember_Admin,
   FetchTeacherRaw,
+  FetchStaffRaw,
+  EditMember_Personal_Photo,
+  UpdateInfo_Personal
 } = require("../controllers/Teacher.controller");
 const {
   ClassRegisteration,
@@ -28,6 +31,9 @@ router.get("/teacher/:id", Authenticate, ReadTeachers_detailed);
 router.post("/validate/username", Authenticate, ValidateUserName);
 router.put("/teacher/edit",Authenticate,EditMember_Admin)
 router.get("/teacher/raw/:id",Authenticate,FetchTeacherRaw)
+router.get("/staff/raw/:id",Authenticate,FetchStaffRaw)
+router.put("/reset/photo/",Authenticate,EditMember_Personal_Photo)
+router.put("/update/mutableInfo/personal",Authenticate,UpdateInfo_Personal)
 
 //?Classes
 router.get("/class/required", Authenticate, FetchRequiredInformation_Class);

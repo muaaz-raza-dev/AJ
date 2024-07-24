@@ -15,7 +15,8 @@ const RegPersonalDetailsForm = () => {
           control={control}
           render={({ field ,fieldState:{error} }) => (
             <>
-            <Input {...field} placeholder="Osman" className="active:border-[var(--dark)]" />
+            <Input {...field} placeholder="Osman" className="active:border-[var(--dark)] dark:bg-dark dark:border-darker
+             dark:text-white  dark:placeholder:text-gray-600" />
             {
               error && <p className="text-red-500 text-xs">{error.message}</p>
             }
@@ -29,7 +30,7 @@ const RegPersonalDetailsForm = () => {
           control={control}
           render={({ field  }) => (
            <>
-            <Input {...field} placeholder="Yousuf" className="active:border-[var(--dark)]" />
+            <Input {...field} placeholder="Yousuf" className="active:border-[var(--dark)] dark:bg-dark dark:border-darker dark:text-white dark:placeholder:text-gray-600"  />
            </>
           )}
         />
@@ -41,7 +42,7 @@ const RegPersonalDetailsForm = () => {
           control={control}
           render={({ field,fieldState:{error} }) => (
             <>
-            <Input {...field} placeholder="Yousuf" className="active:border-[var(--dark)]" />
+            <Input {...field} placeholder="Yousuf" className="active:border-[var(--dark)] dark:bg-dark dark:border-darker dark:text-white "  />
             { error && <p className="text-red-500 text-xs">{error.message}</p>}
             </>
           )}
@@ -54,7 +55,7 @@ const RegPersonalDetailsForm = () => {
           control={control}
           render={({ field,fieldState:{error} }) => (
         <>
-            <Input {...field} className="active:border-[var(--dark)]" type="date" />
+            <Input {...field} className="active:border-[var(--dark)] dark:bg-dark dark:border-darker dark:text-white dark:placeholder:text-gray-600"  type="date" />
 {            error && <p className="text-red-500 text-xs">{error.message}</p>}
         </>
           )}
@@ -62,8 +63,9 @@ const RegPersonalDetailsForm = () => {
 
       </RegLabelWrapper>
       <RegLabelWrapper className="w-[48%]" title="Gender">
-        <Select
+        <Select className=" antd-selectBar rounded-md dark:!bg-dark dark:!border-darker dark:!text-white dark:placeholder:text-gray-600"
           defaultValue={"male"}
+          
           onChange={(value) => setValue("Gender", value)}
         >
           <Select.Option value="male">Male</Select.Option>
@@ -79,7 +81,7 @@ const RegPersonalDetailsForm = () => {
             <Input
               {...field}
               placeholder="osman@gmail.com"
-              className="active:border-[var(--dark)]"
+              className="active:border-[var(--dark)] dark:bg-dark dark:border-darker dark:text-white dark:placeholder:text-gray-600" 
          
             />
           )}
@@ -93,7 +95,7 @@ const RegPersonalDetailsForm = () => {
             <Input
               {...field}
               placeholder="XXXXX-XXXXXXX-X"
-              className="active:border-[var(--dark)] px-2"
+              className="active:border-[var(--dark)] px-2 dark:bg-dark dark:border-darker dark:text-white dark:placeholder:text-gray-600"
               
             />
           )}
@@ -107,7 +109,7 @@ const RegPersonalDetailsForm = () => {
             <Input
               {...field}
               placeholder="XXXXX-XXXXXXX-X"
-              className="active:border-[var(--dark)] px-2"
+              className="active:border-[var(--dark)] px-2 dark:bg-dark dark:border-darker dark:text-white dark:placeholder:text-gray-600"
               
             />
           )}
@@ -121,7 +123,7 @@ const RegPersonalDetailsForm = () => {
             <Input
               {...field}
               placeholder="XXXXX-XXXXXXX-X"
-              className="active:border-[var(--dark)] px-2"
+              className="active:border-[var(--dark)] px-2 dark:bg-dark dark:border-darker dark:text-white dark:placeholder:text-gray-600"
               
             />
           )}
@@ -137,7 +139,7 @@ const RegPersonalDetailsForm = () => {
             render={({ field,fieldState:{error} }) => (
            
            
-              <Input {...field} placeholder="32348290342" className={`w-[49%] active:border-[var(--dark)] ${error&&"border border-red-500"}`} type="number" prefix={<BiPhone/>} />
+              <Input {...field} placeholder="32348290342" className={`w-[49%] active:border-[var(--dark)] dark:bg-dark dark:border-darker dark:text-white dark:placeholder:text-gray-600 ${error&&"border border-red-500"}`} type="number" prefix={<BiPhone/>} />
              
             )}
           />
@@ -145,7 +147,7 @@ const RegPersonalDetailsForm = () => {
             name="contact.1"
             control={control}
             render={({ field }) => (
-              <Input {...field} placeholder="032348290342" className="w-[49%] active:border-[var(--dark)]" type="number" prefix={<BiPhone/>} />
+              <Input {...field} placeholder="032348290342" className="w-[49%] active:border-[var(--dark)] dark:bg-dark dark:border-darker dark:text-white dark:placeholder:text-gray-600" type="number" prefix={<BiPhone/>} />
             )}
           />
         </div>
@@ -159,7 +161,7 @@ const RegPersonalDetailsForm = () => {
               {...field}
               type="number"
               placeholder="+92234234234234"
-              className="active:border-[var(--dark)] px-2"
+              className="active:border-[var(--dark)] px-2 dark:bg-dark dark:border-darker dark:text-white dark:placeholder:text-gray-600"
               prefix={<BsWhatsapp/>}
             />
           )}
@@ -177,9 +179,10 @@ const RegPersonalDetailsForm = () => {
           rows={1}
           maxLength={200}
           placeholder="Lorem ipsum dolo,"
-          className="!resize-none"
+        
+          className="!resize-none dark:bg-dark dark:border-darker dark:text-white dark:placeholder:text-gray-600"
         />
-          <p className="text-xs self-end text-[var(--secondary)]">{field.value.length}/200</p>
+          <p className="text-xs self-end text-[var(--secondary)] dark:text-white">{field?.value?.length}/200</p>
           </>
       )}
     />

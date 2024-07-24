@@ -25,7 +25,7 @@ let Photo = watch("photo")
   }, [Photo])
   return (
     <section className="w-[16%] flex flex-col gap-y-2 px-1">
-      <h1 className="DarkText hFont font-bold">Photo*</h1>
+      <h1 className="DarkText dark:text-white hFont font-bold">Photo*</h1>
       <div
         {...getRootProps({
           className:

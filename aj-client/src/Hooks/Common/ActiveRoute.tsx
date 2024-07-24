@@ -8,24 +8,27 @@ const useActiveRoute = () => {
   }, [pathname]);
   const ValidateRoute = ({
     toCompare,
+    index,
     classesToApply,
     exact=true
   }: {
     toCompare: string;
+    index?:boolean;
     classesToApply: string;
   exact?:boolean    
   }) => {
     let Route = pathname;
+    let ifIndex = (Route == "/" || Route=="")? index ? classesToApply:"" : ""
+    
     if (toCompare.includes("/")) {
       if (exact===false) {
-        return Route.includes(toCompare) ? classesToApply : "";
+        return Route.includes(toCompare) ? classesToApply : ifIndex;
       }
       else{
-        return Route == toCompare ? classesToApply : "";
+        return Route == toCompare ? classesToApply : ifIndex;
       }
     } else {
-
-      Route.split("/").some((elm) => toCompare == elm) ? classesToApply : "";
+        Route.split("/").some((elm) => toCompare == elm) ? classesToApply :  ifIndex;
     }
   };
 

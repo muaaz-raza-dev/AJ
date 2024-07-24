@@ -1,13 +1,13 @@
 export const schoolRoles: string[] = [
     "Teacher",
-    "Principal",
     "Vice Principal",
+    "Administrator" , 
     "School Nurse" ,
+
 ];
 export const Account_Roles : string[] = [
     "admin",
-    "teacher",
-    "student"
+    "user",
 ]
 export const commonSubjects: string[] = [
     "Mathematics",

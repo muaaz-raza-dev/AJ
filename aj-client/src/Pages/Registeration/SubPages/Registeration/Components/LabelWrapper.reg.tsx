@@ -9,7 +9,7 @@ interface ILabelWrapper extends Ichildren{
 const RegLabelWrapper:FC<ILabelWrapper> = ({children,className,title}) => {
   return (
     <div className={`flex flex-col gap-y-2 ${className}`}>
-      <h1 className="DarkText hFont font-bold">{title} *</h1>
+      <h1 className="DarkText dark:text-white hFont font-bold">{title} *</h1>
       {children}
     </div>
   )

@@ -4,8 +4,7 @@ import { Route, Routes } from 'react-router-dom'
 const AuthLayout = () => {
   return (
  <Routes>
-<Route path='/auth' index element={<LoginFile/>}/>
-<Route path='*' element={<LoginFile/>}/>
+<Route path='*' index element={<LoginFile/>}/>
  </Routes>
   )
 }

@@ -9,16 +9,23 @@ import useTeacherRegsiter, { useEditTeacher } from "@/Hooks/Teacher&Class/useTea
 import { FC } from "react"
 import { useReadTeacherRawDetails } from "@/Hooks/Teacher&Class/useReadTeachers"
 import { Fetching_Request } from "@/Global/Loaders/AppLoader"
+import ErrorPage from "@/Global/Loaders/ErrorPage"
+import StudentDetailedSkeletonLoader from "@/Pages/Students Directory/sub-section/Student Detailed/StudentDetailedSkeletonLoader"
+import NotFoundValidator from "@/Api/404Validator"
 
 const TeacherRegistrationForm:FC<{edit?:boolean}> = ({edit}) => {
   let form  = useForm<Iteacher>({defaultValues:default_teacherReg})
   let {mutate,isLoading} =useTeacherRegsiter(form.reset)
-  let {isLoading:isFetching}=useReadTeacherRawDetails(form.reset) //to fill the editable data
+  let {isLoading:isFetching,isError,error}=useReadTeacherRawDetails(form.reset) //to fill the editable data
   let {mutate:editMutatate, isLoading:loading} = useEditTeacher()
   let formSubmit  :SubmitHandler<Iteacher> = (data) =>{
     if(edit) editMutatate(data)
     else mutate(data)
   }
+if(edit){
+  if(isError&&NotFoundValidator(error))return <ErrorPage title="Teacher not found" message="The teacher you're looking for is not exist . It may be due to typos in the teacher's id" navigate="/dashboard"/>
+  if(isFetching) return <StudentDetailedSkeletonLoader/>
+}
   return (
 <FormProvider {...form}>
 {edit&&isFetching&&<Fetching_Request/>}

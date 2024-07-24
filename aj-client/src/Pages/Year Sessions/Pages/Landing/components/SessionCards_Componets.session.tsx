@@ -5,12 +5,12 @@ const SessionCards_Componets = () => {
   let sessions  = useAppSelector(s=>s.sessions.payload.Sessions.Filtered)
   return (
     <main className="flex gap-3  w-full flex-col min-h-[70vh] overflow-y-auto">
-      <h1 className='font-bold text-gray-800 text-2xl'>Yearly Sessions</h1>
     <div className="flex gap-4  w-full flex-wrap ">
+      
       {
         sessions.length === 0 &&(
           <div className="flex justify-center items-center w-[100%] h-[100%] bg-[var(--bg)]">
-            <h1 className="text-2xl text-center text-gray-500 font-black">No Sessions Found</h1>
+            <h1 className="text-2xl text-center text-gray-500 font-black">No Sessions Registered</h1>
           </div>
         )
       }

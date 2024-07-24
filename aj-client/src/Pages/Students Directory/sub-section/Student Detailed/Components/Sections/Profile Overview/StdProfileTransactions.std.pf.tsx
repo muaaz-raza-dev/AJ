@@ -2,13 +2,14 @@ import { FC } from "react"
 import { IShortTransactions } from "@/app/Types/ItransactionsRead"
 import { useAppSelector } from "@/app/ReduxHooks"
 import { ChevronRight } from "lucide-react"
+import { Link } from "react-router-dom"
 
 const StdProfileTransactions = () => {
   let {Transactions}=useAppSelector(s=>s.stdExclusive.overview)
   return (
-    <div className="bg-[var(--box)] rounded-lg py-4 flex flex-col gap-y-3">
-    <h1 className="text-xl text-[var(--darker)] font-bold hFont px-4">Payment History</h1>
-        <div className="flex flex-col gap-4 px-4">
+    <div className="bg-[var(--box)] dark:bg-darker dark:text-white rounded-lg py-4 flex flex-col gap-y-3">
+    <h1 className="text-xl text-[var(--darker)] font-bold hFont px-4 dark:text-white">Recent Transactions</h1>
+        <div className="flex flex-wrap gap-1 px-4">
           {
             Transactions.length==0?
             <p className="text-center bg-transparent">No transactions yet</p>
@@ -22,19 +23,16 @@ const StdProfileTransactions = () => {
 
 const StdProfileEachTransaction:FC<{data:IShortTransactions&{Transaction?:{[key:string]:any}[]}}>= ({data})=>{
   return(
-    <div className=" flex gap-x-4 justify-between hover:scale-105 transition-transform  items-center hFont shadow-inner h-12  rounded-md text-[0.8rem]   pr-4">
-          <div className="flex gap-x-4 h-full items-center">
-            <div className="bg-[var(--dark)] w-2 h-12 rounded-l-md"></div>
-            {/* <div className="rounded-full center w-8 h-8 text-white items-center aspect-square bg-orange-600 ">
-            </div> */}
-            <span className="hFont text-black "># <b className=" ">000{data.Invoice}</b></span>
-            {data?.Transaction?.map(e=><b>{e?.purpose}</b>)}
+    <div className=" flex gap-x-4 justify-between hover:shadow-sm transition-shadow  w-[48%] bg-light dark:bg-dark  items-center hFont  h-12  rounded-md text-[0.8rem]   px-4">
+          <div className="flex gap-x-4 h-full items-center ">
+            <span className="hFont text-black dark:text-white"># <b className=" ">000{data.Invoice}</b></span>
+            {data?.Transactions?.map(e=><b className="bg-dark px-3 rounded-md text-white">{e.paymentTitle}</b>)}
           </div>
           <div className="flex items-center ">
-            <div className="flex gap-x-4">
-            <b className="hFont   text-green-600 ">{data.totalAmount} pkr</b>
+            <div className="flex gap-x-4 items-center">
+            <b className="hFont text-sm  ">{data?.amount?.totalAmount} pkr</b>
+            <Link to={`/transactions/transaction/${data._id}`} className=" text-sm   rounded-md bg-dark text-white"><ChevronRight size={18}/></Link>
             </div>
-            <button className=" text-sm  text-black rounded-md "><ChevronRight/></button>
           </div>
         </div>
         

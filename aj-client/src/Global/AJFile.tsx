@@ -6,18 +6,12 @@ import useAuthenticate from "@/Hooks/Auth/useAuthenticate"
 
 const AJFile = () => {
   const {isLogined,isLoading} = useAppSelector(state=>state.credits)
+  const {DarkMode} =useAppSelector(s=>s.global)
   useAuthenticate()
   return (
-    <>
-    {
-      isLogined?
-      <MainLayout/>:
-      <AuthLayout/>
-    }
-{
-  isLoading&&<AppLoader/>
-}
-    </>
+    <main className={`${DarkMode&&"dark"} transition-colors`}>
+    { isLoading ? <AppLoader/> : ( isLogined ? <MainLayout/> : <AuthLayout/>) }
+    </main>
   )
 }
 

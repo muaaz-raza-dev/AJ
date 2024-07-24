@@ -1,7 +1,6 @@
 import StudentMeta from "@/Api/Student exclusive/StudentMeta.api";
 import { useAppDispatch } from "@/app/ReduxHooks";
 import {
-  RedInsertFeeExclusive,
   RedInsertStudentOverview,
 } from "@/app/Slices/StdExclusiveSlice";
 import { useQuery } from "react-query";
@@ -23,7 +22,6 @@ const useFetchStudentMeta = () => {
           isFetched: true,
         })
       );
-      dispatch(RedInsertFeeExclusive({ Filters: { FeeTypes:payload.FeeTypes,Years:payload.Years },AppliedFilters:{FeeType:payload.FeeTypes[0]} }));
     },
     onError({
       response: {

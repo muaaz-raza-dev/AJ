@@ -6,13 +6,19 @@ const { AnalyzePaymentHistory } = require("./utils/history/AnalyzePaymentHistory
 const { CalculateFrequentDues, CalculateOneTimeDues } = require("./utils/Transaction/CalculateFeeDues.utils")
 
 const InitialHistoryData=async(req,res)=>{ //? Intial data = FIlters + small data
-    let {id}=req.params
+let {id}=req.params
+try {
+    if(id.length!=24) return res.status(404).json({message:"Student Not Found"})
     let studentInformation = await Students.findById(id).select("FirstName LastName DOA GRNO ConsiderOneTimeFee") 
     if(!studentInformation) return res.status(404).json({message:"Student Not Found"})
-    let ClassHistory = await CalculateClassHistory(id)
+        let ClassHistory = await CalculateClassHistory(id)
     let { Dues ,Paid } = await CalculateTotalPaymentHistory(id)
     let filters = await AnalyzeFilters(id,studentInformation)
     Respond({res,payload:{ClassHistory,studentInformation,Dues ,Paid,filters}})
+} 
+catch(err){
+    res.status(404).json({message:"Student Not Found"})
+}
 }
 const GetDuesHistory = async(req,res)=>{
 let {studentId} =req.body 

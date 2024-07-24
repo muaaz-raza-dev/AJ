@@ -86,7 +86,9 @@ Respond({res,payload})
 
 const FetchConfigDetails = async(req,res)=>{
 let {id} =req.params
+if(!id||id.length!=24) return res.status(404).json({message:"Invalid Id"})
 let Config  =await PaymentConfig.findById(id).populate({path:"classes.classId",select:"name _id"})
+ if(!Config) return res.status(404).json({message:"Config Not Found"})  // Check if Config exists
 let payload = JSON.parse(JSON.stringify(Config))
 payload.classes = payload.classes.map(e=>({classId:e.classId._id,label:e.classId.name,value:e.classId._id,amount:e.amount})) 
 Respond({res,payload})   

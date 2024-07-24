@@ -8,7 +8,7 @@ const { default: mongoose } = require("mongoose");
 const CalculateFeeDues = async (studentInfo) => {
 let FrequentDues  = await CalculateFrequentDues(studentInfo)  
 let OneTimeDues = await CalculateOneTimeDues(studentInfo)
-let Dues = FrequentDues.concat(OneTimeDues)
+let Dues = FrequentDues.concat(OneTimeDues||[])
 let FeeInfo = await AnalyzeFeeInfo(Dues,studentInfo)
 return {Dues,FeeInfo}
 };
@@ -148,7 +148,8 @@ async function AnalyzeFeeInfo(Dues,studentInfo){
   let FeeInfo = {Purposes:[],Dates:{},Sessions:{},Amounts:{}} // Purposes : {feeFrequecy,label:feeTilte,value:_id} , Dates : {} ,Sessions:{label:sessionName ,value:_id} , Amount:{}
   let IdConfig ={}
   dues.forEach(due=>{
-    let id = due._id  //! id is combined to reduce the risk of amount
+    let id = due?._id  //! id is combined to reduce the risk of amount
+    if(!id) return FeeInfo
     if(!FeeInfo.Amounts[id]) FeeInfo.Amounts[id] = due.amount
     if(!IdConfig[id]){
        IdConfig[id] ={id}

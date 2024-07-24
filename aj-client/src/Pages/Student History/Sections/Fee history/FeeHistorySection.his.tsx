@@ -21,9 +21,9 @@ const FeeHistorySection = () => {
   }
 
   return (
-    <section className="w-full bg-[var(--box)] flex flex-col rounded-md shadow gap-3 p-3 ">
+    <section className="w-full bg-[var(--box)] dark:bg-dark  flex flex-col rounded-md shadow gap-3 p-3 ">
         <div className="flex justify-between">
-    <h1 className="hFont text-3xl font-bold ">{dataType=="Dues"?  "All Dues details" : `${feeType} Fee History `} </h1> 
+    <h1 className="hFont dark:text-white text-3xl font-bold ">{dataType=="Dues"?  "All Dues details" : `${feeType} Fee History `} </h1> 
         </div>
         {dataType=="All" ? 
         <FeeHistoryComponents/> :

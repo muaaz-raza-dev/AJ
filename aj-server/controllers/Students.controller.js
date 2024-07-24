@@ -67,7 +67,7 @@ async function FilterStudents(req, res) {
   try {
       let Inputs = [];
       let ClassCondition = {}
-      if (Filters.Class && Filters.Class != "All"){ClassCondition.Class =Filters.Class};
+      if (Filters.Class && Filters.Class != "All"){ClassCondition.CurrentClass =Filters.Class};
       if (Filters.Covid) Inputs.push({CovidVaccine : Filters.Covid});
       if (Filters.Polio) Inputs.push({PolioPermission : Filters.Polio});
       let FinalQuery={...ClassCondition}
@@ -78,7 +78,7 @@ async function FilterStudents(req, res) {
       .limit(Limit)
       .skip((count == 0 ? count : count - 1) * Limit)
       .select(
-        "LastName FirstName fatherName DOA Section GRNO RollNo contact Class WA email"
+        "LastName FirstName fatherName DOA CurrentSection GRNO RollNo contact CurrentClass WA email"
       );
     let totalStudents = await Students.find(FinalQuery).countDocuments();
     res.json({ success: true, payload: students, totalStudents, count });

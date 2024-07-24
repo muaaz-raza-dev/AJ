@@ -3,7 +3,7 @@ import SearchBarFilter from "./SearchBarFilter.std"
 
 const StudentsFilterHeader = () => {
   return (
-    <div className="  py-4 px-4 justify-between bg-[var(--box)] shadow w-full gap-x-1 rounded-md flex">
+    <div className="  py-4 px-4 justify-between dark:bg-darker bg-[var(--box)] shadow w-full gap-x-1 rounded-md flex">
       <SearchBarFilter        />
       <StudentAdvancedFilters />
     </div>

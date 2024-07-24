@@ -26,7 +26,7 @@ const StudentCheckBoxFilters = () => {
   return (
     <div className="relative " >
 <Badge color="#4D44B5"  dot={Filters.Polio||Filters.Covid} >
-    <button onClick={()=>setToggleSelect(!ToggleSelect)}  className='cursor-pointer font-medium   gap-x-2 justify-center   bg-[var(--dark)] text-white flex    p-2 px-4 rounded-md items-center'>
+    <button onClick={()=>setToggleSelect(!ToggleSelect)}  className='cursor-pointer font-medium   gap-x-2 justify-center   bg-light text-dark dark:text-light dark:bg-dark flex    p-2 px-4 rounded-md items-center'>
         <FaFilter/>
         <p>
         Advanced Options

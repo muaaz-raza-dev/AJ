@@ -8,13 +8,14 @@ import useFetchConfigs from "@/Hooks/School Payment/useFetchConfigs"
 
 const Landing_Payment_SettingsPage = () => {
   useFetchSessions_pay_mod(handleFilters)
+
   let dispatch = useAppDispatch() 
   let {mutate} =useFetchConfigs()
 
   function handleFilters (payload:any){
-    dispatch(RedLPFilters({label:"sessions",selected:payload.Sessions[0].value,
+    dispatch(RedLPFilters({label:"sessions",selected:payload.Sessions[payload.Sessions.length-1].value,
     available:payload.Sessions.map((e:any)=>({label:e.label,value:e.value})),isLoading:true}))
-    mutate({session:payload.Sessions[0].value,feeTypes:"Other"})
+    mutate({session:payload.Sessions[payload.Sessions.length-1].value,feeTypes:"Other"})
   }
   return (
     <section className="w-full flex flex-col gap-4">

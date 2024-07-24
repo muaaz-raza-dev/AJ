@@ -1,39 +1,19 @@
+import { useAppSelector } from "@/app/ReduxHooks"
 import { Link } from "react-router-dom"
 
-const FeeConfigCTACard = () => {
-  return (
-<div className=" flex gap-6   bg-[var(--box)] shadow text-darker rounded-lg  p-4  justify-center items-start">
-    <div className="w-[80%]">
-  <h2 className="text-xl font-bold ">Configure Payment Setting </h2>
-  <p className="text-sm ">Ensure to setup payment settings before collecting payments.</p>
-    </div>
-    <div className="flex flex-col gap-2 self-end">
-    <Link to={"/payments/config/setup"} className="text-sm items-center px-2 py-1 bg-[var(--bg)] rounded-md text-dark  font-bold shadow-sm hover:bg-gray-100">
-    Visiualize
-  </Link>
-  <Link to={"/payments/config/setup"} className="text-sm items-center px-2 bg-dark py-1 rounded-md text-white font-bold shadow-sm ">
-    Configure 
-  </Link>
-    </div>
-  
-</div>
-
-
-  )
-}
-
 export const SessionConfigCTACard = () => {
+  let {Sessions}=useAppSelector(s=>s.global)
+  if(Object.keys(Sessions).length==0){
     return (
-  <div className=" flex gap-6   bg-darker shadow text-white rounded-lg  p-4  justify-center items-start ">
+      <div className=" flex flex-col items-center gap-2  w-full from-darker to-dark bg-gradient-to-tl shadow text-white rounded-lg  p-4  justify-center  ">
       <div className="">
-    <h2 className="text-xl font-bold ">Start new session</h2>
-    <p className="text-xs ">End up current session and start new session.</p>
+    <h2 className="text-3xl hFont font-bold ">Register Yearly Session</h2>
+    <p className="text-sm text-center ">Setup the first session to get started.</p>
       </div>
-    <Link  to={"registeration"}  className="inline-flex self-end items-center px-2 bg-white rounded-md text-darker font-bold shadow-sm hover:bg-gray-100">
-      Setup
+    <Link  to={"registeration"}  className="inline-flex  items-center px-12 py-2 bg-white rounded-md text-darker font-bold shadow-sm hover:bg-gray-100">
+      Setup 
     </Link>
   </div>
     )
   }
-
-export default FeeConfigCTACard
+  }

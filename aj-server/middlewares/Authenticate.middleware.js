@@ -9,7 +9,7 @@ let JWT_Secret = process.env.jwt_Secret
     }
     else{
      let credentials =jwt.verify(member, JWT_Secret)
-        let verifiedMember = await User.findById(credentials.userId)
+        let verifiedMember = await User.findById(credentials.userId).select("-isBlocked -LastLogin ")
         if (!verifiedMember) {
             res.json({success:false,msg:'Try with valid credentials'})
         } 

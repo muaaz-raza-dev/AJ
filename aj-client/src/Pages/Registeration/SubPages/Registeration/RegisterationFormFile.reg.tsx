@@ -19,12 +19,11 @@ const RegisterationFormFile:FC<{edit?:boolean}> = ({edit}) => {
   let FormHandler:SubmitHandler<IRegisterFormState> = ()=>{
     if (!edit) {
       ImageUpload(mutate,form,setLoading)
-
     }
     else {ImageUpload(Edit,form,setLoading)}
   }
   return (
-    <section className="flex flex-col gap-y-8 ">
+    <section className="flex flex-col gap-y-8 dark:bg-transparent rounded-md">
     <FormProvider {...form}>
     <form onSubmit={form.handleSubmit(FormHandler)} className="flex flex-col gap-y-8 ">
     <StudentsDetailsForm/>

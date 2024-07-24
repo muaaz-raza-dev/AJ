@@ -56,8 +56,9 @@ const CustomSelectComponent:FC<{state:string,label:string,disabled?:boolean,setS
  = ({state,setState,data,rawData,label,disabled})=>{
     return  (<>
     <Select value={state} onValueChange={setState} disabled={disabled}>
-    <SelectTrigger className="min-w-[120px] max-w-max   rounded-lg text-dark border-dark border-2 bg-transparent font-bold  relative h-full focus:ring-0" >
-  <p className="absolute -top-0.5 text-[0.67rem] text-gray-500 1  font-bold">{label}</p>
+    <SelectTrigger className=" min-w-[120px] max-w-max   rounded-lg text-dark   border-dark dark:text-white border-2 bg-transparent 
+    font-bold  relative h-full focus:ring-0" >
+  <p className="absolute -top-0.5 text-[0.67rem] text-gray-400   font-bold ">{label}</p>
       <SelectValue   />
     </SelectTrigger>
     <SelectContent>

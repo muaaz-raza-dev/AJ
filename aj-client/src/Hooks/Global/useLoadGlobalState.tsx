@@ -5,7 +5,7 @@ import { useQuery } from "react-query"
 const useLoadGlobalState = () => {
     let dispatch =useAppDispatch()
 const global = useQuery({
-    queryKey:"Global State", queryFn:ReadGlobal , refetchOnWindowFocus:false, staleTime:1000*60*60 ,onSuccess(data) {
+    queryKey:"Global State", queryFn:ReadGlobal , refetchOnWindowFocus:false, staleTime:1000*60*5 ,onSuccess(data) {
 dispatch(InsertGlobalValues({Classes:data.Classes,Sections:data.Sections,Sessions:data.Sessions,GlobalFees:data.GlobalFees}))
     },}) 
     return global

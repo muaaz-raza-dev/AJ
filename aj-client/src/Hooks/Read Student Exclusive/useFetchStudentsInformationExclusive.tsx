@@ -14,6 +14,8 @@ const useFetchStudentInformationExclusive = () => {
     queryKey: ["Student's Information", GRNO],
     queryFn: () => StudentsInformation(GRNO ?? 0),
     staleTime: 1e3 * 60 * 10,
+    refetchOnMount:true,
+    
     refetchOnWindowFocus: false,
     onSuccess({ payload }) {
       dispatch(
@@ -22,6 +24,7 @@ const useFetchStudentInformationExclusive = () => {
         })
       );
     },
+    
   });
 };
 export const useEditStudentInformationExclusive = () => {

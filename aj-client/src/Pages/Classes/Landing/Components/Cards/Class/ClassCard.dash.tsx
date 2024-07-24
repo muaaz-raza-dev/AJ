@@ -7,10 +7,10 @@ import { Link } from "react-router-dom";
 const ClassCard:FC<{data:Iclass}> = ({data}) => {
   return (
     <div className="rounded overflow-hidden bg-[var(--box)] shadow flex flex-col w-[30%] h-max pb-2 ">
-      <Link to={`class/${data._id}`} className="h-[5rem] cursor-pointer w-full ClassBG relative">
+      <Link to={`class/${data._id}`} className="min-h-[2rem] cursor-pointer w-full relative">
       <div className="absolute bg-[var(--success)] top-2 hFont p-1 text-xs rounded-md font-bold left-2">{data.Session?.acedmic_year}</div>
-        <div className="bg-dark hover:bg-opacity-60 transition-all rounded-md h-full w-full center  bg-clip-padding backdrop-filter backdrop-blur-xs bg-opacity-80 ">
-          <h1 className="text-4xl font-bold hFont">{data.name}</h1>
+        <div className="bg-gradient-to-tl to-dark_dimmer from-dark center">
+          <h1 className="text-4xl font-bold hFont p-3">{data.name}</h1>
         </div>
       </Link>
 

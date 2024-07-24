@@ -7,10 +7,8 @@ import { Link } from "react-router-dom";
 const TeacherCard:FC<{data:Iteacher}> = ({data}) => {
   return (
     <section className="rounded overflow-hidden shadow flex flex-col w-[40%]  h-max">
-      <header className="h-[5rem] w-full ClassBG TeacherBg">
-        <div className="bg-dark hover:bg-opacity-60 transition-colors rounded-md h-full w-full center  bg-clip-padding backdrop-filter backdrop-blur-xs bg-opacity-10"></div>
-      </header>
-      <main className="bg-[var(--box)] rounded-md -mt-2 p-2 flex flex-col gap-1">
+
+      <main className="bg-[var(--box)] rounded-md -mt-2 p-2 py-4 flex flex-col gap-1">
         <BasicDetails data = {data}/>
     
         <div className="flex justify-between mt-1">

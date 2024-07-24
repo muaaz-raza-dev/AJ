@@ -6,7 +6,7 @@ import { useMutation, useQuery } from "react-query";
 const useReadClasses = () => {
     let dispatch = useAppDispatch();
     return useQuery({
-      queryKey: ["Read", "Teacher"],
+      queryKey: ["Read", "Classes"],
       queryFn: ReadClasses_short,
       staleTime: 1000 * 60 * 10,
       refetchOnWindowFocus: false,

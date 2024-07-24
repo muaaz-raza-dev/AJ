@@ -10,7 +10,7 @@ const MonthlyFeeHistoryComp = () => {
   let Classes = useAppSelector(s=>s.global.Classes)
   useEffect(() => { setstate(lod.groupBy(FeeHistory,(({year})=>year)))}, [FeeHistory])
   return (
-    <div className="flex gap-2 w-full  items-start flex-col bg-[var(--box)]">
+    <div className="flex gap-2 w-full  items-start flex-col bg-[var(--box)] dark:bg-dark">
       {
         Object.entries(state).map(([year,doc])=>{
           return( <>
@@ -42,8 +42,6 @@ useEffect(() => {
   if(status == "Advanced paid") setAssets({title:"Paid in advanced . ", className:"bg-[var(--info)] text-black"})
 }, [status])
 
-console.log();
-
 return <Tooltip title={assets.title}>
 <div className={` px-3 ${assets.className} cursor-pointer center text-sm font-semibold  rounded-full `}>
     <p>{status}</p>
@@ -55,18 +53,18 @@ const EachMonthlyFeeHistoryComp:FC<{data:IfeeHistory}> = ({data}) =>{
       let handleClick = ()=>{
         if(data.transactionId && data.status =="Paid") {navigate(`/transactions/transaction/${data.transactionId}`)}
       }
-    return <div onClick={handleClick} className="w-[24%] h-28 p-2 bg-[var(--primary)]  shadow text-dark  rounded-md flex flex-col gap-1">
+    return <div onClick={handleClick} className="w-[24%] h-28 p-2 bg-[var(--primary)]  shadow text-dark dark:text-light dark:bg-darker  rounded-md flex flex-col gap-1">
       <div className="flex gap-2 justify-between py-1">
     <h1 className="text-xl hFont font-semibold">{data.month}</h1>
     <PaymentStatusComp status={data.status}/>
     </div>
     <div className="flex gap-2">
-                <p className="text-base text-gray-600 font-semibold">Fee Title : </p>
-                <p className="text-base font-semibold text-black"> {data.feeTitle}</p>
+                <p className="text-base text-gray-500 font-semibold">Fee Title : </p>
+                <p className="text-base font-semibold text-black dark:text-white"> {data.feeTitle}</p>
                 </div>
                 <div className="flex gap-2">
-                <p className="text-base text-gray-600 font-semibold">Amount : </p>
-                <p className="text-base font-semibold text-black "> {data.amount} PKR</p>
+                <p className="text-base text-gray-500 font-semibold">Amount : </p>
+                <p className="text-base font-semibold text-black dark:text-white "> {data.amount} PKR</p>
                 </div>
     </div>
 }

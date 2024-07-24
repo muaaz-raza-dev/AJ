@@ -7,6 +7,9 @@ import useRegisterPaymentsConfigs, { useEditPaymentsConfigs } from "@/Hooks/Scho
 import { FC } from "react"
 import { useFetchConfigDetailed } from "@/Hooks/School Payment/useFetchConfigs"
 import { Fetching_Request } from "@/Global/Loaders/AppLoader"
+import ErrorPage from "@/Global/Loaders/ErrorPage"
+import StudentDetailedSkeletonLoader from "@/Pages/Students Directory/sub-section/Student Detailed/StudentDetailedSkeletonLoader"
+import NotFoundValidator from "@/Api/404Validator"
 
 const ConfigForm:FC<{edit?:boolean}> = ({edit}) => {
     let form  = useForm<IpaymentRegisterationState>({defaultValues:defaultPaymentRegisterationConfig})
@@ -28,6 +31,16 @@ const ConfigForm:FC<{edit?:boolean}> = ({edit}) => {
       if(!edit) mutate(data.payload)
       else Emutate(data.payload)
     }
+
+
+
+
+
+
+if(edit&&fetching){
+  if( fetching.isError&&NotFoundValidator(fetching.error))return <ErrorPage title="Invalid Payment Config Id" message="The config you're looking for is not exist" navigate="/students"/>
+  if(fetching.isLoading) return <StudentDetailedSkeletonLoader/>
+}
   return (
     <FormProvider {...form}>
     <form onSubmit={form.handleSubmit(formSubmit)} className="flex w-full gap-2">

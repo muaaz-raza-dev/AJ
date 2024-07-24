@@ -2,6 +2,7 @@ import { useAppDispatch } from "@/app/ReduxHooks";
 import {  useQuery } from "react-query";
 import Authenticate from "@/Api/Auth/Authenticate.api";
 import { CreditsInsertion } from "@/app/Slices/CredentialSlice";
+import SetThemeToStorage from "../Theme/SetThemeToStorage";
 const useAuthenticate = () => {
   let dispatch = useAppDispatch();
   let LoginRequest = useQuery({
@@ -9,13 +10,14 @@ const useAuthenticate = () => {
     queryFn:Authenticate,
     staleTime:Infinity,
     refetchOnWindowFocus:false,
-  onSuccess(data) {
+onSuccess(data) {
 dispatch(CreditsInsertion({isLoading:false,isLogined:true,Info:data.payload}))
-  },
+SetThemeToStorage()
+},
   onError() {
 dispatch(CreditsInsertion({isLoading:false}))
   },
-    });
+  });
   return LoginRequest
 };
 
