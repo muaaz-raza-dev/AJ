@@ -18,7 +18,7 @@ const Session_Selection = () => {
       <CustomSelect_Reg
       optimumData={Object.entries(Sessions).map(e=>({label:e[1],value:e[0]}))}
         nosearch
-        placeholder="Session"
+        placeholder="Pick a Session"
         setState={setState}
         state={session_value}
       />

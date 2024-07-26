@@ -1,8 +1,9 @@
 import { useAppSelector } from "@/app/ReduxHooks"
 import { useToggleTheme } from "@/Hooks/Theme/SetThemeToStorage"
 import { Popover, PopoverContent, PopoverTrigger } from "@/shdcn/components/ui/popover"
+import { Moon } from "lucide-react"
 import { useState } from "react"
-import { MdDarkMode, MdLightMode } from "react-icons/md"
+import {  MdLightMode } from "react-icons/md"
   
 
 const ThemeToggle = () => {
@@ -17,7 +18,7 @@ const ThemeToggle = () => {
     <div className="rounded-md p-2 hover:bg-dark hover:!text-white text-dark bg-white dark:bg-dark dark:text-white transition-colors">
 
   {
-      DarkMode ? <MdDarkMode  size={22}  className="dark:text-white " /> : <MdLightMode size={22} className="dark:text-white " /> 
+      DarkMode ? <Moon   size={20}  className="dark:text-white " /> : <MdLightMode size={22} className="dark:text-white " /> 
     }
     </div>
 

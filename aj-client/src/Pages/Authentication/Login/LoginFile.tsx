@@ -3,7 +3,7 @@ import LoginForm from "./LoginForm";
 import "@/Style/LoginBGAnimation.css"
 export default function LoginFile() {
   return (
-      <div className="w-screen backdrop-blur-md h-screen bg-gradient-to-tl center  to-[var(--dark)] from-[var(--secondary)]">
+      <div className="w-screen backdrop-blur-md h-screen bg-gradient-to-tl center  to-[var(--dark)] from-darker">
         <div className="lg:w-[70%] max-lg:w-[80%] max-md:w-[90%] max-sm:w-[95%] gap-y-8   flex flex-col items-center p-12 rounded-md">
           <motion.div
             animate={{ scale: 1 }}
@@ -26,6 +26,10 @@ export default function LoginFile() {
         {/* Animation */}
         <div className="area">
 			<ul className="circles">
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
 				<li></li>
 				<li></li>
 				<li></li>

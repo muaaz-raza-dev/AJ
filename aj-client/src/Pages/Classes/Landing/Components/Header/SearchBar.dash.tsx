@@ -33,8 +33,8 @@ dispatch (RedDashSearchClassFilter({input:value}))
   }
   return (
     <>
-    <div className="relative w-full flex justify-between items-center rounded-lg border-2 bg-[var(--box)] border-dark overflow-hidden">
-    <Input onChange={handleSearch} className="bg-transparent h-full focus:ring-0 focus-visible:ring-0 outline-0" placeholder="Search for Class & Teacher"/>
+    <div className="relative w-full flex justify-between items-center rounded-lg border-2 bg-[var(--box)] dark:bg-dark focus-visible:ring-offset-transparent focus:ring-offset-transparent ring-offset-transparent dark:text-white border-dark overflow-hidden">
+    <Input onChange={handleSearch} className="bg-transparent focus:ring-0 border-none outline-none focus-visible:ring-0 h-full " placeholder="Search for Class & Teacher"/>
     <div className="flex items-center justify-center w-[10%]">
       {loading&&<RequestLoading dark size='18' stroke='2'/>}
     </div>

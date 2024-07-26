@@ -9,7 +9,7 @@ const CustomAmountSelection:FC<{fieldName:string}> = ({fieldName}) => {
   return (
     <>
     <input type="number" placeholder="Amount" className='
-    border rounded-md  w-full px-2 py-1.5  border-[#8080806b] focus:border-dark  transition-all outline-none 
+    border rounded-md  w-full px-2 py-1.5  border-[#8080806b] dark:border-dark focus:border-dark  transition-all outline-none dark:bg-dark dark:text-white dark:placeholder:text-gray-500 
     ' value={amount||""} disabled={paymentType!="Custom"} onChange={(e)=> {
         if(paymentType=="Custom") {
           setValue(`${fieldName}.amount.realAmount`,+e.target.value) 
@@ -42,7 +42,7 @@ export const TotalAmountSelection:FC<{fieldName:string}> = ({fieldName}) => {
 return (
   <>
  <h1 className=' 
-   border rounded-md  w-full px-2 py-1.5  border-[#8080806b] focus:border-dark  transition-all outline-none '
+   border rounded-md  w-full px-2 py-1.5  dark:border-dark border-[#8080806b] focus:border-dark  transition-all outline-none dark:bg-dark dark:text-white dark:placeholder:text-gray-500 '
    >{amounts.totalAmount}
    </h1>
 </>

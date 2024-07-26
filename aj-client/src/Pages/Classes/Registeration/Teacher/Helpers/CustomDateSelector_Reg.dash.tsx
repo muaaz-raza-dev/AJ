@@ -16,7 +16,7 @@ const CustomDateSelector_Reg:React.FC<{className?:string;required?:boolean,formV
     
   return (
     <Popover>
-      <PopoverTrigger asChild>
+      <PopoverTrigger className="dark:bg-darker dark:border-darker dark:text-white" asChild>
         <Button
           variant={"outline"}
           className={cn(

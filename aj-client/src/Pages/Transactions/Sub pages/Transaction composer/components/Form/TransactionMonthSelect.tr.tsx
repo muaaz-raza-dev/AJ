@@ -23,8 +23,8 @@ const TransactionMonthSelect:FC<{fieldName:string}> = ({fieldName}) => {
         if(feeFrequency =="Monthly"||feeFrequency =="Custom" ){
             return (
                 <>
-            <CustomSelect_Reg nosearch setState={handleYearSelection} state={year} data={Object.keys(Dates[paymentConfigId]||{})} />
-            <CustomSelect_Reg nosearch setState={handleMonthSelection} state={month} data={Dates[paymentConfigId][year]||[]} />
+            <CustomSelect_Reg className="antd-selectBarDark" nosearch setState={handleYearSelection} state={year} data={Object.keys(Dates[paymentConfigId]||{})} />
+            <CustomSelect_Reg className="antd-selectBarDark" nosearch setState={handleMonthSelection} state={month} data={Dates[paymentConfigId][year]||[]} />
             </>
         )
     }
@@ -35,7 +35,7 @@ const TransactionMonthSelect:FC<{fieldName:string}> = ({fieldName}) => {
         }
 
         return (
-            <CustomSelect_Reg nosearch  setState={handleSessionIdSelection} state={sessionId||""}
+            <CustomSelect_Reg nosearch className="antd-selectBarDark"  setState={handleSessionIdSelection} state={sessionId||""}
              optimumData={Object.entries(Sessions).map(e=>({label:e[1],value:e[0]}))} />
         )
     }

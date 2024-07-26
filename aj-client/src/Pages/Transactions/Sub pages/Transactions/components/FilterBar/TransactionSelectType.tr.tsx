@@ -28,8 +28,8 @@ const TransactionSelectType = () => {
     <Skeleton count={1}  className="w-full py-3"/>
     </div>:
     <Select value={transactionType} onValueChange={(val)=>dispatch(RedTransactionsFilters({transactionType:val}))}>
-      <SelectTrigger className="w-[180px] rounded-lg border-2 border-dark relative h-full focus:ring-0">
-    <p className='text-xs text-dark font-bold absolute top-0'>Fee Types</p>
+      <SelectTrigger className="w-[180px] rounded-lg dark:bg-darker dark:text-white border-2 border-dark relative h-full focus:ring-0">
+    <p className='text-xs text-dark dark:text-gray-500 font-bold absolute top-0'>Fee Types</p>
         <SelectValue  />
       </SelectTrigger>
       <SelectContent>

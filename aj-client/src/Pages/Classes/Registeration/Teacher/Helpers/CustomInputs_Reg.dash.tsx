@@ -16,7 +16,7 @@ const CustomInputs_Reg:FC<CustomInputProps> = ({ formContext,field_name,required
     <input
     {...formContext.register(field_name,required?{required:"This field is required"}:{})}
     {...props}
-    className=" border rounded-md  w-full p-2  border-[#8080806b] focus:border-dark  transition-all outline-none "
+    className=" dark:bg-darker dark:border-darker dark:text-white border rounded-md  w-full p-2  border-[#8080806b] focus:border-dark  transition-all outline-none "
     />
   )
 }
@@ -26,7 +26,7 @@ export const CustomTextArea_Reg:FC<CustomTextAreaProps> = ({formContext,field_na
     <textarea
     {...formContext.register(field_name,required?{required:"This field is required"}:{})}
     {...props}
-    className=" border rounded-md  w-[95%] p-2  border-[#8080806b] focus:border-dark  transition-all outline-none "
+    className=" border rounded-md  w-[95%] p-2 dark:bg-darker dark:border-darker dark:text-white  border-[#8080806b] focus:border-dark  transition-all outline-none "
     />
   )
 }

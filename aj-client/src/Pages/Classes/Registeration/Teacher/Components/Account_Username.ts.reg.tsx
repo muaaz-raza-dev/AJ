@@ -38,14 +38,15 @@ const Account_Username:FC<{edit?:boolean}> = ({edit}) => {
         
     }
   return (
-    <div className="flex items-center box-border gap-1 border border-[#8080806b] rounded-md  w-full">
+    <div className="flex items-center box-border gap-1 border border-[#8080806b] dark:border-darker rounded-md  w-full">
      <input
     onChange={({target:{value}})=>debounced(value)}
-    className="  p-2 w-[85%]  outline-none "
+    className="  p-2 w-[85%]  outline-none dark:bg-darker dark:text-white dark:border-darker"
     {...(edit?{value:username}:{})}
     id="username" 
+    placeholder="Username"
     disabled={edit?true:false}/>
-    <div className="flex w-[15%] items-center justify-end px-6">
+    <div className="flex w-[15%]  items-center justify-end px-6">
     <ValidationComp />
     </div>
     </div>

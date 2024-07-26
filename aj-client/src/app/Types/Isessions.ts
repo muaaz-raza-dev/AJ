@@ -4,6 +4,7 @@ export interface Isessions {
 isActive:boolean;  // Assuming "Active" is the default status
 end_date:string;
 start_date:string;
+_id?:string;
 acedmic_year:string;
 session_name:string;
 session_description:string;

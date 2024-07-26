@@ -6,7 +6,7 @@ import { Link } from "react-router-dom"
 const TableRowTrDetails:FC<{data:ItransactionField_Detailed}> = ({data}) => {
 
   return (
-    <TableRow className="w-full hover:bg-gray-200 font-medium ">
+    <TableRow className="w-full dark:hover:bg-dark hover:bg-gray-200 font-medium ">
     <TableCell className="w-[14.28%]">{data.paymentType}</TableCell>
     <TableCell className="w-[14.28%]">
       <Link to={data.paymentTitle=="Registered"?`/payment-settings`:""}>

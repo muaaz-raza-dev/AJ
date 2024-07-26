@@ -31,15 +31,15 @@ const Certification_Select = () => {
         <section className="w-full flex gap-2 flex-col">
         <div className="flex gap-x-2 w-[50%]">
         <input value={Options.input} type="text" placeholder="Iot & Robotics" id="Certifications"  
-    className=" border rounded-md  w-[95%] p-2  border-[#8080806b] focus:border-dark  transition-all outline-none "
+    className=" border rounded-md  w-[95%] p-2  border-[#8080806b] focus:border-dark dark:bg-darker dark:border-darker dark:text-white  transition-all outline-none "
     onChange={handleInput}
     />
-    <Button disabled={!Options.input} type="button" onClick={handleOptions} className="bg-dark text-white border border-dark hover:text-dark">Add</Button>
+    <Button disabled={!Options.input} type="button" onClick={handleOptions} className=" h-full bg-darker text-white border border-dark hover:text-dark">Add</Button>
         </div>
         <div className=" w-full rounded flex gap-2 ">
              {
                 options.map((e,id)=>{
-                    return <div className="border-2 rounded-md border-dark text-dark w-max px-3 py-1 flex gap-2">
+                    return <div className="border-2 rounded-md dark:text-white  border-darker text-dark w-max px-3 py-1 flex gap-2">
                 <p>
                 {e}
                 </p>

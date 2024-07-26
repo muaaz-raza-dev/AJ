@@ -33,10 +33,13 @@ async function CreateTransaction(req, res) {
     }
     const newTransaction = new TransactionsScema(Payload);
     const savedTransaction = await newTransaction.save();
-    res.json(savedTransaction);
+    let transaction = await TransactionsScema.findById(savedTransaction._id)
+    .populate({ path: "Student", select: "FirstName LastName GRNO" })
+    .populate({ path: "RecievedBy", select: "Name" })
+    Respond({res,payload:transaction,success:true})
   } catch (error) {
     console.log(error);
-    res.status(400).json({ message: error.message });
+    res.status(400).json({ message: error.message ,success:false});
   }
 }
 

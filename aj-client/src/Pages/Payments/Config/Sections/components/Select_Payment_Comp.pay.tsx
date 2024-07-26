@@ -12,7 +12,7 @@ const Select_Payment_Comp:FC<{fieldName:string;placeholder?:string;onChange?:(va
     let form= useFormContext()
   return (
     <Select value={form.watch(fieldName)} onValueChange={(val)=>{form.setValue(fieldName,val) ; onChange&&onChange(val) }}>
-      <SelectTrigger className="w-full ring-offset-0 rounded-md ring-0 focus:ring-0 focus:border-dark outline-none border-gray-300 border">
+      <SelectTrigger className="w-full ring-offset-0 rounded-md ring-0 dark:bg-darker dark:border-darker focus:ring-0 focus:border-dark outline-none border-gray-300 border">
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
       <SelectContent>

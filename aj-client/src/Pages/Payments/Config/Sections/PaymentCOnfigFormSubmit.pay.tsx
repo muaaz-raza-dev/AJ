@@ -16,11 +16,10 @@ const PaymentConfigFormSubmit :FC<{loading:boolean,edit?:boolean}> = ({loading,e
         UpdateState(Payload)
     }
   }, [isLoading])
-  // console.log(changes);
   
   
   return (
-    <Button type="submit" disabled={loading||(edit?!changes:false)} className="text-white my-4 bg-dark w-full transition-colors hFont hover:bg-darker">
+    <Button type="submit" disabled={loading||(edit?!changes:false)} className="text-white my-4 bg-darker border-darker  border-2 w-full transition-colors hFont hover:bg-dark">
             {loading ?<RequestLoading size="18" /> : edit?"Update":"Register"}
   </Button>
   )

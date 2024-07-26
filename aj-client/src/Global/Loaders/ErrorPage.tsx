@@ -12,7 +12,7 @@ const ErrorPage = ({navigate,message ,title}:{navigate?:string,message?:string;t
             404
           </div>
       
-          <div className="font-bold text-4xl md:text-6xl text-center">
+          <div className="font-bold text-4xl md:text-6xl text-center dark:text-white">
             {title || "Page not found"}
           </div>
 

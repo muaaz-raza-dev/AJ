@@ -13,7 +13,7 @@ const TeacherCardsSection = () => {
        data.map((val)=>{
         
 return <div className="w-full  flex flex-col gap-2">
-            <h1 className="hFont font-bold text-xl">{capitalizeFirstLetter(val.acedmic_role+"s")}</h1>
+            <h1 className="hFont font-bold text-xl dark:text-white">{capitalizeFirstLetter(val.acedmic_role+"s")}</h1>
             <div className="flex gap-4  w-full flex-wrap ">
             {
               !isLoading ?

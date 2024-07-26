@@ -45,7 +45,6 @@ const Payment_Dates_Yearly = () => {
     let onChangedueDate = (val:string)=>{
         let selectedDate  = moment(val)
         let session_end_date  = moment(selectedSession?.end_date)
-        console.log(selectedSession);
         
         if(session_end_date.isAfter(selectedDate)){
         setValue("payload.dueDate",moment(val).toISOString()) 
@@ -67,7 +66,7 @@ const Payment_Dates_Yearly = () => {
 
     }
     return (
-        <div className="w-full flex flex-col  gap-2 bg-[var(--box)] p-4">
+        <div className="w-full flex flex-col  gap-2 bg-[var(--box)] dark:bg-dark rounded-md p-4">
 <LabelWrapper
   className="w-full"
   labelClassName="text-base font-semibold "
@@ -75,7 +74,7 @@ const Payment_Dates_Yearly = () => {
 >
 <div className="flex gap-2 w-full">
     <CustomDateSelector_Reg required className='w-[83%]'  formValue={paymentDate} label='Pick the date of when payment is started'  onChange={onChangePaymentDate}/>
-    <Button type='button' onClick={()=>Reset("paymentDate")} className='bg-[var(--primary)] w-[15%] text-dark'>Reset</Button>
+    <Button type='button' onClick={()=>Reset("paymentDate")} className='bg-light dark:bg-darker text-dark w-[15%] dark:text-white '>Reset</Button>
     </div>
     {Error.isError&&Error.type=="start" && <p className='text-red-600 text-sm font-medium'>{Error.error}</p>}
   </LabelWrapper>
@@ -86,7 +85,7 @@ const Payment_Dates_Yearly = () => {
 >
     <div className="flex gap-2 w-full">
 <CustomDateSelector_Reg className='w-[83%]'  formValue={dueDate} label='Pick the date of when payment is ended'  onChange={onChangedueDate}/>
-<Button type='button' onClick={()=>Reset("dueDate")}  className='bg-[var(--primary)] w-[15%] text-dark'>Reset</Button>
+<Button type='button' onClick={()=>Reset("dueDate")}  className='bg-light dark:bg-darker text-dark w-[15%] dark:text-white '>Reset</Button>
     </div>
     {Error.isError&&Error.type=="end" && <p className='text-red-600 text-sm font-medium'>{Error.error}</p>}
 </LabelWrapper>
@@ -136,7 +135,7 @@ const Payment_Dates_Monthly = () => {
     }, [Start ,session ,End,lod.isEqual(paymentMonths,payload)])
 
   return (
-    <div className="w-full flex gap-2 bg-[var(--box)] p-4">
+    <div className="w-full flex gap-2 bg-[var(--box)] dark:bg-dark rounded-md p-4">
 <LabelWrapper
   className="w-1/2"
   labelClassName="text-sm font-semibold "

@@ -1,21 +1,22 @@
 import { Isessions } from "@/app/Types/Isessions"
-import { CalendarCheck, Shapes } from "lucide-react"
+import { ArrowUpRight, CalendarCheck, Shapes } from "lucide-react"
 import moment from "moment"
 import { FC } from "react"
+import { Link } from "react-router-dom"
 
 const SessionCard:FC<{data:Isessions}> = ({data}) => {
   return (
-    <section className="rounded overflow-hidden shadow flex gap-3 bg-[var(--box)] w-[40%]  h-max ">
+    <section className="rounded overflow-hidden shadow flex dark:bg-dark dark:text-white gap-1 bg-[var(--box)] w-[40%]  h-max ">
       <header className=" w-[35%] SessionBg ">
         <div className="bg-[black] relative">
           {data.isActive?
-        <div className="absolute bg-[var(--success)] top-2 hFont p-1 text-xs rounded-md font-medium left-2">Fresh</div> :
-        <div className="absolute bg-[var(--warning)] top-2 hFont p-1 text-xs rounded-md font-medium left-2">Past</div> 
+        <div className="absolute bg-[var(--success)] text-black top-2 hFont p-1 text-xs rounded-md font-medium left-2">Fresh</div> :
+        <div className="absolute bg-[var(--warning)] text-black top-2 hFont p-1 text-xs rounded-md font-medium left-2">Past</div> 
       }
         </div>
       </header>
 
-      <main className="bg-[var(--box)] w-[75%] rounded-md -mt-2 p-2 flex flex-col gap-2 py-2 pt-4">
+      <main className="bg-[var(--box)] dark:bg-dark dark:text-white w-[75%] rounded-md -mt-2 p-1 flex flex-col gap-2 py-2 pt-4">
 
         <div className="flex justify-between mt-1 w-full flex-col ">
           <div className="flex gap-2 flex-col">
@@ -25,14 +26,14 @@ const SessionCard:FC<{data:Isessions}> = ({data}) => {
             </div>
 <div className="flex gap-1 items-center">
 
-      <div className="bg-gray-200 px-2 rounded text-sm w-max flex items-center gap-1">
+      <div className="bg-gray-200 dark:bg-dark_dimmer  px-2 rounded text-sm w-max flex items-center gap-1">
         <CalendarCheck size={14}/>Starts
         <b>
           {moment(data.start_date).format("MMMM Y")}
         </b>
          </div>
          {data.end_date&&
-         <div className="bg-gray-200 px-2 rounded text-sm w-max flex items-center gap-1">
+         <div className="bg-gray-200 dark:bg-dark_dimmer  px-2 rounded text-sm w-max flex items-center gap-1">
         <CalendarCheck size={14}/>Ends
         <b>
         {moment(data.end_date).format("MMMM Y")}
@@ -42,13 +43,13 @@ const SessionCard:FC<{data:Isessions}> = ({data}) => {
 </div>
 
 <div className="flex gap-1 items-center">
-      <div className="bg-gray-200  px-2 rounded text-sm w-max flex items-center gap-1">
+      <div className="bg-gray-200 dark:bg-dark_dimmer   px-2 rounded text-sm w-max flex items-center gap-1">
       <Shapes size={14} />
         <b>
           {data.Classes.length} classes
         </b>
          </div>
-         <div className="bg-gray-200  px-2 rounded text-sm w-max flex items-center gap-1">
+         <div className="bg-gray-200 dark:bg-dark_dimmer   px-2 rounded text-sm w-max flex items-center gap-1">
       <Shapes size={14} />
         <b>
           42 sections
@@ -60,9 +61,10 @@ const SessionCard:FC<{data:Isessions}> = ({data}) => {
 </div>
         </div>
           <div className="flex gap-2 justify-end">
-          <button className="font-bold text-sm text-dark  py-1 rounded-md bg-[var(--primary)]    border-[var(--dark)] border px-5 transition-colors flex gap-1 items-center">
-            Edit Details
-          </button>
+          <Link to={`edit/${data?._id}`} className="font-bold text-sm text-dark dark:!text-white dark:!bg-darker  py-2 rounded-md bg-light   
+          border-[var(--dark)] border px-5 transition-colors  flex gap-1 items-center">
+            Edit Details <ArrowUpRight size={18}/>
+          </Link>
           </div>
       </main>
     </section>

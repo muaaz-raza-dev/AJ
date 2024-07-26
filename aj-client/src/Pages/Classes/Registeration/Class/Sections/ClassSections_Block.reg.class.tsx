@@ -28,7 +28,6 @@ const ClassSections_Block: FC<{ index: number }> = ({ index }) => {       //? in
       <LabelWrapper required label="Capacity of students">
         <CustomInputs_Reg
           formContext={form}
-          type="number"
           placeholder="120"
           required
           id="Capacity of students"

@@ -32,7 +32,7 @@ function TransactionPurposeSectionFooter() {
         <Button
           type="button"
           onClick={handlePuropseAddition}
-          className="border-[var(--dark)] border text-[var(--dark)] hover:bg-[var(-dark)] active:scale-95 transition-transform hover:text-[var(--dark)]"
+          className="border-[var(--dark)] border text-[var(--dark)] dark:text-white hover:bg-[var(-dark)] active:scale-95 transition-transform hover:text-[var(--dark)] dark:bg-dark"
         >
           Add purpose
         </Button>
@@ -63,7 +63,7 @@ function TransactionComposeAdditionalInputs() {
       <RegLabelWrapper title="Amount Paid" className="w-[33%]">
       <Controller control={control} rules={{ required:"The payment amount is required",min:{value:totalAmount-1 ,message:"Can't be less than total Amount"}}} name='PaidAmount'
      render={({field,fieldState:{error}})=>
-{return(<> <Input placeholder="4000" {...field} type="number" />
+{return(<> <Input placeholder="4000" {...field} className="dark:bg-darker dark:text-white dark:placeholder:text-gray-500 dark:border-dark" type="number" />
  {error && <p className="text-red-500 text-xs">{error.message}</p>}</>)
  }}/>
       </RegLabelWrapper>
@@ -71,7 +71,7 @@ function TransactionComposeAdditionalInputs() {
 return (
   <>
   <RegLabelWrapper title="Note (not required)" className="w-[65%]">
-        <Input placeholder="All dues are clear now! " {...field}/>
+        <Input placeholder="All dues are clear now! " {...field} className="dark:bg-darker dark:text-white dark:placeholder:text-gray-500 dark:border-dark"/>
       </RegLabelWrapper>
       {error && <p className="text-red-500 text-xs">{error.message}</p>}
       </>
@@ -86,31 +86,31 @@ const TransactionPurposeSection = () => {
   
   return (
     <div className=" py-2 flex flex-col gap-y-3">
-      <Table>
+      <Table className="dark:text-white">
         <TableHeader>
-          <TableRow className="">
-            <TableHead className="text-[var(--dark)] hFont">Custom </TableHead>
-            <TableHead className="text-[var(--dark)] hFont">Purpose</TableHead>
-            <TableHead className="text-[var(--dark)] hFont">
+          <TableRow className="dark:hover:bg-transparent dark:border-dark ">
+            <TableHead className="text-[var(--dark)] dark:text-white hFont">Custom </TableHead>
+            <TableHead className="text-[var(--dark)] dark:text-white hFont">Purpose</TableHead>
+            <TableHead className="text-[var(--dark)] dark:text-white hFont">
               Fee period / Session
             </TableHead>
-            <TableHead className="text-[var(--dark)] hFont w-[10%]">
+            <TableHead className="text-[var(--dark)] dark:text-white hFont w-[10%]">
                Amount
             </TableHead>
             <TableHead
-              className="text-[var(--dark)] hFont w-[20%]
+              className="text-[var(--dark)] dark:text-white hFont w-[20%]
             "
             >
               Discount
             </TableHead>
             <TableHead
-              className="text-[var(--dark)] hFont w-[15%]
+              className="text-[var(--dark)] dark:text-white hFont w-[15%]
             "
             >
               Total Amount
             </TableHead>
             <TableHead
-              className="text-[var(--dark)] hFont w-[5%]
+              className="text-[var(--dark)] dark:text-white hFont w-[5%]
             "
             >
             </TableHead>

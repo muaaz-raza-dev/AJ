@@ -26,7 +26,7 @@ const Schedule_details_Reg: FC<{ index: number }> = ({ index:index_section }) =>
   }, [subjects]);
   
   return (
-    <LabelWrapper label="Subject Teaching Details" className="w-full" labelClassName="text-darker  rounded p-2 !text-xl !font-bold">
+    <LabelWrapper label="Subject Teaching Details" className="w-full" labelClassName="text-darker  rounded p-2 !text-xl !font-bold dark:bg-darker">
       {subjects.map((subject: string, index: number) => (
         <EachSubjectTeacher_Comp
           key={index}

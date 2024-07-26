@@ -6,7 +6,7 @@ import { useAppSelector } from "@/app/ReduxHooks";
 import SubSidebarLinks_Shrinked from "./SubSidebarLinks";
 import { MdCurrencyExchange, MdOutlinePayments } from "react-icons/md";
 import { FaUsersLine } from "react-icons/fa6";
-import RoleBasedAccess from "../Middleware/RoleBasedAccess";
+import RoleBasedAccess from "../Middleware Hooks/RoleBasedAccess";
 
 const SidebarLinks = () => {
   let { ValidateRoute } = useActiveRoute();

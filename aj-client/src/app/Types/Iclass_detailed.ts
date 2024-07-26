@@ -17,7 +17,7 @@ interface Iclass_section extends defaultId{
     Class: string ; //Object Id
     ClassTeacher?: Iteacher;//Object Id
     Students: Array<string >;  //Object Id
-    capacity: number;
+    capacity: number|string;
     Subjects_teachers:Iclass_section_teachers[];
     start_date : string;
     end_date?:string ;

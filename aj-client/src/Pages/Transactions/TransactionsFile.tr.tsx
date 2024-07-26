@@ -6,7 +6,7 @@ const TransactionsFile = () => {
   return (
     <>
     <Routes>
-      <Route element={<TransactionPage/>} index /> 
+      <Route index element={<TransactionPage/>}  /> 
       <Route element={<TransactionComposePage/>} path="/create"/> 
       <Route element={<TransactionDetailsPage/>} path="/transaction/:id"/> 
     </Routes>

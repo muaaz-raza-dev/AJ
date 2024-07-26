@@ -3,7 +3,7 @@ import Navigationbar from "./components/nav/navigationbar.set"
 import AccountsSectionForm from "./components/Account/AccountsSectionForm.set"
 import ProfileSettingForm from "./components/Profile/ProfileSettingForm.set"
 import UsersPage from "./components/Users/UsersPage.set"
-import RoleBasedAccess from "@/Global/Middleware/RoleBasedAccess"
+import RoleBasedAccess from "@/Global/Middleware Hooks/RoleBasedAccess"
 
 const SettingsFile = () => {
   return (

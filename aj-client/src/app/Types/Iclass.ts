@@ -27,7 +27,7 @@ export interface Iclass_section  extends defaultId{
     Class: string ; //Object Id
     ClassTeacher?: Iteacher;//Object Id
     Students: Array<string >;  //Object Id
-    capacity: number;
+    capacity: number|string;
     Subjects_teachers:SubjectsTeacher;
     start_date : string;
     end_date?:string ;
@@ -37,7 +37,7 @@ export const defaultSection_Class :Iclass_section = {
         name: "", 
         Class: "",
         Students: [],
-        capacity: 0,
+        capacity:"",
         Subjects_teachers:{},
         start_date : "" ,
 }

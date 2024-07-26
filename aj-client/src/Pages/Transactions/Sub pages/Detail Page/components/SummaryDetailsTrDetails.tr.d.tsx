@@ -9,8 +9,8 @@ const SummaryDetailsTrDetails = () => {
     Note:q?.Note
   }
   return (
-<section className="flex  bg-[var(--box)] rounded-md p-4  flex-col gap-3 w-full">
-    <h1 className="text-3xl hFont font-bold text-darker">Summary</h1>
+<section className="flex  bg-[var(--box)] dark:bg-darker dark:text-white rounded-md p-4  flex-col gap-3 w-full">
+    <h1 className="text-3xl hFont font-bold text-darker dark:text-white">Summary</h1>
     <Separator  className='h-0.5 bg-gray-200' />
     <div className="flex gap-2 gap-y-5  w-full flex-wrap">
       {

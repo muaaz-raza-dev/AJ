@@ -1,7 +1,7 @@
 import EachUserComp from "./Components/EachUserComp.set"
 import ActionBar from "./Components/ActionBar.set"
 import useGetUsers from "@/Hooks/Settings/useGetUsers"
-import NotFoundHandler from "@/Global/Middleware/NotFoundHandler"
+import NotFoundHandler from "@/Global/Middleware Hooks/NotFoundHandler"
 
 const UsersPage = () => {
   let {isLoading,data,isError,error} = useGetUsers()

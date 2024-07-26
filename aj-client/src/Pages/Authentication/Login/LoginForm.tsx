@@ -3,7 +3,6 @@ import RequestLoading from "@/Global/Loaders/RequestLoding";
 import useLogin from "@/Hooks/Auth/useLogin";
 import { Lock, Mail } from "lucide-react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
 
 const LoginForm = () => {
   const {register,formState: { errors },handleSubmit,} = useForm<LoginPayload>();
@@ -54,18 +53,13 @@ const LoginForm = () => {
        )}
       </div>
 
-      <button className="w-full bg-[var(--dark)] py-4 text-xl !rounded-lg text-white active:scale-95 transition-transform font-bold hFont">
+      <button disabled={isLoading} className="w-full bg-[var(--dark)] py-4 text-xl !rounded-lg text-white active:scale-95 transition-transform font-bold hFont">
         {
           isLoading?
           <RequestLoading/>:
           "Login"
         }
       </button>
-      <div className="flex w-full justify-center  ">
-        <Link to={"/"} className="font-bold  text-white ">
-          Forgot password?
-        </Link>
-      </div>
     </form>
   );
 };

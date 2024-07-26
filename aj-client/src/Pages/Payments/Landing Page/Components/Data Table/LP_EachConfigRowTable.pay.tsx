@@ -1,6 +1,7 @@
 import { Ipayment_config_short } from "@/app/Types/IpaymentLanding"
 import { TableCell, TableRow } from "@/shdcn/components/ui/table"
 import { Tooltip } from "antd"
+import { ArrowUpRight } from "lucide-react"
 import moment from "moment"
 import { FC } from "react"
 import { Link } from "react-router-dom"
@@ -8,10 +9,11 @@ import { Link } from "react-router-dom"
 const LP_EachConfigRowTable:FC<{data:Ipayment_config_short}> = ({data}) => {
   
   return (
-    <TableRow>
-              <TableCell className='text-dark font-bold text-base'>
-    <Link to={`/payment-settings/edit/${data?._id}`}>
-                {data.feeTitle}
+    <TableRow className="dark:text-white">
+              <TableCell className='text-dark dark:text-white font-bold text-base'>
+    <Link to={`/payment-settings/edit/${data?._id}`} className="flex items-center gap-1">
+                {data.feeTitle} 
+                <ArrowUpRight size={16}/>
               </Link>
                 </TableCell>
               <TableCell className=' font-bold text-sm'>{data?.feeDescription}</TableCell>
@@ -33,7 +35,7 @@ const LP_EachConfigRowTable:FC<{data:Ipayment_config_short}> = ({data}) => {
                 data.classes ?
                 data?.classes.map(e=>(
                   <Tooltip title={`${e.amount} PKR`} >
-                <div className="rounded-full cursor-pointer  px-3 py-0.5 border border-dark bg-[var(--primary)] text-sm text-dark center">{e.name}</div>
+                <div className="rounded-full cursor-pointer  px-3 py-0.5 border border-dark bg-[var(--primary)] text-sm dark:bg-darker dark:text-white text-dark center">{e.name}</div>
                 </Tooltip>
                   )
                 ) :

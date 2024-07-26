@@ -15,18 +15,18 @@ const TransactionDuesDetailsSection = () => {
     if(StudentInfo?.FirstName) {
 
   return (
-    <div className="bg-[var(--primary)] shadow-inner border rounded-md w-full p-2 pb-4 px-4">
-      <h1 className="text-center text-lg py-1 font-bold hFont">Dues Details</h1>
+    <div className="bg-light dark:bg-transparent  shadow-inner border-2 dark:border-dark rounded-md w-full p-2 pb-4 px-4">
+      <h1 className="text-center text-xl py-1 font-bold hFont">Dues Details</h1>
       <div className="flex flex-wrap  gap-4">
         {
             data &&
             Object.entries(data).map(([id,docs])=> (
-              <div key={id}  className="w-[32%] shadow  flex flex-col min-h-28 p-2 rounded-lg   gap-1 bg-[var(--box)]">
+              <div key={id}  className="w-[32%] shadow dark:bg-dark  flex flex-col min-h-28 p-2 px-4 rounded-lg   gap-1 bg-[var(--box)]">
                 <div className="font-bold text-base flex justify-between rounded-md  h-[30%]">
                     <h1>
                     {docs[0].feeTitle} {docs[0].feeFrequency!="One Time"&&`(${Sessions[docs[0].session]})`}
                     </h1>
-                    <p className="text-green-800 font-extrabold">
+                    <p className="text-green-800 font-extrabold dark:text-green-200">
                         {docs[0].amount}
                     </p>
                     </div>
@@ -44,10 +44,10 @@ const TransactionDuesDetailsSection = () => {
                   ))}
                 </div>
                 <div className="flex w-full justify-between ">
-                <p className="text-gray-600 font-extrabold">
+                <p className="text-gray-600 font-extrabold dark:text-gray-200">
                       Total
                     </p>
-                    <p className="text-red-800 font-extrabold">
+                    <p className="text-red-800 font-extrabold dark:text-red-300">
                         {lod.sumBy(docs,"amount").toString()} PKR
                     </p>
                 </div>

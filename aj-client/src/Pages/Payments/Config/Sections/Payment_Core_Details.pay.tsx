@@ -9,9 +9,9 @@ const Payment_Core_Details:FC<{loading:boolean,edit?:boolean}> = ({loading,edit}
   let form = useFormContext();
   let feeFrequecy = form.watch("payload.feeFrequency");
   return (
-    <div className={`${feeFrequecy!="One Time"?"w-[40%] flex-col":"w-[70%] "} transition-all flex flex-col gap-4 rounded-lg  `}>
-      <div className="w-full rounded-lg bg-[var(--box)] px-4 py-3 flex flex-col gap-3">
-        <div className=" py-2 font-bold text-xl text-black hFont  ">
+    <div className={`${feeFrequecy!="One Time"?"w-[40%] flex-col":"w-[70%] "} transition-all  flex flex-col gap-4 rounded-lg  `}>
+      <div className="w-full rounded-lg bg-[var(--box)] dark:bg-dark dark:text-white px-4 py-3 flex flex-col gap-3">
+        <div className=" py-2 font-bold text-xl  hFont  ">
           Payment title & description
         </div>
         <CustomInputs_Reg
@@ -27,8 +27,8 @@ const Payment_Core_Details:FC<{loading:boolean,edit?:boolean}> = ({loading,edit}
           formContext={form}
         />
       </div>
-      <div className="w-full flex flex-col gap-2 rounded-lg bg-[var(--box)] px-4 py-2 ">
-        <div className=" py-3 font-bold text-xl text-black hFont border-b ">
+      <div className="w-full flex flex-col gap-2 rounded-lg bg-[var(--box)] dark:bg-dark dark:text-white px-4 py-2 ">
+        <div className=" py-3 font-bold text-xl  hFont border-b ">
           Payment Core details
         </div>
         <FeeFrequency />   {/*Monthly  */}
@@ -64,7 +64,7 @@ const FeeAmount = ()=>{
     required
     placeholder='Write amount to apply to all classes then modify them.'
     onChange={({target:{value}})=>handleAllAmounts(value)}
-    className=" border rounded-md  min-w-[40%] p-2 bg-transparent  border-[#8080806b]  focus:border-dark  transition-all outline-none "
+    className=" border rounded-md  min-w-[40%] p-2 bg-transparent dark:bg-darker dark:text-white dark:border-darker  border-[#8080806b]  focus:border-dark  transition-all outline-none "
     />
   </LabelWrapper>
   }

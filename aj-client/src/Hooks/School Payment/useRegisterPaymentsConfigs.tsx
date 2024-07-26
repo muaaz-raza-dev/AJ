@@ -16,6 +16,9 @@ const useRegisterPaymentsConfigs = (reset: () => void) => {
         "Payment Config registered . You are ready to collect the payments 🎊"
       );
     },
+    onError() {
+      toast.error("An error occurred while creating payment config. Please try again with valid inputs .");
+    },
   });
   return Registeration;
 };
@@ -32,6 +35,9 @@ export const useEditPaymentsConfigs = (reset: () => void) => {
       toast.success(
         "Payment Config updated . You are again ready to collect the payments 🎊"
       );
+    },
+    onError() {
+      toast.error("An error occurred while updating payment config. Please try again with valid inputs .");
     },
   });
   return Registeration;

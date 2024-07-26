@@ -7,9 +7,9 @@ import { Link } from 'react-router-dom'
 
 const TransactionRow = ({data}:{data:IShortTransactions}) => {
   return (
-    <TableRow className='hover:bg-gray-200 transition-colors'>
+    <TableRow className='hover:bg-gray-200 dark:hover:text-dark group transition-colors dark:text-white'>
               <TableCell className='text-[var(--dark)] font-bold  '>
-                <div className="bg-darker text-white w-8 h-8 font-bold center rounded-full aspect-square ">
+                <div className="bg-darker text-white  w-8 h-8 font-bold center rounded-full aspect-square ">
                  {data.Invoice}
                 </div>
                 </TableCell>
@@ -24,15 +24,15 @@ const TransactionRow = ({data}:{data:IShortTransactions}) => {
               <TableCell className=' font-bold'>{data?.RecievedBy?.Name}</TableCell>
               <TableCell className=' font-bold'>{data.Transactions.map(tr=>{
                 if(tr.paymentType == "Registered") {
-                  return <Link to={"/payment-settings"} className='cursor-pointer bg-dark text-sm text-white rounded-xl font-bold w-max px-2 py-1'>{tr.paymentTitle}</Link>
+                  return <Link to={"/payment-settings"} className='cursor-pointer bg-darker text-sm text-white rounded-xl font-bold w-max px-2 py-1'>{tr.paymentTitle}</Link>
                 }
                 else {
                   return <div className='cursor-pointer border-dark border text-sm text-dark  rounded-xl font-bold w-max px-2 py-1'>{tr.paymentTitle}</div>
                 }
                 })}</TableCell>
-              <TableCell className='text-[var(--dark)] text-base items-end ml-auto  font-bold'>{data?.amount.totalAmount} PKR</TableCell>
+              <TableCell className='text-[var(--dark)] dark:text-white dark:group-hover:text-black text-base items-end ml-auto  font-bold'>{data?.amount.totalAmount} PKR</TableCell>
               <TableCell className='center'>
-                <Link to={`transaction/${data?._id}`} className="bg-dark hover:translate-x-0.5 transition-transform text-white rounded-md p-2 cursor-pointer">
+                <Link to={`transaction/${data?._id}`} className="bg-darker hover:translate-x-0.5 transition-transform text-white rounded-md p-2 cursor-pointer">
                 <ArrowRight size={17} strokeWidth={"4"}/>
                 </Link>
                  </TableCell>

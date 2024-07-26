@@ -6,6 +6,8 @@ import { MdVerified } from "react-icons/md";
 import { FC, useState } from "react";
 import useSearchStudentswithGRNO from "@/Hooks/Transactions/useSearchStudentswithGRNO";
 import RegLabelWrapper from "@/Pages/Registeration/SubPages/Registeration/Components/LabelWrapper.reg";
+import { useFormContext } from "react-hook-form";
+import { ItransactionForm } from "@/app/Types/ItransactionForm";
 
 const TransactionSearchStudentsField: FC<{ transaction?: boolean }> = () => {
   let {
@@ -14,7 +16,8 @@ const TransactionSearchStudentsField: FC<{ transaction?: boolean }> = () => {
     data,
     isLoading
   } = useSearchStudentswithGRNO();
-
+  const form =useFormContext<ItransactionForm>()
+  let GRNO = form.watch("Student");
   const [Inputed, setInputed] = useState("");
 
   const debounced = useDebouncedCallback((value) => {
@@ -41,7 +44,7 @@ const TransactionSearchStudentsField: FC<{ transaction?: boolean }> = () => {
 
   return (
     <RegLabelWrapper title="Student" className="w-[100%] flex gap-x-2">
-      <div className="flex  justify-between items-center">
+      <div className="flex  gap-4 items-center">
         <Input
           value={Inputed}
           defaultValue={""}
@@ -50,7 +53,7 @@ const TransactionSearchStudentsField: FC<{ transaction?: boolean }> = () => {
             setInputed(e.target.value);
           }}
           placeholder="Input GRno here"
-          className="active:border-[var(--dark)] w-[95%]"
+          className="active:border-[var(--dark)] w-[95%] dark:bg-darker dark:border-dark dark:text-white dark:placeholder:text-gray-500"
         />
         <GRSuffix />
       </div>

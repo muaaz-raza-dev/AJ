@@ -48,7 +48,7 @@ try {
   let MemberAccount =await User.findOne({StaffId})
   let password =await bcryptjs.compare(Payload.password,MemberAccount.password)
   console.log(password,Payload);
-if(!Payload.password||password) { await User.findOneAndUpdate({StaffId},Payload)
+if(!Payload.password||password) { await User.findOneAndUpdate({StaffId},{...Payload,isLogOutRequired:true})
     return true
 }
 else {

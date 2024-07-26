@@ -17,10 +17,12 @@ const Account_Details_Teacher:FC<{edit?:boolean}> = ({edit}) => {
     </LabelWrapper>
     <LabelWrapper required label="Password">
       <div className="flex gap-4 items-center h-full">
-      <Input.Password value={form.watch("account_Details.password")} onChange={(e)=>form.setValue("account_Details.password",e.target.value)}  placeholder="Password" className="h-full"/>
+      <Input.Password  value={form.watch("account_Details.password")} onChange={(e)=>form.setValue("account_Details.password",e.target.value)}  placeholder="Password" className="dark:bg-darker dark:text-white dark:border-darker"/>
+        {edit&&
       <Tooltip title="Password will be unchanged if you keep this feild remain empty. ">
       <Info className='text-orange-500' size={22} />
       </Tooltip>
+    }
       </div>
     </LabelWrapper>
     <Account_Role/>

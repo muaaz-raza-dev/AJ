@@ -30,7 +30,7 @@ const TransactionTitleSelectionComp:FC<{fieldName:string}> = ({fieldName}) => {
 if(paymentType=="Custom"){
     return (
         <input type="text" placeholder="Enter custom payment title" className='
-         border rounded-md  w-full p-2  border-[#8080806b] focus:border-dark  transition-all outline-none 
+         border rounded-md  w-full p-2  border-[#8080806b] focus:border-dark dark:bg-dark dark:text-white dark:placeholder:text-gray-500  transition-all outline-none 
          ' value={paymentTitle} onChange={(e)=> {
             setValue(`${fieldName}.paymentTitle`,e.target.value)
             setValue(`${fieldName}.paymentConfigId`,"")
@@ -41,7 +41,7 @@ if(paymentType=="Custom"){
 else{
     console.log("I am here" ,watch());
     return (
-        <CustomSelect_Reg className=''
+        <CustomSelect_Reg className='antd-selectBarDark'
         setState={handlePurposeSelection} state={paymentConfigId} optimumData={Purposes} />)
     }
 }

@@ -19,7 +19,8 @@ const TransactionFilterBar = () => {
       <TransactionFilterSearch/>
       <div className="w-full flex gap-x-4 justify-end">
       <TransactionSelectType/>
-      <Link to={"create"} className="bg-gradient-to-bl to-dark from-indigo-900 h-full text-white center px-3 transition-colors hover:bg-dark  rounded-lg">New Transaction</Link>
+      <Link to={"create"} className=" bg-dark h-full text-white center px-3 transition-colors
+       hover:bg-dark  rounded-lg">New Transaction</Link>
       </div>
     </div>
   )

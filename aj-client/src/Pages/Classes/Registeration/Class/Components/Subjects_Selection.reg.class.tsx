@@ -36,7 +36,7 @@ const Subjects_Selection = () => {
         <section className="w-full flex gap-2 flex-col">
         <div className="flex gap-x-2 w-full">
     <CustomSelect_Reg data={commonSubjects} placeholder="Teaching Subjects" setState={handleInput} state={Options.input}  />
-    <Button type="button" disabled={!Options.input} onClick={handleOptions} className="bg-dark text-white border border-dark hover:text-dark">Add</Button>
+    <Button type="button" disabled={!Options.input} onClick={handleOptions} className="bg-dark dark:bg-darker text-white border border-dark hover:text-dark">Add</Button>
         </div>
         <div className=" w-full rounded flex gap-2 flex-wrap">
              {

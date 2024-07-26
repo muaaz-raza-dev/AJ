@@ -24,12 +24,12 @@ setSearchParams(e=>({...e,section:Sections.selected}))
     dispatch(RedDashFilters({ fields_name: "Sections", selected:(route =="classes" || !route)?"Classes":"Teachers" }));
   }, [])
   return (
-    <div className="  border-2 bg-[var(--box)] p-1 text-black rounded-lg gap-3 flex w-1/2">
+    <div className="  border-2 bg-[var(--box)] dark:bg-dark dark:border-darker p-1 text-black rounded-lg gap-3 flex w-1/2">
       {Sections.available.map((s) => {
         if (s == Sections.selected) {
           return (
             <Link to={`/dashboard/${s.toLowerCase()}`}
-              className={` p-2 bg-[var(--dark)] w-1/2 center shadow-md  rounded-md text-white `}
+              className={` p-2 bg-[var(--dark)] w-1/2 center shadow-md dark:bg-darker  rounded-md text-white `}
               onClick={() => SelectSection(s)}
             >
 
@@ -39,7 +39,7 @@ setSearchParams(e=>({...e,section:Sections.selected}))
         } else {
           return (
             <Link to={`/dashboard/${s.toLowerCase()}`}
-              className=" center p-2 w-1/2 font-bold text-black bg-[var(--box)] rounded-md "
+              className=" center p-2 w-1/2 font-bold text-black dark:text-white rounded-md "
               onClick={() => SelectSection(s)}
             >
                 {s}

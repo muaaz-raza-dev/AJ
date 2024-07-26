@@ -8,7 +8,6 @@ import useFetchConfigs from "@/Hooks/School Payment/useFetchConfigs"
 
 const Landing_Payment_SettingsPage = () => {
   useFetchSessions_pay_mod(handleFilters)
-
   let dispatch = useAppDispatch() 
   let {mutate} =useFetchConfigs()
 

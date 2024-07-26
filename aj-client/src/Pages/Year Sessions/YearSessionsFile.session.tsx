@@ -7,6 +7,7 @@ const YearSessionsFile = () => {
     <Routes>
         <Route index element={<SessionsLandingPage/>}/>
         <Route path="/registeration" element={<SessionRegisterations/>}/>
+        <Route path="/edit/:id" element={<SessionRegisterations edit={true}/>}/>
     </Routes>
   )
 }

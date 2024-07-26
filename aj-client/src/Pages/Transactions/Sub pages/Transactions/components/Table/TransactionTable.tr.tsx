@@ -8,7 +8,7 @@ const TransactionTable = () => {
   let {Transactions}= useAppSelector(s=>s.transactions)
   return (
     <>
-    <Table className="bg-[var(--box)] rounded-md">
+    <Table className="bg-[var(--box)] dark:bg-dark rounded-md">
     <TransactionHead/>
     <TableBody>
       {Transactions.map(tr=><TransactionRow data={tr}/>)}

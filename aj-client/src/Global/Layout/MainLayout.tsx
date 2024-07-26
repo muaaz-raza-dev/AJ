@@ -1,14 +1,16 @@
+import React from "react";
 import { Route, Routes } from "react-router-dom";
 import SidebarFile from "../Sidebar/SidebarFile";
 import Header from "../Header/Header";
-import TransactionsFile from "@/Pages/Transactions/TransactionsFile.tr";
 import StudentsDirectoryFile from "@/Pages/Students Directory/StudentDirectoryFile.std";
-import ClassesFile from "@/Pages/Classes/DashboardFile.dash";
 import { useAppSelector } from "@/app/ReduxHooks";
-import YearSessionsFile from "@/Pages/Year Sessions/YearSessionsFile.session";
-import PaymentFile from "@/Pages/Payments/PaymentFile.pay";
-import SettingsFile from "@/Pages/Settings/SettingsFile.set";
-import RoleBasedAccess from "../Middleware/RoleBasedAccess";
+const TransactionsFile = React.lazy(() => import("@/Pages/Transactions/TransactionsFile.tr"));
+const ClassesFile = React.lazy(() => import("@/Pages/Classes/DashboardFile.dash"));
+const YearSessionsFile = React.lazy(() => import("@/Pages/Year Sessions/YearSessionsFile.session"));
+const PaymentFile = React.lazy(() => import("@/Pages/Payments/PaymentFile.pay"));
+const SettingsFile = React.lazy(() => import("@/Pages/Settings/SettingsFile.set"));
+import RoleBasedAccess from "../Middleware Hooks/RoleBasedAccess";
+import CustomSuspense from "../Middleware Hooks/CustomSuspense";
 
 const MainLayout = () => {
   return (
@@ -35,12 +37,18 @@ const MainLayoutRoutes = () => {
         </RoleBasedAccess>
         } path="/stats" />
 
-      <Route element={<StudentsDirectoryFile />}  path="/students/*" />
+      <Route element={
+        <CustomSuspense>
+          <StudentsDirectoryFile />
+        </CustomSuspense>
+        }  path="/students/*" />
       <Route element={<StudentsDirectoryFile />} index path="/" />
 
       <Route element={
           <RoleBasedAccess roleToGiveAccess={["admin", "chief admin"]}>
+            <CustomSuspense>
             <TransactionsFile />
+            </CustomSuspense>
           </RoleBasedAccess>
         }
         path="/transactions/*"
@@ -48,24 +56,36 @@ const MainLayoutRoutes = () => {
 
       <Route element={
           <RoleBasedAccess roleToGiveAccess={["admin", "chief admin"]}>
+            <CustomSuspense>
             <PaymentFile />
+            </CustomSuspense>
           </RoleBasedAccess>
         }
         path="/payment-settings/*"
         />
 
-      <Route element={<ClassesFile />} path="/dashboard/*" />
+      <Route element={
+        <CustomSuspense>
+          <ClassesFile />
+        </CustomSuspense>
+        } path="/dashboard/*" />
 
 
       <Route element={
           <RoleBasedAccess roleToGiveAccess={["admin", "chief admin"]}>
+          <CustomSuspense>
             <YearSessionsFile />
+          </CustomSuspense>
           </RoleBasedAccess>
         }
         path="/sessions/*"
         />
 
-      <Route element={<SettingsFile />} path="/settings/*" />
+      <Route element={
+        <CustomSuspense>
+          <SettingsFile />
+        </CustomSuspense>
+        } path="/settings/*" />
 
 
     </Routes>

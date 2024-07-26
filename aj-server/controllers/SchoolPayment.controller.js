@@ -6,13 +6,13 @@ const { OptimizeDates } = require("./utils/OptimizeSessionDates_SchoolPayment");
 const RegisterPayment = async(req,res)=>{
     let {payload} = req.body;
     try{
-        
         if(payload.feeFrequency == "One Time") {
             delete payload.feeFrequency
-            await RegisterOneTimeConfig(payload)
+            let OneTime = await RegisterOneTimeConfig(payload)
+            if(!OneTime)  Respond({res,message: 'Somethig went wrong.',status:500,success:false}) 
         }
         else {
-            let payment = await PaymentConfig.create({...payload})
+            await PaymentConfig.create({...payload})
         }
         
         Respond({res,
@@ -29,14 +29,20 @@ const RegisterPayment = async(req,res)=>{
     }
 }
 const RegisterOneTimeConfig = async(payload)=>{
-let ParentPayload = JSON.parse(JSON.stringify(payload))
-delete ParentPayload.classes
-delete ParentPayload.session
+    try{
+
+        let ParentPayload = JSON.parse(JSON.stringify(payload))
+        delete ParentPayload.classes
+        delete ParentPayload.session
 let parent = await OneTimeFee.create({...ParentPayload,isParent:true})
 let childPayload = {...payload, Parent: parent._id || parent._doc._id}
 let child = await OneTimeFee.create(childPayload)
 await OneTimeFee.findByIdAndUpdate(parent._id,{$push:{Children:child._id||child._doc._id}})
 return child
+}
+catch(err){
+    return false  //! false == error
+}
 }
 
 const GetSessions = async(req,res)=>{

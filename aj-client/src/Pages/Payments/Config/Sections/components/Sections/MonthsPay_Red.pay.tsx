@@ -26,8 +26,8 @@ const MonthsPay_Red = () => {
         }, [paymentMonths])
 if(FeeFrequency == "Monthly" ||FeeFrequency == "Custom") { 
     return (
-        <div className="flex flex-col bg-[var(--box)] p-4 w-full">
-    <h1 className="text-darker  !font-bold hFont text-xl pb-2 "> Select Months of payments </h1>
+        <div className="flex flex-col bg-[var(--box)] dark:bg-dark rounded-md p-4 w-full">
+    <h1 className="text-darker  !font-bold hFont text-xl pb-2 dark:text-white"> Select Months of payments </h1>
     <div className="flex flex-col gap-2 w-full">
         {
             
@@ -38,7 +38,7 @@ if(FeeFrequency == "Monthly" ||FeeFrequency == "Custom") {
 :
             Object.entries(Grouped).map((val)=>{
                 return <div className="flex flex-col gap-2">
-                <h2 className="text-dark font-semibold text-xl ">{val[0]}</h2>
+                <h2 className="text-dark font-semibold text-xl dark:text-white">{val[0]}</h2>
             <div className="flex flex-wrap gap-4 w-full">
                 {val[1].map((e:IpaymentMonths) => <CustomCheckbox label={e.month} field_name={`payload.paymentMonths[${e?.index}].isPayment`}/>)}
             </div>         
@@ -61,7 +61,7 @@ const CustomCheckbox:FC<{label:string,field_name:string}> = ({label,field_name})
 <Checkbox id={label} checked={value} className="bg-[var(--primary)] text-black" onChange={({target:{checked}})=>form.setValue(field_name,checked)}/>
 <label
 htmlFor={label}
-className="text-lg font-semibold leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+className="text-lg dark:text-white font-semibold leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
 >
     {label}
 </label>

@@ -11,7 +11,8 @@ const UserSchema = new mongoose.Schema({
   email:{type:String},
   password:{type:String, required: true },
   Name:String,
-  LastLogin:{type:[String]},
+  LastLogin:{type:String},
+  isLogOutRequired:{type:Boolean,default:false},
   isBlocked:{type:Boolean,default:false},
   StaffId:{type:ObjectId , ref:"Teacher"},
 });

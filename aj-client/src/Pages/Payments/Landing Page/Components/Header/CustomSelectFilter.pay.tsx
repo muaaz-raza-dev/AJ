@@ -16,7 +16,7 @@ className?:string ,
 const Custom_SelectFilter:FC<IcustomSelectFilter> = ({className,options,value,queryFn,label}) => {
   return (
     <Select value={value} onValueChange={queryFn}>
-    <SelectTrigger className={`w-[35%] border-2 h-full border-dark ring-0 focus:ring-offset-0 focus:ring-0 relative ${className}`}>
+    <SelectTrigger className={`w-[35%] border-2 h-full dark:bg-darker dark:text-white border-dark ring-0 focus:ring-offset-0 focus:ring-0 relative ${className}`}>
     <p className="absolute -top-1  text-[0.7rem] font-medium text-dark text-center "> {label}  </p>
       <SelectValue placeholder="Select Session " />
     </SelectTrigger>

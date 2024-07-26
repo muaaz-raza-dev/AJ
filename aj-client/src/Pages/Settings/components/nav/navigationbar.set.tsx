@@ -1,4 +1,4 @@
-import RoleBasedAccess from "@/Global/Middleware/RoleBasedAccess"
+import RoleBasedAccess from "@/Global/Middleware Hooks/RoleBasedAccess"
 import useActiveRoute from "@/Hooks/Common/ActiveRoute"
 import { Link } from "react-router-dom"
 

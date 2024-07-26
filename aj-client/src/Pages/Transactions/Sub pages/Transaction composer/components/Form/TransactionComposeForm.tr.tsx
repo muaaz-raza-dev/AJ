@@ -7,15 +7,15 @@ const TransactionComposeForm = () => {
     let form = useForm<ItransactionForm>({defaultValues:defaultTransactionForm})
     let {mutate,isLoading}= useCreateTransaction(form.reset)
     let handleTransaction: SubmitHandler<ItransactionForm> = (payload)=>{
-      mutate(payload)
-    }
-    let PrintAndConfirmTransaction = ()=>{
+      mutate(payload) 
+      
 
     }
+    
   return (
     <FormProvider {...form}>
     <form className="flex flex-wrap w-full" onSubmit={form.handleSubmit(handleTransaction)}>
-        <TransactionFeeDetailsForm isLoading={isLoading} PrintFn={PrintAndConfirmTransaction}/>
+        <TransactionFeeDetailsForm isLoading={isLoading} />
     </form>
     </FormProvider>
   )

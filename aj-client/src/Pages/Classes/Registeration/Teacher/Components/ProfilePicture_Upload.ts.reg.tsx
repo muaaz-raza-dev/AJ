@@ -75,14 +75,14 @@ const AnalyzeDescription_Class = ()=>{
                     <Button type="button" 
                     onClick={UploadFile}
                     disabled={!ImageState.file }
-                     className="text-white bg-dark hover:text-dark border border-dark">
+                     className="text-white bg-darker hover:text-dark hover:bg-light border border-dark">
                      {loading?
                      <RequestLoading size="16" stroke="2" />
                      :"Upload"
                      }
                      </Button>
                     <Button type="button" onClick={Remove} disabled={!ImageState.file}
-                     className="bg-[var(--box)] text-red-600 border border-red-600" >
+                     className="bg-[var(--box)] text-red-600  " >
                        {loading?
                      <RequestLoading size="16" stroke="2" dark  />
                      :"Remove"

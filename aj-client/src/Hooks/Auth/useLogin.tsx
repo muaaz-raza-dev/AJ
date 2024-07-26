@@ -14,10 +14,10 @@ const useLogin = () => {
     mutationFn: ({ usernameOrEmail, password }: LoginPayload) =>
       Login({ usernameOrEmail, password }),
   onSuccess(data) {
-    Cookie.set(CookieKey,data.token,{expires:new Date(new Date().getTime() + 30 * 24 * 60 * 60 * 1000)})
+      Cookie.set(CookieKey,data.token,{expires:new Date(new Date().getTime() + 30 * 24 * 60 * 60 * 1000)})
       dispatch(CreditsInsertion({isLogined:true,Info:data.payload}))
-    toast.success(data.message)
-naviagte("/")
+      toast.success(data.message)
+      naviagte("/")
   },
   onError(error:any) {
     toast.error(error.response.data.message)

@@ -9,12 +9,13 @@ export interface IDuesTrCompose {
 }
 export interface IcomposeTransactionFilters {
 isLoading:boolean , 
-StudentInfo?:IstudentExclusive ,
+StudentInfo?:IstudentExclusive|null ,
 ClassbasedFeeInfo : ClassBasedFeeDetails ,
+isPrint:boolean;
 FeeInfo:{
-    Purposes:{value:string,feeTitle:string,label:string,feeFrequency:"One Time"|"Custom"|"Yearly"|"Monthly";sessionId:string}[] ,
-    Dates : {[key:string]:{[key:string]: string[] }} ,
-    Amounts : {[key:string]:number} ,
+Purposes:{value:string,feeTitle:string,label:string,feeFrequency:"One Time"|"Custom"|"Yearly"|"Monthly";sessionId:string}[] ,
+Dates : {[key:string]:{[key:string]: string[] }} ,
+Amounts : {[key:string]:number} ,
   },Invoice:string ,
   Dues:IDuesTrCompose[]
 DiscountedTotal : number , 
@@ -24,6 +25,7 @@ DiscountedTotal : number ,
 export const defaultTransactionFilters: IcomposeTransactionFilters = {
     isLoading: false,
     DiscountedTotal: 0 ,
+    isPrint:false,
     Invoice:"",
     ClassbasedFeeInfo: { /* default ClassBasedFeeDetails object */ },
     Dues:[],

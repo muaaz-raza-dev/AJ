@@ -20,8 +20,8 @@ const TransactionPagination = () => {
     <div className="flex gap-x-5 items-center">
         <button
         disabled={!hasNextPage}
-          className={` rounded-md  center w-8 aspect-square ${
-             "text-darker bg-gray-300 scale-95 font-bold "
+          className={`   rounded-md  center w-8 aspect-square ${
+             "text-darker dark:bg-dark dark:text-white bg-gray-200 scale-95 font-bold "
           } `}
           onClick={() => HandlePagination(1)}
         >
@@ -30,7 +30,7 @@ const TransactionPagination = () => {
         <button
         disabled={!hasPreviousPage}
           className={` rounded-md  center w-8 aspect-square ${
-            "text-darker bg-gray-300 scale-95 font-bold "
+            "text-darker dark:bg-dark dark:text-white bg-gray-300 scale-95 font-bold "
             } `}
             onClick={() => HandlePagination(-1)}
             >

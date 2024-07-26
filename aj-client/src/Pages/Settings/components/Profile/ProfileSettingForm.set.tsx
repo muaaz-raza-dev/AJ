@@ -3,7 +3,7 @@ import MutableInfoForm from './MutableInfoForm.set'
 import NonMutableInfoForm from './NonMutableInfoForm.set'
 import ProfileFormSubmit from './ProfileFormSubmit.set'
 import { defaultStaffInformationEditForm, IStaffInformationEditForm } from '@/app/Types/IStaffInformation_Settings'
-import NotFoundHandler from '@/Global/Middleware/NotFoundHandler'
+import NotFoundHandler from '@/Global/Middleware Hooks/NotFoundHandler'
 import useGetPersonalInformation from '@/Hooks/Settings/useGetPersonalInformation'
 import useUpdatePersonalInformation from '@/Hooks/Settings/useUpdatePersonalInformation'
 

@@ -8,7 +8,7 @@ const CustomSelect_Reg:FC<{className?:string,data?:string[],optimumData?:{value:
   {... (nosearch&& { onChange:setState })}
   onSelect={setState}
   placeholder={placeholder}
-  className={`w-full h-full ${className}`}
+  className={`w-full h-full antd-selectBar ${className}`}
   filterOption={(input, option) => (option?.label ?? '').toLowerCase().includes(input.toLowerCase()) }
   options={optimumData|| data?.map(e=>({label:e,value:e}))}
   />
