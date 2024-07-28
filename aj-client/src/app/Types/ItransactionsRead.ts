@@ -9,6 +9,7 @@ export interface IShortTransactions {
     FirstName: string;
   },
   PayorsName:string;
+  isDelayedRegistory?:boolean;
   RecievedBy:{Name:string},
   amount:{totalAmount: number};
   Transactions: [{ paymentTitle:string;paymentType:"Custom"|"Registered";paymentConfigId:string }];

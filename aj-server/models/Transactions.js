@@ -29,7 +29,8 @@ const TransactionSchema = new mongoose.Schema(
     },
     Time: { type: Date, default: Date.now },
     Invoice: { type: Number, unique: true },
-    isCancelled:{type:Boolean, default:false}
+    isCancelled:{type:Boolean, default:false},
+    isDelayedRegistory:{type:Boolean,default:false}
   },
   { timestamps: true }
 );

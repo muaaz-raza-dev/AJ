@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const {ObjectId} =require("mongodb")
-const YearlySessionSchema = new mongoose.Schema({
+const Sessions = new mongoose.Schema({
   session_name: {
     type: String,
     required: true,
@@ -32,4 +32,4 @@ const YearlySessionSchema = new mongoose.Schema({
 },{timestamps:true});
 
 
-module.exports = mongoose.model('YearlySession', YearlySessionSchema);
+module.exports = mongoose.model('YearlySession', Sessions);

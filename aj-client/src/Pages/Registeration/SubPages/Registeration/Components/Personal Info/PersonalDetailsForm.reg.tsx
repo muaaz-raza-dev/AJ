@@ -63,7 +63,7 @@ const RegPersonalDetailsForm = () => {
 
       </RegLabelWrapper>
       <RegLabelWrapper className="w-[48%]" title="Gender">
-        <Select className=" antd-selectBar rounded-md dark:!bg-dark dark:!border-darker dark:!text-white dark:placeholder:text-gray-600"
+        <Select className=" antd-selectBarDark rounded-md dark:!bg-dark dark:!border-darker dark:!text-white dark:placeholder:text-gray-600"
           defaultValue={"male"}
           
           onChange={(value) => setValue("Gender", value)}

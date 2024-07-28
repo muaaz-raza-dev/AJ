@@ -12,7 +12,7 @@ export default defineConfig({
         name: 'AJ Workspace',
         short_name: 'AJ',
         description: 'CMS to manage the acedmic transaction related tasks',
-        theme_color: '#ffffff',
+        theme_color: '#1b0c39',
         icons: [
           {
             src: 'pwa-192x192.png',

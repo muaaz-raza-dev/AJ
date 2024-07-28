@@ -5,7 +5,8 @@ import { FC } from 'react'
 const SummaryDetailsTrDetails = () => {
   let {data} = useFetchTransactionDetailed()
   let  q = data?.payload
-  let details = {GRNO :q?.Student.GRNO , Student : q?.Student.FirstName+" " +q?.Student.LastName , Invoice :q?.Invoice, "Payors Name":q?.PayorsName ,"Recieved By":q?.RecievedBy.Name,"Paid Amount":q?.PaidAmount ,"Transaction Time":moment(q?.Time).format("D MMMM Y hh:mm:ss a"),
+  let details = {GRNO :q?.Student.GRNO , Student : q?.Student.FirstName+" " +q?.Student.LastName , Invoice :q?.Invoice, "Payors Name":q?.PayorsName ,"Recieved By":q?.RecievedBy.Name,"Paid Amount":q?.PaidAmount ,"Transaction Time":q?.isDelayedRegistory? moment(q?.Time).format("D MMMM Y "): moment(q?.Time).format("D MMMM Y hh:mm:ss a"),Registory : q?.isDelayedRegistory?"Delayed":"On Time"
+    ,
     Note:q?.Note
   }
   return (

@@ -41,7 +41,7 @@ const RegAcademicDetailsForm: FC<{ edit?: boolean }> = ({ edit }) => {
             <>
               <Select
                 showSearch={false}
-                className="dark:bg-dark  rounded-md antd-selectBar dark:border-darker dark:text-white dark:placeholder:text-gray-600"
+                className="dark:bg-dark  rounded-md antd-selectBarDark dark:border-darker dark:text-white dark:placeholder:text-gray-600"
                 {...field}
                 placeholder="7th"
                 options={Object.entries(Classes).map((elm) => ({
@@ -61,7 +61,7 @@ const RegAcademicDetailsForm: FC<{ edit?: boolean }> = ({ edit }) => {
           control={control}
           render={({ field }) => (
             <Select 
-             className="antd-selectBar rounded-md  custom-select dark:bg-dark dark:border-darker dark:text-white dark:placeholder-gray-600"
+             className="antd-selectBarDark rounded-md  custom-select dark:bg-dark dark:border-darker dark:text-white dark:placeholder-gray-600"
                 showSearch={false}
                 {...field}
                 placeholder="A"

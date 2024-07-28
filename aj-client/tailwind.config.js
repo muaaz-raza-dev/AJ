@@ -27,6 +27,7 @@ module.exports = {
         secondary: "#a098ae",
         danger : "#fd5353",
         light:"#F3F4FF",
+        box:"#fff",
         dark_dimmer:"#23104adc",
         dark:"#2f1660",
         darker:"#23104a",

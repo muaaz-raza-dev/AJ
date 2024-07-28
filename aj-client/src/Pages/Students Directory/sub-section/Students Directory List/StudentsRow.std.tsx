@@ -30,7 +30,7 @@ const StudentsTableRow :FC<{data:IstudentShort}> = ({data}) => {
             </a>
         </TableCell>
         <TableCell className=''>
-            <Link to={"/dashboard"} className="bg-dark center text-white rounded-full px-2 py-1.5">
+            <Link to={"/dashboard"} className="bg-darker center text-white rounded-full px-2 py-1.5">
                 {Classes[data?.CurrentClass]}
             </Link>
             </TableCell>

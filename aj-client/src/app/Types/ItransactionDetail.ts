@@ -14,6 +14,7 @@ export interface ItransactionDetail {
     RecievedBy:{_id:string,Name:string};
     Invoice:string;
     isCancelled:boolean ;
+    isDelayedRegistory?:boolean;
     Transactions:ItransactionField_Detailed[]
 }
 

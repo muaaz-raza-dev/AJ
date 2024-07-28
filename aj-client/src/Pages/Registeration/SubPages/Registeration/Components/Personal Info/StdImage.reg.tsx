@@ -29,13 +29,13 @@ let Photo = watch("photo")
       <div
         {...getRootProps({
           className:
-           ` dropzone w-full aspect-square border-[var(--darker)]   border-2 center `,
+           ` dropzone w-full aspect-square border-[var(--darker)] dark:border-dark   border-2 center `,
         })}
       >
         <input {...getInputProps({ type: "file", })} />
         {(Preview?
         <img src={Preview} alt=""  className="object-contain"/>:
-        <p className="text-[var(--secondary)] px-2 text-[0.7rem] cursor-pointer text-center">
+        <p className="text-gray-600 px-2 text-[0.7rem] cursor-pointer text-center">
           Drag and Drop or click to select the file
         </p>)
         }

@@ -1,8 +1,6 @@
 const moment = require("moment");
 const Students = require("../models/Students");
-const Classes = require("../models/Class");
 const TransactionsScema = require("../models/Transactions");
-const CalculateMonthlyFeeRespectToDues = require("./utils/CalculateMonthlyFeeRespectToDues");
 const Respond = require("../Helpers/ResponseHandler");
 const PaymentConfig = require("../models/SchoolPayments");
 const Session = require("../models/Session");
@@ -10,29 +8,16 @@ const {
   CalculatePaymentConfigs,
 } = require("./utils/Transaction/CalculateReadTransactionMetaFilters");
 const { CalculateFeeDues } = require("./utils/Transaction/CalculateFeeDues.utils");
+const Transactions = require("../models/Transactions");
 
 async function CreateTransaction(req, res) {
   let { payload } = req.body;
   try {
     let Payload = { ...payload, RecievedBy: req.AdminId };
-    let paymentConfigIds = await Payload.Transactions.map((e) => {
-      if (e.paymentType == "Registered") return e.paymentConfigId;
-    });
-    if (paymentConfigIds.length != 0) {
-      await Students.findOneAndUpdate(
-        {
-          _id: Payload.Student,
-          FinancialDetails: {
-            $elemMatch: {
-              paymentConfigId: { $in: paymentConfigIds },
-            },
-          },
-        },
-        { $set: { "FinancialDetails.$.paid": true } }
-      );
-    }
-    const newTransaction = new TransactionsScema(Payload);
-    const savedTransaction = await newTransaction.save();
+    if(payload.Time){ Payload.Time = new Date(Payload.Time).toISOString(); Payload.isDelayedRegistory = true}
+    else {Payload.Time = new Date().toISOString()}
+
+    const savedTransaction = await Transactions.create(Payload);
     let transaction = await TransactionsScema.findById(savedTransaction._id)
     .populate({ path: "Student", select: "FirstName LastName GRNO" })
     .populate({ path: "RecievedBy", select: "Name" })
@@ -58,7 +43,6 @@ async function SearchStudent(req, res) {
         (pre) => pre.classId.toString() == student.CurrentClass
       )?.amount;
     });
-
     let { Dues, FeeInfo} = await CalculateFeeDues(student);
     Respond({
       res,
@@ -137,7 +121,6 @@ async function SetTransactionConfig(req, res) {
       let updated = await Global_Fee_Preferences.findOneAndUpdate(Find, {
         $push: { Months: { ...payload, month } },
       });
-      console.log(updated);
     } else {
       await Global_Fee_Preferences.updateOne(
         { ...Find, Months: { $elemMatch: { month: req.body.month } } },

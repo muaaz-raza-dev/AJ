@@ -91,7 +91,6 @@ let height_points = height*72
 // Create Document Component
 const Transaction:FC<{data:ItransactionDetail|undefined}> = ({data}) => {
   if(data) {
-
     return (
       <Document >
     <Page size={{width:Width_points,height:height_points}} style={styles.page}>

@@ -25,7 +25,7 @@ let {studentId} =req.body
 let studentInfo = await Students.findById(studentId)
 let FrequentDues  = await CalculateFrequentDues(studentInfo)  
 let OneTimeDues = await CalculateOneTimeDues(studentInfo)
-let Dues = FrequentDues.concat(OneTimeDues)
+let Dues = FrequentDues.concat(OneTimeDues||[])
 Respond({res,payload:Dues})
 }
 const GetPaymentHistory= async(req,res) =>{

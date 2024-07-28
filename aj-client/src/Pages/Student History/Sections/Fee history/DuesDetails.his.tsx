@@ -16,12 +16,12 @@ const DuesDetails = () => {
         {
             data &&
             Object.entries(data).map(([id,docs])=> (
-              <div key={id}  className="w-[32%] shadow  flex flex-col min-h-28 p-2 rounded-lg   gap-1 bg-[var(--primary)]">
+              <div key={id}  className="w-[32%] shadow  flex flex-col min-h-28 p-2 rounded-lg   gap-1 bg-[var(--primary)] dark:bg-darker dark:text-white">
                 <div className="font-bold text-base flex justify-between rounded-md  h-[30%]">
                     <h1>
                     {docs[0].feeTitle} {docs[0].feeFrequency!="One Time"&&`(${Sessions[docs[0].session]})`}
                     </h1>
-                    <p className="text-green-800 font-extrabold">
+                    <p className="text-green-800 dark:text-green-500 font-extrabold">
                         {docs[0].amount}
                     </p>
                     </div>
@@ -39,10 +39,10 @@ const DuesDetails = () => {
                   ))}
                 </div>
                 <div className="flex w-full justify-between ">
-                <p className="text-gray-600 font-extrabold">
+                <p className="text-gray-600 dark:text-gray-400 font-extrabold">
                       Total
                     </p>
-                    <p className="text-red-800 font-extrabold">
+                    <p className="text-red-800 dark:text-red-400 font-extrabold">
                         {lod.sumBy(docs,"amount").toString()} PKR
                     </p>
                 </div>

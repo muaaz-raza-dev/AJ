@@ -2,9 +2,10 @@ import { Table, TableBody, TableHead,TableHeader,TableRow,} from "@/shdcn/compon
 import TransactionPurposeTableRow from "./TransactionPurposeTableRow.tr";
 import { Button } from "@/shdcn/components/ui/button";
 import RegLabelWrapper from "@/Pages/Registeration/SubPages/Registeration/Components/LabelWrapper.reg";
-import { Input } from "antd";
+import { Input, Tooltip } from "antd";
 import { Controller, useFormContext } from "react-hook-form";
 import { ItransactionField } from "@/app/Types/ItransactionForm";
+import { Info } from "lucide-react";
 
 
 let defaultTransactionBlock = {paymentType: "Registered", paymentConfigId : "", month : "",year:"",
@@ -74,6 +75,20 @@ return (
         <Input placeholder="All dues are clear now! " {...field} className="dark:bg-darker dark:text-white dark:placeholder:text-gray-500 dark:border-dark"/>
       </RegLabelWrapper>
       {error && <p className="text-red-500 text-xs">{error.message}</p>}
+      </>
+          )
+      } }/>
+<Controller control={control}  name='Time' render={({field})=>{
+return (
+  <>
+  <RegLabelWrapper title="Date (not required)" className="w-[30%] gap-2">
+    <div className="flex w-full gap-2 items-center">
+        <Input placeholder="" type="Date" {...field} className="dark:bg-darker dark:text-white dark:placeholder:text-gray-500 dark:border-dark"/>
+        <Tooltip title={"In case of delayed registeration. Insert the transaction date. Otherewise, keep this field remain empty"}>
+        <Info size={16} className="text-gray-600"/>
+        </Tooltip>
+    </div>
+      </RegLabelWrapper>
       </>
           )
       } }/>

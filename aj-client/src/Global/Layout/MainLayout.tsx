@@ -11,6 +11,7 @@ const PaymentFile = React.lazy(() => import("@/Pages/Payments/PaymentFile.pay"))
 const SettingsFile = React.lazy(() => import("@/Pages/Settings/SettingsFile.set"));
 import RoleBasedAccess from "../Middleware Hooks/RoleBasedAccess";
 import CustomSuspense from "../Middleware Hooks/CustomSuspense";
+import StatsFile from "../../Pages/Statistics/StatsFile.stat";
 
 const MainLayout = () => {
   return (
@@ -32,9 +33,9 @@ const MainLayoutRoutes = () => {
     <Header />
     <Routes>
       <Route  element={
-          <RoleBasedAccess roleToGiveAccess={["admin", "chief admin"]}>
-        <h1>Coming Soon ...</h1>
-        </RoleBasedAccess>
+       <RoleBasedAccess roleToGiveAccess={["chief admin"]}>
+       <StatsFile/>
+       </RoleBasedAccess>
         } path="/stats" />
 
       <Route element={

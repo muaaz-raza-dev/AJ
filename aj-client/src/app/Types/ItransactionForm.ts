@@ -16,6 +16,7 @@ export interface ItransactionField {
 
 export interface ItransactionForm{
 PayorsName:string,
+Time:string;
 PaidAmount:number|string,
 amount:{
   realAmount:number,
@@ -32,6 +33,7 @@ Transactions:ItransactionField[]
 export const defaultTransactionForm: ItransactionForm = {
   PayorsName: '',
   PaidAmount:"",
+  Time: '',  // For delayed Registory 
   amount:{
     realAmount:0,
     discount:0,

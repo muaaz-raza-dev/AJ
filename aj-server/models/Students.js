@@ -25,6 +25,8 @@ const registerFormSchema = new mongoose.Schema({
   DOA: { type: String, required: true }, // Consider using Date type if you store actual dates
   CurrentClass: { type: ObjectId, required: true , ref:"Classes" },
   PolioPermission: { type: Boolean, } ,
+  TerminateEnrollment:{type:Boolean,default:false},
+  TerminationDate:{type:Date}
 }, { timestamps: true });
 
 module.exports = mongoose.model('Students', registerFormSchema);

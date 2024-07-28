@@ -19,7 +19,6 @@ const AnalyzePaymentHistory = async(PaymentConfig,feeFrequency,student) => {
 
 async function CalculateOneTimeFeeHistory (studentInfo){
     let History = []
-    console.log(studentInfo , "Hello");
     if(studentInfo.ConsiderOneTimeFee){
     let OneTimeFees = await OneTimeFee.find({session:studentInfo.firstSession,isDeprecated:false})
     let totalTransactions = await CalculateTotalTransactions(studentInfo._id.toString(),OneTimeFees.map(e=>e._id.toString()),"onetime-fees")

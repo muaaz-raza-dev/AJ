@@ -4,6 +4,7 @@ const bcrypt = require("bcryptjs");
 const {StatusCodes:{OK}}= require("http-status-codes");
 const Respond = require("../Helpers/ResponseHandler");
 const {GlobalRestrictionValidator,UserSpecificRestrictionValidator, isLogOutRequired} = require("./utils/Auth/GlobalRestrictionValidator");
+const HandleJWTToken = require("../Helpers/HandleTokenExpiry");
 let secretKey =process.env.jwt_Secret
 async function LoginController  (req,res){
 let {usernameOrEmail, password}  =req.body
@@ -45,9 +46,10 @@ catch(err){
 
 async function VerificationController (req,res){
     try {
-        let token = req.header("auth-token")
-        let decodedToken = jwt.verify(token, secretKey)
-        if(!decodedToken&&token) res.status(403).json({success:false, message:"Session Expired . Re-login into your account ."})
+        let token = req.header("auth-token") 
+        if(!token) res.status(401).json({ success: false, message: "Try with valid credentials" });
+        let {decodedToken,response} =  HandleJWTToken(token,res)
+        if(!decodedToken&&token) return response
         let user = await User.findById(decodedToken.userId)
         if (user) {
         let isRistricted = false

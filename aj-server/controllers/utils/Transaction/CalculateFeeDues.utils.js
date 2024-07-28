@@ -62,11 +62,17 @@ SessionPaymentConfigs.forEach(config=>{
           if(pay.isPayment&&!isPaid){
             let paymentDate = moment (pay.paymentDate)
             let DOA = moment (new Date(studentInfo.DOA).toISOString())
-            if(pay.isPayment &&paymentDate.isSameOrBefore(moment())  ){ 
-              if(paymentDate.year() ==DOA.year() && paymentDate.month>= DOA.month) {
+            if(paymentDate.isSameOrBefore(moment())  ){ 
+              if(paymentDate.year()==DOA.year() ) {
+                if( paymentDate.month()>= DOA.month()) {
                 Dues.push({_id:config._id, feeTitle:config.feeTitle, dueDate:pay.dueDate,feeFrequency:config.feeFrequency,
                   amount:amount,session:config.session,class:ClassSessionPair[config.session.toString()],month:pay.month,year:pay.year})
                 }
+              }
+                else if(DOA.year() <= paymentDate.year()) {
+                Dues.push({_id:config._id, feeTitle:config.feeTitle, dueDate:pay.dueDate,feeFrequency:config.feeFrequency,
+                  amount:amount,session:config.session,class:ClassSessionPair[config.session.toString()],month:pay.month,year:pay.year})
+              }
               }
           }
       })    
@@ -81,7 +87,6 @@ SessionPaymentConfigs.forEach(config=>{
   }
 
 })
-
 return Dues
 
 }
