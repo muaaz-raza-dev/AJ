@@ -6,7 +6,7 @@ import { IstudentShort } from "@/app/Types/IstudentsDir.t"
 const Teacher_Details = () => {
   let Students = useAppSelector(s=>s.classDetailed.payload.Students)
   return (
-    <div className='w-[35%] flex flex-col gap-2 '>
+    <div className='w-[35%] max-md:w-full flex flex-col max-md:flex-col-reverse gap-2 '>
     <Notes_send/>
     <div className="flex bg-[var(--box)] rounded-md flex-col gap-7 p-4">
 

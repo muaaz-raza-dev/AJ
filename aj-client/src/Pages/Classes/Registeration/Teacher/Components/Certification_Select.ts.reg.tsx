@@ -29,7 +29,7 @@ const Certification_Select = () => {
   return (
     <LabelWrapper required label="Certifications" className="w-full ">
         <section className="w-full flex gap-2 flex-col">
-        <div className="flex gap-x-2 w-[50%]">
+        <div className="flex gap-x-2 w-[50%] max-sm:w-full">
         <input value={Options.input} type="text" placeholder="Iot & Robotics" id="Certifications"  
     className=" border rounded-md  w-[95%] p-2  border-[#8080806b] focus:border-dark dark:bg-darker dark:border-darker dark:text-white  transition-all outline-none "
     onChange={handleInput}

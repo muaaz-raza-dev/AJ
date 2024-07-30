@@ -16,7 +16,7 @@ UpdateState(Init.Details)
 }, [Init])
   return (
     <div className="w-full items-center justify-end gap-x-2 flex">
-      <button type="submit" className={`rounded-xl transition-colors duration-150 w-28 py-1.5 bg-[var(--dark)] border-[var(--dark)] border text-white hFont  ${edit&&!changes&&"grayscale"} `} disabled={isLoading||(edit&&!changes)}>
+      <button type="submit" className={`rounded-xl transition-colors duration-150 w-28 max-md:w-full py-1.5 bg-[var(--dark)] border-[var(--dark)] border text-white hFont  ${edit&&!changes&&"grayscale"} `} disabled={isLoading||(edit&&!changes)}>
         {isLoading? <RequestLoading size="22" stroke="2"/>:edit?" Update ":"Register"}
       </button>
     </div>

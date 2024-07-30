@@ -3,9 +3,9 @@ import AppLoader from '../Loaders/AppLoader'
 
 const CustomSuspense:FC<{children:ReactNode}> = ({children}) => {
   return (
-    <Suspense fallback={<AppLoader/>}>
+<Suspense fallback={<AppLoader/>}>
 {children}
-    </Suspense>
+</Suspense>
   )
 }
 

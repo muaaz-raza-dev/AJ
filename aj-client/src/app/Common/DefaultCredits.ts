@@ -4,6 +4,7 @@ export let CookieKey =import.meta.env.VITE_APP_SECRET_COOKIE_KEY
 
 export let DefaultCredits:Icredits = {
     Info:{
+        photo:"",
         _id:"",
         username: "",
         Name: "",

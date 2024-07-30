@@ -8,7 +8,6 @@ import {
     SelectValue,
   } from "@/shdcn/components/ui/select"
 import {Button} from "@/shdcn/components/ui/button"
-import { MdFormatListBulletedAdd } from "react-icons/md"
 import { Link } from "react-router-dom"
 import useFilterTeachers from "@/Hooks/Teacher&Class/useFilterTeachers"
 import { RedDashFilters } from "@/app/Slices/DashboardSlice"
@@ -17,7 +16,7 @@ import { FaAddressCard } from "react-icons/fa"
 const SpecialFilters = () => {
     let {selected} =useAppSelector(s=>s.dashboard.Filters.Sections)
   return (
- <>
+ <div className="flex justify-between gap-2">
  {
     selected == "Classes" ? <FilterBarClasses/> : <FilterBarTeachers/>
  }
@@ -28,7 +27,7 @@ const SpecialFilters = () => {
             <FaAddressCard />
             </Button>
             </Link>
- </>
+ </div>
   )
 }
 
@@ -42,7 +41,7 @@ const FilterBarClasses=()=>{
   }
     return  (  
         <Select value={Session.selected} onValueChange={handleFilter}>
-          <SelectTrigger className="w-[180px] dark:bg-dark dark:text-white focus:ring-0 border-2 bg-[var(--box)] border-[var(--dark)] relative" >
+          <SelectTrigger className="w-[180px] max-md:w-full dark:bg-dark  dark:text-white focus:ring-0 border-2  bg-[var(--box)] border-[var(--dark)] relative" >
             <p className="absolute -top-1  text-[0.67rem] font-medium text-dark text-center "> Session </p>
             <SelectValue defaultValue={Session.selected} className="border-0 focus:ring-0"  />
           </SelectTrigger>
@@ -69,7 +68,7 @@ const FilterBarTeachers = () =>{
   }
     return  (  
         <Select value={EmployementStatus.selected} onValueChange={handleChange}>
-          <SelectTrigger className="w-[180px] dark:bg-dark dark:text-white focus:ring-0 border-2 bg-[var(--box)] border-[var(--dark)] relative" >
+          <SelectTrigger className="w-[180px] max-md:w-full dark:bg-dark dark:text-white focus:ring-0 border-2  bg-[var(--box)] border-[var(--dark)] relative" >
             <p className="absolute -top-1  text-[0.67rem] font-medium text-dark"> Employement Status </p>
             <SelectValue defaultValue={EmployementStatus.selected} className="border-0 focus:ring-0"  />
           </SelectTrigger>

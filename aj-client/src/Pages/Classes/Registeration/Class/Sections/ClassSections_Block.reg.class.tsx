@@ -16,7 +16,7 @@ const ClassSections_Block: FC<{ index: number }> = ({ index }) => {       //? in
   
   return (
     <RegSectionHeader dark label={`Section ${index+1} details`} deleteBtn={sections.length!=1} onDelete={DeleteSection}>
-      <LabelWrapper required label="Section name">
+      <LabelWrapper required label="Section name"  className="max-sm:w-full">
         <CustomInputs_Reg
           formContext={form}
           placeholder="e.g A, Olive etc"
@@ -25,7 +25,7 @@ const ClassSections_Block: FC<{ index: number }> = ({ index }) => {       //? in
           field_name={`sections[${index}].name`}
         />
       </LabelWrapper>
-      <LabelWrapper required label="Capacity of students">
+      <LabelWrapper label="Capacity of students"  className="max-sm:w-full">
         <CustomInputs_Reg
           formContext={form}
           placeholder="120"
@@ -34,7 +34,7 @@ const ClassSections_Block: FC<{ index: number }> = ({ index }) => {       //? in
           field_name={`sections[${index}].capacity`}
         />
       </LabelWrapper>
-      <LabelWrapper required label="Date of section start">
+      <LabelWrapper required label="Date of section start"  className="max-sm:w-full">
         <SectionStartDate_Comp section_index={index}/>
 </LabelWrapper>
       <Class_Teacher_Selections index={index}/> 

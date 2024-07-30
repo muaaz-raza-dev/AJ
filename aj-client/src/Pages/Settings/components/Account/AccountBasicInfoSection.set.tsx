@@ -13,13 +13,13 @@ const AccountBasicInfoSection = () => {
     <>
    <ProfilePhotoResetComp/>
     <SettingsLabelWrapper label="Username" description="Unique identity of your account .">
-    <div className="min-w-[40%] flex  gap-4">
+    <div className="min-w-[60%]  md:min-w-[40%] flex  gap-4">
        <UsernameField />
     </div>
 </SettingsLabelWrapper>
 <SettingsLabelWrapper label="Account Role" >
-    <div className="min-w-[40%] flex  gap-4">
-        <Input className='dark:bg-dark dark:border-none dark:text-white' value={Role} />
+    <div className="min-w-[60%] md:min-w-[40%]  flex  gap-4 ">
+        <Input className='dark:bg-dark dark:border-none  dark:text-white' value={Role} />
 </div>
 </SettingsLabelWrapper>
     </>
@@ -46,7 +46,7 @@ const UsernameField = ()=>{
   },1000)
  
 return  (<div className="flex items-center dark:bg-dark dark:border-none dark:text-white box-border bg-[var(--box)] gap-1 border border-[#8080806b] rounded-md  w-full">
-      <Input value={username} onChange={({target:{value}})=>{setValue("Info.username",value);setloading(true);debounced(value)}} placeholder="@Jeaset" className='border-none outline-none dark:bg-dark dark:border-none dark:text-white focus:outline-0 focus:ring-0 focus-within:ring-0'  />
+      <Input value={username} onChange={({target:{value}})=>{setValue("Info.username",value);setloading(true);debounced(value)}} placeholder="@Jeaset" className='border-none outline-none dark:bg-dark dark:border-none dark:text-white focus:outline-0 focus:ring-0 focus-within:ring-0 max-md:text-base'  />
 <div className="flex w-[15%] items-center justify-end px-6">
 <ValidationComp loading={loading} username={username} vData={vData} data={data} isLoading={isLoading} />
 </div>

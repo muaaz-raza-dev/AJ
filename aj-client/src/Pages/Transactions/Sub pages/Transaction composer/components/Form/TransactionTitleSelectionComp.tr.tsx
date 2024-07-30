@@ -39,9 +39,8 @@ if(paymentType=="Custom"){
     )
 }
 else{
-    console.log("I am here" ,watch());
     return (
-        <CustomSelect_Reg className='antd-selectBarDark'
+        <CustomSelect_Reg className='antd-selectBarDark min-w-36'
         setState={handlePurposeSelection} state={paymentConfigId} optimumData={Purposes} />)
     }
 }

@@ -21,8 +21,8 @@ const TransactionDuesDetailsSection = () => {
         {
             data &&
             Object.entries(data).map(([id,docs])=> (
-              <div key={id}  className="w-[32%] shadow dark:bg-dark  flex flex-col min-h-28 p-2 px-4 rounded-lg   gap-1 bg-[var(--box)]">
-                <div className="font-bold text-base flex justify-between rounded-md  h-[30%]">
+              <div key={id}  className="w-[32%] max-lg:w-[48%] max-sm:w-full shadow dark:bg-dark  flex flex-col min-h-28 p-2 px-4 rounded-lg   gap-1 bg-[var(--box)]">
+                <div className="font-bold text-base flex justify-between rounded-md  min-h-[30%] ">
                     <h1>
                     {docs[0].feeTitle} {docs[0].feeFrequency!="One Time"&&`(${Sessions[docs[0].session]})`}
                     </h1>

@@ -18,10 +18,7 @@ const EachYearlyHistoryComp:FC<{data:IfeeHistory}> = ({data})  =>{
   let handleClick = ()=>{
     if(data.transactionId && data.status =="Paid") {navigate(`/transactions/transaction/${data.transactionId}`)}
   }
-  return <div onClick={handleClick} className="w-[50%] min-h-24  p-2 bg-[var(--primary)]  shadow text-dark dark:bg-darker dark:text-white  rounded-md flex flex-col gap-1">
-    {/* <div className="w-full p-2 bg-dark rounded-md text-white hFont font-semibold text-lg">
-        Grinds 2024-2025
-    </div> */}
+  return <div onClick={handleClick} className="w-[49%] min-h-24 max-sm:w-full  p-2 bg-[var(--primary)]  shadow text-dark dark:bg-darker dark:text-white  rounded-md flex flex-col gap-1">
     <div className="flex gap-2 justify-between py-1 px-2">
   <h1 className="text-xl hFont font-semibold">{Sessions[data.session]}</h1>
     <PaymentStatusComp status={data.status}/>

@@ -7,11 +7,11 @@ const queryClient = new QueryClient({})
 function App() {
   
   return (
-    <QueryClientProvider client={queryClient}>
+<QueryClientProvider client={queryClient}>
 <BrowserRouter>
 <Toaster/>
   <AJFile/>
-  <iframe hidden id='PDFView' ></iframe> {/* // ? to print the pdfs */}
+<iframe hidden id='PDFView' ></iframe> {/* // ? to print the pdfs */}
   </BrowserRouter>
   </QueryClientProvider>
   )

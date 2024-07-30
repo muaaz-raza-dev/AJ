@@ -1,5 +1,5 @@
 import PhotoUploadCloudinary from '@/Api/Photo/PhotoUploadCloudinary.api';
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useFormContext } from 'react-hook-form';
 import toast from 'react-hot-toast';
 

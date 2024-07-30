@@ -6,7 +6,7 @@ const HeaderTransactionDetail = () => {
   let {data  } = useFetchTransactionDetailed()
   let q =data?.payload 
   return (
-      <div className="flex justify-between items-center bg-[var(--box)] dark:bg-darker dark:text-white p-2 px-4 rounded-md">
+      <div className="flex justify-between md:items-center bg-[var(--box)] gap-4 max-md:flex-col dark:bg-darker dark:text-white p-2 md:px-4 rounded-md">
     <section className="flex flex-col justify-center gap-2 w-full">
     <div className="flex gap-2 items-center">
     <IoReceiptSharp  />

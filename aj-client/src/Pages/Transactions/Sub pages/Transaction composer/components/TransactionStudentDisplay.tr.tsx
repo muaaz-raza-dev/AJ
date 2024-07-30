@@ -12,8 +12,8 @@ const TransactionStudentDisplay = () => {
   return (
     <>
       {!isLoading && Ld.size(student) != 0 ? (
-        <div className="flex gap-x-4 w-full">
-          <div className="flex shadow-inner border-2 dark:border-dark gap-2 rounded-md px-4 py-4  w-[50%] ">
+        <div className="flex gap-x-4 gap-2 w-full max-md:flex-wrap">
+          <div className="flex shadow-inner border-2 dark:border-dark gap-2 rounded-md px-4 py-4  w-[50%] max-md:w-full">
             <div className="w-[20%] h-full center aspect-square rounded ">
               {student?.photo ? (
                 <img
@@ -50,7 +50,7 @@ const TransactionStudentDisplay = () => {
             </div>
           </div>
           {/* //! Monthly Fee Record */}
-          <div className="flex shadow-inner border-2 dark:border-dark  gap-2 rounded px-4 py-4  w-[50%] ">
+          <div className="flex shadow-inner border-2 dark:border-dark  gap-2 rounded px-4 py-4  w-[50%] max-md:w-full">
             <div className="w-full flex flex-col gap-2">
               <div className="flex gap-x-2 hFont text-xs font-semibold">
                 <h1 className="text-lg"> {Class} Class  Details ( Session Based ) </h1>

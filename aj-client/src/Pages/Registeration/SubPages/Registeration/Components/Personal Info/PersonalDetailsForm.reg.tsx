@@ -7,7 +7,7 @@ import { BiPhone } from "react-icons/bi";
 const RegPersonalDetailsForm = () => {
   let { control ,setValue} = useFormContext();
   return (
-    <div className="flex w-full flex-wrap gap-x-4 gap-y-6">
+    <div className="flex w-full  flex-wrap  gap-x-4 gap-y-6">
    <RegLabelWrapper className="w-[48%] self-end" title="First Name">
         <Controller
           rules={{required:"First Name is required"}}

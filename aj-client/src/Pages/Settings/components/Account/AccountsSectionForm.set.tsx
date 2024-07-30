@@ -10,19 +10,19 @@ import useResetCredentials from "@/Hooks/Settings/useResetCredentials"
 const AccountsSectionForm = () => {
     let form  = useForm<IaccountInfo>({defaultValues:defaultAccountInfo})
     let {isLoading} =useGetAccountInfo(form.reset)
-    let {mutate} = useResetCredentials(form.reset)
+    let {mutate} = useResetCredentials()
     let formSubmit  :SubmitHandler<IaccountInfo> = (data) =>{
         mutate({currentPassword:data?.Passwords?.currentPassword,newPassword:data?.Passwords?.newPassword,isUpdatePassword:data.isUpdatePassword,username:data.Info.username})
       }
   return (
     <FormProvider {...form}>
-        {isLoading&&<Fetching_Request/>}
-    <form className="flex flex-col gap-3 w-full" onSubmit={form.handleSubmit(formSubmit)}>
+{isLoading&&<Fetching_Request/>}
+<form className="flex flex-col gap-3 w-full px-2" onSubmit={form.handleSubmit(formSubmit)}>
 <AccountBasicInfoSection/>
 <AccountPasswordInfoSection/>
 <AccountInfoFormSubmit/>
-    </form>
-    </FormProvider>
+</form>
+</FormProvider>
   )
 }
 

@@ -12,23 +12,22 @@ const Schedule_Details = () => {
     <div className="flex flex-col w-full bg-[var(--box)] rounded-md p-6 gap-4">
           {/* Filter Bar */}
         <FilterBar/>
-
         <Separator  />
 		  <div className="flex gap-4 flex-wrap">
 
         {
 
           payload.map((data)=>{
-            return <div className=" flex flex-col w-[30%] rounded-md  ">
+            return <div className=" flex flex-col w-[30%] max-md:w-[48%] rounded-md  ">
                   <div className="flex w-full gap-2 flex-wrap">
 									<div className="p-2">
-										<h1 className="hFont text-lg font-semibold text-gray-600">{data.subject}</h1>
+										<h1 className="hFont text-lg whitespace-nowrap    font-semibold text-gray-600">{data.subject}</h1>
                     {
                       data.Teachers.map((teacher:Iteacher)=>{
                         return <div className="flex gap-2 items-center">
                           <div className="flex  gap-1">
-                            <h1 className="hFont  font-semibold leading-tight">{teacher?.firstName}</h1>
-                            <h1 className="hFont  font-semibold leading-tight">{teacher?.lastName}</h1>
+                            <h1 className="hFont whitespace-nowrap    font-semibold leading-tight">{teacher?.firstName}</h1>
+                            <h1 className="hFont  whitespace-nowrap  font-semibold leading-tight">{teacher?.lastName}</h1>
                           </div>
                           <img src={teacher?.photo} className="avatar avatar-sm w-6 h-6 rounded-full" alt=""/>
                         </div>

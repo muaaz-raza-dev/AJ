@@ -7,15 +7,15 @@ const DynamicSections_Reg = () => {
   let form =useFormContext()
   let feeFrequecy = form.watch("payload.feeFrequency");
     return (
-        <div className={`w-[60%]  flex flex-col gap-4 rounded-lg transition-all `}>
-          <DynamicCLass_Reg/>
-          {feeFrequecy!="One Time"&&
-          <>
-            <MonthsPay_Red/>
-            <Payment_Dates_Reg_Sections/>
-            </>
-          }
-         </div>
+ <div className={`w-[60%] max-md:w-full  flex flex-col gap-4 rounded-lg transition-all `}>
+ <DynamicCLass_Reg/>
+ {feeFrequecy!="One Time"&&
+ <>
+ <MonthsPay_Red/>
+ <Payment_Dates_Reg_Sections/>
+ </>
+ }
+ </div>
        
     )
 }

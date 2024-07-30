@@ -14,8 +14,8 @@ const AccountInfoFormSubmit = () => {
     if(isLoaded) UpdateState({...watch("Info"),...watch("Passwords")})
     }, [isLoaded])
   return (
-<div className="flex items-center  justify-end py-4  gap-3  w-[90%]">
-<Button  onClick={()=>setValue("isUpdatePassword",!isUpdatePassword)} type="button" className="text-white active:scale-95 transition-transform bg-darker hover:bg-darker">Update Password</Button>
+<div className="flex items-center  justify-end py-4  gap-3  w-[90%] max-md:w-full">
+<Button  onClick={()=>setValue("isUpdatePassword",!isUpdatePassword)} type="button" className=" active:scale-95 transition-transform !bg-box border border-darker text-dark hover:bg-darker">Update Password</Button>
 <Button disabled={isUpdatePassword ? false:!isVerified||!changes } className="text-white bg-dark hover:bg-dark">Update</Button>
 </div>
   )

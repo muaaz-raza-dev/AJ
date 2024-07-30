@@ -62,7 +62,7 @@ const EachClassAmountCollapsable:FC<{feild_name:string;classId?:string;class_nam
     form.setValue(`${Feild_parent}.classId`,classId)
   }, [])
     
-    return  <Collapsible className="w-[49%] rounded-lg p-1  px-4 h-max transition-all" >
+    return  <Collapsible className="w-[49%] max-md:w-full rounded-lg p-1  px-4 h-max transition-all" >
     <CollapsibleTrigger className="w-full  !gap-y-1 items-center flex  py-1  justify-between">
     <h1 className=" text-gray-600 dark:text-gray-300 !font-bold hFont  ">Class {class_name} (Amount)</h1>
     <button type="button" className="hover:bg-light dark:hover:text-dark text-black dark:text-white rounded-md px-2 transition-colors"> 

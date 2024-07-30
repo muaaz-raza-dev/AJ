@@ -19,7 +19,7 @@ const useRegisterSession = (Reset?:()=>void) => {
   });
 };
 
-export const useUpdateSession = (Reset?:()=>void) => {
+export const useUpdateSession = () => {
   let id =useParams().id || ""
   return useMutation({
     mutationKey: ["register", "session"],
@@ -27,7 +27,6 @@ export const useUpdateSession = (Reset?:()=>void) => {
     onSuccess(data) {
       if(data.success) toast.success("Session updated Successfully 🎊");
       else toast.error("An error occured Try again later!");
-      Reset && Reset()
     },
     onError() {
       toast.error("An error occured Try again later!");

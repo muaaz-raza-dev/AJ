@@ -36,7 +36,7 @@ let {Student:{FirstName,fatherName,LastName,Address,DOA,DOB,Gender,NewAdmission,
 
 export const EachKVBlock:FC<{label:string;value:string|any;link?:string;onClick?:(val:string)=>void}>  =({label,value,link,onClick})=>{
     if(value) {
-        return <div onDoubleClick={()=>{onClick&&onClick(value)}} className="flex flex-col min-w-[32%] font-medium border border-gray-200 rounded-md px-4 py-2 cursor-pointer shadow-sm transition duration-300 dark:border-dark hover:bg-gray-100 dark:hover:bg-dark">
+        return <div onDoubleClick={()=>{onClick&&onClick(value)}} className="flex flex-col min-w-[32%] max-md:min-w-[48%] font-medium border border-gray-200 rounded-md px-4 py-2 cursor-pointer shadow-sm transition duration-300 dark:border-dark hover:bg-gray-100 dark:hover:bg-dark">
     <h2 className="text-gray-500  text-[0.82rem] leading-tight">{label} :</h2>
     {link?
     <a href={link} className="text-blue-500 underline leading-tight">{value}</a>:

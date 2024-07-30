@@ -13,7 +13,7 @@ const TransactionRow = ({data}:{data:IShortTransactions}) => {
 {data.Invoice}
 </div>
 </TableCell>
-<TableCell className=' font-bold cursor-pointer'>
+<TableCell className=' font-bold text-sm whitespace-nowrap cursor-pointer'>
 <Tooltip title={data?.isDelayedRegistory? moment(data.Time).format('D MMMM Y ') : moment(data.Time).format('D MMMM Y hh:mm:ss a')}>
 {moment(data.Time).format('D MMMM Y')}
 </Tooltip>

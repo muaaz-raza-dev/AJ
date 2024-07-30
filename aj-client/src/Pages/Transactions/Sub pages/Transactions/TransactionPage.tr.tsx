@@ -6,7 +6,7 @@ import TransactionTable from "./components/Table/TransactionTable.tr"
 const TransactionPage = () => {
   useReadTransactionsMeta()
   return (
-    <main className="flex-col flex gap-y-4 py-3">
+    <main className="flex-col flex gap-y-4 py-3 max-md:py-0">
       <TransactionFilterBar/>
       <TransactionTable/>
       <TransactionFooter/>

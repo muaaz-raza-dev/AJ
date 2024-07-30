@@ -10,7 +10,8 @@ const MonthlyFeeHistoryComp = () => {
   let Classes = useAppSelector(s=>s.global.Classes)
   useEffect(() => { setstate(lod.groupBy(FeeHistory,(({year})=>year)))}, [FeeHistory])
   return (
-    <div className="flex gap-2 w-full  items-start flex-col bg-[var(--box)] dark:bg-dark">
+    <div className="flex gap-2 w-full  items-start flex-col bg-box
+     dark:bg-dark">
       {
         Object.entries(state).map(([year,doc])=>{
           return( <>
@@ -53,7 +54,7 @@ const EachMonthlyFeeHistoryComp:FC<{data:IfeeHistory}> = ({data}) =>{
       let handleClick = ()=>{
         if(data.transactionId && data.status =="Paid") {navigate(`/transactions/transaction/${data.transactionId}`)}
       }
-    return <div onClick={handleClick} className="w-[24%] h-28 p-2 bg-[var(--primary)]  shadow text-dark dark:text-light dark:bg-darker  rounded-md flex flex-col gap-1">
+    return <div onClick={handleClick} className="w-[24%] max-lg:w-[32%] max-md:w-[49%] max-sm:w-full h-28 p-2 bg-[var(--primary)]  shadow text-dark dark:text-light dark:bg-darker  rounded-md flex flex-col gap-1">
       <div className="flex gap-2 justify-between py-1">
     <h1 className="text-xl hFont font-semibold">{data.month}</h1>
     <PaymentStatusComp status={data.status}/>

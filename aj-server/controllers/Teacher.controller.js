@@ -47,7 +47,6 @@ delete Payload.username
 try {
   let MemberAccount =await User.findOne({StaffId})
   let password =await bcryptjs.compare(Payload.password,MemberAccount.password)
-  console.log(password,Payload);
 if(!Payload.password||password) { await User.findOneAndUpdate({StaffId},{...Payload,isLogOutRequired:true})
     return true
 }
@@ -166,7 +165,7 @@ const FetchTeacherRaw = async (req,res)=>{
   if(!id||id.length!=24) return res.status(404).json({message:"Invlaid Id"})
     let teacher = await Teacher.findById(id).select("-__v -createdAt -updatedAt ");
 if(!teacher) return res.status(404).json({message:"Teacher not found"})
-  let user = await User.findOne({Teacher_Id:id}).select("-password -__v -createdAt -updatedAt")
+  let user = await User.findOne({StaffId:id}).select("-password -__v -createdAt -updatedAt")
   Respond({ res, message: "All teachers", payload:{...teacher._doc,account_Details:user}, success: true });
 }
 
@@ -239,7 +238,6 @@ const UpdateInfo_Personal = async(req,res)=>{
   let { payload } = req.body;
     try {
       let user = await  User.findById(req.AdminId)
-      console.log(user,payload);
       if(user.Role!="cheif admin"){
         await  Teacher.findByIdAndUpdate(user.StaffId,payload,{new: true} )
       }

@@ -14,21 +14,21 @@ const TransactionPurposeTableRow: FC<{ index: number; data: ItransactionField }>
   let Field_name = `Transactions[${index}]`
   return (
     <TableRow >
-      <TableCell className="w-[1%] ">
+      <TableCell className="w-max ">
         <CustomSwitch fieldName={Field_name}/>
       </TableCell>
-      <TableCell className="w-[15%] ">
+      <TableCell className="w-max ">
  <TransactionTitleSelectionComp fieldName={Field_name}/>      
       </TableCell>
-      <TableCell className="w-[25%] ">
+      <TableCell className="w-max ">
         <div className="flex gap-1 ">
       <TransactionMonthSelect  fieldName={Field_name} />
         </div>
       </TableCell>
-      <TableCell className="w-[10%]  ">
+      <TableCell className="w-max  ">
       <CustomAmountSelection fieldName={Field_name}/>
       </TableCell>
-      <TableCell className="w-[20%]">
+      <TableCell className="w-max">
         <div className="flex gap-1 center">
         <CustomDiscountComp fieldName={Field_name}/>
         </div>
@@ -36,7 +36,7 @@ const TransactionPurposeTableRow: FC<{ index: number; data: ItransactionField }>
       <TableCell className="">
         <TotalAmountSelection fieldName={Field_name}/>
       </TableCell>
-      <TableCell className="w-[10%]">
+      <TableCell className="w-max">
         <DeleteTransactionBlock index={index}/>
       </TableCell>
     </TableRow>

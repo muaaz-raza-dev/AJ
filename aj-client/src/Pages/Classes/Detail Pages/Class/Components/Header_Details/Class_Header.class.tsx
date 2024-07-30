@@ -7,11 +7,13 @@ const Class_Header = () => {
     <div className="flex flex-col gap-y-4 w-full items-center bg-[var(--box)] pb-2">
       <div className="h-36 rounded-md pt-1 bg-dark w-full flex  justify-between">
         {/* Main Heading */}
-        <div className="w-[30%] center">
-          <h1 className="hFont text-white font-semibold text-4xl">{name}</h1>
+        <div className="w-[30%] max-md:w-full  center">
+          <h1 className="hFont text-white font-semibold text-4xl gap-4 flex max-md:text-6xl">{name}
+            <p className="max-md:visible md:hidden"> Class</p>
+          </h1>
         </div>
         {/* // Desing */}
-        <div className="flex flex-row-reverse items-end mx-8">
+        <div className="flex flex-row-reverse items-end mx-8 max-md:hidden">
           <div className="ml-[-150px]">
             <svg
               width="264"

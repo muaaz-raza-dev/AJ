@@ -197,3 +197,39 @@ width: 0.5rem;
 .antd-selectBarDark .ant-select-selector {
   @apply dark:bg-dark dark:border-darker rounded-md dark:text-white ring-0 border-transparent outline-none dark:placeholder:text-gray-600
   }
+
+
+/* Media screen for screens with width less than or equal to 480px */
+@media screen and (max-width: 480px) {
+  html {
+    font-size: 80%;
+  }
+}
+
+/* Media screen for screens with width between 481px and 768px */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  html {
+    font-size: 85%;
+  }
+}
+
+/* Media screen for screens with width between 769px and 1024px */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  html {
+    font-size: 90%;
+  }
+}
+
+/* Media screen for screens with width between 1025px and 1280px */
+@media screen and (min-width: 1025px) and (max-width: 1280px) {
+  html {
+    font-size: 95%;
+  }
+}
+
+/* Media screen for screens with width greater than or equal to 1281px */
+@media screen and (min-width: 1281px) {
+  html {
+    font-size: 100%;
+  }
+}

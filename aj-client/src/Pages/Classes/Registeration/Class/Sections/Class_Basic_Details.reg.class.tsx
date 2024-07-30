@@ -17,10 +17,10 @@ const Class_Basic_Details = () => {
     }
     return (
     <RegSectionHeader dark label={`Class Details`}>
-    <LabelWrapper required label="Class Name">
+    <LabelWrapper required label="Class Name" className="max-sm:w-full">
       <CustomInputs_Reg placeholder="e.g 1st, nursery" required formContext={form} id="Class Name"  field_name="name"/>
     </LabelWrapper>
-    <LabelWrapper required label="Date of class start">
+    <LabelWrapper required label="Date of class start"  className="max-sm:w-full">
     <CustomDateSelector_Reg formValue={start_date} onChange={handleStartDate} label="Pick date of start class this year" className="w-full"/>
     </LabelWrapper>
 <Session_Selection />

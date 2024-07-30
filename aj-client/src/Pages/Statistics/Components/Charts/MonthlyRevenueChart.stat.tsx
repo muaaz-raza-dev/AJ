@@ -1,4 +1,4 @@
-import {  Bar, BarChart, CartesianGrid, LabelList, Rectangle, XAxis, YAxis } from "recharts"
+import {  Bar, BarChart, CartesianGrid, LabelList, Rectangle, XAxis } from "recharts"
 import {
   Card,
   CardContent,
@@ -41,16 +41,16 @@ const MonthlyRevenueChart = () => {
   let {isLoading} =useAppSelector(s=>s.stats.filters.monthly)
   
   return (
-    <div className="w-[50%] py-6 px-4 bg-box dark:bg-dark dark:text-white rounded shadow-md p-2">
+    <div className="w-[50%] max-lg:w-full py-6 px-4 bg-box  rounded shadow-md p-2">
 <FilterBarAndReport/>
 {isLoading ?
 <SkeletonChartsLoading/>
  : 
-<Card className="border-none dark:bg-dark dark:text-white">
+<Card className="border-none dark:bg-box ">
           <CardHeader>
             <CardDescription className="dark:text-gray-400">
     Avg per month
-    <h3 className="font-bold text-3xl leading-tight dark:text-white text-dark">{average} PKR</h3>
+    <h3 className="font-bold text-3xl leading-tight text-dark">{average} PKR</h3>
             </CardDescription>
           </CardHeader>
           <CardContent className="p-0">
@@ -101,12 +101,12 @@ const FilterBarAndReport = ()=>{
   const handleChange = (type:string)=>{
     dispatch(RedstInsertFilters({type:"monthly",InsertType:"selected",selected:type,isLoading:true}))
   }
- return <div className="flex justify-start w-full  gap-8">
- <h1 className="text-dark text-xl dark:text-white font-bold">Revenue Report </h1>
+ return <div className="flex justify-between items-center w-full  gap-8 max-lg:gap-4 flex-wrap">
+ <h1 className="text-dark text-xl  font-bold  whitespace-nowrap ">Revenue Report </h1>
  
- <div className="flex gap-2 w-[60%] items-center">
+ <div className="flex gap-2  items-center flex-wrap justify-end">
   {available.map((t,index)=>(
-    <button key={`${t} ${index}`} disabled={isLoading} onClick={()=>handleChange(t)} className={`px-3 py-1 rounded-md text-sm  font-medium
+    <button key={`${t} ${index}`} disabled={isLoading} onClick={()=>handleChange(t)} className={`px-3 py-1 rounded-md text-sm  whitespace-nowrap   font-medium 
        ${t==selected ?" bg-dark text-light scale-95":"bg-light text-dark"}    `}>{t}</button>
   ))
   }

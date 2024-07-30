@@ -7,7 +7,7 @@ const Header = () => {
     if(isLoading) return <Fetching_Request />
     let q= data?.payload
   return (
-    <section className='flex gap-3 flex-wrap'>
+    <section className='flex gap-3 flex-wrap '>
         <CustomStatBox className='bg-[#e4e5f9] dark:bg-[#140d31]' label='Total Students'
          mainValue={q?.totalStudents.total?.toString()||''} subLabel='Since last year' svg='green' rate={q?.totalStudents.rate}/>
 

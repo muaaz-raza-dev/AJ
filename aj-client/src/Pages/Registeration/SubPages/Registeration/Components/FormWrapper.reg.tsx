@@ -7,7 +7,7 @@ const RegFormWrapper:FC<{children:ReactNode,title:string,className?:string}> = (
         {title}
         </h1>
       </header>
-      <main className={`px-3 py-2 ${className}`}>
+      <main className={`px-2 py-2 ${className}`}>
         {children}
       </main>
     </main>

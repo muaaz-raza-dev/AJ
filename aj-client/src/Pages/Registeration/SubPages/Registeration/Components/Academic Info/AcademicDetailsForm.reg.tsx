@@ -12,7 +12,7 @@ const RegAcademicDetailsForm: FC<{ edit?: boolean }> = ({ edit }) => {
   let Class  = watch("CurrentClass")
   let { Classes , Sections} = useAppSelector((state) => state.global);
   return (
-    <div className="flex w-full flex-wrap gap-x-4 gap-y-6">
+    <div className="flex w-full flex-wrap gap-x-4 gap-y-6 pb-4">
       <GRnoRegisterationFormField edit={edit} />
       <RegLabelWrapper className="w-[48%]" title="Roll no">
         <Controller

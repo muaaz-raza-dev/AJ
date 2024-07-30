@@ -13,7 +13,7 @@ const SummaryDetailsTrDetails = () => {
 <section className="flex  bg-[var(--box)] dark:bg-darker dark:text-white rounded-md p-4  flex-col gap-3 w-full">
     <h1 className="text-3xl hFont font-bold text-darker dark:text-white">Summary</h1>
     <Separator  className='h-0.5 bg-gray-200' />
-    <div className="flex gap-2 gap-y-5  w-full flex-wrap">
+    <div className="flex gap-2 gap-y-5 max-md:gap-y-2  w-full flex-wrap">
       {
         Object.entries(details).map(([label, value]) => 
           {
@@ -28,7 +28,7 @@ const SummaryDetailsTrDetails = () => {
   )
 }
 const EachDetailField :FC<{label:string;value:string}> = ({label,value})=>{
-    return <div className="flex min-w-[49%] gap-3 text-[1rem]">
+    return <div className="flex min-w-[49%] max-md:w-full  gap-3 text-[1rem]">
     <p className="text-gray-500 font-medium">{label} : </p>
     <p className=" font-semibold "> {value} </p>
 </div>

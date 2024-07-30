@@ -29,7 +29,6 @@ async function GRValidation(req, res) {
   let Student = await Students.findOne({ GRNO: req.body.GRNO }).select(
     "GRNO  _id FirstName Class "
   );
-  console.log(Student);
   if (Student) {
     res
       .status(400)

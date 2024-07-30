@@ -24,12 +24,13 @@ let Photo = watch("photo")
   
   }, [Photo])
   return (
-    <section className="w-[16%] flex flex-col gap-y-2 px-1">
+    <section className="w-[16%]   max-lg:w-full flex flex-col gap-y-2 px-1">
       <h1 className="DarkText dark:text-white hFont font-bold">Photo*</h1>
       <div
         {...getRootProps({
           className:
-           ` dropzone w-full aspect-square border-[var(--darker)] dark:border-dark   border-2 center `,
+           ` dropzone lg:w-full max-lg:w-[20%] max-md:w-[25%] max-sm:w-[35%] aspect-square border-[var(--darker)] 
+           border-dark   rounded border-2 center `,
         })}
       >
         <input {...getInputProps({ type: "file", })} />

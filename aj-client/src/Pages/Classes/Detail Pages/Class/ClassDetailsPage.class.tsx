@@ -18,8 +18,8 @@ const ClassDetailsPage = () => {
     );
   if (isLoading) return <StudentDetailedSkeletonLoader />;
   return (
-    <div className="w-full flex  gap-2 ">
-      <div className="flex w-[65%] flex-col gap-4">
+    <div className="w-full flex max-md:flex-col  gap-2 ">
+      <div className="flex w-[65%] max-md:w-full flex-col gap-4">
         <Class_Header />
         <Schedule_Details />
       </div>

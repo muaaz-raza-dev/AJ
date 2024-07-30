@@ -23,7 +23,7 @@ export const useFetchConfigDetailed = (reset:(payload:any)=>void) => {
       queryKey: ["Fetch", "Config" , id],
       queryFn: () =>{
         dispatch (RedLPFilters({label:"feeTypes",register:{isLoading:true}}))
-        return FetchConfigDetailed(id)
+        return FetchConfigDetailed(id||"")
       },
       refetchOnWindowFocus:false,
       staleTime: 1000 ,

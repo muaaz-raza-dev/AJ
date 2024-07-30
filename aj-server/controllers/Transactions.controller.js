@@ -70,7 +70,7 @@ async function ReadTransactions(req, res) {
   let Limit = process.env.TransactionPerRequest;
   let { transactionType, searchMode, count, Input: q } = req.body;
   try {
-    let Query = {};
+    let Query = {isCancelled:false};
 
     if (q) {
       if (searchMode == "Invoice") Query["Invoice"] = q;
@@ -94,14 +94,13 @@ async function ReadTransactions(req, res) {
     }
     let DataLength = await TransactionsScema.countDocuments(Query);
     let transactions = await TransactionsScema.find(Query)
-      .populate({ path: "Student", select: "FirstName LastName GRNO" })
-      .populate({ path: "RecievedBy", select: "Name" })
-      .skip(Limit * (count - 1))
-      .limit(Limit)
-      .sort("-Time");
+    .populate({ path: "Student", select: "FirstName LastName GRNO" })
+    .populate({ path: "RecievedBy", select: "Name" })
+    .skip(Limit * ( count - 1 ))
+    .limit(Limit)
+    .sort("-Time");
     res.json({ success: true, payload: transactions, DataLength, count });
   } catch (error) {
-    console.log(error);
     res.status(400).json({ message: error.message, success: false });
   }
 }
@@ -110,6 +109,7 @@ async function ReadTransactionsMeta(req, res) {
   let paymentConfigs = await CalculatePaymentConfigs();
   res.json({ payload: { paymentConfigs } });
 }
+
 async function SetTransactionConfig(req, res) {
   let { Monthly, Annual, dueDate } = req.body;
   try {

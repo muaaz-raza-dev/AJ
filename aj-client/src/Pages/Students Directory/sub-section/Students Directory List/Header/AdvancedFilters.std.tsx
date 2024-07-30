@@ -4,10 +4,11 @@ import NewStudentLink from "./NewStudentLink.std"
 
 const StudentAdvancedFilters = () => {
   return (
-    <div className='justify-self-end gap-x-2 items-center  flex'>
+    <div className='justify-self-end max-md:flex-wrap gap-2  gap-x-1 items-center flex '>
+
       <StudentClassSelect/>
       <StudentCheckboxFilters/>
-<     NewStudentLink/>
+      <NewStudentLink/>
 
       
 

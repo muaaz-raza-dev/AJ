@@ -10,12 +10,12 @@ const TransactionFilterSearch = () => {
   return (
          <div  className='flex  rounded-xl gap-x-1 w-full   items-center justify-center'>
       <div className="  bg-[var(--box)] border-2 w-[80%] border-[var(--dark)] dark:bg-darker   flex gap-x-1 px-2 rounded-md items-center">
-      <IoSearch className='text-[var(--dark)] dark:text-white' size={21}/>
+<IoSearch className='text-[var(--dark)] dark:text-white' size={21}/>
 <TranscationInputFilter/>
       </div>
       <Select  value={searchMode}  onValueChange={(e)=>dispatch(RedTransactionsFilters({searchMode:e}))}>
-  <SelectTrigger className="w-[150px]  dark:placeholder:text-gray-500 dark:bg-darker dark:text-white    focus:ring-0 focus:ring-offset-0 focus-visible:ring-transparent ring-offset-0 ring-0 outline-none border-l-0 border-2 border-[var(--dark)] rounded-md bg-[var(--box)] h-full relative">
-  <p className="absolute dark:text-gray-600 -top-0.5 text-sm text-[var(--dark)]  font-bold">Search Mode</p>
+  <SelectTrigger className="w-[150px] max-md:w-[30%] h-12    dark:placeholder:text-gray-500 dark:bg-darker dark:text-white    focus:ring-0 focus:ring-offset-0 focus-visible:ring-transparent ring-offset-0 ring-0 outline-none border-l-0 border-2 border-[var(--dark)] rounded-md bg-[var(--box)] ` relative">
+  <p className="absolute dark:text-gray-600 -top-0.5 text-xs text-gray-400  font-bold">Search Mode</p>
     <SelectValue placeholder="Invoice" defaultValue={"Invoice"} />
   </SelectTrigger>
   <SelectContent>

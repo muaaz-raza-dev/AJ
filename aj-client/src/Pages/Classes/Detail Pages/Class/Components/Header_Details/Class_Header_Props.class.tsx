@@ -9,7 +9,7 @@ const Class_Header_Props = () => {
   );
   return (
     <>
-      <div className="flex flex-wrap gap-1 w-[95%]">
+      <div className="flex flex-wrap gap-1 w-[95%] items-center">
         <div className="w-[32%]">
           <div className="">
             <ul className="flex gap-2 items-center">
@@ -40,14 +40,14 @@ const Class_Header_Props = () => {
           </div>
         </div>
 
-        <div className="w-[32%] flex gap-4 justify-end">
+        <div className="w-[32%] flex max-md:flex-col gap-4 justify-end">
           <Link
             to={"/sessions/"}
             className="bg-dark text-white h-max rounded font-bold hFont px-3 py-1 w-max"
           >
             {Session?.acedmic_year}
           </Link>
-  <Link to={`/dashboard/class/edit/${_id}`} className="bg-darker active:scale-95 transition-transform text-white h-max rounded font-bold hFont px-3 py-1 w-max">
+  <Link to={`/dashboard/class/edit/${_id}`} className="bg-darker max-md:hidden whitespace-nowrap active:scale-95 transition-transform text-white h-max rounded font-bold hFont px-3 py-1 w-max">
   Edit </Link>
         </div>
       </div>
@@ -74,7 +74,7 @@ const Class_Header_Props = () => {
 
       
 
-      <div className="  w-[95%] flex justify-between">
+      <div className="  w-[95%] flex flex-col gap-2  ">
         <div className="">
 
         <h1 className="hFont text-xl font-semibold pb-2">Subjects</h1>
@@ -89,6 +89,9 @@ const Class_Header_Props = () => {
           </div>
         </div>
       </div>
+        <Link to={`/dashboard/class/edit/${_id}`} className="bg-darker md:hidden whitespace-nowrap active:scale-95 transition-transform text-white h-max rounded-md font-bold hFont  py-2 text-center  w-full">
+        Edit Class Details
+        </Link>
 
     </>
   );

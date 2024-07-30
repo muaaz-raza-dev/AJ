@@ -13,7 +13,7 @@ let {Info:{Name,Role,photo}} = useAppSelector(s=>s.credits)
 let {ValidateRoute}= useActiveRoute()
 if(toggle){
   return (
-    <div className="md:w-full   flex gap-x-2 md:py-5 justify-between items-center">
+    <div className="md:w-full max-md:hidden   flex gap-x-2 md:py-5 justify-between items-center">
     <Space size={24}>
     <Badge  color='#a098ae'>
       <Avatar shape="circle" icon={<UserOutlined />} src={photo||"/images/sample.png"} />
@@ -41,7 +41,7 @@ if(toggle){
 }
 else {
   let ActiveClassName="!bg-[var(--light)] !text-[var(--dark)] !dark:text-[var(--ligth)] border-none rounded-md"
-  return  <div className='flex flex-col gap-2 w-full'>
+  return  <div className='flex flex-col gap-2 w-full  max-md:hidden'>
         <Link
           to={"/settings"}
           className={` w-full center transition-colors hover:bg-[var(--light)] hover:border-transparent hover:text-[var(--dark)]

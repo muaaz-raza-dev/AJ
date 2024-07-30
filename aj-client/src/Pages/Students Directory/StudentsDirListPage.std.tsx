@@ -7,9 +7,7 @@ import { useAppSelector } from "@/app/ReduxHooks";
 const StudentsDirListPage = () => {
   let {count} =useAppSelector(state=>state.StudentsDir)
   let {mutate} = useLoadStudents()(count)
-  useEffect(() => {
-    mutate(count)
-  }, []);
+  useEffect(()=>mutate(count) , []);
   return (
     <div className="w-full flex flex-col gap-y-4">
       <StudentsFilterHeader/>

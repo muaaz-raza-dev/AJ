@@ -11,7 +11,7 @@ const StudentsTableRow :FC<{data:IstudentShort}> = ({data}) => {
     let {Classes,Sections} = useAppSelector(s=>s.global)
   return (
     <TableRow >
-        <TableCell className=' text-base font-bold'>{data.FirstName} {data.LastName}</TableCell>
+        <TableCell className=' text-base font-bold whitespace-nowrap'>{data.FirstName} {data.LastName}</TableCell>
         <TableCell className='font-bold'>#{data.GRNO}</TableCell>
         <TableCell className=' font-semibold'>{data.fatherName}</TableCell>
         <TableCell className='font-bold'>{data.RollNo}</TableCell>

@@ -97,7 +97,7 @@ const TransactionComposerFooter: FC<{
             elm={"Confirm"}
             key={"Confirm"}
             isLoading={isLoading}
-            isPrint ={true}
+            isPrint ={false}
 
           />
       <button ref={button} hidden></button>

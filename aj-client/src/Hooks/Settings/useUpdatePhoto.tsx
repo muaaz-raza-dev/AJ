@@ -6,7 +6,7 @@ const useResetPhoto = () => {
     return useMutation({
       mutationKey: ["Photo update"],
       mutationFn: (photo:string) => UpdatePhoto(photo),
-      onSuccess(data) {
+      onSuccess() {
         toast.success("Profile photo is uploaded successfully 🙌")
       },
       onError() {

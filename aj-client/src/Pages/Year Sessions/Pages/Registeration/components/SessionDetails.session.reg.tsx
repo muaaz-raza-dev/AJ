@@ -12,7 +12,6 @@ const SessionDetails = () => {
     let handleEndDate = (value:string)=>{
       form.setValue("end_date",value)
     }
-
   return (
     <RegSectionHeader  label={"Session details"}>
     <LabelWrapper required label="Session's Name">

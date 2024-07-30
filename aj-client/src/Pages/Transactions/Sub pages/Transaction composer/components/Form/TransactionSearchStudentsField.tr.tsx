@@ -6,8 +6,6 @@ import { MdVerified } from "react-icons/md";
 import { FC, useState } from "react";
 import useSearchStudentswithGRNO from "@/Hooks/Transactions/useSearchStudentswithGRNO";
 import RegLabelWrapper from "@/Pages/Registeration/SubPages/Registeration/Components/LabelWrapper.reg";
-import { useFormContext } from "react-hook-form";
-import { ItransactionForm } from "@/app/Types/ItransactionForm";
 
 const TransactionSearchStudentsField: FC<{ transaction?: boolean }> = () => {
   let {
@@ -16,10 +14,7 @@ const TransactionSearchStudentsField: FC<{ transaction?: boolean }> = () => {
     data,
     isLoading
   } = useSearchStudentswithGRNO();
-  const form =useFormContext<ItransactionForm>()
-  let GRNO = form.watch("Student");
-  const [Inputed, setInputed] = useState("");
-
+  const [Inputed,setInputed]=useState("")
   const debounced = useDebouncedCallback((value) => {
     Search(value);
   }, 1500);

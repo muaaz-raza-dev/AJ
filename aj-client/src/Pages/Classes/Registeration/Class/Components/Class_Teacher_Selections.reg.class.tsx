@@ -16,7 +16,7 @@ const Class_Teacher_Selections:FC<{index:number}> = ({index}) => {
     }, [teachers])
     
   return (
-    <LabelWrapper required label="Class Teacher " >
+    <LabelWrapper required label="Class Teacher "  className="max-sm:w-full">
         <section className="w-full flex gap-2 flex-col h-full">
     <CustomSelect_Reg optimumData={Object.entries(teachers).map(e=>({label:e[0],value:e[1]}))} nosearch placeholder="ClassTeacher" setState={setState}
      state={ ClassTeacher } />

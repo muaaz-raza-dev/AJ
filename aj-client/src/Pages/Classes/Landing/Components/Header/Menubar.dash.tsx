@@ -1,19 +1,12 @@
 import { useAppDispatch, useAppSelector } from "@/app/ReduxHooks";
 import { RedDashFilters } from "@/app/Slices/DashboardSlice";
 import { useEffect } from "react";
-import { Link, useLocation, useSearchParams } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Menubar = () => {
   let { Sections } = useAppSelector((s) => s.dashboard.Filters);
-  const [searchParams, setSearchParams] = useSearchParams()
-  let section = searchParams.get("section") ||""
   let location =useLocation()
-  useEffect(() => {
-    dispatch(RedDashFilters({ fields_name: "Sections", selected: section }));
-  }, [section])
-  useEffect(() => {
-setSearchParams(e=>({...e,section:Sections.selected}))  
-  }, [location.pathname])
+  
   let dispatch = useAppDispatch();
   const SelectSection = (value: string) => {
     dispatch(RedDashFilters({ fields_name: "Sections", selected: value }));
@@ -24,7 +17,7 @@ setSearchParams(e=>({...e,section:Sections.selected}))
     dispatch(RedDashFilters({ fields_name: "Sections", selected:(route =="classes" || !route)?"Classes":"Teachers" }));
   }, [])
   return (
-    <div className="  border-2 bg-[var(--box)] dark:bg-dark dark:border-darker p-1 text-black rounded-lg gap-3 flex w-1/2">
+    <div className="bg-[var(--box)] dark:bg-dark dark:border-darker p-2 text-black rounded-lg gap-3 flex w-1/2 max-md:w-full">
       {Sections.available.map((s) => {
         if (s == Sections.selected) {
           return (

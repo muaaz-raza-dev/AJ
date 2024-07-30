@@ -1,3 +1,4 @@
+import ToggleTransactionStatus from "./ToggleTransactionStatus.tr.d"
 import TransactionTableTrDetails from "./Transaction Table/TransactionTableTrDetails.ts.d"
 import TransactionPaymentListing from "./TransactionPaymentListing.tr.d"
 
@@ -9,6 +10,7 @@ const TransactionDetails = () => {
   <TransactionTableTrDetails/>
 </section>
   <TransactionPaymentListing/>
+  <ToggleTransactionStatus/>
     </>
   )
 }

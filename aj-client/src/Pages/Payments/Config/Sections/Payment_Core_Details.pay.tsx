@@ -9,7 +9,7 @@ const Payment_Core_Details:FC<{loading:boolean,edit?:boolean}> = ({loading,edit}
   let form = useFormContext();
   let feeFrequecy = form.watch("payload.feeFrequency");
   return (
-    <div className={`${feeFrequecy!="One Time"?"w-[40%] flex-col":"w-[70%] "} transition-all  flex flex-col gap-4 rounded-lg  `}>
+    <div className={`${feeFrequecy!="One Time"?"w-[40%] flex-col":"w-[70%]"} max-md:w-full transition-all  flex flex-col gap-4 rounded-lg  `}>
       <div className="w-full rounded-lg bg-[var(--box)] dark:bg-dark dark:text-white px-4 py-3 flex flex-col gap-3">
         <div className=" py-2 font-bold text-xl  hFont  ">
           Payment title & description

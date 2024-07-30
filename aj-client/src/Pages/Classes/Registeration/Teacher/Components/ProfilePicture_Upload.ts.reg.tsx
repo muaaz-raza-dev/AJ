@@ -65,7 +65,7 @@ const AnalyzeDescription_Class = ()=>{
         <div className="flex flex-col  gap-2">
             <div  {...getRootProps({
           className:
-           ` dropzone w-[16%] rounded  aspect-square   border-2 center `,
+           ` dropzone w-[16%] max-lg:w-[33%] max-sm:w-[49%] rounded  aspect-square   border-2 center `,
         })}>
         <input {...getInputProps({ type: "file", })} />
         <img src={photo||ImageState.sample||"/images/upload_image.png"} alt="" className="w-full rounded h-full object-cover" />

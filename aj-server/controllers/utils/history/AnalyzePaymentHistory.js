@@ -28,7 +28,6 @@ async function CalculateOneTimeFeeHistory (studentInfo){
     amount = config.classes.find(cl=>cl.classId.toString()== studentInfo.firstClass.toString()).amount
     }
     let transactions  = totalTransactions.filter(tr=>tr.Transactions.paymentConfigId._id.toString()==fee._id.toString())
-    console.log(transactions);
     let Transaction = transactions.find(tr=> tr.Transactions.paymentConfigId._id.toString()==fee._id.toString())
     let isPaid= Transactions ? true:false
     let payload = {status:"",feeTitle:fee.feeTitle,amount,session:studentInfo.firstSession ,_id:fee._id.toString(),
@@ -95,7 +94,6 @@ function CalculateFrequentHistory(Config,totalTransactions,ClassSessionPair,stud
           
         }
         else { payload.status = "Not required" } 
-        console.log(payload.status);
         History.push(payload)
       })    
   }

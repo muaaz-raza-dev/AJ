@@ -1,4 +1,4 @@
-import { Area, AreaChart,  CartesianGrid, LabelList, Tooltip, XAxis } from "recharts"
+import { Area, AreaChart,  CartesianGrid,  Tooltip, XAxis } from "recharts"
 import {
   Card,
   CardContent,
@@ -27,9 +27,9 @@ let {average,chartData} = useAppSelector(s=>s.stats.payload.daily)
 let {isLoading} = useAppSelector(s=>s.stats.filters.daily)
   return (
        
-        <div className="w-[50%] py-6 px-4  bg-box rounded  dark:bg-dark dark:text-white p-2 flex  shadow-md flex-col ">
-        <div className="flex justify-between w-full  gap-8">
-    <h1 className="text-dark text-xl dark:text-white font-bold"> Daily Report </h1>
+        <div className="w-[50%] max-lg:w-full py-6 px-4  bg-box rounded   p-2 flex  shadow-md flex-col ">
+        <div className="flex justify-between items-center w-full  gap-8">
+    <h1 className="text-dark text-xl  font-bold"> Daily Report </h1>
     
     <DailyGraphFilterBar/>
     
@@ -37,7 +37,7 @@ let {isLoading} = useAppSelector(s=>s.stats.filters.daily)
     {isLoading ?
 <SkeletonChartsLoading/>
  : 
- <Card className="border-none w-full ">
+ <Card className="border-none w-full dark:bg-box">
  <CardHeader>
    <CardDescription>Avg per day</CardDescription>
    <CardTitle>
@@ -58,13 +58,19 @@ let {isLoading} = useAppSelector(s=>s.stats.filters.daily)
        />
       
        <Tooltip content={<CustomTooltip/>} />
+       <defs>
+              <linearGradient id="fillDesktop" x1="0" y1="1" x2="0" y2="0">
+                <stop offset="5%" stopColor="var(--darker)" stopOpacity={0.1} />
+                <stop offset="95%" stopColor="var(--darker)" stopOpacity={0.9} />
+              </linearGradient>
+              </defs>
        <Area
          dataKey="revenue"
          type="bump"
-         fill="var(--darker)"
+         fill="url(#fillDesktop)"
          fillOpacity={1}
          stroke="var(--dark)"
-         strokeWidth={5}
+         strokeWidth={3}
          >
 
           </Area>
@@ -80,7 +86,6 @@ let {isLoading} = useAppSelector(s=>s.stats.filters.daily)
 
 const CustomTooltip = ({ active, payload, label }:any) => {
 
-  console.log(payload);
   if (active && payload && payload.length) {
     
     return (

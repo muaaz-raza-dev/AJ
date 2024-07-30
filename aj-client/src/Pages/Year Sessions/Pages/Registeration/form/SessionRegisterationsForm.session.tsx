@@ -11,7 +11,7 @@ import  { SkeletonLoader } from "@/Pages/Students Directory/sub-section/Student 
 
 const SessionRegisterations:FC<{edit?:boolean}> = ({edit}) => {
   let form  =useForm<Isessions>({defaultValues:defaultSession})
-  let {mutate:Edit,isLoading:isUpdating} = useUpdateSession(form.reset)
+  let {mutate:Edit,isLoading:isUpdating} = useUpdateSession()
   let  {mutate,isLoading} =useRegisterSession(form.reset)
   let {isLoading:loading,isError,error}=useFetchSession(form.reset)
   let formSubmit  :SubmitHandler<Isessions> = (data) =>{

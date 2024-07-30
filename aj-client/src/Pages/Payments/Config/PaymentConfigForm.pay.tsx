@@ -38,17 +38,18 @@ const ConfigForm:FC<{edit?:boolean}> = ({edit}) => {
 
 
 if(edit&&fetching){
-  if( fetching.isError&&NotFoundValidator(fetching.error))return <ErrorPage title="Invalid Payment Config Id" message="The config you're looking for is not exist" navigate="/students"/>
+  if( fetching.isError&&NotFoundValidator(fetching.error))return <ErrorPage title="Invalid Payment Config Id"
+   message="The config you're looking for is not exist" navigate="/students"/>
   if(fetching.isLoading) return <StudentDetailedSkeletonLoader/>
 }
-  return (
-    <FormProvider {...form}>
-    <form onSubmit={form.handleSubmit(formSubmit)} className="flex w-full gap-2">
-    {edit&&fetching?.isLoading&&<Fetching_Request/>}
+return (
+<FormProvider {...form}>
+<form onSubmit={form.handleSubmit(formSubmit)} className="flex w-full max-md:flex-col gap-2">
+{edit&&fetching?.isLoading&&<Fetching_Request/>}
 <DynamicSections_Reg/>
 <Payment_Core_Details loading={!edit ? isLoading : eLoading} edit={edit}/>
-  </form>
-    </FormProvider>
+</form>
+</FormProvider>
   )
 }
 

@@ -9,6 +9,7 @@ const CustomAmountSelection:FC<{fieldName:string}> = ({fieldName}) => {
   return (
     <>
     <input type="number" placeholder="Amount" className='
+    min-w-28
     border rounded-md  w-full px-2 py-1.5  border-[#8080806b] dark:border-dark focus:border-dark  transition-all outline-none dark:bg-dark dark:text-white dark:placeholder:text-gray-500 
     ' value={amount||""} disabled={paymentType!="Custom"} onChange={(e)=> {
         if(paymentType=="Custom") {

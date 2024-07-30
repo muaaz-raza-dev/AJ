@@ -15,7 +15,7 @@ const TransactionDetailsPage = () => {
   return (
     <>
     {isLoading ? <div className="center"> <RequestLoading dark /> </div> : 
-    <main className="flex flex-col gap-2 py-4 w-full">
+    <main className="flex flex-col gap-2 py-4 max-md:py-0 w-full">
 <HeaderTransactionDetail />
 <SummaryDetailsTrDetails />
 <TransactionDetails />

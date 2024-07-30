@@ -9,7 +9,7 @@ const LandingPage = () => {
       <div className="flex">
         <Routes>
         <Route index  path="/classes" element={ <ClassDivision/> }      />
-        <Route index  element={ <ClassDivision/> }      />
+        <Route index path="/" element={ <ClassDivision/> }      />
         <Route path="/teachers" element={ <TeacherDivision/> }   />
         </Routes>
       </div>

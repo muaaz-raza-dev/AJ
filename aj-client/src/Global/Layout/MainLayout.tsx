@@ -15,10 +15,13 @@ import StatsFile from "../../Pages/Statistics/StatsFile.stat";
 
 const MainLayout = () => {
   return (
-    <main className=" flex max-md:flex-col-reverse min-h-screen">
-        <SidebarFile />
+    <>
+    <main className=" md:flex flex-row-reverse bg-black min-h-screen w-full">
         <MainLayoutRoutes />
+         
       </main>
+        <SidebarFile />
+    </>
   );
 };
 
@@ -28,7 +31,7 @@ const MainLayoutRoutes = () => {
     <main
     className={` ${
       Expanded ? "md:w-[80%]" : "md:w-[94%]"
-      }  max-md:w-[100%] dark:bg-[var(--bg-dark)] bg-[var(--bg)] px-6`}
+      }  max-md:w-[100%] dark:bg-[var(--bg-dark)] bg-[var(--bg)]  md:px-6 max-md:px-2 min-h-screen`}
       >
     <Header />
     <Routes>

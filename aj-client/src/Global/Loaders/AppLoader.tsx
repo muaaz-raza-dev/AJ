@@ -10,9 +10,7 @@ const AppLoader = () => {
     
     // Default values shown
     return (
-        <div className="w-screen h-screen z-10 fixed top-0 bg-dark  center  flex-col gap-12 text-white overflow-hidden">
-
-
+<div className="w-screen h-screen z-10 fixed top-0 bg-darker  center  flex-col gap-12 text-white overflow-hidden">
 <l-trefoil
   stroke-length="0.15"
   bg-opacity="0.1"
@@ -21,9 +19,8 @@ const AppLoader = () => {
   speed="3" 
   color="white" 
 ></l-trefoil>
-
-        <h1 className='text-6xl hFont font-bold'> AJ WorkSpace </h1>
-        </div>
+<h1 className='text-6xl max-md:text-3xl hFont font-bold'> AJ WorkSpace </h1>
+</div>
     )
 
 }

@@ -18,20 +18,22 @@ type IfilterPayload = IpayloadDailyFilters|IpayloadMonthlyFilters
 
 export const InsertStatFiltersFn = (state:IstatCharts,{payload:{type,InsertType,isLoading,selected,available}}:PayloadAction<IfilterPayload>) => {
 if(type == 'monthly'){
-        if(InsertType == "selected" && selected){
+        if(InsertType == "selected" && selected && typeof selected =="string"){
             state.filters[type].selected = selected
         }
         else if(InsertType == "available"&&available) {
-         state.filters[type].available = available
+            let Available = available as string[]
+         state.filters[type].available = Available
         }
     
 }
 else {
-    if(InsertType == "selected" &&  selected ){
+    if(InsertType == "selected" && selected &&  typeof selected !="string" ){
         state.filters[type].selected = selected
     }
     else if(InsertType == "available") {
-        if(available) state.filters[type].available = available
+        let Available = available as {[key:string]:string[]}
+        if(Available) state.filters[type].available = Available
     }
 }
 if(isLoading!=undefined) state.filters[type].isLoading = isLoading

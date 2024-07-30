@@ -23,7 +23,7 @@ const StdProfileTransactions = () => {
 
 const StdProfileEachTransaction:FC<{data:IShortTransactions&{Transaction?:{[key:string]:any}[]}}>= ({data})=>{
   return(
-    <div className=" flex gap-x-4 justify-between hover:shadow-sm transition-shadow  w-[48%] bg-light dark:bg-dark  items-center hFont  h-12  rounded-md text-[0.8rem]   px-4">
+    <div className=" flex gap-x-4 justify-between hover:shadow-sm transition-shadow  w-[48%] max-md:w-full bg-light dark:bg-dark  items-center hFont  h-12  rounded-md text-[0.8rem]   px-4">
           <div className="flex gap-x-4 h-full items-center ">
             <span className="hFont text-black dark:text-white"># <b className=" ">000{data.Invoice}</b></span>
             {data?.Transactions?.map(e=><b className="bg-dark px-3 rounded-md text-white">{e.paymentTitle}</b>)}

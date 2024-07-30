@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const ClassCard:FC<{data:Iclass}> = ({data}) => {
   return (
-    <div className="rounded-md  overflow-hidden bg-[var(--box)] border dark:border-darker dark:bg-darker dark:text-white shadow flex flex-col w-[30%] h-max pb-2 ">
+    <div className=" rounded-md  overflow-hidden bg-[var(--box)] border dark:border-darker dark:bg-darker dark:text-white shadow flex flex-col lg:w-[30%] max-md:w-full max-lg:w-[48%] h-max pb-2 ">
       <Link to={`class/${data._id}`} className="min-h-[2rem] cursor-pointer w-full relative">
       <div className="absolute bg-[var(--success)] text-black top-2 hFont p-1 px-2 text-xs rounded-md font-bold left-2">{data.Session?.acedmic_year}</div>
         <div className="bg-dark text-white center">
@@ -14,7 +14,7 @@ const ClassCard:FC<{data:Iclass}> = ({data}) => {
         </div>
       </Link>
 
-      <div className="px-3 py-2  flex flex-col  justify-between gap-1 bg-box">
+      <div className="px-3 py-2  flex flex-col  justify-between gap-1 bg-box dark:bg-transparent">
   
         <span className=" text-xs font-regular mr-1 flex flex-row items-center ">
         <span className=" text-[0.9rem] hFont font-bold text-dark dark:text-white">Duration :</span>
@@ -29,10 +29,10 @@ const ClassCard:FC<{data:Iclass}> = ({data}) => {
         </div>
 
       <div className="flex justify-end gap-2 ">
-      <Link to={`class/edit/${data._id}`}>
+      <Link to={`/dashboard/class/edit/${data._id}`}>
         <Button className=" w-max p-1 h-max border-dark border text-dark hover:scale-95 transition px-2">Edit </Button>
         </Link>
-        <Link to={`class/${data._id}`}>
+        <Link to={`/dashboard/class/${data._id}`}>
         <Button className="bg-dark hover:bg-dark hover:text-white w-max p-1 h-max text-white hover:scale-95 transition px-2">Details</Button>
         </Link>
       </div>

@@ -14,21 +14,25 @@ const SidebarFile = () => {
     <aside
     className={`${
       toggle ? "md:w-[20%]" : "md:w-[6%]"
-    } max-md:w-[100%]  sticky left-0 transition-all duration-100   top-0 bg-[var(--dark)]  max-md:h-26 md:h-screen`}
+    } fixed md:left-0 md:top-0 max-md:bottom-0  w-full max-md:min-h-20 md:h-screen bg-[var(--dark)]`}
   >
-    <div className="w-full h-full sticky p-2 text-white flex flex-col max-md:flex-row justify-between">
-      <div className="max-md:w-full">
-        <div className="flex gap-x-2  max-md:hidden py-8 items-center justify-center text-xl">
-          <button onClick={Switcher} className=" border border-[white]  rounded-full bg-[var(--bg)] text-[var(--dark)] center aspect-square w-10 font-bold">
+    <div className="w-full h-full  p-2 max-md:px-1 text-white flex flex-col max-md:flex-row items-center justify-between">
+      <div className="w-full">
+        <div className="flex gap-x-2 max-md:hidden py-8 items-center justify-center text-xl">
+          <button
+            onClick={Switcher}
+            className="border border-[white] rounded-full bg-[var(--bg)] text-[var(--dark)] center aspect-square w-10 font-bold"
+          >
             AJ
           </button>
-          {toggle && <p className="">Foundation School</p>}
+          {toggle && <p>Foundation School</p>}
         </div>
         <SidebarLinks />
       </div>
       <SidebarAdminProfile />
     </div>
-    </aside>
+  </aside>
+  
   );
 };
 

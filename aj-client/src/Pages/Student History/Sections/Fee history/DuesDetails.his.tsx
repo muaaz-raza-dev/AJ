@@ -16,7 +16,7 @@ const DuesDetails = () => {
         {
             data &&
             Object.entries(data).map(([id,docs])=> (
-              <div key={id}  className="w-[32%] shadow  flex flex-col min-h-28 p-2 rounded-lg   gap-1 bg-[var(--primary)] dark:bg-darker dark:text-white">
+              <div key={id}  className="md:w-[32%] max-sm:w-full  shadow  flex flex-col min-h-28 p-2 rounded-lg   gap-1 bg-[var(--primary)] dark:bg-darker dark:text-white">
                 <div className="font-bold text-base flex justify-between rounded-md  h-[30%]">
                     <h1>
                     {docs[0].feeTitle} {docs[0].feeFrequency!="One Time"&&`(${Sessions[docs[0].session]})`}

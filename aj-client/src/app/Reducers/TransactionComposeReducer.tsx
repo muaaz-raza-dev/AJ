@@ -26,7 +26,6 @@ if(Invoice!=undefined) state.Invoice = Invoice
 if(Dues) state.Dues = Dues
 if(isPrint!=undefined) state.isPrint =isPrint
 }
-
 interface IcalculateDiscountedTotal {
     Amounts :{ 
         discount ?: number ,  //Just in number 

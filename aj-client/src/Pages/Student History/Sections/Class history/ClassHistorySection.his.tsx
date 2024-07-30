@@ -12,8 +12,8 @@ const ClassHistorySection = () => {
     <h1 className="hFont text-3xl font-bold ">Acedmic Class history</h1>
 <div className="w-full overflow-auto">
 
-      <div className="min-w-full max-w-max  gap-1 flex  ">
-      <div className=" w-[33%] inline-flex   items-center justify-start gap-1 ">
+      <div className="min-w-full max-w-max max-md:w-full gap-1 flex  ">
+      <div className=" w-[33%] max-md:w-full inline-flex   items-center justify-start gap-1 ">
         <div className=" w-[78%] bg-dark dark:bg-darker dark:text-white text-white p-2 rounded-lg">
         <h1 className="hFont font-bold">Admission</h1>
         <p className="text-sm"> {moment(stdInformation.DOA).format("D MMMM YYYY")}  </p>
@@ -30,7 +30,7 @@ const ClassHistorySection = () => {
         let groupIndex = Math.floor((i-1)/groupSize)+1
         let isEven  = groupIndex % 2 ==0 
         if(isEven) {
-          return <div className=" w-[33%] inline-flex   items-center justify-start gap-1 ">
+          return <div className=" w-[33%] max-md:w-full inline-flex   items-center justify-start gap-1 ">
         <div className=" w-[78%] bg-dark_dimmer text-white p-2 rounded-lg">
         <h1 className="hFont font-bold">{Classes[his.Class]} {his.name}</h1>
         <p className="text-sm"> {Sessions[his.Session]} </p>

@@ -1,5 +1,5 @@
 import { PayloadAction } from "@reduxjs/toolkit"
-import { IfeeDoc, IstdExclusive, IstdExclusiveOverview } from "../Types/IStudentExclusive"
+import {  IstdExclusive, IstdExclusiveOverview } from "../Types/IStudentExclusive"
 import { IRegisterFormState } from "../Types/IStdregisterForm.t";
 interface IstdExclusiveAction{
     overview?:IstdExclusiveOverview;
@@ -8,14 +8,14 @@ interface IstdExclusiveAction{
     isFetched?:boolean
 
 }
-interface IstdFeeExclusiveAction { 
-Filters ?:{Years?:string[],FeeTypes?:string[]},
-        AppliedFilters?:{Year?:string;FeeType?:string} // we'll send selectedFilters object to server 
-        isLoading?:boolean;
-        isError?:string;
-        FeeCollection?:IfeeDoc[]
+// interface IstdFeeExclusiveAction { 
+// Filters ?:{Years?:string[],FeeTypes?:string[]},
+//         AppliedFilters?:{Year?:string;FeeType?:string} // we'll send selectedFilters object to server 
+//         isLoading?:boolean;
+//         isError?:string;
+//         FeeCollection?:IfeeDoc[]
         
-}
+// }
 interface IstdInformationExclusive{
     Information : {isLoading?:boolean,isError?:string;Details?:IRegisterFormState};
 }

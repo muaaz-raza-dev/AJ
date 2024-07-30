@@ -5,12 +5,13 @@ const CustomStatBox:FC<{svg:string;label:string;mainValue:string,subLabel?:strin
   
   let title = rate?.rate =="zero"  ? "No increments or decrements" : `The ${rate?.rate == "positive"?"increment":"decrement" } rate of the value compared to past`
   return (
-    <div className={`flex justify-between  dark:text-white    overflow-hidden relative min-w-[24%]  rounded-xl shadow  gap-2  h-32 ${className}`}>
+    <div className={`flex justify-between  dark:text-white    overflow-hidden relative
+     min-w-[24%] max-lg:w-[48%]  rounded-xl shadow  gap-2  h-32 max-md:h-28  ${className}`}>
     <div className="flex flex-col gap-1 w-full px-6 py-4">
-        <p className="hFont font-normal">{label}</p>
-        <h1 className="text-4xl font-bold">{mainValue} </h1>
+        <p className="hFont max-md:text-sm font-normal">{label}</p>
+        <h1 className="text-4xl max-md:text-2xl font-bold">{mainValue} </h1>
         {subLabel&&
-        <div className="flex gap-2 text-sm font-medium items-center">
+        <div className="flex gap-2 text-sm max-md:text-xs font-medium items-center">
         <p >{subLabel}</p>
         <Tooltip title={title}>
         <div className={`bg-light ${rate?.rate =="negative"&& "text-red-400"} ${rate?.rate=="positive"&&"text-green-600"} 
@@ -19,7 +20,7 @@ const CustomStatBox:FC<{svg:string;label:string;mainValue:string,subLabel?:strin
         </div>
             }
     </div>
-    <img src={`/svgs/graph-${svg}.svg`} className="absolute right-0 -top-2 opacity-30 p-2" />
+    <img src={`/svgs/graph-${svg}.svg`} className="absolute right-0 -top-2  opacity-30 p-2" />
 </div>
   )
 }
