@@ -15,10 +15,10 @@ const ClassHistorySection = () => {
       <div className="min-w-full max-w-max max-md:w-full gap-1 flex  ">
       <div className=" w-[33%] max-md:w-full inline-flex   items-center justify-start gap-1 ">
         <div className=" w-[78%] bg-dark dark:bg-darker dark:text-white text-white p-2 rounded-lg">
-        <h1 className="hFont font-bold">Admission</h1>
+        <h1 className="hFont font-bold">Admission  {stdInformation.firstAdmittedClass&&`in ${stdInformation?.firstAdmittedClass}`}</h1>
         <p className="text-sm"> {moment(stdInformation.DOA).format("D MMMM YYYY")}  </p>
         </div>
-        <Tooltip title={"to the registered first Class "}>
+        <Tooltip title={stdInformation.firstAdmittedClass?"No records between the years":"To the first Class"}>
            <Separator className="bg-darker dark:bg-light h-1 rounded-full w-[20%]"/>
         </Tooltip>
         </div>

@@ -6,6 +6,7 @@ import DateOfAdmissionField from "./DateOfAdmissionField.reg";
 import GRnoRegisterationFormField from "./GRnoField.reg";
 import { useAppSelector } from "@/app/ReduxHooks";
 import { FC } from "react";
+import FirstAcademicClassField from "./FirstAcademicClassField.reg";
 
 const RegAcademicDetailsForm: FC<{ edit?: boolean }> = ({ edit }) => {
   const { control ,watch } = useFormContext();
@@ -89,6 +90,7 @@ const RegAcademicDetailsForm: FC<{ edit?: boolean }> = ({ edit }) => {
           )}
         />
       </RegLabelWrapper>
+      <FirstAcademicClassField/>
       <DateOfAdmissionField edit={edit} />
       <PolioandVaccineConfirmationField />
     </div>

@@ -6,6 +6,7 @@ import { useFormContext } from "react-hook-form";
 import Class_Teacher_Selections from "../Components/Class_Teacher_Selections.reg.class";
 import Schedule_details_Reg from "./Schedule_details.reg.class";
 import CustomDateSelector_Reg from "../../Teacher/Helpers/CustomDateSelector_Reg.dash";
+import Subjects_Selection from "../Components/Subjects_Selection.reg.class";
 
 const ClassSections_Block: FC<{ index: number }> = ({ index }) => {       //? index of section 1 2 3
   let form = useFormContext();
@@ -38,6 +39,7 @@ const ClassSections_Block: FC<{ index: number }> = ({ index }) => {       //? in
         <SectionStartDate_Comp section_index={index}/>
 </LabelWrapper>
       <Class_Teacher_Selections index={index}/> 
+      <Subjects_Selection index={index}/>
       <Schedule_details_Reg index={index}/>
     </RegSectionHeader>
   );

@@ -7,7 +7,6 @@ export interface defaultId {
 export interface Iclass extends defaultId{
     name:string,
     sections:Array<Iclass_section>;
-    subjects :string[]
     start_date : string;
     end_date?:string ;
     Students?:IstudentShort[]
@@ -31,6 +30,7 @@ export interface Iclass_section  extends defaultId{
     Subjects_teachers:SubjectsTeacher;
     start_date : string;
     end_date?:string ;
+    subjects :string[]
 }
 
 export const defaultSection_Class :Iclass_section = {
@@ -40,11 +40,11 @@ export const defaultSection_Class :Iclass_section = {
         capacity:"",
         Subjects_teachers:{},
         start_date : "" ,
+        subjects: [] ,
 }
 export const defaultClass: Iclass = {
     name: "",
     SessionId:"",
     sections: [defaultSection_Class],
-    subjects: [] ,
     start_date : "" ,
 };

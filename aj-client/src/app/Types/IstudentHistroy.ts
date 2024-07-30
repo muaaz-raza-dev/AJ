@@ -7,7 +7,7 @@ payload: IstudentHistoryPayload ;
 
 export interface IstudentHistoryPayload{ 
 stats:{totalPaid:number ; totalDues:number} ;
-studentInformation : {FirstName:string;LastName:string;DOA:string;GRNO:number|string};
+studentInformation : {FirstName:string;LastName:string;DOA:string;GRNO:number|string;firstAdmittedClass?:string;};
 ClassHistory:{name:string;Date:string;Session:string;Class:string}[];
 FeeHistory:IfeeHistory[];
 Dues:IDuesTrCompose[]

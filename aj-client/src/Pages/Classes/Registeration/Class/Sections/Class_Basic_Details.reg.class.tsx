@@ -24,7 +24,6 @@ const Class_Basic_Details = () => {
     <CustomDateSelector_Reg formValue={start_date} onChange={handleStartDate} label="Pick date of start class this year" className="w-full"/>
     </LabelWrapper>
 <Session_Selection />
-    <Subjects_Selection/>
     </RegSectionHeader>
   )
 }

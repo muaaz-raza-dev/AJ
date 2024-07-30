@@ -11,7 +11,7 @@ const FilterBar = () => {
   return (
     <div className="flex justify-between items-center w-full">
     <h1 className="hFont font-bold text-2xl  text-dark !self-end ">
-      Schedule Details
+      Session Based Details
     </h1>
     <div className="flex gap-2">
       <Select

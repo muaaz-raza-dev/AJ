@@ -10,6 +10,7 @@ const useFetchSessions = () => {
         queryKey: [ "sessions"],
         queryFn:  ReadSessions,
         staleTime: 1000 * 60 * 10,
+        refetchOnMount: true,
         refetchOnWindowFocus: false,
         onSuccess(data) {
             dispatch(RedSesInsertPayload({type:"Sessions",Original:data.payload,Filtered:data.payload}))

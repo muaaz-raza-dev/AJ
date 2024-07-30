@@ -4,15 +4,15 @@ import { IstudentShort } from "./IstudentsDir.t";
 import { Iteacher } from "./ITeacherRegisteration";
 export interface Iclass_detailed_payload extends defaultId{
         name:string ,
-        subjects:string[]; 
         Students:IstudentShort[];
         Session?:Isessions;
         sections:Iclass_section[];
         start_date:string;
         end_date?:string;
-
-}
-interface Iclass_section extends defaultId{
+        
+    }
+    interface Iclass_section extends defaultId{
+    subjects:string[]; 
     name: string;
     Class: string ; //Object Id
     ClassTeacher?: Iteacher;//Object Id
@@ -33,7 +33,6 @@ Filters:{Sections: {selected_index:number}}
 export const default_classDetailed: Iclass_detailed = {
     payload :{
         name: "",
-        subjects: [],
         Students: [],
         sections: [],
         start_date: "",

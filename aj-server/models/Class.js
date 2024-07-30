@@ -3,7 +3,6 @@ const { ObjectId } = require("mongodb");
 
 const ClassSchema = new mongoose.Schema({
     name: { type: String, required: true },
-    subjects: {type:[String],required:true},
     sections :[{type:ObjectId,ref:"Section"}],
     start_date : {type:String,required:true},
     end_date : {type:String,},

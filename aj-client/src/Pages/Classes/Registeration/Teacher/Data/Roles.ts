@@ -17,7 +17,9 @@ export const commonSubjects: string[] = [
     "Geography",
     "Physical Education",
     "Art",
-    "Music",
+    "Physics",
+    "Chemistry",
+    "Urdu",
     "Computer Science",
 ];
 

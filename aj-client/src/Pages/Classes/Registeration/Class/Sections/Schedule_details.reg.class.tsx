@@ -7,7 +7,8 @@ import { useDebouncedCallback } from "use-debounce";
 import { useAppSelector } from "@/app/ReduxHooks";
 const Schedule_details_Reg: FC<{ index: number }> = ({ index:index_section }) => {
   const [subjectTeachers, setSubjectTeachers] = useState<SubjectsTeacher>({});
-  let subjects = useFormContext().watch("subjects");
+  let subjects = useFormContext().watch(`sections[${index_section}].subjects`);
+  console.log(subjects,)
   let form = useFormContext()
   let teachers =useAppSelector(s=>s.dashboard.RequiredInfo.Teachers)
   let debounced  =useDebouncedCallback((_)=>{
@@ -27,7 +28,7 @@ const Schedule_details_Reg: FC<{ index: number }> = ({ index:index_section }) =>
   
   return (
     <LabelWrapper label="Subject Teaching Details" className="w-full" labelClassName="text-darker  rounded p-2 !text-xl !font-bold dark:bg-darker">
-      {subjects.map((subject: string, index: number) => (
+      {subjects?.map((subject: string, index: number) => (
         <EachSubjectTeacher_Comp
           key={index}
           setState={setSubjectTeachers}

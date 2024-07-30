@@ -9,7 +9,7 @@ const useFetchStdHistoryMeta = () => {
   let {selected} =useAppSelector(s=>s.studentHistory.filters.PaymentConfigs)
   let id = useParams().id ||""
   return useQuery({
-    queryKey: ["StdHistoryMeta"],
+    queryKey: ["StdHistoryMeta",id],
     queryFn: ()=>FetchHistoryMeta(id),
     staleTime: 1000*60*5,
     refetchOnWindowFocus: false,

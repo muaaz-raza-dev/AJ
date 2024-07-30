@@ -21,6 +21,7 @@ DOA:string //Date of Admission
 PolioPermission?:boolean;
 CovidVaccine?:boolean;
 ConsiderOneTimeFee?:boolean;
+firstAdmittedClass?:string;
 }
 export const defaultRegisterFormState: IRegisterFormState = {
     FirstName: '',

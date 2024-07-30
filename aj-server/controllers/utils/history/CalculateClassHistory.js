@@ -7,7 +7,7 @@ const CalculateClassHistory = async (studentId) => {
           end_date: -1,
         })
   )
-  let payload= JSON.parse(JSON.stringify(history))
+let payload= JSON.parse(JSON.stringify(history))
 payload.forEach((doc, i) => {
     payload[i].Section =  doc._id ;
     payload[i].Session = doc.Class.SessionId

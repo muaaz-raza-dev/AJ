@@ -9,9 +9,9 @@ const InitialHistoryData=async(req,res)=>{ //? Intial data = FIlters + small dat
 let {id}=req.params
 try {
     if(id.length!=24) return res.status(404).json({message:"Student Not Found"})
-    let studentInformation = await Students.findById(id).select("FirstName LastName DOA GRNO ConsiderOneTimeFee") 
+    let studentInformation = await Students.findById(id).select("FirstName LastName DOA GRNO ConsiderOneTimeFee firstAdmittedClass") 
     if(!studentInformation) return res.status(404).json({message:"Student Not Found"})
-        let ClassHistory = await CalculateClassHistory(id)
+    let ClassHistory = await CalculateClassHistory(id)
     let { Dues ,Paid } = await CalculateTotalPaymentHistory(id)
     let filters = await AnalyzeFilters(id,studentInformation)
     Respond({res,payload:{ClassHistory,studentInformation,Dues ,Paid,filters}})

@@ -4,7 +4,7 @@ import { BsBoxes } from "react-icons/bs";
 import { FaUsers } from "react-icons/fa";
 import { Link } from "react-router-dom";
 const Class_Header_Props = () => {
-  let { Students, sections, Session, subjects,start_date ,_id } = useAppSelector(
+  let { Students, sections, Session, start_date ,_id } = useAppSelector(
     (s) => s.classDetailed.payload
   );
   return (
@@ -61,34 +61,13 @@ const Class_Header_Props = () => {
           <p className="text-gray-600">Session Name</p>
           <p>{Session?.session_name}</p>
         </div>
-        <div className="w-[32%] font-bold">
-          <p className="text-gray-600">Session Acedmic Year</p>
-          <p>{Session?.acedmic_year}</p>
-        </div>
-        <div className="w-[32%] font-bold">
-          <p className="text-gray-600">Class Teacher</p>
-          {sections.map(e=><p>{e?.ClassTeacher?.firstName}</p>)}
-
-        </div>
+        
+     
       </div>
 
       
 
-      <div className="  w-[95%] flex flex-col gap-2  ">
-        <div className="">
-
-        <h1 className="hFont text-xl font-semibold pb-2">Subjects</h1>
-        <div className="flex gap-1.5 flex-wrap">
-          {subjects.map((e) => {
-            return (
-              <div className="w-max rounded-md  text-sm px-3 py-1 font-semibold border-2 hover:bg-dark_dimmer transition-colors border-[var(--dark)] text-darker">
-                {e}
-              </div>
-            );
-          })}
-          </div>
-        </div>
-      </div>
+ 
         <Link to={`/dashboard/class/edit/${_id}`} className="bg-darker md:hidden whitespace-nowrap active:scale-95 transition-transform text-white h-max rounded-md font-bold hFont  py-2 text-center  w-full">
         Edit Class Details
         </Link>
