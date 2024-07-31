@@ -11,7 +11,7 @@ const LP_EachConfigRowTable:FC<{data:Ipayment_config_short}> = ({data}) => {
   return (
     <TableRow className="dark:text-white">
               <TableCell className='text-dark dark:text-white font-bold text-base'>
-    <Link to={`/payment-settings/edit/${data?._id}`} className="flex items-center gap-1">
+    <Link to={`/payment-settings/${data?._id}`} className="flex items-center gap-1">
                 {data.feeTitle} 
                 <ArrowUpRight size={16}/>
               </Link>

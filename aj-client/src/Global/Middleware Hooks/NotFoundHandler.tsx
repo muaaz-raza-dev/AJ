@@ -9,10 +9,10 @@ interface InotFoundValidatorProps{
     isError:boolean;
     error:any;
     isLoading:boolean;
-    ErrorPageProps :{title:string;message:string,navigate:string}
+    ErrorPageProps ?:{title?:string;message?:string,navigate?:string}
 
 }
-const NotFoundHandler:FC<InotFoundValidatorProps> = ({ErrorPageProps,isLoading,children,error,isError,}) => {
+const NotFoundHandler:FC<InotFoundValidatorProps> = ({ErrorPageProps={},isLoading,children,error,isError,}) => {
     if (isLoading) return <StudentDetailedSkeletonLoader />;
     if (isError && NotFoundValidator(error))
         return (

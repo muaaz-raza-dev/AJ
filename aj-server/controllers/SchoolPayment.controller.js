@@ -3,6 +3,7 @@ const OneTimeFee = require("../models/OneTimeFee");
 const PaymentConfig = require("../models/SchoolPayments");
 const Session = require("../models/Session");
 const { OptimizeDates } = require("./utils/OptimizeSessionDates_SchoolPayment");
+const PaymentConfigSpecificStat = require("./utils/Payments/PaymentConfigSpecificStat");
 const RegisterPayment = async(req,res)=>{
     let {payload} = req.body;
     try{
@@ -12,6 +13,8 @@ const RegisterPayment = async(req,res)=>{
             if(!OneTime)  Respond({res,message: 'Somethig went wrong.',status:500,success:false}) 
         }
         else {
+            if(payload.feeFrequency=="Yearly")
+            delete payload.paymentMonths
             await PaymentConfig.create({...payload})
         }
         
@@ -77,15 +80,16 @@ if(feeTypes=="Other"){
 }
 else {
     Configs = await OneTimeFee.find({session,isDeprecated:false}).populate({path:"session",select:"session_name acedmic_year"})
-    .populate({path:"classes",populate:{path:"classId",select:"name"}})
+    .populate({path:"classes",populate:{path:"classId",select:"name"}}).select("-paymentMonths")
 }
 let payload = JSON.parse(JSON.stringify(Configs))
 payload.forEach((config,i)=>{
     payload[i].classes = config?.classes.map(e=>({amount:e.amount,name:e.classId?.name}))
     payload[i].session = config.session.session_name + " " +config.session.acedmic_year
-    let times =  config ?.paymentMonths?.filter(pay=>pay.isPayment).length
+
+    let times = config.feeFrequency == "Yearly" ? 1 : config?.paymentMonths?.filter(pay=>pay.isPayment).length 
+
     payload[i].Installments = feeTypes =="One Time" ? "One time in the admission" : `${times} times in a Session`
-    payload[i].feeFrequency = "One Time"
 })
 Respond({res,payload})
 }
@@ -106,5 +110,22 @@ const UpdateConfig = async(req,res)=>{
     let new_config = await PaymentConfig.create({...payload,isDeprecated:false})
     let config = await PaymentConfig.findByIdAndUpdate(id,{isDeprecated:true,deprecatedDate:new Date().toISOString(),newVersionId:new_config._id})
     Respond({res,payload:config,message:"Config Updated",payload:new_config})
+
 }
-module.exports = {RegisterPayment,GetSessions,GetConfigs,FetchConfigDetails,UpdateConfig}
+
+
+const FetchConfigAllDetails = async(req,res)=>{
+const {id} =req.params
+if(!id||id.length!=24) return res.status(404).json({message:"Invalid Id"})
+let Config = null
+Config = await PaymentConfig.findById(id).populate({path:"session",select:"session_name acedmic_year"}).populate({path:"classes.classId",select:"name _id sections",populate:{path:"sections",select:"Students"}})
+if(!Config){ 
+Config = await OneTimeFee.findById(id).populate({path:"session",select:"session_name acedmic_year"}).populate({path:"classes.classId",select:"name _id sections" ,populate:{path:"sections",select:"Students"}})
+if(!Config)return res.status(404).json({message:"Config Not Found"})  // Check if Config exists
+}
+
+let stats = await PaymentConfigSpecificStat(Config)
+res.json({success:true,payload:Config,stats})
+
+}
+module.exports = {RegisterPayment,GetSessions,GetConfigs,FetchConfigDetails,UpdateConfig,FetchConfigAllDetails}

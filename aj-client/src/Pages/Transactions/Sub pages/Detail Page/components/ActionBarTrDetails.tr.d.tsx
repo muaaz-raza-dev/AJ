@@ -19,7 +19,6 @@ const ActionBarTrDetails = () => {
            <Button onClick={()=>Print(q)} className="bg-dark hover:bg-dark text-white shadow  font-bold " >
             Print Transaction
         </Button>
-        <iframe hidden id="PDFView"></iframe>
     </div>
   )
 }

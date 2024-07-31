@@ -1,4 +1,0 @@
-salary    = 5,000 pkr
-role      = Teacher, Manager , Co-ordinator
-Subjects  = English , Science , Physics , Chemistry  
-schedule  = entry Time - End Time

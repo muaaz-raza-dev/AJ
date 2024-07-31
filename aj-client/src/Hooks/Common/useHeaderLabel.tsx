@@ -20,6 +20,7 @@ let RouteForLabel: { [key: string]: string } = {
   "/dashboard/teachers":"Teachers & Staffs",
   "/payment-settings" : "Payment Configurations",
   "/payment-settings/setup" : "Setup Payment Config",
+  "/payment-settings/*" : "Payment Config Overview",
   "/students/history/*" : "Classes and Fees history",
   "/settings" : "Personal Information ",
   "/settings/accounts" : "Accounts Settings ",
