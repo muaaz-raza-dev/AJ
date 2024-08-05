@@ -32,6 +32,7 @@ const LP_EachConfigRowTable:FC<{data:Ipayment_config_short}> = ({data}) => {
                 <TableCell className=' font-bold'>{moment(data.createdAt).format("D MMMM Y").toString()}</TableCell>
               <TableCell className='text-[var(--dark)] flex-wrap items-end ml-auto flex gap-1  font-bold'>
                 { 
+                !data.feeStatus.includes("Same")?
                 data.classes ?
                 data?.classes.map(e=>(
                   <Tooltip title={`${e.amount} PKR`} >
@@ -39,7 +40,8 @@ const LP_EachConfigRowTable:FC<{data:Ipayment_config_short}> = ({data}) => {
                 </Tooltip>
                   )
                 ) :
-                data?.feeAmount ||""
+                data?.feeAmount ||"" : 
+                data.classes[0].amount
               }
               </TableCell>
     </TableRow>

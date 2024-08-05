@@ -35,8 +35,8 @@ if(edit){
 <Academic_Details_Teacher/>
 <Account_Details_Teacher edit={edit}/>
 <Teacher_Reg_Submit loading={edit?loading:isLoading}/>
-    </form>
-    </FormProvider>
+</form>
+</FormProvider>
   )
 }
 

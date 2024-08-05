@@ -14,20 +14,20 @@ const ClassRegisterationForm:FC<{edit?:boolean}> = ({edit}) => {
   let {isLoading:isFetching} = useFetchClassRawDetails(form.reset)
   let {mutate,isLoading} =useRegisterClass(form.reset)
   let {mutate:editMutatate,isLoading:loading} = useEditClass()
-  let formSubmit  :SubmitHandler<Iclass> = (data) =>{
+  let formSubmit: SubmitHandler<Iclass> = (data) =>{
     if (edit) editMutatate(data)
     else mutate(data);
  } 
  
   return (
-    <FormProvider {...form}>
-      {edit&&isFetching&&<Fetching_Request/>}
-    <form onSubmit={form.handleSubmit(formSubmit)} className="flex flex-col gap-y-4">
+<FormProvider {...form}>
+{edit&&isFetching&&<Fetching_Request/>}
+<form onSubmit={form.handleSubmit(formSubmit)} className="flex flex-col gap-y-4">
 <Class_Basic_Details />
 <ClassSection_Details/>
 <ClassRegFormSubmit loading={edit ? loading: isLoading}/>
-    </form>
-    </FormProvider>
+</form>
+</FormProvider>
   )
 }
 

@@ -33,7 +33,7 @@ const Subjects_Selection:FC<{index:number}> = ({index}) => {
         }
     }, [selected])
   return (
-    <LabelWrapper required label="Subjects " className="w-full">
+    <LabelWrapper  label="Subjects " className="w-full">
         <section className="w-full flex gap-2 flex-col">
         <div className="flex gap-x-2 w-full">
     <AutoComplete className={`w-full h-full antd-selectBar`} filterOption={(value,options)=>options?.value.includes(value)||false} options={commonSubjects.map(e=>({value:e}))} value={Options.input} onChange={handleInput} placeholder="Subjects"  />

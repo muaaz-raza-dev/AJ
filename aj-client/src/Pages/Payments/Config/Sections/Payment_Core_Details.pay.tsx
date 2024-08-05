@@ -61,7 +61,6 @@ const FeeAmount = ()=>{
 >
 <input
     type='number'
-    required
     placeholder='Write amount to apply to all classes then modify them.'
     onChange={({target:{value}})=>handleAllAmounts(value)}
     className=" border rounded-md  min-w-[40%] p-2 bg-transparent dark:bg-darker dark:text-white dark:border-darker  border-[#8080806b]  focus:border-dark  transition-all outline-none "

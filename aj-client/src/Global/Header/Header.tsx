@@ -1,6 +1,4 @@
-import { Avatar, Badge } from "antd";
 import { FiSettings } from "react-icons/fi";
-import { UserOutlined } from "@ant-design/icons";
 import useHeaderLabel from "@/Hooks/Common/useHeaderLabel";
 import { FaAngleLeft } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
@@ -9,10 +7,11 @@ import useActiveRoute from "@/Hooks/Common/ActiveRoute";
 import ThemeToggle from "./ThemeToggle";
 import { Button } from "@/shdcn/components/ui/button";
 import LogoutButton from "./LogoutButton";
+import AvatarOptions from "./AvatarOptions";
 const Header = () => {
   const { ActiveLabel } = useHeaderLabel();
   let { ValidateRoute } = useActiveRoute();
-  let { Role, Name ,photo} = useAppSelector((s) => s.credits.Info);
+  let { Role, Name } = useAppSelector((s) => s.credits.Info);
   let Active = "!bg-dark !text-white dark:bg-light dark:text-dark";
   let navigate = useNavigate();
   return (
@@ -50,17 +49,7 @@ const Header = () => {
             <h1 className="dark:text-white leading-tight  text-dark font-bold">{Name}</h1>
             <p className=" text-[0.87rem]  leading-tight dark:text-gray-400">{Role}</p>
           </div>
-          <Link to={"/settings"} className="">
-            <Badge>
-              <Avatar
-                size={36}
-                shape="circle"
-                icon={<UserOutlined />}
-                src={photo||"/images/sample.png"}
-                className="  cursor-pointer shadow"
-              />
-            </Badge>
-          </Link>
+         <AvatarOptions/>
         </div>
       </div>
     </header>

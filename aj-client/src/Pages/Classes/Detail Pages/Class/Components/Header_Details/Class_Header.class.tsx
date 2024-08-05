@@ -4,8 +4,8 @@ import Class_Header_Props from "./Class_Header_Props.class";
 const Class_Header = () => {
     let {name,} =useAppSelector(s=>s.classDetailed.payload)
   return (
-    <div className="flex flex-col gap-y-4 w-full items-center bg-[var(--box)] pb-2">
-      <div className="h-36 rounded-md pt-1 bg-dark w-full flex  justify-between">
+    <div className="flex flex-col gap-y-4 w-full rounded-md items-center bg-[var(--box)] dark:bg-dark dark:text-white pb-2">
+      <div className="h-36 rounded-md pt-1 bg-darker w-full flex  justify-between">
         {/* Main Heading */}
         <div className="w-[30%] max-md:w-full  center">
           <h1 className="hFont text-white font-semibold text-4xl gap-4 flex max-md:text-6xl">{name}

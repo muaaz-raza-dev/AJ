@@ -1,10 +1,11 @@
 import useFetchClassDetaills from "@/Hooks/Teacher&Class/useFetchClassDetaills";
 import Class_Header from "./Components/Header_Details/Class_Header.class";
-import Teacher_Details from "./Components/Teacher_Details/Teacher_Details.class";
 import ErrorPage from "@/Global/Loaders/ErrorPage";
 import StudentDetailedSkeletonLoader from "@/Pages/Students Directory/sub-section/Student Detailed/StudentDetailedSkeletonLoader";
 import NotFoundValidator from "@/Api/404Validator";
 import SessionDetails from "./Components/Schedule_Details/SessionDetails.class";
+import RecentAdmissions from "./Components/Class&Payment Details/RecentAdmissions.class";
+import PaymentConfigDetails from "./Components/Class&Payment Details/PaymentConfigDetails.class";
 
 const ClassDetailsPage = () => {
   let { isError, error, isLoading } = useFetchClassDetaills();
@@ -23,8 +24,10 @@ const ClassDetailsPage = () => {
         <Class_Header />
         <SessionDetails/>
       </div>
-     
-      <Teacher_Details />
+      <div className='w-[35%] max-md:w-full flex flex-col max-md:flex-col-reverse gap-2 '>
+      <PaymentConfigDetails/>
+      <RecentAdmissions />
+    </div>
     </div>
   );
 };

@@ -12,6 +12,7 @@ const SettingsFile = React.lazy(() => import("@/Pages/Settings/SettingsFile.set"
 import RoleBasedAccess from "../Middleware Hooks/RoleBasedAccess";
 import CustomSuspense from "../Middleware Hooks/CustomSuspense";
 import StatsFile from "../../Pages/Statistics/StatsFile.stat";
+import GuideFile from "@/Pages/Guide/GuideFile.guide";
 
 const MainLayout = () => {
   return (
@@ -90,7 +91,12 @@ const MainLayoutRoutes = () => {
           <SettingsFile />
         </CustomSuspense>
         } path="/settings/*" />
-
+        
+      <Route element={
+        <CustomSuspense>
+          <GuideFile/>
+        </CustomSuspense>
+        } path="/guide/*" />
 
     </Routes>
         </main>

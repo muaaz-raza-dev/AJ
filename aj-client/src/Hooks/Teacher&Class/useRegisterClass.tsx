@@ -9,7 +9,12 @@ const useRegisterClass = (reset:()=>void) => {
         onSuccess(){
             reset()
    toast.success("Class and corresponding sections are registerd 🎊")   
-}})
+},
+onError(){
+    toast("An error occured. Try again later...")
+}
+
+})
      return Registeration
 }
 
@@ -22,7 +27,11 @@ export const useEditClass = () => {
         onSuccess(){
         navigate("/dashboard")
    toast.success("Class and corresponding sections are edited 🎊")   
-}})
+},
+onError(){
+    toast("An error occured. Try again later...")
+}
+})
      return Registeration
 }
 

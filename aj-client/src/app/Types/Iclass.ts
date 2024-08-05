@@ -11,7 +11,8 @@ export interface Iclass extends defaultId{
     end_date?:string ;
     Students?:IstudentShort[]
     Session?:Isessions;
-    SessionId:string ;   // * Yearly Session
+    SessionId:string ;  // * Yearly Session
+    updates:{paymentConfigs:boolean}
 }
 
 export interface SubjectsTeacher {
@@ -22,6 +23,7 @@ export interface SubjectsTeacher {
 }
 
 export interface Iclass_section  extends defaultId{
+
     name: string;
     Class: string ; //Object Id
     ClassTeacher?: Iteacher;//Object Id
@@ -31,6 +33,7 @@ export interface Iclass_section  extends defaultId{
     start_date : string;
     end_date?:string ;
     subjects :string[]
+    isSubTeacherDetails:boolean; 
 }
 
 export const defaultSection_Class :Iclass_section = {
@@ -41,10 +44,12 @@ export const defaultSection_Class :Iclass_section = {
         Subjects_teachers:{},
         start_date : "" ,
         subjects: [] ,
+        isSubTeacherDetails:false,
 }
 export const defaultClass: Iclass = {
     name: "",
     SessionId:"",
     sections: [defaultSection_Class],
     start_date : "" ,
+    updates:{paymentConfigs:false}
 };

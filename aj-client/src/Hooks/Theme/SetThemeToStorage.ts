@@ -11,14 +11,14 @@ return DarkMode
 }
 
 export const useToggleTheme = ()=>{
+let activeTheme = JSON.parse(localStorage.getItem("DarkMode")||"Dark")
 let dispatch =useAppDispatch()
-
 function toggleTheme(DarkMode:boolean){
  localStorage.setItem("DarkMode",JSON.stringify(DarkMode))
  dispatch(InsertGlobalValues({DarkMode}))
 }
 
-return {toggleTheme}
+return {toggleTheme,activeTheme}
 }
 
 export default SetThemeToStorage

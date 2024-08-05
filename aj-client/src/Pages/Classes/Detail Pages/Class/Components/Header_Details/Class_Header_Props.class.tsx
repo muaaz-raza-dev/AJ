@@ -43,22 +43,22 @@ const Class_Header_Props = () => {
         <div className="w-[32%] flex max-md:flex-col gap-4 justify-end">
           <Link
             to={"/sessions/"}
-            className="bg-dark text-white h-max rounded font-bold hFont px-3 py-1 w-max"
+            className="bg-darker text-white h-max rounded font-bold hFont px-3 py-1 w-max"
           >
             {Session?.acedmic_year}
           </Link>
   <Link to={`/dashboard/class/edit/${_id}`} className="bg-darker max-md:hidden whitespace-nowrap active:scale-95 transition-transform text-white h-max rounded font-bold hFont px-3 py-1 w-max">
-  Edit </Link>
+  Update </Link>
         </div>
       </div>
 
       <div className=" w-[95%] flex gap-1 flex-wrap">
         <div className="w-[32%] font-bold">
-          <p className="text-gray-600">Start Date</p>
+          <p className="text-gray-600 text-sm dark:text-gray-300">Start Date</p>
           <p>{moment(start_date).format("D MMMM Y")}</p>
         </div>
         <div className="w-[32%] font-bold">
-          <p className="text-gray-600">Session Name</p>
+          <p className="text-gray-600 text-sm dark:text-gray-300">Session Name</p>
           <p>{Session?.session_name}</p>
         </div>
         

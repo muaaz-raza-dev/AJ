@@ -27,6 +27,7 @@ dispatch (RedDashSearchClassFilter({input:value}))
      }
     setLoading(false)    
   },250)
+  
   const handleSearch:ChangeEventHandler<HTMLInputElement> = ({target:{value}})=>{
     setLoading(true)
     debounced(value)

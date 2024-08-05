@@ -10,9 +10,9 @@ const SubjectTeacherDetails = () => {
   return (
         payload.map((data: Iclass_section_teachers) => {
             return <div className=" flex flex-col w-[30%] max-md:w-[48%] rounded-md  ">
-              <div className="flex w-full gap-2 flex-wrap">
-                <div className="p-2 flex flex-col gap-4">
-                  <h1 className="hFont  whitespace-nowrap    font-semibold text-gray-600">{data.subject}</h1>
+              <div className="flex w-full  flex-wrap">
+                <div className="p-2 flex flex-col gap-1">
+                  <h1 className="hFont  whitespace-nowrap dark:text-gray-200    font-semibold text-gray-600">{data.subject}</h1>
                   {
                     data.Teachers.map((teacher: Iteacher) => {
                       return <div className="flex gap-2 items-center">

@@ -9,8 +9,16 @@ export interface Iclass_detailed_payload extends defaultId{
         sections:Iclass_section[];
         start_date:string;
         end_date?:string;
-        
+        PaymentConfigDetails:IclassPaymentDetails[]
+        isPaymentConfigUpdate:boolean
     }
+
+export interface IclassPaymentDetails  {
+feeTitle :string;
+feeStatus:string;
+class:{classId:string;amount:string}|null
+_id:string;
+}
     interface Iclass_section extends defaultId{
     subjects:string[]; 
     name: string;
@@ -36,7 +44,9 @@ export const default_classDetailed: Iclass_detailed = {
         Students: [],
         sections: [],
         start_date: "",
-        end_date: ""
+        end_date: "" ,
+        isPaymentConfigUpdate:false,
+        PaymentConfigDetails:[]
     } ,
     Filters:{Sections:{selected_index:0}}
 };

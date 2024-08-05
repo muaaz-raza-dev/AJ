@@ -20,6 +20,8 @@ const {
   Filter_Read_Classes,
   Edit_Class,
   FetchClassInformation_Raw,
+  FetchClassBasedPaymentConfigInfo,
+  UpdateClassBasedPaymentConfig,
 } = require("../controllers/Classes.controller");
 const router = express.Router();
 
@@ -46,5 +48,8 @@ router.post("/class/edit", Authenticate, Edit_Class);
 
 router.get("/classes/", Authenticate, Read_all_Classes);
 router.get("/class/:id", Authenticate, Read_Class_details);
+// ClassBased Payment Config Info
+router.get("/paymentConfigs/:id",Authenticate,FetchClassBasedPaymentConfigInfo)
+router.put("/class/paymentConfigs",Authenticate,UpdateClassBasedPaymentConfig)
 
 module.exports = router;

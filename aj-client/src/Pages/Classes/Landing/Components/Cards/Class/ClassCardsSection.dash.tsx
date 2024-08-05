@@ -14,10 +14,11 @@ const ClassCardsSection = () => {
           </div>
         ) 
       }
+
         {
           isLoading ? (
             <div className="flex justify-center items-center w-[100%] h-[100%] ">
-              <RequestLoading />
+              <RequestLoading dark/>
             </div>
           ) :
           Classes.map((data, index) => {

@@ -2,6 +2,7 @@ import useFetchConfigOverview from "@/Hooks/School Payment/useFetchConfigOvervie
 import { Button } from "@/shdcn/components/ui/button"
 import { Tooltip } from "antd"
 import { BiMoney } from "react-icons/bi"
+import { Link } from "react-router-dom"
 
 const HeaderComp = () => {
   let {data} =useFetchConfigOverview()
@@ -27,9 +28,11 @@ const HeaderComp = () => {
     </div>
 </section>
 <div className="md:p-2  rounded-md flex gap-4 md:justify-end " >
+  <Link to={`/payment-settings/edit/${q?._id}`}>
         <Button className="bg-dark  hover:bg-darker text-white shadow  font-bold " >
             Edit Configurations
         </Button>
+  </Link>
     </div>
       </div>
   )

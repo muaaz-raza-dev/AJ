@@ -32,11 +32,11 @@ const SpecialFilters = () => {
 }
 
 const FilterBarClasses=()=>{
-  let {mutate,isLoading } =useReadFilteredClasses()
+  let {mutate } =useReadFilteredClasses()
     let {Session} =useAppSelector(s=>s.dashboard.Filters)
     let dispatch =useAppDispatch()
   let handleFilter = (value:string)=>{
-    dispatch(RedDashFilters({fields_name:"Session",selected:value,isLoading}))
+    dispatch(RedDashFilters({fields_name:"Session",selected:value,isLoading:true}))
     mutate(value)
   }
     return  (  

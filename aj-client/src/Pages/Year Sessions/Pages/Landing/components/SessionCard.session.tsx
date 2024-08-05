@@ -5,6 +5,7 @@ import { FC } from "react"
 import { Link } from "react-router-dom"
 
 const SessionCard:FC<{data:Isessions}> = ({data}) => {
+  
   return (
     <section className={`rounded overflow-hidden shadow flex dark:bg-dark dark:text-white gap-1 bg-[var(--box)] w-[40%] max-md:w-full h-max ${!data.isActive&&"grayscale"}`}>
       <header className=" w-[35%]  SessionBg ">
@@ -52,7 +53,7 @@ const SessionCard:FC<{data:Isessions}> = ({data}) => {
          <div className="bg-gray-200 dark:bg-dark_dimmer   px-2 rounded text-sm w-max flex items-center gap-1">
       <Shapes size={14} />
         <b>
-          42 sections
+       
         </b>
          </div>
          

@@ -107,9 +107,8 @@ Respond({res,payload})
 const UpdateConfig = async(req,res)=>{ 
     let {id, payload} = req.body
     delete payload._id
-    let new_config = await PaymentConfig.create({...payload,isDeprecated:false})
-    let config = await PaymentConfig.findByIdAndUpdate(id,{isDeprecated:true,deprecatedDate:new Date().toISOString(),newVersionId:new_config._id})
-    Respond({res,payload:config,message:"Config Updated",payload:new_config})
+    let config = await PaymentConfig.findByIdAndUpdate(id,{...payload,isDeprecated:false},{new:true})
+    Respond({res,payload:config,message:"Config Updated",payload:config})
 
 }
 

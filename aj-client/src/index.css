@@ -116,7 +116,7 @@ backdrop-filter: blur(6px);
 }
 
 .data-\[state\=checked\]\:bg-primary[data-state=checked] {
-  background-color:  var(--dark) !important;
+  background-color:  var(--darker) !important;
 }
 
 

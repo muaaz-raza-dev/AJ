@@ -1,7 +1,12 @@
 const Respond = require("../Helpers/ResponseHandler");
 const Class = require("../models/Class");
+const OneTimeFee = require("../models/OneTimeFee");
+const PaymentConfig = require("../models/SchoolPayments");
 const Sections_Class = require("../models/Sections_Class");
 const Session = require("../models/Session");
+const PaymentConfigClassValidator = require("./utils/Classes/PaymentConfigClassValidator.utils");
+const ReadPaymentConfigsBasedonClass = require("./utils/Classes/ReadPaymentConfigsBasedonClass.utils");
+const SetupPaymentConfigAuto = require("./utils/Classes/SetupPaymentConfigAuto.utils");
 const  OptimizeExclusiveReadClass_payload  = require("./utils/OptimizeExclusiveReadClass_payload");
 
 const SectionRegisteration = async (sections) => {
@@ -31,8 +36,9 @@ const ClassRegisteration = async (req, res) => {
     let Class_exist = await Class.findOne(payload);
     if (!Class_exist) {
       let newClass = await Class.create(payload);
+      let newClassId =newClass._id||newClass._doc._id
       await Session.findByIdAndUpdate(payload.SessionId, {
-        $push: { Classes: newClass._id || newClass._doc._id },
+        $push: { Classes: newClassId },
       });
       let Sections = sections.map((section) => ({
         ...section,
@@ -40,9 +46,11 @@ const ClassRegisteration = async (req, res) => {
       }));
       let section_response = await SectionRegisteration(Sections);
       if (section_response) {
-         await Class.findByIdAndUpdate(newClass._doc._id, {
+         await Class.findByIdAndUpdate(newClassId, {
           sections: section_response,
         });
+        await SetupPaymentConfigAuto(payload.SessionId,newClassId)
+
         Respond({
           res,
           success: true,
@@ -50,13 +58,15 @@ const ClassRegisteration = async (req, res) => {
           status: 201,
           payload: newClass,
         });
-      } else
+
+      } else {
+        await Class.findByIdAndDelete(newClass._id)
         Respond({
           res,
           success: false,
           message: "Something went wrong,try again later!",
           status: 401,
-        });
+        }); }
      }
     else{
       Respond({
@@ -84,22 +94,26 @@ const Read_all_Classes = async (req, res) => {
     ).map((e) => ({ [e.acedmic_year]: e._id }));
     let ActiveSession = await Session.findOne({ isActive: true }).select("_id"); //By default only the current session classes wil be fetched
     let Classes = await Class.find({ SessionId: ActiveSession })
-      .populate("sections SessionId")
-      .select(" name sections  subjects  start_date end_date");
+    .populate({path:"sections",select:"start_date end_date name Students"}).populate({path:"SessionId",select:"session_name acedmic_year"})
+    .select(" name sections start_date end_date");
     let payload = JSON.parse(JSON.stringify(Classes));
+    
     payload.forEach((elm, index) => {
       payload[index].Students = [];
-      payload[index].Session = payload[index].SessionId;
+      payload[index].Session = payload[index]?.SessionId;
+      delete payload[index].SessionId
       elm.sections.forEach((section) => {
         payload[index].Students.push(...section.Students);
       });
     });
+
+    let Payload =await PaymentConfigClassValidator(Classes,ActiveSession._id,payload)
     Respond({
       res,
       success: true,
       message: "Classes fetched",
       status: 200,
-      payload: { payload, Filters: Sessions },
+      payload: { payload:Payload, Filters: Sessions  },
     });
   } catch (err) {
     console.log(err);
@@ -116,24 +130,27 @@ const Filter_Read_Classes = async (req, res) => {
   let { SessionId } = req.body;
   try {
     let Classes = await Class.find({ SessionId })
-    .populate("sections SessionId")
-    .select(" name sections  subjects  start_date end_date");
+    .populate({path:"sections",select:"start_date end_date name Students"}).populate({path:"SessionId",select:"session_name acedmic_year"})
+    .select(" name sections start_date end_date");
   let payload = JSON.parse(JSON.stringify(Classes));
   payload.forEach((elm, index) => {
     payload[index].Students = [];
-    payload[index].Session = payload[index].SessionId;
+    payload[index].Session = payload[index]?.SessionId;
+    delete payload[index].SessionId
     elm.sections.forEach((section) => {
       payload[index].Students.push(...section.Students);
     });
   });
-    Respond({
+  let Payload =await PaymentConfigClassValidator(Classes,SessionId,payload)
+Respond({
       res,
       success: true,
       message: "Classes fetched",
       status: 200,
-      payload,
+      payload:Payload,
     });
   } catch (err) {
+    console.log(err)
     Respond({
       res,
       success: false,
@@ -146,15 +163,19 @@ const Filter_Read_Classes = async (req, res) => {
 const Read_Class_details = async (req, res) => {
   let { id } = req.params;
   try {
-    if(id.length!=24) return res.status(404).json({message:"Invalid Class Id"})
+    if(id.length!=24||!id) return res.status(404).json({message:"Invalid Class Id"})
     let class_payload = await Class.findById(id)
       .populate({
         path: "sections",
         populate: { path: "ClassTeacher Students Subjects_teachers.Teachers" },
       })
-      .populate("SessionId");
-      if(!class_payload) return res.status(404).json({message:"Class Not Found"})
+      .populate({path:"SessionId",select:"session_name acedmic_year "});
+  if(!class_payload){ return res.status(404).json({message:"Class Not Found"})}
+
   let payload = OptimizeExclusiveReadClass_payload(class_payload)
+  let {Payload:PaymentConfigDetails,isPaymentConfigUpdate} =await ReadPaymentConfigsBasedonClass(class_payload.SessionId._id,class_payload._id.toString())
+  payload.PaymentConfigDetails =  PaymentConfigDetails
+  payload.isPaymentConfigUpdate = isPaymentConfigUpdate
     Respond({
       res,
       success: true,
@@ -264,11 +285,95 @@ const FetchClassInformation_Raw = async(req,res)=>{
     }
     
 }
+
+
+
+const FetchClassBasedPaymentConfigInfo = async(req,res)=>{
+  let {id} = req.params ;
+  if(id.length!=24||!id) return res.status(404).json({message:"Invalid Class Id"})
+  let class_payload = await Class.findById(id).populate("SessionId name")
+  if(!class_payload) {return Respond({ res,status:404, message: "Class not found", success: false });}
+  let payment_configs = await PaymentConfig.find({session : class_payload.SessionId ,isDeprecated:false }).select("classes feeStatus feeFrequency feeTitle")
+  let OneTime_configs =await OneTimeFee.find({session : class_payload.SessionId ,isDeprecated:false }).select("classes feeStatus feeFrequency feeTitle")
+  let Configs= [...payment_configs,...OneTime_configs]
+
+let Payload = []  // {configId:{feeStatus,amount}}
+Configs.forEach(config=>{
+let payload= {Config:config,class:{classId:id}}
+if(config.feeStatus == "Same amount for every Class"){
+      payload.class.amount  = config.classes[0].amount
+}
+else {
+      payload.class.amount  = config.classes.find(cl=>cl.classId.toString()==id)?.amount || 0
+}
+Payload.push(payload)
+
+})
+Respond({ res, payload:{Configs:Payload,ClassDetails:class_payload}, success: true });
+}
+
+const UpdateClassBasedPaymentConfig = async(req,res)=>{
+  let {Configs} = req.body  //COnfigs = [Config:{id,feeTitle};class:{classId:}]
+
+  try {
+    for (const {Config: config, class: Class} of Configs) {
+      if(config.feeFrequency != "One Time") {
+        await PaymentConfig.findByIdAndUpdate(
+          config._id,
+          {
+            $addToSet: {
+              classes: {
+                classId: Class.classId,
+                amount: Class.amount
+              }
+            }
+          },
+          { new: true }
+        );
+      } else {
+        await OneTimeFee.findByIdAndUpdate(
+          config._id,
+          {
+            $addToSet: {
+              classes: {
+                classId: Class.classId,
+                amount: Class.amount
+              }
+            }
+          },
+          { new: true }
+        );
+    }
+  }
+
+    Respond({
+      res,
+      success: true,
+      message: "Payment configurations updated successfully",
+      status: 200
+    });
+  } catch (err) {
+    console.error(err);
+    Respond({
+      res,
+      success: false,
+      message: "Something went wrong, try again later!",
+      status: 500
+    });
+  }
+
+  
+
+}
+
+
 module.exports = {
   ClassRegisteration,
   Read_all_Classes,
   Read_Class_details,
   Filter_Read_Classes,
-  Edit_Class ,
+  Edit_Class,
+  UpdateClassBasedPaymentConfig,
+  FetchClassBasedPaymentConfigInfo,
   FetchClassInformation_Raw  //this function is used to fetch class information in raw format.  It is not used in the main API endpoints.  It is used for testing purpose.  You can delete this function if you don't need it.  It will return a raw JSON object of the class.  This function is not tested in the main API endpoints.  It is used for testing purpose.  You can delete this function if you don't need it.  It will return
 };

@@ -11,6 +11,7 @@ let RouteForLabel: { [key: string]: string } = {
   "/students/*": "Student Profile",
   "/dashboard": "Classes & Teachers",
   "/dashboard/class/*" :" Class Overview",
+  "/dashboard/class/payment/*" :"Class Based Payment Configs",
   "/dashboard/teacher/register":"Staff Registeration",
   "/sessions" :"Yearly Session",
   "/sessions/edit/*" :"Update Session",
@@ -23,6 +24,7 @@ let RouteForLabel: { [key: string]: string } = {
   "/payment-settings/*" : "Payment Config Overview",
   "/students/history/*" : "Classes and Fees history",
   "/settings" : "Personal Information ",
+  "/guide":"Workspace setup guideline",
   "/settings/accounts" : "Accounts Settings ",
   "/settings/advanced" : "Advanced Settings ",
   "/stats" : "Acedmic Stats"

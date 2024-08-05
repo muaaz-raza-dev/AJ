@@ -23,7 +23,7 @@ try{
         bcrypt.compare(password, searchedUser.password,async(err,result)=>{
             if (result) {
             await User.findByIdAndUpdate(searchedUser._id, {isLogOutRequired:false });
-            let token =  jwt.sign({userId:searchedUser._id},secretKey,{expiresIn:"24 hour"})
+            let token =  jwt.sign({userId:searchedUser._id},secretKey,{expiresIn:"7 days"})
             res.status(OK).json({success:true,message:"Logined Successfully " ,token:token , payload:searchedUser})
             }
             else{
