@@ -68,30 +68,31 @@ async function SearchStudent(req, res) {
 
 async function ReadTransactions(req, res) {
   let Limit = process.env.TransactionPerRequest;
-  let { transactionType, searchMode, count, Input: q } = req.body;
+  let { transactionType, searchMode, count, Input: q ,DateRange } = req.body;
   try {
     let Query = {isCancelled:false};
-
     if (q) {
       if (searchMode == "Invoice") Query["Invoice"] = q;
       else {
         let std = await Students.findOne({ GRNO: q });
         Query["Student"] = std ? std?._id : "123456789123456789123456";
       }
-    } else {
-      if (transactionType != "Custom") {
-        if (transactionType)
+    }
+     else {
           Query["Transactions"] = {
             $elemMatch: {
-              paymentType: "Registered",
-              paymentConfigId: transactionType,
+              paymentType: transactionType == "Custom" ?  "Custom" : "Registered",
             },
           };
-      } else {
-        if (transactionType)
-          Query["Transactions"] = { $elemMatch: { paymentType: "Custom" } };
-      }
+
+    if(DateRange){
+      let start = moment(new Date(DateRange.start)).toISOString();
+      let end = moment(new Date(DateRange.end)).toISOString();
+      Query["Time"] = {$gte:start, $lte:end}
     }
+
+    }
+    console.log(Query)
     let DataLength = await TransactionsScema.countDocuments(Query);
     let transactions = await TransactionsScema.find(Query)
     .populate({ path: "Student", select: "FirstName LastName GRNO" })

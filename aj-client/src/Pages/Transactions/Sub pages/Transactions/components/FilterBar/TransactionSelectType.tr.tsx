@@ -29,7 +29,7 @@ const TransactionSelectType = () => {
     </div>:
     <Select value={transactionType} onValueChange={(val)=>dispatch(RedTransactionsFilters({transactionType:val}))}>
       <SelectTrigger className="w-[180px] max-md:w-full h-12 rounded-md dark:bg-darker dark:text-white border-2 border-dark relative  focus:ring-0">
-    <p className='text-xs text-gray-400 dark:text-gray-500 font-bold absolute top-0'>Fee Types</p>
+    <p className='text-xs text-gray-400 dark:text-gray-500  absolute top-0'>Fee Types</p>
         <SelectValue  />
       </SelectTrigger>
       <SelectContent>

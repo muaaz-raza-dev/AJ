@@ -4,10 +4,11 @@ import TransactionSelectType from "./TransactionSelectType.tr"
 import useReadPageTransactions from "@/Hooks/Transactions/useReadPageTransactions";
 import { useAppSelector } from "@/app/ReduxHooks";
 import { Link } from "react-router-dom";
+import TransactionDateRangeFilter from "./TransactionDateRangeFilter.tr";
 
 const TransactionFilterBar = () => {
   let {Filters ,TransactionTypes} = useAppSelector(s=>s.transactions)
-  let {mutate} = useReadPageTransactions(Filters.count)
+  let {mutate} = useReadPageTransactions()
  useEffect(() => {
   let {transactionType}= Filters
   if(transactionType!=""){
@@ -15,6 +16,7 @@ const TransactionFilterBar = () => {
   }
 }, [Filters.transactionType,TransactionTypes]);
   return (
+    <div className="flex w-full gap-4 flex-col ">
     <div className="w-full flex max-md:flex-col gap-x-4 gap-2">
       <TransactionFilterSearch/>
       <div className="w-full flex gap-x-1 max-md:justify-start justify-end ">
@@ -22,6 +24,11 @@ const TransactionFilterBar = () => {
       <Link to={"create"} className=" bg-dark whitespace-nowrap  text-white center px-3 transition-colors
        hover:bg-dark   rounded-md">New Transaction</Link>
       </div>
+       </div>
+       {/* //Advanced Filters  */}
+       <div className="w-full flex max-md:flex-col gap-x-4 gap-2 justify-between items-end">
+        <TransactionDateRangeFilter/>
+       </div>
     </div>
   )
 }

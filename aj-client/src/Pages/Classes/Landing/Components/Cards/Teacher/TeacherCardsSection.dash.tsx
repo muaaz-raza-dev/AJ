@@ -1,6 +1,6 @@
 import { useAppSelector } from "@/app/ReduxHooks"
 import TeacherCard from "../Teacher/TeacherCard.dash"
-import { capitalizeFirstLetter } from "@/Hooks/utils/Capitalize_special"
+import { capitalizeFirstLetter } from "@/utils/Capitalize_special"
 import RequestLoading from "@/Global/Loaders/RequestLoding"
 const TeacherCardsSection = () => {
   let data = useAppSelector(s=>s.dashboard.payload.Teachers.Filtered)

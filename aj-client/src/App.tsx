@@ -5,13 +5,13 @@ import { Toaster } from 'react-hot-toast';
 import AJFile from './Global/AJFile';
 const queryClient = new QueryClient({})
 function App() {
-  
+ 
   return (
 <QueryClientProvider client={queryClient}>
 <BrowserRouter>
 <Toaster/>
-  <AJFile/>
-<iframe hidden id='PDFView' ></iframe> {/* // ? to print the pdfs */}
+<AJFile/>
+<iframe hidden id='PDFView' ></iframe> // ? to print the pdfs
   </BrowserRouter>
   </QueryClientProvider>
   )

@@ -39,7 +39,7 @@ return {Dues :totalDues ,Paid:totalPaid}
 
 async function CalculatePaymentAppliedAllTime (totalSessions,ClassSessionPair,StudentDetails){
 let totalAmountToPay= 0
-let RegisteredPayments_AllTime = (await PaymentConfig.find({session:{$in:totalSessions}})) 
+let RegisteredPayments_AllTime = (await PaymentConfig.find({session:{$in:totalSessions},isDeprecated:false})) 
 let ConsiderOneTimeFee = StudentDetails.ConsiderOneTimeFee
 // ? To calculat the amount of One Time Fee
 if(ConsiderOneTimeFee){
@@ -179,7 +179,7 @@ let Classes = (await Sections_Class.find({Students:studentId,}).select("Class"))
 let sessions = await Session.find({Classes:{$in:Classes}}).select("_id session_name acedmic_year")
 Payload.Sessions=sessions.map(s=>({value:s._id.toString() , label:`${s.session_name} ${s.acedmic_year}`})) 
 
-let paymentConfigs = await PaymentConfig.find({session:{$in:sessions.map(e=>e._id)}}).select("_id feeFrequency feeTitle paymentDate session")
+let paymentConfigs = await PaymentConfig.find({isDeprecated:false,session:{$in:sessions.map(e=>e._id)}}).select("_id feeFrequency feeTitle paymentDate session")
 Payload.feeTypes.push(...Object.keys(lod.groupBy(paymentConfigs,(({feeFrequency})=>feeFrequency))))
 
 paymentConfigs.forEach(config=>{

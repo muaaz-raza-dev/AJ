@@ -1,4 +1,4 @@
-import useScreenSizeTracker from '@/Hooks/utils/useScreenSizeTracker';
+import useScreenSizeTracker from '@/utils/useScreenSizeTracker';
 import { Tooltip } from 'antd';
 import  { FC, ReactNode, } from 'react'
 

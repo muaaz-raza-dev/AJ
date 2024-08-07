@@ -8,7 +8,7 @@
 :root{
   --dark:#2f1660;
   --bg-dark:#1b0c39;
-  --bg:#F3F4FF;
+  --bg:#f6f3ff;
   --light:#F3F4FF;
   --darker:#23104a;
   --secondary:#F3F4FF;
@@ -19,7 +19,7 @@
     --info: #00ADA3;
     --warning: #FCC43E;
     --danger: #fd5353;
-    --dark-dimmer:#23104adc;
+    --dark-dimmer:#23104a6b;
 }
 @layer base {
   :root {

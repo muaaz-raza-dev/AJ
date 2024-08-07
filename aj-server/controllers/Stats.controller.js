@@ -1,4 +1,6 @@
 const Respond = require("../Helpers/ResponseHandler")
+const OneTimeFee = require("../models/OneTimeFee")
+const PaymentConfig = require("../models/SchoolPayments")
 const CalculateAllMonths = require("./utils/Stats/CalculateAllMonths")
 const { CalculateNewAdmissions } = require("./utils/Stats/CalculateNewAdmissions")
 const { CalculateTotalPendings } = require("./utils/Stats/CalculateTotalPendings")
@@ -6,7 +8,9 @@ const { CalculateTotalRevenue } = require("./utils/Stats/CalculateTotalRevenue")
 const { CalculateTotalStudents } = require("./utils/Stats/CalculateTotalStduents")
 const GetDailyChartReport = require("./utils/Stats/charts/GetDailyChartReport")
 const {  GetMonthlyChartReport } = require("./utils/Stats/charts/GetMonthlyChartReport")
-const moment = require("moment")
+const CalculateAllStatFilters = require("./utils/Stats/FilteredData/CalculateAllStatFilters")
+const CalculateMonthlyFeeReport = require("./utils/Stats/FilteredData/CalculateMonthlyFeeReport")
+const CalculateYearlyFeeReport = require("./utils/Stats/FilteredData/CalculateYearlyFeeReport")
 const GeneralStats = async(req,res)=>{
 try{
 let totalStudents  = await CalculateTotalStudents()
@@ -14,7 +18,8 @@ let newAdmissions = await CalculateNewAdmissions()
 let MonthlyRevenue = await CalculateTotalRevenue()
 let PendingPayments  = await CalculateTotalPendings()
 let Dates  =await CalculateAllMonths() // FRom the beggining of the software. {2024:["may","june","july"]}
-Respond({res,payload:{totalStudents,newAdmissions,MonthlyRevenue,PendingPayments,Dates}})
+let FstatsFilters = await CalculateAllStatFilters() // For filterable Stats
+Respond({res,payload:{totalStudents,newAdmissions,MonthlyRevenue,PendingPayments,Dates,FstatsFilters}})
 }
 catch(err){
 console.log(err);
@@ -46,4 +51,18 @@ const DailyChartReport = async(req,res)=>{
         Respond({res,error:err,status:501,message:"Somthing went wrong."})
     }
 }
-module.exports = {GeneralStats,MonthlyChartReport,DailyChartReport}
+
+const FilterableConfigStats = async(req,res)=>{
+let {PaymentConfig:paymentConfig,month,year,Session,Class,feeFrequency} = req.body
+let Config = await PaymentConfig.findById(paymentConfig).select("-createdAt -updatedAt ")
+if(!Config) return Respond({res,success:false,status:404,message:"Payment Config not found. Try again later!"})
+let payload ; // no of Student not the amount
+if(feeFrequency == "Custom"||feeFrequency == "Monthly"){
+payload = await CalculateMonthlyFeeReport(Config,month,year,(Class=="all"?"":Class))
+}
+else {
+payload = await CalculateYearlyFeeReport(Config,Session)
+}
+Respond({res,payload,})
+}
+module.exports = {GeneralStats,MonthlyChartReport,DailyChartReport,FilterableConfigStats}

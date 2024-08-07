@@ -1,16 +1,19 @@
 import ReadTransactions from "@/Api/Transaction/Transaction Read/ReadTransactions.api"
-import { useAppDispatch } from "@/app/ReduxHooks"
+import { useAppDispatch, useAppSelector } from "@/app/ReduxHooks"
 import { RedTransactionsFilters, RedTransactionsReadInsert } from "@/app/Slices/TransactionReadSlice"
 import { ItransactionReadFilters } from "@/app/Types/ItransactionsRead"
 import { useMutation } from "react-query"
 
 
-const useReadPageTransactions = (count:number) => {
+const useReadPageTransactions = () => {
 let dispatch =useAppDispatch()
-
-return useMutation({mutationKey:["Read","Transactions",count],mutationFn:(filters:ItransactionReadFilters)=>{
+let {count}=useAppSelector(s=>s.transactions.Filters)
+return useMutation({mutationKey:["Read","Transactions",count],
+    mutationFn:(filters:ItransactionReadFilters)=>{
     dispatch(RedTransactionsReadInsert({isLoadingTransactions:true}))
-    return ReadTransactions(filters)},onSuccess({payload:data,DataLength,count}) {
+    return ReadTransactions(filters)
+},
+    onSuccess({payload:data,DataLength,count}) {
             dispatch(RedTransactionsReadInsert({Transactions:data,DataLength}))
             dispatch(RedTransactionsFilters({count:count}))
 },onSettled(){

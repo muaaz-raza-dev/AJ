@@ -12,8 +12,7 @@ interface  ItransactionReadOptional {
 interface ItransactionsFilters{
     transactionType?: string;
     searchMode?: string;
-    year?: string;
-    month?: string;
+    DateRange?:{start?:string;end?:string;}
     Input?: string;
     count?: number;}
 const InsertTransactionsStateFn = (state:ItransactionRead,{payload:{DataLength,isLoadingTransactions,TransactionStats,SearchModes,TransactionTypes,Transactions}}:PayloadAction<ItransactionReadOptional>)=>{
@@ -24,12 +23,11 @@ const InsertTransactionsStateFn = (state:ItransactionRead,{payload:{DataLength,i
     if(TransactionTypes!=undefined) state.TransactionTypes = TransactionTypes
     if(Transactions!=undefined) state.Transactions = Transactions
 }
-export const TransactionsFilterManagerFn =({Filters}:ItransactionRead,{payload:{transactionType,month,year,count,searchMode}}:PayloadAction<ItransactionsFilters>)=>{
+export const TransactionsFilterManagerFn =({Filters}:ItransactionRead,{payload:{transactionType,DateRange,count,searchMode}}:PayloadAction<ItransactionsFilters>)=>{
 if (transactionType!=undefined) Filters.transactionType =transactionType
-if (month!=undefined) Filters.month =month
-if (year!=undefined) Filters.year =year
 if (count!=undefined) Filters.count =count
 if (searchMode!=undefined) Filters.searchMode =searchMode
+if(DateRange){Filters.DateRange = {...Filters.DateRange,...DateRange}}
     
 }
 

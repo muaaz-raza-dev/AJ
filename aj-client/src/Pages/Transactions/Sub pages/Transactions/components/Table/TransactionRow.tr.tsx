@@ -1,5 +1,6 @@
 import { IShortTransactions } from '@/app/Types/ItransactionsRead'
 import { TableCell, TableRow } from '@/shdcn/components/ui/table'
+import { GetTransactionPurposes } from '@/utils/GetEachTransactionPurpose'
 import { Tooltip } from 'antd'
 import { ArrowRight } from 'lucide-react'
 import moment from 'moment'
@@ -22,9 +23,12 @@ const TransactionRow = ({data}:{data:IShortTransactions}) => {
 <TableCell className=' font-bold'>{data?.Student?.FirstName}</TableCell>
 <TableCell className=' font-bold'>{data?.PayorsName}</TableCell>
 <TableCell className=' font-bold'>{data?.RecievedBy?.Name}</TableCell>
-<TableCell className=' font-bold'>{data.Transactions.map(tr=>{
+<TableCell className=' font-bold'>{
+data.Transactions.map(tr=>{
 if(tr.paymentType == "Registered") {
-return <Link to={"/payment-settings"} className='cursor-pointer bg-darker text-sm text-white rounded-xl font-bold w-max px-2 py-1'>{tr.paymentTitle}</Link>
+return <Tooltip title={GetTransactionPurposes(tr)}>
+  <Link to={"/payment-settings"} className='cursor-pointer bg-darker text-sm text-white rounded-xl font-bold w-max px-2 mx-2 py-1'>{tr.paymentTitle}</Link>
+</Tooltip>
 }
 else {
 return <div className='cursor-pointer border-dark border text-sm text-dark  rounded-xl font-bold w-max px-2 py-1'>{tr.paymentTitle}</div>

@@ -1,5 +1,3 @@
-import moment from "moment";
-
 export interface IShortTransactions {
   _id:string;
   Invoice: number;
@@ -7,12 +5,16 @@ export interface IShortTransactions {
   Student:{
     GRNO: string;
     FirstName: string;
+    LastName: string;
   },
   PayorsName:string;
   isDelayedRegistory?:boolean;
   RecievedBy:{Name:string},
   amount:{totalAmount: number};
-  Transactions: [{ paymentTitle:string;paymentType:"Custom"|"Registered";paymentConfigId:string }];
+  Transactions: {paymentTitle:string;paymentType:"Custom"|"Registered";paymentConfigId:string;
+    month?:string;
+    year?:string;
+    session?:string }[];
 }
 
 export interface ItransactionRead {
@@ -34,9 +36,8 @@ export interface ItransactionRead {
 }
 export interface ItransactionReadFilters {
   transactionType: string;
+  DateRange:{start:string;end:string},
   searchMode: string;
-  year: string;
-  month: string;
   Input: string;
   count: number;
 }
@@ -48,17 +49,18 @@ export const defaultTransactionRead: ItransactionRead = {
     PendingAmount: 0,
     RecievedAmount: 0,
     PendingTransactions: 0,
-    isLoading: true,
+    isLoading: false,
   },
   Transactions: [],
   SearchModes: ["Invoice", "GR no"],
-  TransactionTypes: [],
+  TransactionTypes: [{value:"Registered",label:"Regsitered"},{value:"Custom",label:"Custom"},{value:"All",label:"All"}],
   q: "",
   Filters: {
-    transactionType: "",
+    transactionType: "All",
+    DateRange:{start: new Date(new Date().setHours(0, 0, 0, 0)).toISOString(),
+      end: new Date(new Date().setHours(23, 59, 59, 999)).toISOString()
+      },
     searchMode: "Invoice",
-    year: moment().year().toString(),
-    month: "",
     Input: "",
     count: 1,
   },

@@ -4,7 +4,7 @@ import { useDropzone } from "react-dropzone";
 import { useFormContext } from "react-hook-form";
 import WebCamImage from "./WebCamImage.reg";
 import clsx from "clsx";
-import { Camera, Cross } from "lucide-react";
+import { Camera } from "lucide-react";
 import { MdCancel } from "react-icons/md";
 import { FaCheck } from "react-icons/fa";
 

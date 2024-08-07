@@ -2,10 +2,11 @@ import { useAppSelector } from "@/app/ReduxHooks";
 import usePagination from "@/Hooks/Common/usePagination";
 import useReadPageTransactions from "@/Hooks/Transactions/useReadPageTransactions";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import ExportTransaction from "../FilterBar/export/ExportTransaction.tr";
 const TransactionPagination = () => {
-  let { Filters, DataLength } = useAppSelector((s) => s.transactions);
+  let { Filters, DataLength, } = useAppSelector((s) => s.transactions);
   let TrPerPage = import.meta.env.VITE_APP_TransactionPerRequest;
-  let { mutate } = useReadPageTransactions(Filters.count);
+  let { mutate } = useReadPageTransactions();
   let { hasNextPage,hasPreviousPage,currentPage,pageNumbers,nextPage,previousPage } =usePagination({ itemsPerPage: TrPerPage, totalItems: DataLength });
   
   let HandlePagination = (direction: number) => {
@@ -18,6 +19,9 @@ const TransactionPagination = () => {
   
   return (
     <div className="flex items-center justify-between gap-x-2 ">
+      <div className="flex gap-2 items-center">
+        <ExportTransaction/>
+
     <p className="gap-x-1 flex font-bold text-gray-700 dark:text-white">
       Showing 
       <b className="text-[var(--darker)] dark:text-white ">
@@ -33,6 +37,7 @@ const TransactionPagination = () => {
        </b>
        transactions
     </p>
+      </div>
     <div className="flex gap-x-5 items-center">
         <button
         disabled={!hasPreviousPage}

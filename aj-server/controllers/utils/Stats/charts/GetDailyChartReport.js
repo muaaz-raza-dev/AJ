@@ -38,7 +38,6 @@ for(let i=1;i<=EndDay;i++){
 
 payload = Object.values(payload)
 let average = GetAverage(payload)
-
 return {chartData:payload,average};
 
 }

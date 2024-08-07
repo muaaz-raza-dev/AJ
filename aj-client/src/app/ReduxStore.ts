@@ -13,6 +13,7 @@ import { Class_detailed } from "./Slices/ClassDetailedSlice";
 import { lpaymentconfig } from "./Slices/LPaymentConfigSlice";
 import { studentHist } from "./Slices/StudentHistorySlice";
 import { Stats } from "./Slices/StatsSlice";
+import { Fstats } from "./Slices/FilterableStatsSlice";
 
 
 
@@ -31,7 +32,8 @@ reducer:{
     classDetailed:Class_detailed ,
     paymentConfigsL:lpaymentconfig ,
     studentHistory:studentHist,
-    stats: Stats
+    stats: Stats,
+    fStats:Fstats // FilterableStats
 }
 });
 
