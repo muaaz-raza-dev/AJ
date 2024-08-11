@@ -9,8 +9,8 @@ const ClassCardsSection = () => {
   return (
     <main className="flex gap-2  w-[100%] min-h-max   overflow-y-auto flex-wrap">
       {
-        Classes.length === 0 &&(
-          <div className="flex justify-center items-center w-[100%] h-[100%] ">
+        !isLoading&&Classes.length === 0 &&(
+          <div className="flex justify-center items-center ">
             <h1 className="text-2xl text-center text-gray-500 font-black">No Classes Found</h1>
           </div>
         ) 
@@ -18,7 +18,7 @@ const ClassCardsSection = () => {
 
         {
           isLoading ? (
-            <div className="flex justify-center items-center w-[100%] h-[100%] ">
+            <div className="flex justify-center items-center w-[100%]  ">
               <RequestLoading dark stroke="5" />
             </div>
           ) :
