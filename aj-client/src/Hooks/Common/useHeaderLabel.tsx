@@ -2,15 +2,16 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
 let RouteForLabel: { [key: string]: string } = {
-  "/students/*/edit": "Student Registeration",
+  "/students/*/edit": "Edit Student Details",
   "/": "Students Directory",
   "/settings/user/edit/*" : "Edit user credentials",
   "/students": "Students Directory",
+  
   "/transactions": "Transactions",
   "/settings/advanced-actions":"Advanced Settings",
   "/transactions/create": "Create transaction",
   "/transactions/transaction/*": "Invoice details",
-  "/students/*": "Student Profile",
+  "/students/registeration": "Student Registeration",
   "/settings/users":"User Accounts Details",
   "/dashboard": "Classes & Teachers",
   "/dashboard/class/*" :" Class Overview",

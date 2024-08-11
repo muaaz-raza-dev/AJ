@@ -122,7 +122,6 @@ const Payment_Dates_Monthly = () => {
                 }
             return payload
         })
-        console.log(payload);
         
         setPayload(payload)
         if(!lod.isEqual (payload ,  paymentMonths)) {

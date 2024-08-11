@@ -6,7 +6,8 @@ import { useMutation } from 'react-query'
 const useResetCredentials = (Reset:(val:any)=>void) => {
   return useMutation({
     mutationKey: ['Reset Credentials'],
-    mutationFn:({username,isUpdatePassword,newPassword,currentPassword}:{username:string,isUpdatePassword:boolean,newPassword:string,currentPassword:string})=> {return ResetCredentials(currentPassword,newPassword,username,isUpdatePassword)},
+    mutationFn:(payload:
+      {username:string;Name:string;email?:string;isUpdatePassword:boolean,newPassword:string,currentPassword:string})=> {return ResetCredentials(payload)},
     onSuccess({message,payload}) {
       toast.success(message)
       Reset({

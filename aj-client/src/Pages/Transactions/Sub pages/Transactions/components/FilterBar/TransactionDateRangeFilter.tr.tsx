@@ -26,7 +26,7 @@ let {start,end} =Filters.DateRange
   }
   return (
     <section className="flex flex-col w-full dark:text-white">
-      <h1 className="hFont  font-bold ">Transaction Date Range</h1>
+      {/* <h1 className="hFont  font-bold ">Transaction Date Range</h1> */}
     <div className="flex gap-3 w-full max-md:flex-col">
       <div className="flex gap-3 max-md:w-full ">
       <CalendarComp label={"Start"} placeholder="Pick the start date" onChange={HandleStart} value={start} />
@@ -34,7 +34,8 @@ let {start,end} =Filters.DateRange
       </div>
       <Button type="button"
       onClick={ApplyRangeFilter}
-      className="h-12 text-left bg-box dark:bg-dark dark:border-none dark:text-white hover:bg-box hover:text-dark border-2  font-bold active:scale-95 text-dark "
+      className="h-12 text-left bg-box dark:bg-dark dark:border-none dark:text-white hover:bg-box hover:text-dark border-2
+       border-dark  font-bold active:scale-95 text-dark "
     >
       
       Apply 

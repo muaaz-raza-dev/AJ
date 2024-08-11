@@ -51,7 +51,6 @@ const SessionCard:FC<{data:Isessions}> = ({data}) => {
         </b>
          </div>
          <div className="bg-gray-200 dark:bg-dark_dimmer   px-2 rounded text-sm w-max flex items-center gap-1">
-      <Shapes size={14} />
         <b>
        
         </b>

@@ -1,6 +1,8 @@
 export interface IaccountInfo {
     Info :{
         username:string;
+        Name:string;
+        email?:string;
         Role:string;
         photo:string; // photo url
     };
@@ -20,11 +22,12 @@ export interface IaccountInfo {
 export const defaultAccountInfo :IaccountInfo ={
     Info: {
         username: '',
-        Role: '' ,
+        Name: '',
+        Role: 'user' ,
         photo:''
     },
     isLoaded:false,
-    isVerified: false,
+    isVerified: true,
     isUpdatePassword: false,
     Passwords: {
         currentPassword: '',

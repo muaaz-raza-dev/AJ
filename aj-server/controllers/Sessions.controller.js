@@ -25,7 +25,7 @@ const UpdateSession = async(req,res)=>{
 
 
 const ReadSessions = async(req,res)=>{
-const Sessions =await Session.find().populate("Classes")
+const Sessions =await Session.find()
 Respond({res,success:true,message:"Sessions fetched",status:200,payload:Sessions})
 }
 

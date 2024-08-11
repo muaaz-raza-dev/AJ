@@ -24,10 +24,10 @@ const StudentDetailedSkeletonLoader = () => {
 export const SkeletonLoader = () => {
   return (
     <>
-    <Skeleton className=' dark:bg-dark h-[20%]' baseColor='transparent'/>
-    <Skeleton className=' dark:bg-dark h-[10%]' baseColor='transparent'/>
-    <Skeleton className=' dark:bg-dark h-[10%]' baseColor='transparent'/>
-    <Skeleton count={5} className=' dark:bg-dark h-[4%] flex justify-between flex-wrap gap-4' baseColor='transparent'/>
+    <Skeleton className=' dark:bg-dark h-20' />
+    <Skeleton className=' dark:bg-dark h-20' />
+    <Skeleton className=' dark:bg-dark h-20' />
+    
     </>
   )
 }

@@ -12,8 +12,9 @@ const AccountsSectionForm = () => {
     const {isLoading} =useGetAccountInfo(form.reset)
     const {mutate,isLoading:loading,isSuccess} = useResetCredentials(form.reset)
     const formSubmit  :SubmitHandler<IaccountInfo> = (data) =>{
-    mutate({currentPassword:data?.Passwords?.currentPassword,newPassword:data?.Passwords?.newPassword,isUpdatePassword:data.isUpdatePassword,username:data.Info.username})
+    mutate({currentPassword:data?.Passwords?.currentPassword,newPassword:data?.Passwords?.newPassword,isUpdatePassword:data.isUpdatePassword,...data.Info})
       }
+      
   return (
     <FormProvider {...form}>
 {isLoading&&<Fetching_Request/>}

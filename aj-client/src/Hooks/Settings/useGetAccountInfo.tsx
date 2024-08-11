@@ -9,7 +9,7 @@ const useGetAccountInfo = (Reset?:(val:any)=>void) => {
     refetchOnMount:true,
     refetchOnWindowFocus:false,
     onSuccess({payload}) {
-        Reset&&Reset({...defaultAccountInfo,Info:{username:payload.username,Role:payload.Role,photo:payload.photo},isLoaded:true})
+        Reset&&Reset({...defaultAccountInfo,Info:payload,isLoaded:true})
     },
   },
   

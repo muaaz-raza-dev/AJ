@@ -120,7 +120,7 @@ async function VerificationController(req, res) {
 
       await User.findByIdAndUpdate(decodedToken.userId, {
         LastLogin: new Date().toISOString(),
-      });
+      }).select("-password -LastLogin -isBlocked -isLogOutRequired");
       res.json({ success: true, message: "Verifed", payload: user });
     } 
     
@@ -140,8 +140,8 @@ async function GetAccountInfo(req, res) {
 }
 
 async function ResetCredentials(req, res) {
-  let { currentPassword, newPassword, isUpdatePassword, username } = req.body;
-  console.log(req.body, req.AdminId, req.details);
+  let { currentPassword, newPassword, isUpdatePassword, username,Name,email } = req.body;
+
   if (isUpdatePassword) {
     let isCorrect = await bcrypt.compare(currentPassword, req.details.password);
 
@@ -154,7 +154,7 @@ async function ResetCredentials(req, res) {
     bcrypt.hash(newPassword, 8, async function (err, hash) {
       if (!err) {
         let info= await User.findByIdAndUpdate(req.AdminId, {
-          username,
+          username,Name,email,
           password: hash,
           isLogOutRequired: true,
         },{new:true});
@@ -169,7 +169,7 @@ async function ResetCredentials(req, res) {
     });
     
   } else {
-  const info=  await User.findByIdAndUpdate(req.AdminId, { username },{new:true});
+  const info=  await User.findByIdAndUpdate(req.AdminId, { username,email,Name },{new:true});
     res
       .status(200)
       .json({ success: true,payload:info, message: "Username reset successfully" });

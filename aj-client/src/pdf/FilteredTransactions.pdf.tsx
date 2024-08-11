@@ -61,7 +61,7 @@ return (
 {PagesTransactions.map((page,pageNo,{length:total})=>{
     return <Page size="A4"  style={styles.page}>
     <View style={styles.header}>
-      <Text>Transaction Report ({moment(payload.DateRangeDetails.start).format("DD-MMMM-YY")} - {moment(payload.DateRangeDetails.end).format("DD-MMMM-YY")})  </Text>
+      <Text>Transaction Report ({moment(payload.DateRangeDetails.start).format("DD/MMMM/YY")} - {moment(payload.DateRangeDetails.end).format("DD/MMMM/YY")})  </Text>
     </View>
     <View style={styles.table}>
       <View style={styles.tableRow}>

@@ -2,9 +2,9 @@
 import Axios from "@/app/Common/Axios"
 import Cookies from "js-cookie"
 
-const ResetCredentials = async(currentPassword:string,newPassword:string,username:string,isUpdatePassword:boolean) => {
+const ResetCredentials = async(payload:{username:string;Name:string;email?:string;isUpdatePassword:boolean,newPassword:string,currentPassword:string}) => {
         let Secretkey  =import.meta.env.VITE_APP_SECRET_COOKIE_KEY
-        let response = await Axios.put("/auth/update",{currentPassword,newPassword,username,isUpdatePassword},{headers:{token:Cookies.get(Secretkey)}})
+        let response = await Axios.put("/auth/update",{...payload},{headers:{token:Cookies.get(Secretkey)}})
         return response.data
 }
 

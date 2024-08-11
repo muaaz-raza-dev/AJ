@@ -23,8 +23,8 @@ const SessionRegisterations:FC<{edit?:boolean}> = ({edit}) => {
 
 
 if(edit){
-  if (loading) return <SkeletonLoader/>;
-  if (isError && NotFoundValidator(error))
+if (loading) return <SkeletonLoader/>;
+if (isError && NotFoundValidator(error))
     return (
   <ErrorPage
   title={"Invalid Session Id"}
@@ -36,8 +36,8 @@ if(edit){
 }
 
   return (
-
     <div className="w-full flex flex-col gap-y-4">
+<SkeletonLoader/>
     <FormProvider {...form}>
     <form 
     onSubmit={form.handleSubmit(formSubmit)}

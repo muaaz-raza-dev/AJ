@@ -1,19 +1,31 @@
 import { useFormContext } from 'react-hook-form'
-import { Input, Tooltip } from 'antd'
+import {Input,  Tooltip } from 'antd'
 import { IaccountInfo } from '@/app/Types/IAccountInfo'
 import useValidateUsername from '@/Hooks/Teacher&Class/useValidateUsername.api'
 import { useDebouncedCallback } from 'use-debounce'
 import RequestLoading from '@/Global/Loaders/RequestLoding'
 
 const AccountBasicInfoSection = () => {
-  let {watch} =useFormContext<IaccountInfo>()
+  let {watch,register} =useFormContext<IaccountInfo>()
   let Role= watch("Info.Role")
+  console.log(watch("Info"))
   return (
     <>
    <ProfilePhotoResetComp/>
     <SettingsLabelWrapper label="Username" description="Unique identity of your account .">
     <div className="min-w-[60%]  md:min-w-[40%] flex  gap-4">
        <UsernameField />
+    </div>
+</SettingsLabelWrapper>
+<SettingsLabelWrapper label="Full Name" >
+    <div className="min-w-[60%] md:min-w-[40%]  flex  gap-4 ">
+        <input {...register("Info.Name")} className='dark:bg-dark dark:border-none w-full h-9 p-2 rounded-md text-sm border-gray-300 border dark:text-white' placeholder='Muaaz Raza' />
+    </div>
+</SettingsLabelWrapper>
+<SettingsLabelWrapper label="Email Address" >
+    <div className="min-w-[60%] md:min-w-[40%]  flex  gap-4 ">
+        <input {...register("Info.email")} className='dark:bg-dark dark:border-none w-full h-9 p-2 border rounded-md text-sm border-gray-300 dark:text-white'
+         placeholder='muaazraza@gmail.com' />
     </div>
 </SettingsLabelWrapper>
 <SettingsLabelWrapper label="Account Role" >

@@ -4,9 +4,9 @@ import { useQuery } from "react-query";
 
 const useFetchSessions_pay_mod = (cb:(payload:any)=>void) => {
     return useQuery({
-      queryKey: [ "Payment","Required payload" ],
+      queryKey: [ "Payment","payload","Session Dates" ],
       refetchOnWindowFocus:false,
-      staleTime:1000,
+      refetchOnMount:true,
       queryFn: ReadSessions_Payment_Mod ,
       onSuccess({payload}) {
    cb(payload)

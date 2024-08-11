@@ -1,15 +1,19 @@
+import { useAppSelector } from "@/app/ReduxHooks"
 import RoleBasedAccess from "@/Global/Middleware Hooks/RoleBasedAccess"
 import useActiveRoute from "@/Hooks/Common/ActiveRoute"
 import { Link } from "react-router-dom"
 
 const Navigationbar = () => {
     let {ValidateRoute}  =useActiveRoute()
+    const {StaffId} =useAppSelector(s=>s.credits.Info)
     let ActiveStyle = "dark:bg-dark !bg-darker text-white"
   return (
-    <section className="flex gap-4 overflow-auto customscrollbarTable pb-4">
+    <section className="flex gap-4 overflow-auto customscrollbarTable pb-2">
+      {StaffId &&
       <RoleBasedAccess roleToGiveAccess={["admin","user"]}>
             <Link to={"/settings"} className={`${ValidateRoute({toCompare:"/settings",classesToApply:ActiveStyle})} px-4 dark:bg-gray-900 bg-gray-200 text-nowrap whitespace-nowrap text-sm  hFont font-medium text-gray-700 dark:text-white rounded-md py-1 `}>Personal Information</Link>
-      </RoleBasedAccess>
+      </RoleBasedAccess> }
+
             <Link to={"accounts"} className={`${ValidateRoute({toCompare:"/settings/accounts",classesToApply:ActiveStyle})} px-4 dark:bg-gray-900 bg-gray-200 text-nowrap whitespace-nowrap text-sm  hFont font-medium text-gray-700 dark:text-white rounded-md py-1 `}>Account Settings</Link>
       <RoleBasedAccess roleToGiveAccess={"chief admin"}>
             

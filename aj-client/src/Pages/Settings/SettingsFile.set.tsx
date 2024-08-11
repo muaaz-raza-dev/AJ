@@ -6,21 +6,26 @@ import AccountsSectionForm from "./Pages/Account/AccountsSectionForm.set"
 import ProfileSettingForm from "./Pages/Profile/ProfileSettingForm.set"
 import AdvancedActionPage from "./Pages/AdvancedActions/AdvancedActionPage.set"
 import NewAccountPageForm from "./Pages/New Account/NewAccountPageForm.acc.reg"
+import { useAppSelector } from "@/app/ReduxHooks"
 
 const SettingsFile = () => {
+  const {StaffId} =useAppSelector(s=>s.credits.Info)
   return (
-    <main className="flex flex-col gap-4">
+    <main className="flex flex-col gap-2">
         <Navigationbar/>
         <Routes>
             <Route index element={
-           <RoleBasedAccess redirect="accounts" roleToGiveAccess={["user","admin"]}> 
+              (StaffId &&
+           <RoleBasedAccess redirect="accounts" roleToGiveAccess={["user","admin"]}>
               <ProfileSettingForm />
-           </RoleBasedAccess> } />
+           </RoleBasedAccess> )
+          } />
             <Route path="/advanced-actions" element={
               <RoleBasedAccess redirect="accounts" roleToGiveAccess={"chief admin"}>
                   <AdvancedActionPage/>
               </RoleBasedAccess> } />
             <Route path="/accounts"  element={<AccountsSectionForm />} />
+
             <Route path="/users"  element={
               <RoleBasedAccess redirect="accounts" roleToGiveAccess={"chief admin"}>
               <UsersPage />

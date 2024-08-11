@@ -67,6 +67,7 @@ catch(err){
 return res.status(501).json({success:false,message:"Somthing went wrong try again later."})
 }
 }
+
 const DeleteUserAccount  = async(req,res)=>{
 const {id} =  req.params
 if(!id||id.length!=24) return Respond({res,status:404,message:"Invalid Id"})
