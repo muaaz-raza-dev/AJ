@@ -11,7 +11,7 @@ const SessionCards_Componets = () => {
     <div className="flex max-md:flex-col gap-4  w-full  ">
       
       {
-        sessions.length === 0 &&(
+       !isLoading&& sessions.length === 0 &&(
           <div className="flex justify-center items-center w-[100%] h-[100%] bg-[var(--bg)]">
             <h1 className="text-2xl text-center text-gray-500 font-black">No Sessions Registered</h1>
           </div>
