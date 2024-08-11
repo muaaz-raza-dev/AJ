@@ -4,6 +4,7 @@ import { useAppSelector } from "@/app/ReduxHooks";
 import { Iteacher } from "@/app/Types/ITeacherRegisteration";
 import SubjectTeacherDetails from "./SubjectTeacherDetails.class";
 import { EachKVBlock } from "@/Pages/Students Directory/sub-section/Student Detailed/Components/Sections/Sub-Pages/StudentDetailsKeyValuePairs.std.pf";
+import moment from "moment";
 const SessionDetails = () => {
   let {sections} =useAppSelector(s=>s.classDetailed.payload)
   let {selected_index:i} =useAppSelector(s=>s.classDetailed.Filters.Sections)
@@ -15,9 +16,9 @@ const SessionDetails = () => {
         <Separator className="dark:bg-darker" />
         <div className="flex flex-wrap gap-2">
         <EachKVBlock label="Session Name" value={sections[i].name}/>
-        <EachKVBlock label="Class Teacher" value={ClassTeacher.firstName}/>
+        <EachKVBlock label="Class Teacher" value={ClassTeacher?.firstName}/>
         <EachKVBlock label="Total Students" value={sections[i].Students.length}/>
-        <EachKVBlock label="Start Date" value={sections[i].start_date}/>
+        <EachKVBlock label="Start Date" value={moment(sections[i].start_date).format("DD MMMM YYYY")}/>
         <EachKVBlock label="Capacity of Students" value={sections[i].capacity}/>
         </div>
         <div className="  w-[95%] flex justify-between">
@@ -27,7 +28,7 @@ const SessionDetails = () => {
         <div className="flex gap-1.5 flex-wrap">
           {sections[i].subjects.map((e) => {
             return (
-              <div className="w-max rounded-md cursor-default text-sm px-2 py-1 font-semibold border-2 hover:text-white hover:bg-dark_dimmer transition-colors border-[var(--dark)] dark:bg-darker dark:text-white text-darker">
+              <div className="w-max rounded-md cursor-default text-sm px-2 py-1 font-semibold border-2 hover:text-white hover:bg-dark_dimmer transition-colors border-[var(--dark)] dark:bg-darker dark:text-white text-dark">
                 {e}
               </div>
             );
@@ -36,12 +37,14 @@ const SessionDetails = () => {
         </div>
       </div>
 
-        <div className="">
-    <h2 className="hFont text-xl font-bold ">Teachers Details</h2>
+      {sections[i].isSubTeacherDetails||(sections[i].Subjects_teachers.length!=0)&&
+    <div className="">
+    <h2 className="hFont text-xl font-bold border-b dark:border-darker pb-2 ">Teachers Details</h2>
 		  <div className="flex  flex-wrap">
     <SubjectTeacherDetails/>
         </div>
         </div>
+      }
         </div>
   )
 }

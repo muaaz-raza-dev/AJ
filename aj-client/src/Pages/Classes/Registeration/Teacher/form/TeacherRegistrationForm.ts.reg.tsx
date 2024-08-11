@@ -2,7 +2,6 @@ import { FormProvider, SubmitHandler, useForm } from "react-hook-form"
 import Academic_Details_Teacher from "../Sections/Academic_Details_Teacher.tc.reg"
 import Basic_Details_Teacher from "../Sections/Basic_Details_Teacher.tc.reg"
 import Education_Details_Teacher from "../Sections/Education_Details_Teacher.tc.reg"
-import Account_Details_Teacher from "../Sections/Account_Details_Teacher.ts.reg"
 import Teacher_Reg_Submit from "./Teacher_Reg_Submit.ts.reg"
 import { default_teacherReg, Iteacher } from "@/app/Types/ITeacherRegisteration"
 import useTeacherRegsiter, { useEditTeacher } from "@/Hooks/Teacher&Class/useTeacherRegsiter"
@@ -33,7 +32,6 @@ if(edit){
 <Basic_Details_Teacher/> 
 <Education_Details_Teacher/>
 <Academic_Details_Teacher/>
-<Account_Details_Teacher edit={edit}/>
 <Teacher_Reg_Submit loading={edit?loading:isLoading}/>
 </form>
 </FormProvider>

@@ -7,13 +7,13 @@ const Education_Details_Teacher = () => {
   let form = useFormContext()
   return (
     <RegSectionHeader label={"Education Details"}>
-    <LabelWrapper required label="University / College" >
+    <LabelWrapper  label="University / College" >
       <CustomInputs_Reg field_name="qualification[0]" formContext={form} placeholder="Oxford university"  id="University / College" />
     </LabelWrapper>
-    <LabelWrapper required label="Degree" >
+    <LabelWrapper label="Degree" >
       <CustomInputs_Reg placeholder="B.Tech" formContext={form} id="Degree" field_name="qualification.Degree" />
     </LabelWrapper>
-    <LabelWrapper required label="Experience">
+    <LabelWrapper label="Experience">
       <CustomInputs_Reg field_name="qualification.Experience" placeholder="1.5 year" formContext={form} id="Experience" />
     </LabelWrapper>
   <Certification_Select/>

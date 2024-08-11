@@ -38,7 +38,7 @@ router.put("/reset/photo/",Authenticate,EditMember_Personal_Photo)
 router.put("/update/mutableInfo/personal",Authenticate,UpdateInfo_Personal)
 
 //?Classes
-router.get("/class/required", Authenticate, FetchRequiredInformation_Class);
+router.get("/class/required/:type", Authenticate, FetchRequiredInformation_Class);
 router.get("/class/raw/:id" , Authenticate , FetchClassInformation_Raw)
 router.post("/classes/filtered", Authenticate, Filter_Read_Classes);
 //Create

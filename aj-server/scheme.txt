@@ -1,6 +1,0 @@
-Hierarchy 
-School > Class > Sections > Students & Teachers
-
-Sections : 
--CLass Teacher 
--Seperate Students 

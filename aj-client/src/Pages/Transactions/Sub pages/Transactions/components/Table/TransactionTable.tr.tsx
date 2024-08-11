@@ -27,7 +27,7 @@ function TransactionLoading(){
   } 
   else{
     if (DataLength==0) {
-      return <div className="w-full center hFont flex p-3">
+      return <div className="w-full center hFont flex p-3 dark:text-white">
         No transaction found
       </div>
     }

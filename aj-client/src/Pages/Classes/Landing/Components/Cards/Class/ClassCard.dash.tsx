@@ -36,16 +36,13 @@ const ClassCard:FC<{data:Iclass}> = ({data}) => {
       </div>
       <div className="justify-between flex items-center pb-2 px-3">
         <div className="flex gap-1 justify-start">
-      <div className="text-[0.8rem] font-semibold hFont text-black !bg-[var(--warning)] p-1 px-3 rounded ">{data.sections.length} Sections</div>
-      <div className="text-[0.8rem] font-semibold hFont text-black !bg-[var(--info)] p-1 rounded px-3 ">{data.Students?.length} Students</div>
+      <div className="text-[0.8rem] font-semibold hFont text-black  border-2 p-1 px-3 rounded ">{data.sections.length} Sections</div>
+      <div className="text-[0.8rem] font-semibold hFont text-black  border-2 p-1 rounded px-3 ">{data.Students?.length} Students</div>
         </div>
 
       <div className="flex justify-end gap-2 ">
       <Link to={`/dashboard/class/edit/${data._id}`}>
-        <Button className=" w-max p-1 h-max border-dark border text-dark hover:scale-95 transition px-2">Edit </Button>
-        </Link>
-        <Link to={`/dashboard/class/${data._id}`}>
-        <Button className="bg-dark hover:bg-dark hover:text-white w-max p-1 h-max text-white hover:scale-95 transition px-2">Details</Button>
+        <Button className=" w-max p-1 px-4 h-max bg-darker text-white hover:bg-darker transition ">Edit </Button>
         </Link>
       </div>
       </div>

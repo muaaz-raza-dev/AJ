@@ -38,7 +38,7 @@ const TransactionSearchStudentsField: FC<{ transaction?: boolean }> = () => {
   }
 
   return (
-    <RegLabelWrapper title="Student" className="w-[100%] flex gap-x-2">
+    <RegLabelWrapper title="Student" required className="w-[100%] flex gap-x-2">
       <div className="flex  gap-4 items-center">
         <Input
           value={Inputed}

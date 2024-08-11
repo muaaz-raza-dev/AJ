@@ -13,7 +13,7 @@ const Role_Select = () => {
     }, [state])
   return (
     <LabelWrapper required label="Acedmic Role">
-    <CustomSelect_Reg   data={schoolRoles} state={value} setState={setState} placeholder={"Teacher"}/>
+    <CustomSelect_Reg    data={schoolRoles} state={value} setState={setState} placeholder={"Teacher"}/>
   </LabelWrapper>
   )
 }

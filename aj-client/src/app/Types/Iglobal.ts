@@ -5,10 +5,18 @@ export interface IglobalState  {
     GlobalFees:{[key:string]:string} ;
     Expand_Navbar:boolean;
     DarkMode:boolean;
+    AdvancedSettings:IadvancedActions
+}
+
+export interface IadvancedActions{
+    autoGR:boolean;
+    sortGR:boolean;
+    isTemporaryBlocked:boolean;
 }
 export let DefaultGlobalState :IglobalState  = {
     Expand_Navbar:false ,
     Classes: {},
+    AdvancedSettings:{autoGR:false,sortGR:false,isTemporaryBlocked:false},
     Sections:{},
     Sessions:{} ,
     GlobalFees:{},

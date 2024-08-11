@@ -5,15 +5,18 @@ import { useToggleIndividualBlockUser } from '@/Hooks/Settings/useToggleGlobalRe
 import { Tooltip } from 'antd'
 import moment from 'moment'
 import  { FC } from 'react'
-import { MdBlock, MdVerified } from 'react-icons/md'
+import { FaUserEdit } from 'react-icons/fa'
+import { MdBlock,  MdVerified } from 'react-icons/md'
 import { Link } from 'react-router-dom'
+import DeleteUserCompont from './DeleteUserCompont.set'
 
-const EachUserComp:FC<{data:Iuser}> = ({data}) => {
+const EachUserComp:FC<{data:Iuser;isBlocked:boolean}> = ({data,isBlocked}) => {
   let {data:d} =useGetUsers()
   return (
-    <div className={`w-[24%] max-md:w-full max-lg:w-[48%]  bg-[var(--box)] dark:bg-dark dark:text-white rounded-md shadow-md max-h-72 p-2 px-4
+    <div className={`w-[24%] max-md:w-full max-lg:w-[48%]  bg-[var(--box)] dark:bg-dark dark:text-white rounded-md
+       shadow-md max-h-72 p-2 px-4
        transition-all
-     ${d?.payload.isTemporaryBlocked&&"grayscale"}`}>
+     ${d?.payload.isTemporaryBlocked||data.isBlocked&&"grayscale"}`}>
     <div className="flex justify-between  items-center">
       {data.isBlocked?
 <Tooltip title={"Access Block"} >
@@ -24,21 +27,33 @@ const EachUserComp:FC<{data:Iuser}> = ({data}) => {
     <MdVerified className="text-[var(--success)]"  size={20}/>
         </Tooltip>
         }
-      <ToggleRestrictionButtons data={data}/>  
+        {!isBlocked&&<ToggleRestrictionButtons data={data}/>  
+        }
     </div>
 
     <div className=" flex  justify-center py-1 items-center w-full  flex-col gap-2">
       <div className="flex justify-between w-full items-center">
-<div className="flex gap-4 items-center">
-<img src={data.photo||"/images/sample.png"} className="h-16 w-16 rounded-full object-cover" alt="" />
-<div className="flex flex-col items-center">
-<h1 className="hFont text-lg leading-tight font-semibold">{data.Name}</h1>
+<div className="flex  gap-2 items-center">
+<img src={data.photo||"/images/sample.png"} className="h-14 w-14 rounded-full object-cover" alt="" />
+<div className="flex flex-col ">
+<h1 className="hFont text-lg whitespace-nowrap leading-tight font-semibold">{data.Name}</h1>
 <p className="hFont text-sm font-semibold text-gray-500 dark:text-gray-400 leading-tight">@{data.username}</p>
 </div>
 
 </div>
+<div className=" flex gap-2 px-2 pt-2  ">
+  <Tooltip title={"Edit"}>
+    <Link to={`/settings/user/edit/${data._id}`}>
+      <FaUserEdit    size={22} className='text' />
+    </Link>
+  </Tooltip>
+    
+<DeleteUserCompont id={data._id}/>
+
+
+</div>
 <div className=" p-1 flex justify-between max-md:w-[48%] md:hidden  px-3 font-semibold text-sm  rounded-lg  transition-colors ">
-<h1 className="text-gray-500 dark:text-gray-400 border-r w-1/2">Last Login</h1>
+<h1 className="text-gray-500 dark:text-gray-400  w-1/2">Last Login</h1>
 <p>{moment(data.LastLogin).fromNow()}</p>
 </div>
 
@@ -46,20 +61,22 @@ const EachUserComp:FC<{data:Iuser}> = ({data}) => {
 
 
 <div className="flex flex-col gap-2 w-full max-md:flex-row max-md:flex-wrap   ">
+
 <div className=" p-1 flex justify-between  max-md:w-[48%] px-3 font-semibold text-sm  rounded-lg hover:bg-[var(--primary)] transition-colors border border-gray-200">
-<h1 className="text-gray-500 dark:text-gray-400 border-r w-[60%]">Account type</h1>
+<h1 className="text-gray-500 dark:text-gray-400  w-[60%]">Account type</h1>
 <p>{data.Role}</p>
 </div>
-<div className=" p-1 flex justify-between max-md:w-[48%]  px-3 font-semibold text-sm  rounded-lg hover:bg-[var(--primary)] transition-colors border border-gray-200">
-<h1 className="text-gray-500 dark:text-gray-400 border-r w-[60%]">Acedmic Role</h1>
-<Link to={"/dashboard/teachers"} className="">{data.StaffId.acedmic_role}</Link>
-</div>
 <div className=" p-1 flex justify-between max-md:hidden  px-3 font-semibold text-sm  rounded-lg hover:bg-[var(--primary)] transition-colors border border-gray-200">
-<h1 className="text-gray-500 dark:text-gray-400 border-r w-[60%]">Last Login</h1>
+<h1 className="text-gray-500 dark:text-gray-400  w-[40%]">Last Login</h1>
 <p>{moment(data.LastLogin).fromNow()}</p>
+</div>
+<div className=" p-1 flex justify-between max-md:w-[48%]  px-3 font-semibold text-sm  rounded-lg hover:bg-[var(--primary)] transition-colors border border-gray-200">
+<h1 className="text-gray-500 dark:text-gray-400  w-[60%]">isStaff</h1>
+<Link to={"/dashboard/teachers"} className="">{data.isStaff?"Yes":"No"}</Link>
 </div>
 </div>
     </div>
+    
     </div>
   )
 }
@@ -74,7 +91,7 @@ return <div className="">
 
     isLoading?
     <RequestLoading  size="16" stroke="2"/>
-    : `Block ${data.Name}`
+    : `Block ${data.username}`
     }
    </button>:
 <button disabled={isLoading} onClick={()=>mutate(data._id)} className='px-2 text-black  font-medium tracking-wider py-1 text-xs bg-[var(--success)] rounded-md'>
@@ -82,7 +99,7 @@ return <div className="">
 
 isLoading?
 <RequestLoading  size="16" stroke="2"/>
-: `Unblock ${data.Name}`
+: `Unblock ${data.username}`
 }
  </button>
 }

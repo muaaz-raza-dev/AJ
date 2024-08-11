@@ -10,14 +10,14 @@ const Class_Header_Props = () => {
   return (
     <>
       <div className="flex flex-wrap gap-1 w-[95%] items-center">
-        <div className="w-[32%]">
+        <div className="w-[25%] max-md:w-[30%]">
           <div className="">
             <ul className="flex gap-2 items-center">
               <li className=" w-10  h-10 aspect-square   bg-dark text-white p-2 center rounded-full">
                 <FaUsers size={"30"} />
               </li>
               <li className="">
-                <h3 className="hFont font-medium  ">
+                <h3 className="hFont font-medium whitespace-nowrap  ">
                   {Students.length} students
                 </h3>
               </li>
@@ -25,14 +25,14 @@ const Class_Header_Props = () => {
           </div>
         </div>
 
-        <div className="w-[32%]">
+        <div className="w-[25%]  max-md:w-[30%]">
           <div className="">
             <ul className="flex gap-2 items-center">
               <li className="w-10 h-10 aspect-square center  bg-dark text-white p-2 rounded-full">
                 <BsBoxes size={"30"} />
               </li>
               <li className="">
-                <h3 className="hFont font-medium  ">
+                <h3 className="hFont font-medium whitespace-nowrap  ">
                   {sections.length} section
                 </h3>
               </li>
@@ -40,15 +40,16 @@ const Class_Header_Props = () => {
           </div>
         </div>
 
-        <div className="w-[32%] flex max-md:flex-col gap-4 justify-end">
+        <div className="md:min-w-[48%] max-md:w-[35%]  flex max-md:flex-col gap-4 justify-end">
           <Link
             to={"/sessions/"}
-            className="bg-darker text-white h-max rounded font-bold hFont px-3 py-1 w-max"
+            className=" border-darker border-2 dark:text-white  h-max rounded font-bold hFont px-3 py-1 w-max"
           >
             {Session?.acedmic_year}
           </Link>
-  <Link to={`/dashboard/class/edit/${_id}`} className="bg-darker max-md:hidden whitespace-nowrap active:scale-95 transition-transform text-white h-max rounded font-bold hFont px-3 py-1 w-max">
-  Update </Link>
+  <Link to={`/dashboard/class/edit/${_id}`} className="bg-darker h-9 center max-md:hidden whitespace-nowrap active:scale-95 transition-transform text-white  rounded font-bold hFont px-3 py-1 w-max">
+  Update Class Details
+  </Link>
         </div>
       </div>
 
@@ -69,7 +70,7 @@ const Class_Header_Props = () => {
 
  
         <Link to={`/dashboard/class/edit/${_id}`} className="bg-darker md:hidden whitespace-nowrap active:scale-95 transition-transform text-white h-max rounded-md font-bold hFont  py-2 text-center  w-full">
-        Edit Class Details
+        Update Class Details
         </Link>
 
     </>

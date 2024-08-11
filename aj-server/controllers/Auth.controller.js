@@ -1,107 +1,183 @@
 const jwt = require("jsonwebtoken");
-const User = require("../models/User")
+const User = require("../models/User");
 const bcrypt = require("bcryptjs");
-const {StatusCodes:{OK}}= require("http-status-codes");
+const {
+  StatusCodes: { OK },
+} = require("http-status-codes");
 const Respond = require("../Helpers/ResponseHandler");
-const {GlobalRestrictionValidator,UserSpecificRestrictionValidator, isLogOutRequired} = require("./utils/Auth/GlobalRestrictionValidator");
+const {
+  GlobalRestrictionValidator,
+  UserSpecificRestrictionValidator,
+  isLogOutRequired,
+} = require("./utils/Auth/GlobalRestrictionValidator");
 const HandleJWTToken = require("../Helpers/HandleTokenExpiry");
-let secretKey =process.env.jwt_Secret
-async function LoginController  (req,res){
-let {usernameOrEmail, password}  =req.body
-try{
-    let searchedUser = await User.findOne({ $or: [{ username: usernameOrEmail }, { email: usernameOrEmail }] });
+let secretKey = process.env.jwt_Secret;
+async function LoginController(req, res) {
+  let { usernameOrEmail, password } = req.body;
+  try {
+    let searchedUser = await User.findOne({
+      $or: [{ username: usernameOrEmail }, { email: usernameOrEmail }],
+    });
     if (searchedUser) {
-        let isRestricted = false
-        if(searchedUser.Role != "chief admin") {
-         isRestricted = await GlobalRestrictionValidator() 
-        if(!isRestricted){ isRestricted = UserSpecificRestrictionValidator(searchedUser)
-        if(isRestricted) return res.status(403).json({success:false, message:"You are blocked by the server , Contact your admin ."})
+      let isRestricted = false;
+      if (searchedUser.Role != "chief admin") {
+        isRestricted = await GlobalRestrictionValidator();
+        if (!isRestricted) {
+          isRestricted = UserSpecificRestrictionValidator(searchedUser);
+          if (isRestricted)
+            return res
+              .status(403)
+              .json({
+                success: false,
+                message: "You are blocked by the server , Contact your admin .",
+              });
         }
-        }
-        if(isRestricted)  return res.status(403).json({success:false, message:"Access temporarily blocked. Please try again later."})
+      }
+      if (isRestricted)
+        return res
+          .status(403)
+          .json({
+            success: false,
+            message: "Access temporarily blocked. Please try again later.",
+          });
 
-        bcrypt.compare(password, searchedUser.password,async(err,result)=>{
-            if (result) {
-            await User.findByIdAndUpdate(searchedUser._id, {isLogOutRequired:false });
-            let token =  jwt.sign({userId:searchedUser._id},secretKey,{expiresIn:"7 days"})
-            res.status(OK).json({success:true,message:"Logined Successfully " ,token:token , payload:searchedUser})
-            }
-            else{
-    res.status(401)?.json({success:false, message:"Invalid password"});
-            }
-        })
-        
+      bcrypt.compare(password, searchedUser.password, async (err, result) => {
+        if (result) {
+          await User.findByIdAndUpdate(searchedUser._id, {
+            isLogOutRequired: false,
+          });
+          let token = jwt.sign({ userId: searchedUser._id }, secretKey, {
+            expiresIn: "7 days",
+          });
+          res
+            .status(OK)
+            .json({
+              success: true,
+              message: "Logined Successfully ",
+              token: token,
+              payload: searchedUser,
+            });
+        } else {
+          res
+            .status(401)
+            ?.json({ success: false, message: "Invalid password" });
+        }
+      });
+    } else {
+      res
+        ?.status(401)
+        ?.json({ success: false, message: "Username or email not exists" });
     }
-    
-    else{
-    res?.status(401)?.json({success:false, message:"Username or email not exists"});
-    }
-}
-catch(err){
-    res.status(500).json({success:false, message:"Internal server error"});
+  } catch (err) {
+    res.status(500).json({ success: false, message: "Internal server error" });
+  }
 }
 
-}
+async function VerificationController(req, res) {
+  try {
+    let token = req.header("auth-token");
+    if (!token)
+      res
+        .status(401)
+        .json({ success: false, message: "Try with valid credentials" });
+    let { decodedToken, response } = HandleJWTToken(token, res);
+    if (!decodedToken && token) return response;
+    let user = await User.findById(decodedToken.userId);
+    if (user) {
+      let isRistricted = false;
 
-
-async function VerificationController (req,res){
-    try {
-        let token = req.header("auth-token") 
-        if(!token) res.status(401).json({ success: false, message: "Try with valid credentials" });
-        let {decodedToken,response} =  HandleJWTToken(token,res)
-        if(!decodedToken&&token) return response
-        let user = await User.findById(decodedToken.userId)
-        if (user) {
-        let isRistricted = false
-        if(user.Role != "chief admin") {
-        isRistricted = await GlobalRestrictionValidator(res)  // Check the global Restriction
-        if(!isRistricted) { isRistricted = UserSpecificRestrictionValidator(user)  //Check the user specific restriction
-        if(isRistricted) return res.status(403).json({success:false, message:"You are blocked by the server , Contact your admin ."})
-        else{ isRistricted = isLogOutRequired(user) // isLogoutRequired
-        if(isRistricted) return res.status(403).json({success:false, message:"Re-login required , Login with your valid credentails again."})
-        }
-        }
-        }
-
-        if(isRistricted) return res.status(403).json({success:false, message:"Access temporarily blocked,Logging you out."})
-        
-        await User.findByIdAndUpdate(decodedToken.userId,{LastLogin:new Date().toISOString( )})
-        res.json({ success: true, message: "Verifed", payload: user })
-        }
+      isRistricted = await GlobalRestrictionValidator(user); // Check the global Restriction
+      if (!isRistricted) {
+        isRistricted = UserSpecificRestrictionValidator(user); //Check the user specific restriction
+        if (isRistricted)
+          return res
+            .status(403)
+            .json({
+              success: false,
+              message: "You are blocked by the server , Contact your admin .",
+            });
         else {
-            res.status(401).json({ success: false, message: "User verification failed" });
+          isRistricted = isLogOutRequired(user); // isLogoutRequired
+          if (isRistricted)
+            return res
+              .status(403)
+              .json({
+                success: false,
+                message:
+                  "Re-login required , Login with your valid credentails again.",
+              });
         }
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({ success: false, message: "Internal server error" });
-    }
-}
+      }
 
-async function GetAccountInfo(req,res){
-    Respond({res,payload:req.details})
+      if (isRistricted)
+        return res
+          .status(403)
+          .json({
+            success: false,
+            message: "Access temporarily blocked,Logging you out.",
+          });
 
-}
-
-async function ResetCredentials(req,res){
-    let {currentPassword , newPassword , isUpdatePassword , username} = req.body 
-    if(isUpdatePassword) {
-    let isCorrect =await bcrypt.compare(currentPassword,req.details.password)
- if(!isCorrect){
-     return res.status(401).json({success:false, message:"Incorrect current password"})
- }
- bcrypt.hash(newPassword, 8, function (err, hash) {
-     if (!err) {
-         User.findByIdAndUpdate(req.AdminId,{username, password: hash, isLogOutRequired:true});
-         res.status(200).json({success:true, message:"Credential reseted successfully"})
-     } else {
-         res.status(501).json({success:false, message:"Something went wrong"})
-     }
- });
-    }
+      await User.findByIdAndUpdate(decodedToken.userId, {
+        LastLogin: new Date().toISOString(),
+      });
+      res.json({ success: true, message: "Verifed", payload: user });
+    } 
+    
     else {
-     await   User.findByIdAndUpdate(req.AdminId,{username });
-        res.status(200).json({success:true, message:"Username reset successfully"})
+      res
+        .status(401)
+        .json({ success: false, message: "User verification failed" });
     }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: "Internal server error" });
+  }
 }
 
-module.exports = {LoginController,VerificationController,GetAccountInfo,ResetCredentials}
+async function GetAccountInfo(req, res) {
+  Respond({ res, payload: req.details });
+}
+
+async function ResetCredentials(req, res) {
+  let { currentPassword, newPassword, isUpdatePassword, username } = req.body;
+  console.log(req.body, req.AdminId, req.details);
+  if (isUpdatePassword) {
+    let isCorrect = await bcrypt.compare(currentPassword, req.details.password);
+
+    if (!isCorrect) {
+      return res
+        .status(401)
+        .json({ success: false, message: "Incorrect current password" });
+    }
+
+    bcrypt.hash(newPassword, 8, async function (err, hash) {
+      if (!err) {
+        let info= await User.findByIdAndUpdate(req.AdminId, {
+          username,
+          password: hash,
+          isLogOutRequired: true,
+        },{new:true});
+        res
+          .status(200)
+          .json({ payload:info, success: true, message: "Credential updated successfully" });
+      } else {
+        res
+          .status(501)
+          .json({ success: false, message: "Something went wrong" });
+      }
+    });
+    
+  } else {
+  const info=  await User.findByIdAndUpdate(req.AdminId, { username },{new:true});
+    res
+      .status(200)
+      .json({ success: true,payload:info, message: "Username reset successfully" });
+  }
+}
+
+module.exports = {
+  LoginController,
+  VerificationController,
+  GetAccountInfo,
+  ResetCredentials,
+};

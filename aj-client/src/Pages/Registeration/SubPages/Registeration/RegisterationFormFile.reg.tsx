@@ -27,7 +27,7 @@ const RegisterationFormFile:FC<{edit?:boolean}> = ({edit}) => {
     <FormProvider {...form}>
     <form onSubmit={form.handleSubmit(FormHandler)} className="flex flex-col gap-y-8 ">
     <StudentsDetailsForm/>
-    <RegAcademicInfoForm edit={edit}/>
+    <RegAcademicInfoForm edit={edit||false}/>
     <RegisterationFormSumbit isLoading={edit?Loading||loading:Loading||isLoading} edit={edit}/>
      </form>
         </FormProvider>

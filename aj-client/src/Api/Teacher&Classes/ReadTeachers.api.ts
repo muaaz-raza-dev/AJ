@@ -12,9 +12,9 @@ export const ReadTeachers_detailed = async (teacherId: string) => {
     let response = await Axios.get(`/dashboard/teacher/${teacherId}`, { headers: { token: Cookies.get(Secretkey) } })
     return response.data
 }
-export const Fetch_Required_Info = async () => { //fetching names with its ids as value pairs
+export const Fetch_Required_Info = async (type?:string) => { //fetching names with its ids as value pairs
     let Secretkey = import.meta.env.VITE_APP_SECRET_COOKIE_KEY
-    let response = await Axios.get(`/dashboard/class/required`, { headers: { token: Cookies.get(Secretkey) } })
+    let response = await Axios.get(`/dashboard/class/required/${type}`, { headers: { token: Cookies.get(Secretkey) } })
     return response.data
 }
 

@@ -21,6 +21,7 @@ _id:string;
 }
     interface Iclass_section extends defaultId{
     subjects:string[]; 
+    isSubTeacherDetails?:boolean,
     name: string;
     Class: string ; //Object Id
     ClassTeacher?: Iteacher;//Object Id

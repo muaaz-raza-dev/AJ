@@ -5,8 +5,8 @@ import useFetchGeneralStats from "@/Hooks/Stats/useFetchGenralStats"
 import SkeletonStatsFile from "./SkeletonStatsFile.stat"
 
 const StatsFile = () => {
-  let {isLoading} =useFetchGeneralStats()
-  if(isLoading) return <SkeletonStatsFile/>
+let {isLoading} =useFetchGeneralStats()
+if(isLoading) return <SkeletonStatsFile/>
   return (
 <main className='flex flex-col gap-4'>
 <Header/>

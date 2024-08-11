@@ -14,7 +14,7 @@ const StudentClassSelect = () => {
   let dispatch = useAppDispatch()
   let {Filters} =useAppSelector(state=>state.StudentsDir)
   let {mutate:MutateForClass}  =useFilterStdByClass()
-  let {mutate}  =useLoadStudents()()
+  let {mutate}  =useLoadStudents()
   function ClassHandler(value:string){
     if (value!=="All") {
       MutateForClass({Filters:{...Filters,Class:value},count:1})

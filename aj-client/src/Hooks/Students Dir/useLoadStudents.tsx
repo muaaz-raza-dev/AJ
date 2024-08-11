@@ -1,13 +1,16 @@
 import ReadStudents from "@/Api/Students/ReadStudents.api";
-import { useAppDispatch } from "@/app/ReduxHooks";
+import { useAppDispatch, useAppSelector } from "@/app/ReduxHooks";
 import { InsertStudentsDir } from "@/app/Slices/StudentDirSlice";
 import { useMutation } from "react-query";
 const useLoadStudents = () => {
+    
+  let {count} =useAppSelector(state=>state.StudentsDir)
+
   let dispatch = useAppDispatch();
-  return function MutationState(count?: number) {
+  
     return useMutation({
       mutationKey: ["stdDir", count],
-      mutationFn: (count: number) => ReadStudents(count),
+      mutationFn: (Count?:number) => ReadStudents(Count||count),
       onSuccess(data) {
         dispatch(
           InsertStudentsDir({
@@ -20,7 +23,7 @@ const useLoadStudents = () => {
         );
       },
     });
-  };
+  ;
 };
 
 export default useLoadStudents;

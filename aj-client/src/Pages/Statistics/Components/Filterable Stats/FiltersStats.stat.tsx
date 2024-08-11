@@ -22,8 +22,8 @@ const FiltersStats = () => {
 
 
   const HandleSessionChange = useCallback((session:string)=>{
-      let year = Object.keys(Dates[session]||{})?.[0] || ""
-      let paymentConfig = PaymentConfigs?.[session]?.[0]?.value ||""
+      const year = Object.keys(Dates[session]||{})?.[0] || ""
+      const paymentConfig = PaymentConfigs?.[session]?.[0]?.value ||""
       //Apply all the default options on cahnge of it's root parent which is Session
       dispatch(RedFsFilters({
         selected:{Session:session,Class:Classes?.[session]?.[0]?.value,PaymentConfig:paymentConfig,

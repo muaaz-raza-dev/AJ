@@ -11,7 +11,7 @@ function App() {
 <BrowserRouter>
 <Toaster/>
 <AJFile/>
-<iframe hidden id='PDFView' ></iframe> // ? to print the pdfs
+<iframe hidden id='PDFView' ></iframe> {/* // ? to print the pdfs */}
   </BrowserRouter>
   </QueryClientProvider>
   )

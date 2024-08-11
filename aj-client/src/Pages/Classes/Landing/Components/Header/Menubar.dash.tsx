@@ -17,12 +17,12 @@ const Menubar = () => {
     dispatch(RedDashFilters({ fields_name: "Sections", selected:(route =="classes" || !route)?"Classes":"Teachers" }));
   }, [])
   return (
-    <div className="bg-[var(--box)] dark:bg-dark dark:border-darker p-2 text-black rounded-lg gap-3 flex w-1/2 max-md:w-full">
+    <div className=" dark:bg-dark dark:border-darker p-2 text-black rounded-lg gap-3 flex w-1/2  max-md:w-full">
       {Sections.available.map((s) => {
         if (s == Sections.selected) {
           return (
             <Link to={`/dashboard/${s.toLowerCase()}`}
-              className={` p-2 bg-[var(--dark)] w-1/2 center shadow-md dark:bg-darker  rounded-md text-white `}
+              className={` p-2 bg-[var(--dark)] px-8 center shadow-md dark:bg-darker  rounded-md text-white `}
               onClick={() => SelectSection(s)}
             >
 
@@ -32,7 +32,7 @@ const Menubar = () => {
         } else {
           return (
             <Link to={`/dashboard/${s.toLowerCase()}`}
-              className=" center p-2 w-1/2 font-bold text-black dark:text-white rounded-md "
+              className=" center p-2 px-8 font-bold text-black bg-gray-300 dark:text-white rounded-md "
               onClick={() => SelectSection(s)}
             >
                 {s}

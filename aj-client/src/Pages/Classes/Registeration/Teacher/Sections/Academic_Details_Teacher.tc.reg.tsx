@@ -12,10 +12,10 @@ const Academic_Details_Teacher = () => {
     <RegSectionHeader label={"Academic Details"}>
     <Role_Select/>
     <Teacher_Schedule/>
-    <LabelWrapper required label="Salary">
+    <LabelWrapper  label="Salary">
       <CustomInputs_Reg  formContext={form} field_name="salary" placeholder={"Salary"} type="number"/>
     </LabelWrapper>
-     <LabelWrapper required label="Date of hire" >
+     <LabelWrapper required  label="Date of hire" >
       <HireDate/>
     </LabelWrapper>
      <Teaching_Subjects/>
@@ -28,6 +28,6 @@ const HireDate = ()=>{
     form.setValue("Date_Hire",value)
   }
   let value = form.watch("Date_Hire")
-  return <CustomDateSelector_Reg  formValue={value} className="w-full" label="Pick date of hire" onChange={handleDate}/>
+  return <CustomDateSelector_Reg required formValue={value} className="w-full" label="Pick date of hire" onChange={handleDate}/>
 }
 export default Academic_Details_Teacher

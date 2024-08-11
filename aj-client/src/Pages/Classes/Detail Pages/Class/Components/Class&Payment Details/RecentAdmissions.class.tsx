@@ -44,8 +44,8 @@ const EachStudent_Comp :FC<{data:IstudentShort}>= ({data})=>{
 </div>
 </div>
 <div className="text-gray-600 dark:text-gray-200 flex gap-3 ">
-  <button><EditIcon size={16}   className="hover:text-dark transition-colors"/></button>
-  <button><ArrowRight size={16} className="hover:text-dark transition-colors"/></button>
+  <button><EditIcon size={16}   className="hover:text-darker dark:hover:text-gray-300 transition-colors"/></button>
+  <button><ArrowRight size={16} className="hover:text-darker dark:hover:text-gray-300 transition-colors"/></button>
 </div>
 
   

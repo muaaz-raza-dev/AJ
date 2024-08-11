@@ -92,7 +92,6 @@ async function ReadTransactions(req, res) {
     }
 
     }
-    console.log(Query)
     let DataLength = await TransactionsScema.countDocuments(Query);
     let transactions = await TransactionsScema.find(Query)
     .populate({ path: "Student", select: "FirstName LastName GRNO" })

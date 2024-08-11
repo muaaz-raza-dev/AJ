@@ -26,8 +26,8 @@ const SessionDetails = () => {
     <LabelWrapper required label="End Date">
       <CustomDateSelector_Reg formValue={form.watch("end_date")} label="pick session end date" onChange={handleEndDate} className="w-full" />
     </LabelWrapper>
-    <LabelWrapper required label="Description session">
-        <CustomTextArea_Reg placeholder="write the goals of the whole sessions..." required formContext={form} id="Session Description"  field_name="session_description"/>
+    <LabelWrapper  label="Description session">
+        <CustomTextArea_Reg  placeholder="write the goals of the whole sessions..."  formContext={form} id="Session Description"  field_name="session_description"/>
     </LabelWrapper>
     </RegSectionHeader>
   )

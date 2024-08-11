@@ -57,12 +57,11 @@ function TransactionPurposeSectionFooter() {
 }
 
 function TransactionComposeAdditionalInputs() {
-  let {control,watch} = useFormContext()
-  let totalAmount = watch("totalAmount")
+  let {control} = useFormContext()
   return (
     <div className="flex flex-wrap gap-3">
       <RegLabelWrapper title="Amount Paid" className="w-[33%] max-sm:w-full max-lg:w-[48%]">
-      <Controller control={control} rules={{ required:"The payment amount is required",min:{value:totalAmount-1 ,message:"Can't be less than total Amount"}}} name='PaidAmount'
+      <Controller control={control} name='PaidAmount'
      render={({field,fieldState:{error}})=>
 {return(<> <Input placeholder="4000" {...field} className="dark:bg-darker max-sm:w-full dark:text-white dark:placeholder:text-gray-500 dark:border-dark" type="number" />
  {error && <p className="text-red-500 text-xs">{error.message}</p>}</>)

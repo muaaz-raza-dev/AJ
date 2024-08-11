@@ -6,7 +6,7 @@ const useGetUsers = () => {
         queryFn:GetUsers,
       refetchOnWindowFocus: false,
       refetchOnMount:true,
-      staleTime: 1000 * 60 * 5, // 5 minutes
+      staleTime: 1000 * 60 , // 5 minutes
     });
 };
 

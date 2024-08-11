@@ -61,7 +61,7 @@ const AnalyzeDescription_Class = ()=>{
 
 }
   return (
-    <LabelWrapper required label="Profile Picture" className="">
+    <LabelWrapper  label="Profile Picture" className="">
         <div className="flex flex-col  gap-2">
             <div  {...getRootProps({
           className:

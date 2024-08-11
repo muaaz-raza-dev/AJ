@@ -10,7 +10,7 @@ const StudentCheckBoxFilters = () => {
     let dispatch = useAppDispatch()
     const [ToggleSelect, setToggleSelect] = useState(false)
    let {mutate} = useAdvancedFilter()
-   let {mutate:MutateNormal} = useLoadStudents()()
+   let {mutate:MutateNormal} = useLoadStudents()
     let {Filters,count} = useAppSelector(state=>state.StudentsDir)
      function HandleFilters(key:"Polio"|"Covid",value:boolean){
         dispatch(StudentsDirDefault())

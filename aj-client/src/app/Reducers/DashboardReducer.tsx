@@ -18,7 +18,7 @@ interface IdashboardPayload {
     };
     Filters?: {
       Sections: {
-        available: ["Classes","Teachers"];
+        available: ["Classes","Staffs"];
         selected: "Classes";
       };
       EmployementStatus: {

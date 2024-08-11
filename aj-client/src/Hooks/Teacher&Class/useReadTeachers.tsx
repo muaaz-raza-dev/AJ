@@ -36,11 +36,11 @@ return useQuery({
 });
 };
 
-export const useFetchRequiredInfo = () => {
+export const useFetchRequiredInfo = (type?:string) => {
   let dispatch = useAppDispatch();
   let query = useQuery({
     queryKey: ["Read" , "Reqquired" , "Info"],
-    queryFn:Fetch_Required_Info,
+    queryFn:()=>Fetch_Required_Info(type),
     refetchOnWindowFocus:false,
     staleTime: 1000 * 60 * 10,
     onSuccess(data) {
@@ -48,6 +48,7 @@ export const useFetchRequiredInfo = () => {
   });
     return query
 };
+
 export const useFetchClassRawDetails = (reset:(arg:any)=>void) => {
   let id = useParams().id
 return useQuery(

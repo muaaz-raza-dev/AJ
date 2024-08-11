@@ -1,9 +1,9 @@
 import { FC, ReactNode } from "react"
 const RegFormWrapper:FC<{children:ReactNode,title:string,className?:string}> = ({children,title,className}) => {
   return (
-    <main className="w-full text-light  dark:bg-darker rounded-xl shadow-md ">
-      <header className="bg-dark w-full dark:rounded-none rounded-t-xl ">
-        <h1 className="text-white  hFont text-xl px-3 py-3 font-bold">
+    <main className="w-full dark:text-light  dark:bg-darker rounded-md shadow-md ">
+      <header className="bg-dark w-full dark:rounded-none rounded-t-md ">
+        <h1 className=" text-light  hFont text-xl px-3 py-3 font-bold">
         {title}
         </h1>
       </header>

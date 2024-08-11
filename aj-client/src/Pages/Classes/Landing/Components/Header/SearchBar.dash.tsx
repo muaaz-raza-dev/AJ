@@ -13,7 +13,7 @@ const SearchBar = () => {
   let mode =useAppSelector(s=>s.dashboard.Filters.Sections.selected)
   let debounced = useDebouncedCallback((value)=>{
     if(!value){
-      if(mode =="Teachers"){ dispatch(RedDashPayloadReset({type:mode,defaultState:defaultState_teacher})) } 
+      if(mode =="Staffs"){ dispatch(RedDashPayloadReset({type:"Teachers",defaultState:defaultState_teacher})) } 
       else { dispatch(RedDashPayloadReset({type:"Classes",defaultState: defaultState_class})) } 
         }
 

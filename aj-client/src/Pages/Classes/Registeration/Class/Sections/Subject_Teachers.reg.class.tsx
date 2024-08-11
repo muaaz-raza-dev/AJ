@@ -27,7 +27,7 @@ const SubjectTeacher_Reg: FC<{ index: number }> = ({ index:index_section }) => {
   return (
     <main className={` flex flex-col gap-y-2 w-full   `}>
       <div className="flex justify-between pr-4 ">
-    <label  className={`text-dark   dark:text-white  font-bold text-xl `}>Subject Teachers </label>
+    <label  className={`text-dark   dark:text-white  font-bold text-xl `}>Subject Teachers Details</label>
     <SwitchSubjectTeachers index={index_section}/>
       </div>
       {

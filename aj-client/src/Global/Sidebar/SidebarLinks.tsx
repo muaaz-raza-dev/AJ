@@ -20,9 +20,9 @@ const SidebarLinks = () => {
         <SubSidebarLinks_Shrinked label="Students">
         <Link
           to={"/students"}
-          className={`md:w-full max-md:px-2 transition-colors
+          className={`md:w-full max-md:px-2 duration-50
              md:hover:bg-[var(--light)] md:hover:border-transparent md:hover:text-[var(--dark)]
-            text-[var(--light)] rounded    items-center ${
+            text-[var(--light)] rounded  transition-all   items-center ${
             Expanded ? "px-4" : "justify-center"
           } border-[var(--primary)] md:py-3 max-md:py-2
             ${ValidateRoute({
@@ -42,8 +42,8 @@ const SidebarLinks = () => {
       <SubSidebarLinks_Shrinked label="Transactions">
       <Link
           to={"/transactions"}
-          className={`md:w-full max-md:px-2 transition-colors md:hover:bg-[var(--light)] md:hover:border-transparent md:hover:text-[var(--dark)]
-            text-[var(--light)] rounded    items-center ${
+          className={`md:w-full max-md:px-2 duration-50 md:hover:bg-[var(--light)] md:hover:border-transparent md:hover:text-[var(--dark)]
+            text-[var(--light)] rounded  transition-all   items-center ${
             Expanded ? "px-4" : "justify-center"
           } border-[var(--primary)] md:py-3 max-md:py-2 ${ValidateRoute({
             toCompare: "/transactions",
@@ -64,8 +64,8 @@ const SidebarLinks = () => {
      <SubSidebarLinks_Shrinked label="Classes & Teachers ">
         <Link
           to={"/dashboard"}
-          className={`md:w-full max-md:px-2 transition-colors md:hover:bg-[var(--light)] md:hover:border-transparent md:hover:text-[var(--dark)]
-            text-[var(--light)] rounded    items-center ${
+          className={`md:w-full max-md:px-2 duration-50 md:hover:bg-[var(--light)] md:hover:border-transparent md:hover:text-[var(--dark)]
+            text-[var(--light)] rounded  transition-all   items-center ${
             Expanded ? "px-4" : "justify-center"
           } border-[var(--primary)] md:py-3 max-md:py-2 ${ValidateRoute({
             toCompare: "/dashboard",
@@ -84,8 +84,8 @@ const SidebarLinks = () => {
       <SubSidebarLinks_Shrinked label="Payment Configurations ">
         <Link
           to={"/payment-settings"}
-          className={`md:w-full max-md:px-2 transition-colors md:hover:bg-[var(--light)] md:hover:border-transparent md:hover:text-[var(--dark)]
-            text-[var(--light)] rounded    items-center ${
+          className={`md:w-full max-md:px-2 duration-50 md:hover:bg-[var(--light)] md:hover:border-transparent md:hover:text-[var(--dark)]
+            text-[var(--light)] rounded  transition-all   items-center ${
             Expanded ? "px-4" : "justify-center"
           } border-[var(--primary)] md:py-3 max-md:py-2 ${ValidateRoute({
             toCompare: "/payment-settings",
@@ -104,8 +104,8 @@ const SidebarLinks = () => {
       <SubSidebarLinks_Shrinked label="Yearly Sessions and Year cycles">
         <Link
           to={"/sessions"}
-          className={`md:w-full max-md:px-2 transition-colors md:hover:bg-[var(--light)] md:hover:border-transparent md:hover:text-[var(--dark)]
-            text-[var(--light)] rounded    items-center ${
+          className={`md:w-full max-md:px-2 duration-50 md:hover:bg-[var(--light)] md:hover:border-transparent md:hover:text-[var(--dark)]
+            text-[var(--light)] rounded  transition-all   items-center ${
             Expanded ? "px-4" : "justify-center"
           } border-[var(--primary)] md:py-3 max-md:py-2 ${ValidateRoute({
             toCompare: "/sessions",
@@ -131,8 +131,8 @@ const SidebarLinks = () => {
       <SubSidebarLinks_Shrinked label="Academic Stats">
         <Link
           to={"/stats"}
-          className={`md:w-full max-md:px-2 transition-colors md:hover:bg-[var(--light)] md:hover:border-transparent md:hover:text-[var(--dark)]
-            text-[var(--light)] rounded    items-center ${
+          className={`md:w-full max-md:px-2 duration-50 md:hover:bg-[var(--light)] md:hover:border-transparent md:hover:text-[var(--dark)]
+            text-[var(--light)] rounded  transition-all   items-center ${
             Expanded ? "px-4" : "justify-center"
           } border-[var(--primary)] md:py-3 max-md:py-2 ${ValidateRoute({
             toCompare: "/stats",

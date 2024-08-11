@@ -11,12 +11,12 @@ const StatsBlock:FC<IfilterableStatsPayload&{trailColor?:string}> = ({  value,la
     ping.register()
   }, [])
 return (
-    <div className={`p-2 min-w-[30%] rounded-lg border border-gray-200 text-black shadow-sm opacity-90`}>
+    <div className={`p-2 min-w-[30%] rounded-lg border border-gray-200 dark:border-darker dark:text-white text-black shadow-sm opacity-90`}>
     <div className="flex px-2 gap-1 items-center">
     <div className="text-xl font-bold hFont">{label}</div>
 <l-ping
   size="22"
-  speed="2" 
+  speed="2.5" 
   color="black" 
 ></l-ping>
 

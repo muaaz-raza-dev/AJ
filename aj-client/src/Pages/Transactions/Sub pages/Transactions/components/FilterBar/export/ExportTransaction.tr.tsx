@@ -12,9 +12,9 @@ const ExportTransaction = () => {
     fileName="transaction_report.pdf"
     >
     <button
-      className="h-10 rounded-md center aspect-square text-left bg-white text-dark  hover:bg-dark hover:text-white transition-colors active:scale-95   font-bold flex gap-2 "
+      className="h-8 rounded-md dark:text-white dark:bg-dark center aspect-square text-left bg-white text-dark  hover:bg-dark hover:text-white transition-colors active:scale-95   font-bold flex gap-2 "
     >
-    <FiUploadCloud size={22} /> 
+    <FiUploadCloud size={20} /> 
   </button>
       </PDFDownloadLink>
   )

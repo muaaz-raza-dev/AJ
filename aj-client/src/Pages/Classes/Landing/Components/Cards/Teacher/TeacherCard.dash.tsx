@@ -14,24 +14,22 @@ const TeacherCard:FC<{data:Iteacher}> = ({data}) => {
         <div className="flex justify-between max-md:flex-col gap-2 max-md:items-end mt-1">
           <div className="flex max-md:self-start gap-1">
 
-          <div className="flex gap-1   text-[1rem] border border-darker dark:hover:bg-dark_dimmer cursor-default dark:text-white items-center  rounded px-2  ">
+          <div className="flex gap-1   text-[1rem] border-2 dark:hover:bg-dark_dimmer cursor-default dark:text-white items-center  rounded px-2  ">
             <p>{data.acedmic_role}</p> {/* //! Role */}
           </div>
        
-          <div className="flex gap-1 text-[1rem] border border-darker dark:hover:bg-dark_dimmer cursor-default dark:text-white font-medium items-center  rounded px-2  ">
+          <div className="flex gap-1 text-[1rem] border-2 dark:hover:bg-dark_dimmer cursor-default dark:text-white font-medium items-center  rounded px-2  ">
             {moment(data.Date_Hire).fromNow()} worked {/* //! Expereience */}
           </div>
-          <div className="flex gap-1 text-[1rem] border border-darker dark:hover:bg-dark_dimmer cursor-default dark:text-white font-medium items-center rounded px-2  ">
-
-            {data.qualification&&data.qualification.Degree}
-          </div>
+          {data.qualification&&
+          <div className="flex gap-1 text-[1rem] border-2 dark:hover:bg-dark_dimmer cursor-default dark:text-white font-medium items-center rounded px-2  ">
+            {data.qualification.Degree}
+          </div> }
           </div>
           <div className="flex gap-2">
-          <button className="dark:border-darker  dark:hover:bg-light dark:hover:text-dark  dark:text-white dark:bg-darker  text-dark text-sm  px-3 py-1 rounded-md hover:bg-transparent  font-bold   bg-light border transition-colors">
-            Details
-          </button>
+          
           <Link to={`/dashboard/teacher/edit/${data?._id}`}>
-          <button className="bg-dark dark:hover:bg-light dark:hover:text-dark font-semibold text-sm text-white px-3 py-1 rounded-md dark:bg-darker   border-[var(--dark)] border transition-colors flex gap-1 items-center">
+          <button className="bg-dark dark:hover:bg-light dark:hover:text-dark font-semibold text-sm text-white px-4 py-1 rounded-md dark:bg-darker   border-[var(--dark)] border transition-colors flex gap-1 items-center">
             Edit
           </button>
           </Link>
@@ -49,7 +47,7 @@ const BasicDetails:FC<{data:Iteacher}> =({data}) =>{
 
       <div className="w-12 h-12 rounded-full">
         <img
-          src={data.photo}
+          src={data.photo||"/images/sample.png"}
           alt="photo"
           className="w-full h-full rounded-full object-fill"
         />

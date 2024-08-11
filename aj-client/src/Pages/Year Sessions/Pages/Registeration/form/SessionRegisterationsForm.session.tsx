@@ -42,9 +42,9 @@ if(edit){
     <form 
     onSubmit={form.handleSubmit(formSubmit)}
     className="flex flex-col gap-y-4">
-      <SessionDetails/>
+<SessionDetails/>
 <SessionRegFormSubmit loading={edit ? isUpdating:isLoading}/>
-    </form>
+</form>
 </FormProvider>
     </div>
 

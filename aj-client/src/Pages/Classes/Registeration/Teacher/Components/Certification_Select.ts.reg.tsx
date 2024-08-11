@@ -27,7 +27,7 @@ const Certification_Select = () => {
     setValue("courses",Options.selected)
     }, [Options.selected])
   return (
-    <LabelWrapper required label="Certifications" className="w-full ">
+    <LabelWrapper  label="Certifications" className="w-full ">
         <section className="w-full flex gap-2 flex-col">
         <div className="flex gap-x-2 w-[50%] max-sm:w-full">
         <input value={Options.input} type="text" placeholder="Iot & Robotics" id="Certifications"  

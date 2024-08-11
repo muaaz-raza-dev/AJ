@@ -5,11 +5,12 @@ export interface Ichildren {
 }
 interface ILabelWrapper extends Ichildren{
     title:string
+    required?:boolean
 }
-const RegLabelWrapper:FC<ILabelWrapper> = ({children,className,title}) => {
+const RegLabelWrapper:FC<ILabelWrapper> = ({children,className,title,required}) => {
   return (
     <div className={`flex flex-col gap-y-2 max-md:w-full ${className}`}>
-      <h1 className="DarkText dark:text-white hFont font-bold">{title} *</h1>
+      <h1 className="DarkText dark:text-white hFont font-bold">{title} {required&&"*"}</h1>
       {children}
     </div>
   )

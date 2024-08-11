@@ -6,9 +6,10 @@ export interface Iuser{
     username:string,
     photo:string;
     Role:string,
-    StaffId:{acedmic_role:string};
     LastLogin:string;
-    isBlocked:boolean
+    email?:string;
+    isStaff:boolean;
+    isBlocked:boolean;
 }
 const GetUsers = async() => {
         let Secretkey  =import.meta.env.VITE_APP_SECRET_COOKIE_KEY

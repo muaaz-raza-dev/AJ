@@ -26,10 +26,13 @@ const OptimizeExclusiveReadClass_payload = (class_payload) => {
 ),
       })}
     )
- let{firstName , lastName , photo ,_id} =section.ClassTeacher
-    payload.sections[i].ClassTeacher = {firstName,lastName,photo,_id};
+    if(section.ClassTeacher){
+      let{firstName , lastName , photo ,_id} =section?.ClassTeacher
+      payload.sections[i].ClassTeacher = {firstName,lastName,photo,_id};
+    }
       payload.sections[i].Subjects_teachers = new_Subject_Teacher;
     });
+    console.log(class_payload,payload)
     return payload;
 }
 

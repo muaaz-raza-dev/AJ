@@ -14,7 +14,7 @@ const SidebarFile = () => {
     <aside
     className={`${
       toggle ? "md:w-[20%]" : "md:w-[6%]"
-    } fixed md:left-0 md:top-0 max-md:bottom-0  w-full max-md:min-h-20 md:h-screen bg-[var(--dark)]`}
+    } fixed md:left-0 md:top-0 max-md:bottom-0  w-full max-md:min-h-20 transition-all duration-150 md:h-screen bg-[var(--dark)]`}
   >
     <div className="w-full h-full  p-2 max-md:px-1 text-white flex flex-col max-md:flex-row items-center justify-between">
       <div className="w-full">

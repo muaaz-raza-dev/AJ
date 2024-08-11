@@ -22,7 +22,7 @@ const StudentTableInformationFooter = () => {
     totalItems: totalStudents,
     itemsPerPage: StdCountPerPage,
   });
-  let { mutate } = useLoadStudents()();
+  let { mutate } = useLoadStudents();
   useEffect(() => {
     goToPage(count)
   }, [totalStudents]);

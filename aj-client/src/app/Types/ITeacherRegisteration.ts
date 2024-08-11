@@ -1,5 +1,4 @@
 import { defaultId } from "./Iclass";
-
 export interface Iteacher extends defaultId{
 firstName:string;
 lastName :string;
@@ -19,7 +18,6 @@ courses : string[] ,
 schedule:{Start:string,End:string},
 teaching_subjects : string[]
 salary:number,
-account_Details:{username:string;password:string,Role:string},
 acedmic_role:string
 }
 export const default_teacherReg:Iteacher = {
@@ -34,8 +32,7 @@ qualification:{College:"",Degree:"",Experience:""},
 Date_Hire:"",
 courses:[],
 teaching_subjects:[],
-    account_Details:{username:"",password:'',Role:""},
-salary:1500,
+salary:0,
 address:"",
 schedule:{Start:"",End:""} ,
 acedmic_role:"Teacher"

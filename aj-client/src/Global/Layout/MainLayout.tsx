@@ -17,9 +17,8 @@ import GuideFile from "@/Pages/Guide/GuideFile.guide";
 const MainLayout = () => {
   return (
     <>
-    <main className=" md:flex flex-row-reverse bg-black min-h-screen w-full">
+    <main className=" md:flex flex-row-reverse dark:bg-[var(--bg-dark)] min-h-screen w-full max-md:pb-24 ">
         <MainLayoutRoutes />
-         
       </main>
         <SidebarFile />
     </>

@@ -10,7 +10,7 @@ const LandingPage = () => {
         <Routes>
         <Route index  path="/classes" element={ <ClassDivision/> }      />
         <Route index path="/" element={ <ClassDivision/> }      />
-        <Route path="/teachers" element={ <TeacherDivision/> }   />
+        <Route path="/staffs" element={ <TeacherDivision/> }   />
         </Routes>
       </div>
     </section>

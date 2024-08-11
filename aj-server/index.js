@@ -1,7 +1,7 @@
 require('dotenv').config()
 const app = require("express")()
 const express = require("express")
-const {MongoConnection }= require('./db');
+const {MongoConnection, RedisConnection }= require('./db');
 const cors = require('cors');
 const Port = 6900 || process.env.PORT;
 const server = require('http').createServer(app)
@@ -29,9 +29,12 @@ app.use("/api/payments/config",require("./routes/SchoolPayments"))
 app.use("/api/history",require("./routes/StudentHistroy"))
 app.use("/api/users",require("./routes/Users"))
 app.use("/api/stats",require("./routes/Stats"))
+app.use("/api/settings/advanced",require("./routes/Settings-Advanced"))
 
 
 MongoConnection()
+
 server.listen(Port, () => {
   console.log(`records server is listening on http://localhost:${Port}`);
 });
+

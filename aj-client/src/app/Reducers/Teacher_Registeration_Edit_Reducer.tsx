@@ -20,9 +20,8 @@ interface IteacherDetails_payload {
     teaching_subjects ?: string[]
     salary?:number,
     role:string,
-    account_Details?:{username:string;password:string,Role:string}
 }
-export const InsertTeacherDetailsFn  = (state:Iteacher,{payload:{firstName,lastName,CNIC,email,address,photo,wa,phone,qualification,courses,salary,schedule,account_Details,teaching_subjects}}:PayloadAction<IteacherDetails_payload>) =>{
+export const InsertTeacherDetailsFn  = (state:Iteacher,{payload:{firstName,lastName,CNIC,email,address,photo,wa,phone,qualification,courses,salary,schedule,teaching_subjects}}:PayloadAction<IteacherDetails_payload>) =>{
     if(firstName) state.firstName = firstName
     if(lastName) state.lastName = lastName
     if(CNIC) state.CNIC = CNIC
@@ -34,7 +33,6 @@ export const InsertTeacherDetailsFn  = (state:Iteacher,{payload:{firstName,lastN
     if(address) state.address = address
     if(schedule) state.schedule = schedule
     if(salary) state.salary = salary
-    if(account_Details) state.account_Details = account_Details
     if(phone) state.phone = phone
     if(teaching_subjects) state.teaching_subjects = teaching_subjects
 

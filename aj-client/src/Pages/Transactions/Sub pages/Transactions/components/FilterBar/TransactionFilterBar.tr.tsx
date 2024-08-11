@@ -16,13 +16,13 @@ const TransactionFilterBar = () => {
   }
 }, [Filters.transactionType,TransactionTypes]);
   return (
-    <div className="flex w-full gap-4 flex-col ">
+    <div className="flex w-full gap-4 flex-col dark:text-white">
     <div className="w-full flex max-md:flex-col gap-x-4 gap-2">
       <TransactionFilterSearch/>
-      <div className="w-full flex gap-x-1 max-md:justify-start justify-end ">
+      <div className="w-full flex gap-x-3 max-md:justify-start justify-end ">
       <TransactionSelectType/>
       <Link to={"create"} className=" bg-dark whitespace-nowrap  text-white center px-3 transition-colors
-       hover:bg-dark   rounded-md">New Transaction</Link>
+       hover:bg-dark dark:bg-light dark:text-dark hover:dark:bg-box font-bold    rounded-md">New Transaction</Link>
       </div>
        </div>
        {/* //Advanced Filters  */}

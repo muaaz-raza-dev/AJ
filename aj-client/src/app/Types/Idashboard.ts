@@ -21,8 +21,8 @@ export interface Idashboard {
     Detailed_Teacher :Iteacher|null;
     Filters :{
     Sections : {
-        available:["Classes","Teachers"],
-        selected:"Teachers"|"Classes"
+        available:["Classes","Staffs"],
+        selected:"Staffs"|"Classes"
     },
     EmployementStatus : {
         available:string[] ,
@@ -58,7 +58,7 @@ export const defaultDashboard: Idashboard = {
     RequiredInfo : {Teachers:{},Sessions:{}},
     Filters: {
         Sections: {
-          available: ["Classes","Teachers"],
+          available: ["Classes","Staffs"],
           selected: 'Classes', // Default selection
         },
       EmployementStatus: {

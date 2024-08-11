@@ -8,7 +8,7 @@ const PaymentConfigDetails = () => {
   let id = useParams().id || ""
   let {isPaymentConfigUpdate,PaymentConfigDetails} =useAppSelector(s=>s.classDetailed.payload)
   return (
-    <div className="w-full bg-[var(--box)] dark:bg-dark dark:text-white p-2 " >
+    <div className="w-full bg-[var(--box)] dark:bg-dark dark:text-white p-2 rounded-md" >
     <div className="flex justify-between px-2 my-2 ">
 
       <h1 className=" text-xl font-bold hFont">Payment Config Details</h1>

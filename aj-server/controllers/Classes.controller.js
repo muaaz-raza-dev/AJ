@@ -1,3 +1,4 @@
+const { redis } = require("../db");
 const Respond = require("../Helpers/ResponseHandler");
 const Class = require("../models/Class");
 const OneTimeFee = require("../models/OneTimeFee");
@@ -14,6 +15,7 @@ const SectionRegisteration = async (sections) => {
     let new_sections = [];
     await Promise.all(
       sections.map(async (section) => {
+        if(section.ClassTeacher =="none") delete section.ClassTeacher
         let newSection = await Sections_Class.create({
           ...section,
           Subjects_teachers: Object.values(section.Subjects_teachers),
@@ -45,6 +47,7 @@ const ClassRegisteration = async (req, res) => {
         Class: newClass._doc._id,
       }));
       let section_response = await SectionRegisteration(Sections);
+
       if (section_response) {
          await Class.findByIdAndUpdate(newClassId, {
           sections: section_response,
@@ -60,7 +63,7 @@ const ClassRegisteration = async (req, res) => {
         });
 
       } else {
-        await Class.findByIdAndDelete(newClass._id)
+        await Class.findByIdAndDelete(newClass._id) // to keep the consitency and durablilty on error
         Respond({
           res,
           success: false,
@@ -89,6 +92,17 @@ const ClassRegisteration = async (req, res) => {
 
 const Read_all_Classes = async (req, res) => {
   try {
+    let result = await redis?.get("classes")
+    if(result) {
+      return Respond({
+      res,
+      success: true,
+      message: "Classes fetched",
+      status: 200,
+      payload: JSON.parse(result),
+    });
+  }
+
     let Sessions = (
       await Session.find().select("session_name acedmic_year _id")
     ).map((e) => ({ [e.acedmic_year]: e._id }));
@@ -108,12 +122,15 @@ const Read_all_Classes = async (req, res) => {
     });
 
     let Payload =await PaymentConfigClassValidator(Classes,ActiveSession._id,payload)
-    Respond({
+    result = { payload:Payload, Filters: Sessions  }
+    await redis?.set("classes",JSON.stringify(result),"EX",60*3)
+
+  return  Respond({
       res,
       success: true,
       message: "Classes fetched",
       status: 200,
-      payload: { payload:Payload, Filters: Sessions  },
+      payload: result,
     });
   } catch (err) {
     console.log(err);

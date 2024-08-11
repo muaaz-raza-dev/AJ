@@ -11,8 +11,8 @@ const CPCFormFields = () => {
     let ConfigDetails = watch("Configs")
   return (
 
-      <div className="w-full p-4  bg-box rounded-lg shadow flex flex-col gap-4">
-        <h2 className="text-3xl font-bold  text-darker hFont">Payment Config Details</h2>
+      <div className="w-full p-4  bg-box dark:bg-dark dark:text-white rounded-lg shadow flex flex-col gap-4">
+        <h2 className="text-3xl font-bold  text-darker hFont dark:text-white">Payment Config Details</h2>
     
           <div className='flex flex-wrap gap-2 rounded-md'>
             

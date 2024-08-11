@@ -1,13 +1,15 @@
 const Students = require("../models/Students");
-const Respond = require("../Helpers/ResponseHandler");
 const Sections_Class = require("../models/Sections_Class");
 const Session = require("../models/Session");
+const Respond = require("../Helpers/ResponseHandler");
+const GlobalConfig = require("../models/GlobalConfig");
 async function RegisterStudent(req, res) {
   let { payload  } = req.body;
   try {
     let currentSession =await Session.findOne({isActive:true}).select("_id")
     let student = await Students.create({...payload,firstSession:currentSession._id,firstClass:payload.CurrentClass}); 
     await Sections_Class.findByIdAndUpdate(payload.CurrentSection,{$addToSet:{Students:student._id}})  
+    await GlobalConfig.findOneAndUpdate({},{isSorted:false})
     // to register the student to section to keep the history and records
     res.json({
       success: true,
@@ -25,6 +27,7 @@ async function RegisterStudent(req, res) {
       });
   }
 }
+
 async function GRValidation(req, res) {
   let Student = await Students.findOne({ GRNO: req.body.GRNO }).select(
     "GRNO  _id FirstName Class "
@@ -42,5 +45,21 @@ async function GRValidation(req, res) {
   }
 }
 
+async function AutoGR(req,res){
+let GRNO ;
+const Config = await GlobalConfig.findOne({})
+if(!Config) {res.status(403).json({success:false,message:"Auto GRNO is off."})}
+const Student = await Students.find({}).limit(1).sort("-GRNO").select("GRNO")
+if(Student){
+  GRNO = +Student?.[0].GRNO + 1
+  console.log()
+} 
+else {
+  GRNO = 1
+} 
+  
+return Respond({res,payload:GRNO})
 
-module.exports = { RegisterStudent, GRValidation}
+}
+
+module.exports = { RegisterStudent, GRValidation,AutoGR}

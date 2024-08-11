@@ -8,7 +8,7 @@ import { useAppSelector } from "@/app/ReduxHooks";
 import { FC } from "react";
 import FirstAcademicClassField from "./FirstAcademicClassField.reg";
 
-const RegAcademicDetailsForm: FC<{ edit?: boolean }> = ({ edit }) => {
+const RegAcademicDetailsForm: FC<{ edit: boolean }> = ({ edit }) => {
   const { control ,watch } = useFormContext();
   let Class  = watch("CurrentClass")
   let { Classes , Sections} = useAppSelector((state) => state.global);

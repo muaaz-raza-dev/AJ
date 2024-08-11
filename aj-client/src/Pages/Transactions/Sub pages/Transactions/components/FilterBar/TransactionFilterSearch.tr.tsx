@@ -31,7 +31,7 @@ const TransactionFilterSearch = () => {
 function TranscationInputFilter(){
   let {Filters} =useAppSelector(s=>s.transactions)
   let {mutate} = useReadPageTransactions()
-  let debounced  =useDebouncedCallback((value)=>
+  let debounced  = useDebouncedCallback((value)=>
   mutate({...Filters,Input:value})
   ,400)
 

@@ -28,7 +28,7 @@ const Teaching_Subjects = () => {
         setValue("teaching_subjects",Options.selected)
     }, [Options.selected])
   return (
-    <LabelWrapper required label="Teaching Subjects" >
+    <LabelWrapper  label="Teaching Subjects" >
         <section className="w-full flex gap-2 flex-col">
         <div className="flex gap-x-2 w-full">
     <CustomSelect_Reg data={commonSubjects} placeholder="Teaching Subjects" setState={handleInput} state={Options.input} />
