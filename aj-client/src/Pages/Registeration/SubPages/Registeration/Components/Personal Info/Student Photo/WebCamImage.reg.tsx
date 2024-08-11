@@ -6,8 +6,7 @@ import { useFormContext } from "react-hook-form";
 
 
 const videoConstraints = {
-    facingMode: "user",
-    
+    facingMode: "environment",
 };
 
 const WebCamImage:FC<{setFileState:Dispatch<SetStateAction<IstdImageFile>>,isCapture:boolean}> = ({setFileState,isCapture}) => {

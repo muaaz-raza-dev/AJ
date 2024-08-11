@@ -21,7 +21,7 @@ async function LoginController(req, res) {
     if (searchedUser) {
       let isRestricted = false;
       if (searchedUser.Role != "chief admin") {
-        isRestricted = await GlobalRestrictionValidator();
+        isRestricted = await GlobalRestrictionValidator(searchedUser);
         if (!isRestricted) {
           isRestricted = UserSpecificRestrictionValidator(searchedUser);
           if (isRestricted)
@@ -69,6 +69,7 @@ async function LoginController(req, res) {
         ?.json({ success: false, message: "Username or email not exists" });
     }
   } catch (err) {
+    console.log(err)
     res.status(500).json({ success: false, message: "Internal server error" });
   }
 }

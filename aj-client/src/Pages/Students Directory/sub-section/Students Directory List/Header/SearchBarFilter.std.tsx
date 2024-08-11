@@ -42,7 +42,7 @@ const SearchBarFilter = () => {
   }
   return (
     <div className="flex  rounded-xl  gap-x-1    items-center justify-center">
-      <div className=" max-md:w-[70%] bg-light dark:bg-dark dark:text-white  border-2 border-[var(--dark)]   flex gap-x-1 px-2 rounded-md items-center">
+      <div className=" max-md:w-[70%] bg-box dark:bg-dark dark:text-white  border-2 border-[var(--dark)]   flex gap-x-1 px-2 rounded-md items-center">
         <IoSearch className="text-[var(--dark)] dark:text-light" size={21} />
         <input
           className="px-2  py-3 bg-transparent placeholder-[var(--dark)] placeholder:dark:text-gray-300 outline-none rounded-xl h-full "
@@ -55,7 +55,7 @@ const SearchBarFilter = () => {
         onValueChange={(e) => dispatch(InsertStudentsDir({ SearchMode: e }))}
         value={SearchMode}
       >
-        <SelectTrigger className="w-[100px] max-md:w-[28%] dark:bg-dark dark:text-white h-12  bg-[var(--bg)]  focus-visible:ring-offset-0 focus:ring-0 focus:ring-offset-0 focus-visible:ring-transparent ring-offset-0 ring-0 outline-none border-l-0 border-2 border-[var(--dark)] rounded-md relative">
+        <SelectTrigger className="w-[100px] max-md:w-[28%] bg-box dark:bg-dark dark:text-white h-12    focus-visible:ring-offset-0 focus:ring-0 focus:ring-offset-0 focus-visible:ring-transparent ring-offset-0 ring-0 outline-none border-l-0 border-2 border-[var(--dark)] rounded-md relative">
           <SelectValue placeholder="Name" className="" />
           <p className="absolute -top-0.5 text-[0.6rem] dark:text-white text-gray-400   font-bold">
             Search Mode

@@ -34,7 +34,7 @@ const SidebarLinks = () => {
           })}  flex gap-x-4 max-md:flex-col gap-y-1 `}
         >
           <FaUsersLine  className="text-2xl max-md:3xl" />
-          <p className="max-md:text-[0.8rem]  md:hidden leading-tight ">Students</p>
+          <p className="max-md:text-[0.8rem] max-[400px]:text-[0.67rem]   md:hidden leading-relaxed ">Students</p>
           {Expanded && <p className="max-md:hidden">Students</p>}
         </Link>
      </SubSidebarLinks_Shrinked>
@@ -56,7 +56,7 @@ const SidebarLinks = () => {
            className="text-2xl max-md:3xl"
               
           />
-          <p className="max-md:text-[0.8rem]  md:hidden leading-tight ">Transactions</p>
+          <p className="max-md:text-[0.8rem] max-[400px]:text-[0.67rem]  md:hidden leading-relaxed ">Transactions</p>
           {Expanded && <p className="max-md:hidden">Transactions</p>}
         </Link>
       </SubSidebarLinks_Shrinked> 
@@ -75,7 +75,7 @@ const SidebarLinks = () => {
           })}  flex gap-x-4 max-md:flex-col gap-y-1`}
         >
           <FaSchool  className="text-2xl max-md:3xl"  stroke="2"  />
-          <p className="max-md:text-[0.8rem]  md:hidden leading-tight ">Dashboard</p>
+          <p className="max-md:text-[0.8rem] max-[400px]:text-[0.67rem]  md:hidden leading-relaxed ">Dashboard</p>
         {Expanded && <p className="max-md:hidden">Classes & Teachers</p>}
         </Link>
       </SubSidebarLinks_Shrinked>
@@ -95,7 +95,7 @@ const SidebarLinks = () => {
           })}  flex gap-x-4 max-md:flex-col gap-y-1`}
         >
           <MdOutlinePayments  className="text-2xl max-md:3xl"  stroke="2"  />
-          <p className="max-md:text-[0.8rem]  md:hidden leading-tight ">Configs</p>
+          <p className="max-md:text-[0.8rem] max-[400px]:text-[0.67rem]  md:hidden leading-relaxed ">Configs</p>
           {Expanded && <p className="max-md:hidden">Payment Configuration</p>}
         </Link>
       </SubSidebarLinks_Shrinked>
@@ -115,7 +115,7 @@ const SidebarLinks = () => {
           })}  flex gap-x-4 max-md:flex-col gap-y-1`}
         >
           <FaCalendarMinus   className="text-2xl max-md:3xl"  />
-          <p className="max-md:text-[0.8rem]  md:hidden leading-tight ">Sessions</p>
+          <p className="max-md:text-[0.8rem] max-[400px]:text-[0.67rem]  md:hidden leading-relaxed ">Sessions</p>
           {Expanded && <p className="max-md:hidden">Yearly Sessions</p>}
         </Link>
       </SubSidebarLinks_Shrinked>
@@ -142,7 +142,7 @@ const SidebarLinks = () => {
           })}  flex gap-x-4 max-md:flex-col gap-y-1`}
         >
           <FaRegChartBar  className="text-2xl max-md:3xl" />
-          <p className="max-md:text-[0.8rem]  md:hidden leading-tight ">Stats</p>
+          <p className="max-md:text-[0.8rem] max-[400px]:text-[0.67rem]  md:hidden leading-relaxed ">Stats</p>
           {Expanded && <p className="max-md:hidden">Home</p>}
         </Link>
       </SubSidebarLinks_Shrinked>

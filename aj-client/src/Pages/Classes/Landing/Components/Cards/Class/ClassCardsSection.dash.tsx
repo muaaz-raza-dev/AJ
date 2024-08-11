@@ -1,10 +1,11 @@
 import { useAppSelector } from "@/app/ReduxHooks"
 import ClassCard from "./ClassCard.dash"
 import RequestLoading from "@/Global/Loaders/RequestLoding"
+import useReadClasses from "@/Hooks/Teacher&Class/useReadClasses"
 
 const ClassCardsSection = () => {
   let Classes =useAppSelector(s=>s.dashboard.payload.Classes.Filtered)
-  let isLoading =useAppSelector(s=>s.dashboard.isLoading)
+  let {isLoading} = useReadClasses()
   return (
     <main className="flex gap-2  w-[100%] min-h-max   overflow-y-auto flex-wrap">
       {
@@ -18,7 +19,7 @@ const ClassCardsSection = () => {
         {
           isLoading ? (
             <div className="flex justify-center items-center w-[100%] h-[100%] ">
-              <RequestLoading dark/>
+              <RequestLoading dark stroke="5" />
             </div>
           ) :
           Classes.map((data, index) => {

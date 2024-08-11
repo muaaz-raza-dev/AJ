@@ -23,7 +23,7 @@ const Header = () => {
         >
           <FaAngleLeft  className="max-md:!text-xl text-xl" />
         </Button>
-        <h1 className=" font-bold text-3xl max-md:text-2xl text-darker dark:text-white">
+        <h1 className=" font-bold text-3xl max-md:text-xl  text-darker dark:text-white">
           {ActiveLabel}
         </h1>
       </div>

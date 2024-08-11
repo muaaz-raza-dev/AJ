@@ -10,7 +10,9 @@ const ClassCard:FC<{data:Iclass}> = ({data}) => {
     <div className=" rounded-md  overflow-hidden bg-[var(--box)] border dark:border-darker dark:bg-darker dark:text-white shadow flex flex-col lg:w-[30%] max-md:w-full max-lg:w-[48%] h-max pb-2 ">
       <div className="min-h-[2rem] cursor-pointer w-full relative">
       <Link to={`/dashboard/class/${data._id}`}  >
-      <div className="absolute bg-[var(--success)] text-black top-2 hFont p-1 px-2 text-xs rounded-md font-bold left-2">{data.Session?.acedmic_year}</div>
+      <div className="absolute bg-[var(--success)] text-black top-2 hFont p-1 px-2 text-xs rounded-md font-bold left-2">
+        {data.Session?.acedmic_year}
+      </div>
         <div className="bg-dark text-white center">
           <h1 className="text-4xl font-bold hFont p-3">{data.name}</h1>
         </div>
@@ -36,13 +38,13 @@ const ClassCard:FC<{data:Iclass}> = ({data}) => {
       </div>
       <div className="justify-between flex items-center pb-2 px-3">
         <div className="flex gap-1 justify-start">
-      <div className="text-[0.8rem] font-semibold hFont text-black  border-2 p-1 px-3 rounded ">{data.sections.length} Sections</div>
-      <div className="text-[0.8rem] font-semibold hFont text-black  border-2 p-1 rounded px-3 ">{data.Students?.length} Students</div>
+      <div className="text-[0.8rem] font-semibold hFont text-black dark:text-white dark:border-dark  border-2 p-1 px-3 rounded ">{data.sections.length} Sections</div>
+      <div className="text-[0.8rem] font-semibold hFont text-black dark:text-white dark:border-dark  border-2 p-1 rounded px-3 ">{data.Students?.length} Students</div>
         </div>
 
       <div className="flex justify-end gap-2 ">
       <Link to={`/dashboard/class/edit/${data._id}`}>
-        <Button className=" w-max p-1 px-4 h-max bg-darker text-white hover:bg-darker transition ">Edit </Button>
+        <Button className=" w-max p-1 px-4 h-max bg-dark text-white hover:bg-dark transition ">Edit </Button>
         </Link>
       </div>
       </div>

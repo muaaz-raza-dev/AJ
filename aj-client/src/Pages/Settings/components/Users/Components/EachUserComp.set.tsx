@@ -16,7 +16,7 @@ const EachUserComp:FC<{data:Iuser;isBlocked:boolean}> = ({data,isBlocked}) => {
     <div className={`w-[24%] max-md:w-full max-lg:w-[48%]  bg-[var(--box)] dark:bg-dark dark:text-white rounded-md
        shadow-md max-h-72 p-2 px-4
        transition-all
-     ${d?.payload.isTemporaryBlocked||data.isBlocked&&"grayscale"}`}>
+     ${data.isBlocked||d?.payload.isTemporaryBlocked&&"grayscale"}`}>
     <div className="flex justify-between  items-center">
       {data.isBlocked?
 <Tooltip title={"Access Block"} >
@@ -37,7 +37,9 @@ const EachUserComp:FC<{data:Iuser;isBlocked:boolean}> = ({data,isBlocked}) => {
 <img src={data.photo||"/images/sample.png"} className="h-14 w-14 rounded-full object-cover" alt="" />
 <div className="flex flex-col ">
 <h1 className="hFont text-lg whitespace-nowrap leading-tight font-semibold">{data.Name}</h1>
-<p className="hFont text-sm font-semibold text-gray-500 dark:text-gray-400 leading-tight">@{data.username}</p>
+<p className="hFont text-sm font-semibold text-gray-500 dark:text-gray-400 leading-tight">@{data.username}
+</p>
+<p className='text-xs md:hidden '>{moment(data.LastLogin).fromNow()}</p>
 </div>
 
 </div>
@@ -52,10 +54,7 @@ const EachUserComp:FC<{data:Iuser;isBlocked:boolean}> = ({data,isBlocked}) => {
 
 
 </div>
-<div className=" p-1 flex justify-between max-md:w-[48%] md:hidden  px-3 font-semibold text-sm  rounded-lg  transition-colors ">
-<h1 className="text-gray-500 dark:text-gray-400  w-1/2">Last Login</h1>
-<p>{moment(data.LastLogin).fromNow()}</p>
-</div>
+
 
 </div>
 

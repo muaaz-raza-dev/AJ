@@ -1,24 +1,26 @@
 import {ring } from 'ldrs'
 import { useEffect } from 'react';
-import { trefoil } from 'ldrs'
+import { tailChase } from 'ldrs'
 
 const AppLoader = () => {
+
+    
+    
     useEffect(() => {
-        trefoil.register()
+        tailChase.register()
     }
 , []);
     
     // Default values shown
     return (
-<div className="w-screen h-screen z-10 fixed top-0 bg-darker  center  flex-col gap-12 text-white overflow-hidden">
-<l-trefoil
+<div className="w-screen h-screen z-10 fixed left-0 top-0 bg-darker  center  flex-col gap-12 text-white overflow-hidden">
+<l-tail-chase
   stroke-length="0.15"
   bg-opacity="0.1"
-  size="124"
-  stroke="8"
+  size="88"
   speed="3" 
   color="white" 
-></l-trefoil>
+></l-tail-chase>
 <h1 className='text-6xl max-md:text-3xl hFont font-bold'> AJ WorkSpace </h1>
 </div>
     )

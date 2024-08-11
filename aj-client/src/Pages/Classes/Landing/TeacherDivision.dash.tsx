@@ -12,7 +12,7 @@ const TeacherDivision = () => {
 
   return (
     <>
-          <TeacherCardsSection/>
+    <TeacherCardsSection/>
     </>
   )
 }

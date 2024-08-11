@@ -27,7 +27,7 @@ const StudentClassSelect = () => {
   }
   return (
     <Select onValueChange={ClassHandler} value={Filters.Class}>
-    <SelectTrigger className="w-[120px] max-md:w-[49%] h-12   bg-light dark:bg-dark dark:text-white border-2 border-[var(--dark)] focus-visible:ring-offset-0 focus:ring-0 focus:ring-offset-0 focus-visible:ring-transparent ring-offset-0 ring-0 outline-none rounded-md relative">
+    <SelectTrigger className="w-[120px] max-md:w-full   h-12   bg-box dark:bg-dark dark:text-white border-2 border-[var(--dark)] focus-visible:ring-offset-0 focus:ring-0 focus:ring-offset-0 focus-visible:ring-transparent ring-offset-0 ring-0 outline-none rounded-md relative">
       <p className="absolute -top-0.5 text-[0.6rem] dark:text-white text-gray-400  font-bold">Classes</p>
       <SelectValue placeholder="All" />
     </SelectTrigger>
