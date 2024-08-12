@@ -15,11 +15,12 @@ const SettingsFile = () => {
         <Navigationbar/>
         <Routes>
             <Route index element={
-              (StaffId &&
-           <RoleBasedAccess redirect="accounts" roleToGiveAccess={["user","admin"]}>
+              <RoleBasedAccess redirect="accounts" roleToGiveAccess={["user","admin"]}>
+             {StaffId &&
               <ProfileSettingForm />
-           </RoleBasedAccess> )
-          } />
+            }
+           </RoleBasedAccess> }
+           />
             <Route path="/advanced-actions" element={
               <RoleBasedAccess redirect="accounts" roleToGiveAccess={"chief admin"}>
                   <AdvancedActionPage/>

@@ -1,6 +1,6 @@
 const Respond = require("../Helpers/ResponseHandler")
 const OneTimeFee = require("../models/OneTimeFee")
-const PaymentConfig = require("../models/SchoolPayments")
+const PaymentConfig = require("../models/PaymentConfigs")
 const CalculateAllMonths = require("./utils/Stats/CalculateAllMonths")
 const { CalculateNewAdmissions } = require("./utils/Stats/CalculateNewAdmissions")
 const { CalculateTotalPendings } = require("./utils/Stats/CalculateTotalPendings")

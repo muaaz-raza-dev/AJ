@@ -2,7 +2,7 @@ const moment = require("moment");
 const Students = require("../models/Students");
 const TransactionsScema = require("../models/Transactions");
 const Respond = require("../Helpers/ResponseHandler");
-const PaymentConfig = require("../models/SchoolPayments");
+const PaymentConfig = require("../models/PaymentConfigs");
 const Session = require("../models/Session");
 const {
   CalculatePaymentConfigs,

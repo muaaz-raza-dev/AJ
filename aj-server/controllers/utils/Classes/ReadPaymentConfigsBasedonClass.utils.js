@@ -1,5 +1,5 @@
 const OneTimeFee = require("../../../models/OneTimeFee")
-const PaymentConfig = require("../../../models/SchoolPayments")
+const PaymentConfig = require("../../../models/PaymentConfigs")
 
 const ReadPaymentConfigsBasedonClass = async (SessionId, classId) => {
     let Payload = [];

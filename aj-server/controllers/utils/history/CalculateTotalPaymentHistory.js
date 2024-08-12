@@ -1,5 +1,5 @@
 const Class = require("../../../models/Class")
-const PaymentConfig = require("../../../models/SchoolPayments")
+const PaymentConfig = require("../../../models/PaymentConfigs")
 const Sections_Class = require("../../../models/Sections_Class")
 const Session = require("../../../models/Session")
 const Students = require("../../../models/Students")

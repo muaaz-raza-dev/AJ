@@ -1,5 +1,5 @@
 const moment = require("moment");
-const PaymentConfig = require("../../../models/SchoolPayments");
+const PaymentConfig = require("../../../models/PaymentConfigs");
 const Sections_Class = require("../../../models/Sections_Class");
 const Session = require("../../../models/Session");
 const Transactions = require("../../../models/Transactions");

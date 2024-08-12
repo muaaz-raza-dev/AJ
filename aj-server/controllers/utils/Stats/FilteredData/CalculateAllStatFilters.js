@@ -1,11 +1,15 @@
-const PaymentConfig = require("../../../../models/SchoolPayments");
+const PaymentConfig = require("../../../../models/PaymentConfigs");
 const moment = require("moment");
 const Session = require("../../../../models/Session");
 const Class = require("../../../../models/Class");
+const { redis } = require("../../../../db");
 
 const CalculateAllStatFilters = async () => {
-    const Payload = {Dates:{},PaymentConfigs:{},Classes:{}}
   try {
+    let Payload = await redis?.get("filterableStats:filters")
+    if(Payload) return JSON.parse(Payload)
+
+     Payload = {Dates:{},PaymentConfigs:{},Classes:{}}
     // Fetch all Sessions
     const Sessions = await Session.find().select("_id acedemic_year session_name start_date end_date")
 
@@ -47,7 +51,7 @@ const CalculateAllStatFilters = async () => {
 
         Payload.Dates[sess._id.toString()] = Dates;
     })
-    
+    await redis.set("filterableStats:filters",JSON.stringify(Payload),"EX",60*10) //cahce for 10 minutes
     return Payload;
   } catch (error) {
     console.error("Error in CalculateAllStatFilters:", error);

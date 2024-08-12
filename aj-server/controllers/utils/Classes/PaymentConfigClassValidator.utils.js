@@ -1,5 +1,5 @@
 const OneTimeFee = require("../../../models/OneTimeFee")
-const PaymentConfig = require("../../../models/SchoolPayments")
+const PaymentConfig = require("../../../models/PaymentConfigs")
 
 const PaymentConfigClassValidator =async (Classes,sessionId,payload) => {
 let PaymentConfigs  = await PaymentConfig.countDocuments({session:sessionId})

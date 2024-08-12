@@ -8,14 +8,9 @@ const useResetCredentials = (Reset:(val:any)=>void) => {
     mutationKey: ['Reset Credentials'],
     mutationFn:(payload:
       {username:string;Name:string;email?:string;isUpdatePassword:boolean,newPassword:string,currentPassword:string})=> {return ResetCredentials(payload)},
-    onSuccess({message,payload}) {
+    onSuccess({message}) {
       toast.success(message)
       Reset({
-        Info:{
-          ...payload
-        },
-        isLoaded:false,
-        isVerified: false,
         isUpdatePassword: false,
         Passwords: {
             currentPassword: '',

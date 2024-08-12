@@ -153,14 +153,14 @@ async function ResetCredentials(req, res) {
 
     bcrypt.hash(newPassword, 8, async function (err, hash) {
       if (!err) {
-        let info= await User.findByIdAndUpdate(req.AdminId, {
+         await User.findByIdAndUpdate(req.AdminId, {
           username,Name,email,
           password: hash,
           isLogOutRequired: true,
         },{new:true});
         res
           .status(200)
-          .json({ payload:info, success: true, message: "Credential updated successfully" });
+          .json({ payload, success: true, message: "Credential updated successfully" });
       } else {
         res
           .status(501)
@@ -169,10 +169,10 @@ async function ResetCredentials(req, res) {
     });
     
   } else {
-  const info=  await User.findByIdAndUpdate(req.AdminId, { username,email,Name },{new:true});
+    await User.findByIdAndUpdate(req.AdminId, { username,email,Name },{new:true});
     res
       .status(200)
-      .json({ success: true,payload:info, message: "Username reset successfully" });
+      .json({ success: true, message: "Credential updated successfully" });
   }
 }
 
