@@ -129,7 +129,5 @@ res.json({success:true,payload:Config,stats})
 
 }
 
-const FetchStudentReportConfigFilters = async(req,res)=>{
-    const Filters = await CalculateAllStatFilters()
-}
+
 module.exports = {RegisterPayment,GetSessions,GetConfigs,FetchConfigDetails,UpdateConfig,FetchConfigAllDetails}

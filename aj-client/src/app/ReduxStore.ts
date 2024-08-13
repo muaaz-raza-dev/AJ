@@ -14,6 +14,7 @@ import { lpaymentconfig } from "./Slices/LPaymentConfigSlice";
 import { studentHist } from "./Slices/StudentHistorySlice";
 import { Stats } from "./Slices/StatsSlice";
 import { Fstats } from "./Slices/FilterableStatsSlice";
+import { stdFeeReport } from "./Slices/StdFeeReportSlice";
 
 
 
@@ -33,8 +34,9 @@ reducer:{
     paymentConfigsL:lpaymentconfig ,
     studentHistory:studentHist,
     stats: Stats,
-    fStats:Fstats // FilterableStats
-}
+    fStats:Fstats, // FilterableStats
+    stdFeeReport
+},
 });
 
 export type RootState = ReturnType <typeof Store.getState>

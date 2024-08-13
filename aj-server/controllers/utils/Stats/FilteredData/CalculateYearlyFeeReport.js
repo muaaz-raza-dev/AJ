@@ -1,41 +1,27 @@
 const Students = require("../../../../models/Students");
 const Transactions = require("../../../../models/Transactions");
 const {ObjectId} = require("mongodb")
-function GetAdditionalTransactionPopulationStages (Class){
-    let ClassBasedTransactionPopulationStages  = []
-    if(Class){
+const Session = require("../../../../models/Session");
+const { GetAdditionalTransactionPopulationStages } = require("./CalculateMonthlyFeeReport");
+const Sections_Class = require("../../../../models/Sections_Class");
 
-    
-        ClassBasedTransactionPopulationStages = [{
-            $lookup: {
-                from: "students",
-                localField: "Student",
-                foreignField: "_id",
-                as: "Student"
-            }
-        } ,
-        {
-            $unwind: {
-      path: "$Student",
-      preserveNullAndEmptyArrays: false
-    },
-  },
-  {
-    $match: {
-        "Student.CurrentClass": mongoose.Types.ObjectId(Class),
-    }
-}
-]
-    }
-return ClassBasedTransactionPopulationStages
-}
 
 const CalculateYearlyFeeReport = async(paymentConfig,session,Class) => {
-let Query ={}
-if(Class) Query.CurrentClass = Class
-const totalStudents = await Students.countDocuments({TerminateEnrollment:false,...Query})
+const StudentIds = []
+if(Class){
+  const sections =await Sections_Class.find({Class}).select("Students")
+  sections.map(sec=>StudentIds.push(...sec.Students))
+}
+  else {
+  const Sess = await Session.findById(session).populate({path:"Classes",select:"sections",populate:{path:"sections",select:"Students"}}).select("Classes")
+  Sess.Classes.forEach(cl=>cl.sections.forEach(sec=>{sec.Students.forEach(std=>StudentIds.push(std.toString()))
+  }))
+}
+
+const totalStudents = await Students.countDocuments({TerminateEnrollment:false,_id:{$in:StudentIds}})
+
 const totalTransactions = await Transactions.aggregate([
-...GetAdditionalTransactionPopulationStages(Class),
+... ( GetAdditionalTransactionPopulationStages(StudentIds)),
     {
       $unwind: {
         path: "$Transactions",
@@ -46,7 +32,6 @@ const totalTransactions = await Transactions.aggregate([
         $match: {
           "Transactions.paymentType":"Registered",
           "Transactions.paymentConfigId":new ObjectId(paymentConfig._id),
-          "Transaction.session":session, //! needs to be re-checked
           "isCancelled":false,
         }
       },

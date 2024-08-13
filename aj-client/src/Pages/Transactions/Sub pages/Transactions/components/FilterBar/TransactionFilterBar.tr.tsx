@@ -35,8 +35,7 @@ const TransactionFilterBar = () => {
        </div>
        {/* //Advanced Filters  */}
        {AdvancedFilters&&
-       
-       <div className="w-full flex max-md:flex-col gap-x-4 gap-2 justify-between p-3 items-end bg-box shadow-inner rounded">
+       <div className={`w-full flex max-md:flex-col gap-x-4 gap-2 justify-between p-3 items-end bg-box shadow-inner rounded  `}>
         <TransactionDateRangeFilter/>
        </div>}
     </div>

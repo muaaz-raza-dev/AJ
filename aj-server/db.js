@@ -23,5 +23,6 @@ const RedisConnection = ()=>{
     })
     return redis
 }
-const redis = RedisConnection()
+const redis = null
+// RedisConnection()
 module.exports = {MongoConnection,redis}

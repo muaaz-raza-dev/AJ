@@ -9,7 +9,7 @@ const { CalculateTotalStudents } = require("./utils/Stats/CalculateTotalStduents
 const GetDailyChartReport = require("./utils/Stats/charts/GetDailyChartReport")
 const {  GetMonthlyChartReport } = require("./utils/Stats/charts/GetMonthlyChartReport")
 const CalculateAllStatFilters = require("./utils/Stats/FilteredData/CalculateAllStatFilters")
-const CalculateMonthlyFeeReport = require("./utils/Stats/FilteredData/CalculateMonthlyFeeReport")
+const {CalculateMonthlyFeeReport} = require("./utils/Stats/FilteredData/CalculateMonthlyFeeReport")
 const CalculateYearlyFeeReport = require("./utils/Stats/FilteredData/CalculateYearlyFeeReport")
 const GeneralStats = async(req,res)=>{
 try{
@@ -17,8 +17,8 @@ let totalStudents  = await CalculateTotalStudents()
 let newAdmissions = await CalculateNewAdmissions()
 let MonthlyRevenue = await CalculateTotalRevenue()
 let PendingPayments  = await CalculateTotalPendings()
-let Dates  =await CalculateAllMonths() // FRom the beggining of the software. {2024:["may","june","july"]}
-let FstatsFilters = await CalculateAllStatFilters() // For filterable Stats
+let Dates  =await CalculateAllMonths() // From the beggining of the software. {2024:["may","june","july"]}
+let FstatsFilters = await CalculateAllStatFilters(true) // For filterable Stats
 Respond({res,payload:{totalStudents,newAdmissions,MonthlyRevenue,PendingPayments,Dates,FstatsFilters}})
 }
 catch(err){
@@ -30,8 +30,8 @@ Respond({res,error:err,status:501,message:"Somthing went wrong."})
 const MonthlyChartReport = async(req,res)=>{
 let {duration} = req.body
 try{
-    let data = await GetMonthlyChartReport(duration)
-    Respond({res,payload:data})
+let data = await GetMonthlyChartReport(duration)
+Respond({res,payload:data})
 }
 catch(err){
     console.log(err);
@@ -58,7 +58,7 @@ let Config = await PaymentConfig.findById(paymentConfig).select("-createdAt -upd
 if(!Config) return Respond({res,success:false,status:404,message:"Payment Config not found. Try again later!"})
 let payload ; // no of Student not the amount
 if(feeFrequency == "Custom"||feeFrequency == "Monthly"){
-payload = await CalculateMonthlyFeeReport(Config,month,year,(Class=="all"?"":Class))
+payload = await CalculateMonthlyFeeReport(Config,month,year,(Class=="all"?"":Class),Session)
 }
 else {
 payload = await CalculateYearlyFeeReport(Config,Session)

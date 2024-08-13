@@ -42,12 +42,16 @@ const useFetchGeneralStats = () => {
        let session = Object.keys(Sessions)[0] //default Session
       let year = Object.keys(Dates[session]||{})?.[0] || ""
       let paymentConfig = PaymentConfigs?.[session]?.[0]?.value ||""
+      const month = Dates?.[session]?.[year]?.[0]
+      const Class = Classes?.[session]?.[0]?.value
       dispatch(RedFsFilters({
         available:payload.FstatsFilters, //insert available filters
         selected:{
-        Session:session,Class:Classes?.[session]?.[0]?.value,PaymentConfig:paymentConfig,
-        year:Object.keys(Dates?.[session]||{})?.[0],
-        month:Dates?.[session]?.[year]?.[0],
+        Session:session,
+        Class,
+        PaymentConfig:paymentConfig,
+        year,
+        month,
         feeFrequency:PaymentConfigs[session]?.find(pay=>pay.value ==paymentConfig)?.feeFrequency||"Monthly"
         },
       }))

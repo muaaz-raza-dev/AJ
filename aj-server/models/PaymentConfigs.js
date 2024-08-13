@@ -22,7 +22,7 @@ const AnnualFeeSchema = new mongoose.Schema({
           "required": true,
           "description": "Type of the fee"
         },
-        "feeStatus": {
+         "feeStatus": {
           "type": "String",
           "enum": ["Same amount for every Class", "Different amount for every Class"],
           "description": "Status indicating whether the fee is the same for every class or section"

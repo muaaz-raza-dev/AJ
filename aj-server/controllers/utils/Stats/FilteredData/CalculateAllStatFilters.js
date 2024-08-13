@@ -1,12 +1,15 @@
 const PaymentConfig = require("../../../../models/PaymentConfigs");
 const moment = require("moment");
+const lod  = require("lodash")
 const Session = require("../../../../models/Session");
 const Class = require("../../../../models/Class");
 const { redis } = require("../../../../db");
+const { SortSessionMonthbyYears } = require("../../OptimizeSessionDates_SchoolPayment");
 
-const CalculateAllStatFilters = async () => {
+const CalculateAllStatFilters = async (isAll) => {
+  const RedisIndex = `filterableStats:filters${isAll?":AllClasses":""}`
   try {
-    let Payload = await redis?.get("filterableStats:filters")
+    let Payload = await redis?.get(RedisIndex)
     if(Payload) return JSON.parse(Payload)
 
      Payload = {Dates:{},PaymentConfigs:{},Classes:{}}
@@ -27,31 +30,28 @@ const CalculateAllStatFilters = async () => {
     })
 
     // Populate Payload.Classes
+    let InitClassLabel = isAll ? [{label:"All Classes",value:"all"} ]:[]
+    
     classes.forEach(cl=>{
-        if(!Payload.Classes[cl.SessionId])Payload.Classes[cl.SessionId]=[{label:"All Classes",value:"all"}]
+        if(!Payload.Classes[cl.SessionId])Payload.Classes[cl.SessionId]=InitClassLabel
         Payload.Classes[cl.SessionId].push({label:cl.name,value:cl._id})
     })
 
     // Populate Payload.Dates 
-    const months = moment.months()
     Sessions.forEach(sess=>{
-        
-        const Dates = {};
-        const startDate = moment(sess.start_date)
-        const endDate = moment(sess.end_date)
-        
-        const startMonth = startDate.month()
-        const startYear = startDate.year()
-        
-        const endMonth = endDate.month()
-        const endYear = endDate.year()
+        let {start_date,end_date} = sess
+        let dates = SortSessionMonthbyYears(start_date,end_date)
+        dates = lod.groupBy(dates, ({ year }) => year);
 
-        Dates[startYear] = months.slice(startMonth)
-        Dates[endYear] = months.slice(0,endMonth)
+        const finalDate = {}
+        Object.keys(dates).forEach(year => {
+            finalDate[year] = dates[year].map(date => date.month);
+        });
 
-        Payload.Dates[sess._id.toString()] = Dates;
+        Payload.Dates[sess._id.toString()] = finalDate;
     })
-    await redis.set("filterableStats:filters",JSON.stringify(Payload),"EX",60*10) //cahce for 10 minutes
+
+    await redis?.set(RedisIndex,JSON.stringify(Payload),"EX",60*10) //cahce for 10 minutes
     return Payload;
   } catch (error) {
     console.error("Error in CalculateAllStatFilters:", error);

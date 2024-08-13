@@ -11,8 +11,9 @@ import {
 } from "@/shdcn/components/ui/popover"
 import { cn } from "@/shdcn/lib/utils"
 import { format, parseISO } from "date-fns"
-import { CalendarIcon } from "lucide-react"
+import { ArrowRight, CalendarIcon } from "lucide-react"
 import { FC } from "react"
+import { Link } from "react-router-dom"
 const TransactionDateRangeFilter = () => {
   let dispatch =useAppDispatch()
   let {mutate} = useReadPageTransactions()
@@ -25,7 +26,7 @@ let {start,end} =Filters.DateRange
     mutate(Filters)
   }
   return (
-    <section className="flex flex-col w-full dark:text-white">
+    <section className="flex  w-full dark:text-white">
       {/* <h1 className="hFont  font-bold ">Transaction Date Range</h1> */}
     <div className="flex gap-3 w-full max-md:flex-col">
       <div className="flex gap-3 max-md:w-full ">
@@ -41,6 +42,9 @@ let {start,end} =Filters.DateRange
       Apply 
     </Button>
     </div>
+    <Link to="feeReport" className="px-3 h-12 whitespace-nowrap rounded-md bg-dark text-white font-bold center flex items-center gap-2">
+      Get Fee Report <ArrowRight/>
+    </Link>
     </section>
  
   )

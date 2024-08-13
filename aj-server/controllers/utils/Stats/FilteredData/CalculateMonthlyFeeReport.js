@@ -1,12 +1,11 @@
 const {ObjectId} = require("mongodb");
 const Students = require("../../../../models/Students");
 const Transactions = require("../../../../models/Transactions");
+const Session = require("../../../../models/Session");
+const Sections_Class = require("../../../../models/Sections_Class");
 
-function GetAdditionalTransactionPopulationStages (Class){
-  let ClassBasedTransactionPopulationStages  = []
-  if(Class){
+function GetAdditionalTransactionPopulationStages (StudentsIds){
 
-  
       ClassBasedTransactionPopulationStages = [{
           $lookup: {
               from: "students",
@@ -16,27 +15,37 @@ function GetAdditionalTransactionPopulationStages (Class){
           }
       } ,
       {
-          $unwind: {
+    $unwind: {
     path: "$Student",
     preserveNullAndEmptyArrays: false
   },
 },
 {
   $match: {
-      "Student.CurrentClass": new ObjectId(Class),
+      "Student._id":{$in:StudentsIds},
   }
 }
 ]
-  }
+
 return ClassBasedTransactionPopulationStages
 }
 
-const CalculateMonthlyFeeReport = async(paymentConfig,month,year,Class) => {
-let Query ={}
-if(Class){ Query.CurrentClass = Class}
-const totalStudents = await Students.countDocuments({TerminateEnrollment:false,...Query})
+const CalculateMonthlyFeeReport = async(paymentConfig,month,year,Class,session) => {
+const StudentIds = []
+if(!Class){
+const Sess = await Session.findById(session).populate({path:"Classes",select:"sections",populate:{path:"sections",select:"Students"}}).select("Classes")
+Sess.Classes.forEach(cl=>cl.sections.forEach(sec=>{sec.Students.forEach(std=>StudentIds.push(std))
+}))
+
+}
+else {
+const sections =await Sections_Class.find({Class}).select("Students")
+sections.map(sec=>StudentIds.push(...sec.Students))
+}
+const totalStudents = await Students.countDocuments({TerminateEnrollment:false,_id:{$in:StudentIds}})
+
 const totalTransactions =await Transactions.aggregate([
-...GetAdditionalTransactionPopulationStages(Class),
+...( GetAdditionalTransactionPopulationStages(StudentIds)),
     {
       $unwind: {
         path: "$Transactions",
@@ -52,7 +61,13 @@ const totalTransactions =await Transactions.aggregate([
           "isCancelled":false,
         }
       },
+      {
+        $project:{
+          Invoice:1
+        }
+      }
   ])
+
 let PendingStudents = totalStudents-totalTransactions.length
 const payload =[{value:totalTransactions.length,label:"Fees Paid by Students",
   percentage:totalTransactions.length/totalStudents *100,
@@ -63,4 +78,4 @@ const payload =[{value:totalTransactions.length,label:"Fees Paid by Students",
 return payload
 }
 
-module.exports = CalculateMonthlyFeeReport
+module.exports = {CalculateMonthlyFeeReport,GetAdditionalTransactionPopulationStages}

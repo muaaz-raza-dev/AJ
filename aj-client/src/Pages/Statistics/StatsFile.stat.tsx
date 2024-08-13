@@ -7,7 +7,7 @@ import SkeletonStatsFile from "./SkeletonStatsFile.stat"
 const StatsFile = () => {
 let {isLoading} =useFetchGeneralStats()
 if(isLoading) return <SkeletonStatsFile/>
-  return (
+return (
 <main className='flex flex-col gap-4'>
 <Header/>
 <FilterableStatsSection/>

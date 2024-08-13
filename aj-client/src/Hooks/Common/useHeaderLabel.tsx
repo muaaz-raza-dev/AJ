@@ -6,7 +6,7 @@ let RouteForLabel: { [key: string]: string } = {
   "/": "Students Directory",
   "/settings/user/edit/*" : "Edit user credentials",
   "/students": "Students Directory",
-  
+  "/transactions/feeReport":"Student Fee Report",
   "/transactions": "Transactions",
   "/settings/advanced-actions":"Advanced Settings",
   "/transactions/create": "Create transaction",

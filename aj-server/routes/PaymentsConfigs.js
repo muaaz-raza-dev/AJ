@@ -11,10 +11,8 @@ router.get("/:id" , Authenticate, FetchConfigAllDetails)
 router.get("/get/:id",Authenticate,FetchConfigDetails)
 router.put("/update",Authenticate,UpdateConfig)
 
-//* Report routes *//
 
-//? Get the all the student which either pay the selected fee or not based on filters
 
-router.post("/students/report",Authenticate,UpdateConfig)
+
 
 module.exports = router
