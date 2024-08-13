@@ -23,14 +23,14 @@ return (
 
     </div>
     <div className="flex justify-center py-2">
-    <CircularBar value={+percentage.toLocaleString().slice(0,4)} background={false} className=" w-28 h-28 " styles={buildStyles({
+    <CircularBar value={+percentage?.toLocaleString()?.slice(0,4)||0} background={false} className=" w-28 h-28 " styles={buildStyles({
       textColor: '#000',
       pathTransitionDuration: 1,
       pathColor: trailColor || "#23104a",
       trailColor: '#23104a49',
       
     })} >
-          <h1 className="font-bold hFont  cursor-default">{percentage.toLocaleString().slice(0,4)}%</h1>
+          <h1 className="font-bold hFont  cursor-default">{percentage?.toLocaleString()?.slice(0,4)||0}%</h1>
           <Tooltip title={`${value} Students`}>
           <div className="text-3xl font-bold cursor-default">{value}</div>
           </Tooltip>

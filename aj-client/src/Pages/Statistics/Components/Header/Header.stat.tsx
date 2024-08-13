@@ -16,8 +16,7 @@ const Header = () => {
         <CustomStatBox className='bg-[#daeaea] dark:bg-[#0d311c] ' label='Revenue this month'  mainValue={
             q?.MonthlyRevenue.total?.toString()+" PKR"||''} subLabel='Since last month' svg='green' rate={q?.MonthlyRevenue.rate}/>
 
-        <CustomStatBox className='bg-[#f9e0e1] dark:bg-[#310d10]' label='Pending payments'
-          mainValue={q?.PendingPayments.total?.toString()+" PKR"||''} svg='red'/>
+     
 
 
 

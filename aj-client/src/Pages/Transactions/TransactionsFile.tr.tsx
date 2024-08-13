@@ -2,15 +2,14 @@ import { Route, Routes } from "react-router-dom"
 import TransactionPage from "./Sub pages/Transactions/TransactionPage.tr"
 import TransactionComposePage from "./Sub pages/Transaction composer/components/TransactionComposePage.tr"
 import TransactionDetailsPage from "./Sub pages/Detail Page/TransactionDetailsPage.tr.d"
-import StudentFeeReport from "./Sub pages/Student Fee Report/StudentFeeReport.std.repo"
+
 const TransactionsFile = () => {
   return (
     <>
     <Routes>
       <Route index element={<TransactionPage/>}  /> 
       <Route element={<TransactionComposePage/>} path="/create"/> 
-      <Route element={<StudentFeeReport/>} path="/feereport"/> 
-      <Route element={<TransactionDetailsPage/>} path="/transaction/:id"/> 
+<Route element={<TransactionDetailsPage/>} path="/transaction/:id"/> 
     </Routes>
     </>
   )

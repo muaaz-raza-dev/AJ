@@ -39,7 +39,7 @@ const MainLayoutRoutes = () => {
        <RoleBasedAccess roleToGiveAccess={["chief admin"]}>
        <StatsFile/>
        </RoleBasedAccess>
-        } path="/stats" />
+        } path="/stats/*" />
 
       <Route element={
         <CustomSuspense>

@@ -12,7 +12,7 @@ const ThemeToggle = () => {
     let DarkClass = "bg-dark text-white hover:bg-dark_dimmer";
     let LightClass = "bg-white text-dark";
   return (
-    <Popover open={open}>
+    <Popover open={open} onOpenChange={setOpen}>
   <PopoverTrigger onClick={()=>setOpen(!open)} >
     <div className="rounded-md p-2 hover:bg-dark hover:!text-white text-dark bg-white dark:bg-dark dark:text-white transition-colors">
 

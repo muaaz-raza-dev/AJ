@@ -3,7 +3,6 @@ const OneTimeFee = require("../models/OneTimeFee")
 const PaymentConfig = require("../models/PaymentConfigs")
 const CalculateAllMonths = require("./utils/Stats/CalculateAllMonths")
 const { CalculateNewAdmissions } = require("./utils/Stats/CalculateNewAdmissions")
-const { CalculateTotalPendings } = require("./utils/Stats/CalculateTotalPendings")
 const { CalculateTotalRevenue } = require("./utils/Stats/CalculateTotalRevenue")
 const { CalculateTotalStudents } = require("./utils/Stats/CalculateTotalStduents")
 const GetDailyChartReport = require("./utils/Stats/charts/GetDailyChartReport")
@@ -16,10 +15,9 @@ try{
 let totalStudents  = await CalculateTotalStudents()
 let newAdmissions = await CalculateNewAdmissions()
 let MonthlyRevenue = await CalculateTotalRevenue()
-let PendingPayments  = await CalculateTotalPendings()
 let Dates  =await CalculateAllMonths() // From the beggining of the software. {2024:["may","june","july"]}
 let FstatsFilters = await CalculateAllStatFilters(true) // For filterable Stats
-Respond({res,payload:{totalStudents,newAdmissions,MonthlyRevenue,PendingPayments,Dates,FstatsFilters}})
+Respond({res,payload:{totalStudents,newAdmissions,MonthlyRevenue,Dates,FstatsFilters}})
 }
 catch(err){
 console.log(err);
