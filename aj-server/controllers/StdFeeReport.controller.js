@@ -15,8 +15,7 @@ const GetStudentFeeReport = async (req, res) => {
      payload = await CalculateMonthlyStdFeeReport(PaymentConfig,Month,Year,Class,Type);
     }
     else {
-        payload = await CalculateYearlyStdFeeReport(PaymentConfig,Class,Type);
-
+      payload = await CalculateYearlyStdFeeReport(PaymentConfig,Class,Type);
     }
   Respond({ res, payload });
 };

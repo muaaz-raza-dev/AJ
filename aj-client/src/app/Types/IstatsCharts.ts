@@ -17,6 +17,7 @@ export interface IstatCharts{
             selected:{year:string;month:string}
     },
 }
+
 }
 
 export interface ImonthlyStats{month:string,amount:1000,year:string}

@@ -5,26 +5,33 @@ const CalculateAllMonths =async () => {
     let StartDate = moment(FirstSession?.[0].start_date,"M/D/YYYY").toISOString()
 
     function GenerateYearMonths (startDate){
-        let payload = {2024:[""]}
+        let payload = {}
         const start = moment(startDate)
-        const end = moment()
+        const current = moment() //End is now date
 
         let startYear = start.year()
-        let endYear = end.year()
-        let startMonth = start.month()
-        let endMonth = end.month()
+        let startMonth = start.month()+1 // months counting starts from 0-11
+
+        let currentYear = current.year()
+        let currentMonth = current.month()+1
+
 
         const months = moment.months()
-        for(let year = startYear; year <= endYear; year++){
-            if(year ==startYear)  payload[year] =months.slice(startMonth)
-            else if(year == endYear){payload[year] = months.slice(0, endMonth+1)  }
-            else payload[year] = months
+           for(let year = startYear; year <= currentYear; year++){
+            if(year == currentYear) {
+                 payload[year] =months.slice(startMonth-1,currentMonth)
+            }
+            else if(year == startYear){
+                payload[year] = months.slice(startMonth-1)
+            }
+            else{payload[year] = months}
         }
 
         return payload
     }
 
 const dates = GenerateYearMonths(StartDate)
+
 return dates
 }
 

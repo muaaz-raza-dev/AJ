@@ -1,17 +1,37 @@
+const { redis } = require("../db");
 const Students = require("../models/Students");
 let Limit = process.env.StdPerRequest;
 async function ReadStudents(req, res) {
   let { count } = req.body;
   try {
-    const totalStudents = await Students.countDocuments();
-    let students = await Students.find({})
-      .limit(Limit)
-      .skip((count == 0 ? count : count - 1) * Limit)
-      .select(
-        "LastName FirstName fatherName DOA CurrentSection GRNO contact RollNo CurrentClass WA email"
-      );
-    res.json({ success: true, payload: students, totalStudents, count });
+    let totalStudents  =await redis?.get(`totalstudents`)
+    let students  =await redis?.get(`students:${count}`)
+    if(!students) {
+      students = await Students.find({})
+        .limit(Limit)
+        .skip((count == 0 ? count : count - 1) * Limit)
+        .select(
+          "LastName FirstName fatherName CurrentSection GRNO DOA contact RollNo CurrentClass WA email"
+        );
+        await redis?.set(`students:${count}`,JSON.stringify(students),"EX",60*10)
+    }
+    else {
+      const std =JSON.parse(students) 
+      students = std
+    }
+    if(!totalStudents){
+      totalStudents = await Students.countDocuments();
+      await redis?.set( `totalstudents`,totalStudents,"EX", 60*10 )
+    } 
+
+    else {
+      const totalStd = totalStudents
+      totalStudents = totalStd
+    }
+
+   return res.json({ success: true, payload: students, totalStudents, count });
   } catch (err) {
+    console.log(err)
     res
       .status(500)
       .json({
@@ -68,8 +88,6 @@ async function FilterStudents(req, res) {
       let Inputs = [];
       let ClassCondition = {}
       if (Filters.Class && Filters.Class != "All"){ClassCondition.CurrentClass =Filters.Class};
-      if (Filters.Covid) Inputs.push({CovidVaccine : Filters.Covid});
-      if (Filters.Polio) Inputs.push({PolioPermission : Filters.Polio});
       let FinalQuery={...ClassCondition}
       if (Inputs.length>0) {
         FinalQuery.$or=Inputs

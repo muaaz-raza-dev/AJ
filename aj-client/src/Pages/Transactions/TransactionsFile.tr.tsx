@@ -9,7 +9,7 @@ const TransactionsFile = () => {
     <Routes>
       <Route index element={<TransactionPage/>}  /> 
       <Route element={<TransactionComposePage/>} path="/create"/> 
-<Route element={<TransactionDetailsPage/>} path="/transaction/:id"/> 
+      <Route element={<TransactionDetailsPage/>} path="/transaction/:id"/> 
     </Routes>
     </>
   )

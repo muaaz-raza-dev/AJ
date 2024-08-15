@@ -18,11 +18,14 @@ const CalculateMonthlyStdFeeReport = async (
   
 ) => {
   try {
-    let payload = { amount: 0, students: [], class: null,status:"Pending" };
+    let payload = { amount: 0, students: [], class: null,status:"Pending" , Info:{totalStudents:0,totalPaidAmount:0,totalPendingAmount:0} };
     const StudentIds = [];
     //? Get the students in the selected Class
     const sections = await Sections_Class.find({ Class }).select("Students");
     sections.map((sec) => StudentIds.push(...sec.Students));
+
+
+    payload.Info.totalStudents = await Students.countDocuments({ _id: { $in: StudentIds },TerminateEnrollment:false})
 
     const ClassDetails = await Classes.findById(Class).select("name _id");
     payload.class= ClassDetails
@@ -80,20 +83,29 @@ if(payload.status != "No Fees") {
           LastName: "$Student.LastName",
           fatherName: "$Student.fatherName",
           Invoice: 1,
+          amount:1
         },
       },
     ]);
 }
-if(payload.status != "No Fees"){
 
+function CalculateTotalPaidAmount(trs){
+ payload.Info.totalPaidAmount= trs.reduce((acc,tr)=>acc+tr?.amount?.totalAmount,0)
+}
+
+CalculateTotalPaidAmount(PaidStudents)
+
+if(payload.status != "No Fees"){
     if (Type == "Paid") {
       payload.students = PaidStudents;
     } else {
-      //! It needs to be updated. I should get the students from the session instead of currentClass there is big bug in that!
       const PaidStudentId = PaidStudents.map((pay) => pay._id);
       const UnPaidStudents = await Students.find({
         $and: [{ _id: { $nin: PaidStudentId } }, { _id: { $in: StudentIds } }],
       }).select("GRNO currentClass FirstName LastName fatherName ");
+
+      payload.Info.totalPendingAmount = UnPaidStudents.length*payload.amount
+
       payload.students = UnPaidStudents;
     }
   }

@@ -18,7 +18,7 @@ const StudentListSection = () => {
          </div>
       }
       {
-        isLoading &&
+        !isLoading &&
       <div className="rounded-md bg-darker text-white px-4 py-1">
         {payload.students.length} Students
       </div>

@@ -9,11 +9,13 @@ const { ObjectId } = require("mongodb");
 const Sections_Class = require("../../../../models/Sections_Class");
 
 const CalculateYearlyStdFeeReport = async (paymentConfig,Class,Type) => { 
-    let payload = { amount: 0, students: {}, class: null,status:"Pending" }; //status | "Pending" | "Upcoming"
+    let payload = { amount: 0, students: {}, class: null,status:"Pending" ,Info:{totalStudents:0,totalPaidAmount:0,totalPendingAmount:0}}; //status | "Pending" | "Upcoming"
     const StudentIds = []
        //? Get the students in the selected Class
     const sections = await Sections_Class.find({ Class }).select("Students");
     sections.map((sec) => StudentIds.push(...sec.Students));
+
+    payload.Info.totalStudents = await Students.countDocuments({ _id: { $in: StudentIds },TerminateEnrollment:false})
 
     const ClassDetails = await Classes.findById(Class).select("name _id");
     payload.class= ClassDetails
@@ -52,16 +54,26 @@ const CalculateYearlyStdFeeReport = async (paymentConfig,Class,Type) => {
             }
           },
     ]) 
+
+    function CalculateTotalPaidAmount(trs){
+    payload.Info.totalPaidAmount =  trs.reduce((acc,tr)=>acc+tr?.amount?.totalAmount,0)
+    }
+    
+    CalculateTotalPaidAmount(PaidStudents)
+
     if(payload.status != "No Fees"){
+      const PaidStudentId = PaidStudents.map((pay) => pay._id);
+      const UnPaidStudents = await Students.find({
+        $and: [{ _id: { $nin: PaidStudentId } }, { _id: { $in: StudentIds } }],
+      }).select("GRNO currentClass FirstName LastName fatherName");
+      
+      payload.Info.totalPendingAmount = UnPaidStudents.length*payload.amount
     if (Type == "Paid") {
         payload.students = PaidStudents;
     }
     else {
-        const PaidStudentId = PaidStudents.map((pay) => pay._id);
-        const UnPaidStudents = await Students.find({
-          $and: [{ _id: { $nin: PaidStudentId } }, { _id: { $in: StudentIds } }],
-        }).select("GRNO currentClass FirstName LastName fatherName");
-        payload.students = UnPaidStudents;
+      payload.students = UnPaidStudents;
+
     }
     }
       return payload;

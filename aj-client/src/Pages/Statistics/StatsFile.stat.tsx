@@ -5,6 +5,7 @@ import useFetchGeneralStats from "@/Hooks/Stats/useFetchGenralStats"
 import SkeletonStatsFile from "./SkeletonStatsFile.stat"
 import { Route, Routes } from "react-router-dom"
 import StudentFeeReportPage from "../Transactions/Sub pages/Student Fee Report/StudentFeeReportPage.std.repo"
+import RevenueDetailedPage from "./Revenue detailed/RevenueDetailedPage.stat"
 
 const StatsFile = () => {
 let {isLoading} =useFetchGeneralStats()
@@ -21,6 +22,7 @@ return (
 />
 
 <Route element={<StudentFeeReportPage />} path="/feereport"/> 
+<Route element={<RevenueDetailedPage/>} path="/revenue"/> 
 </Routes>
   )
 }

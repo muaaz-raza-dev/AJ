@@ -47,7 +47,7 @@ export interface Ipayload {
     amount:number;
     class : {name:string;};
     status:"Pending"|"Upcoming"|"No Fees"
-    
+    Info:{totalStudents:number;totalPaidAmount:number;totalPendingAmount:number};
 }
 isLoading?:boolean
 

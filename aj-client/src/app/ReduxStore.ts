@@ -15,6 +15,7 @@ import { studentHist } from "./Slices/StudentHistorySlice";
 import { Stats } from "./Slices/StatsSlice";
 import { Fstats } from "./Slices/FilterableStatsSlice";
 import { stdFeeReport } from "./Slices/StdFeeReportSlice";
+import { detailedRevenue } from "./Slices/RevenueDetailedSlice";
 
 
 
@@ -35,7 +36,8 @@ reducer:{
     studentHistory:studentHist,
     stats: Stats,
     fStats:Fstats, // FilterableStats
-    stdFeeReport
+    stdFeeReport,
+    detailedRevenue
 },
 });
 

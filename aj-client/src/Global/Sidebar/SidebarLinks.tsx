@@ -81,8 +81,8 @@ const SidebarLinks = () => {
         labels={[
           { label: "Classes", url: "/dashboard/classes" },
           { label: "Teacher & Staffs ", url: "/dashboard/staffs" },
-          { label: "Register Class", url: "dashboard/classes" },
-          { label: "Register Staff", url: "dashboard/classes" },
+          { label: "Register Class", url: "/dashboard/class/register" },
+          { label: "Register Staff", url: "/dashboard/teacher/register" },
         ]}
       >
         <SubSidebarLinks_Shrinked label="Classes & Teachers ">
@@ -178,7 +178,7 @@ const SidebarLinks = () => {
               <p className="max-md:text-[0.8rem] max-[400px]:text-[0.67rem]  md:hidden leading-relaxed ">
                 Stats
               </p>
-              {Expanded && <p className="max-md:hidden">Home</p>}
+              {Expanded && <p className="max-md:hidden">Stats and Reports</p>}
             </Link>
           </SubSidebarLinks_Shrinked>
         </RoleBasedAccess>

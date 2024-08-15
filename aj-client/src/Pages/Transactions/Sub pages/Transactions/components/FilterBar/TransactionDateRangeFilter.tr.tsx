@@ -11,12 +11,11 @@ import {
 } from "@/shdcn/components/ui/popover"
 import { cn } from "@/shdcn/lib/utils"
 import { format, parseISO } from "date-fns"
-import { ArrowRight, CalendarIcon } from "lucide-react"
+import {  CalendarIcon } from "lucide-react"
 import { FC } from "react"
-import { Link } from "react-router-dom"
 const TransactionDateRangeFilter = () => {
-  let dispatch =useAppDispatch()
-  let {mutate} = useReadPageTransactions()
+let dispatch =useAppDispatch()
+let {mutate} = useReadPageTransactions()
 const {Filters} =useAppSelector(s=>s.transactions)
 let {start,end} =Filters.DateRange
   const HandleStart = (val:any)=>dispatch(RedTransactionsFilters({DateRange:{start:new Date(val).toISOString()}}))
@@ -42,9 +41,7 @@ let {start,end} =Filters.DateRange
       Apply 
     </Button>
     </div>
-    <Link to="feeReport" className="px-3 h-12 whitespace-nowrap rounded-md bg-dark text-white font-bold center flex items-center gap-2">
-      Get Fee Report <ArrowRight/>
-    </Link>
+    
     </section>
  
   )

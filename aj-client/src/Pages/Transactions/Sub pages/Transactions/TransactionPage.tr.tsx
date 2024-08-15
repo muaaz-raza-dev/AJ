@@ -8,8 +8,6 @@ const TransactionPage = () => {
       <TransactionFilterBar/>
       <TransactionTable/>
       <TransactionFooter/>
-
-      
     </main>
   )
 }

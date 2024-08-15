@@ -22,6 +22,7 @@ let RouteForLabel: { [key: string]: string } = {
   "/sessions/registeration" : "Session Registeration",
   "/dashboard/class/edit/*" : "Update class details",
   "/dashboard/classes":"Classes",
+  "/stats/revenue":"Detailed Revenue Report",
   "/dashboard/staffs":"Staff Members",
   "/payment-settings" : "Payment Configurations",
   "/payment-settings/setup" : "Setup Payment Config",

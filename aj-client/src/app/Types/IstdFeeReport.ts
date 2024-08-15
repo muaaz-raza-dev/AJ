@@ -9,6 +9,7 @@ isLoading:boolean;
 export interface IstdFeeReportPayload{
 students :(IstudentShort&{Invoice:number})[];
 amount:number;
+Info:{totalStudents:number;totalPaidAmount:number;totalPendingAmount:number};
 status:"Pending"|"Upcoming"|"No Fees",
 class : {name:string;}
 
@@ -53,6 +54,7 @@ export const defaultIstdFeeReport: IstdFeeReport = {
       Session: "",
     },
   },
-  payload:{ students :[],amount:0,class:{name:""},status:"Pending",},
+  payload:{ students :[],amount:0,class:{name:""},status:"Pending",
+  Info:{totalStudents:0,totalPaidAmount:0,totalPendingAmount:0}},
   isLoading:false,
 };
