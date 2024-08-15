@@ -31,7 +31,6 @@ async function ReadStudents(req, res) {
 
    return res.json({ success: true, payload: students, totalStudents, count });
   } catch (err) {
-    console.log(err)
     res
       .status(500)
       .json({

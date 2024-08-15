@@ -24,11 +24,10 @@ const StudentsTable = () => {
       <RequestLoading dark  />
       </div>
       :
-          isNotFound&&
+      (isNotFound||MutableData.length==0)&&
             <div className="center">
             no students found
             </div>
-          
       
        }  
     <StudentTableInformationFooter/>

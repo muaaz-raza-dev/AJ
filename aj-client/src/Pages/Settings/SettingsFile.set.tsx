@@ -25,6 +25,7 @@ const SettingsFile = () => {
               <RoleBasedAccess redirect="accounts" roleToGiveAccess={"chief admin"}>
                   <AdvancedActionPage/>
               </RoleBasedAccess> } />
+              
             <Route path="/accounts"  element={<AccountsSectionForm />} />
 
             <Route path="/users"  element={
@@ -37,11 +38,13 @@ const SettingsFile = () => {
               <NewAccountPageForm edit={true} />
               </RoleBasedAccess>
               } />
+
               <Route path="/new-account"  element={
               <RoleBasedAccess redirect="accounts" roleToGiveAccess={"chief admin"}>
               <NewAccountPageForm/>
               </RoleBasedAccess>
               } />
+
         </Routes>
     </main>
   )

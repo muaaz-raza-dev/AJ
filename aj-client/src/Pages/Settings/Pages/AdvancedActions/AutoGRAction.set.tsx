@@ -10,7 +10,7 @@ const {AdvancedSettings} = useAppSelector(s=>s.global)
 const {mutate,isLoading} =useUpdateAdvancedSettings()
 const dispatch =useAppDispatch()
 const HandleChange = (value:boolean)=>{
-dispatch(InsertGlobalValues({AdvancedActions:{sortGR:value}}))
+dispatch(InsertGlobalValues({AdvancedActions:{autoGR:value}}))
 mutate({...AdvancedSettings,autoGR:value})
 }
 
