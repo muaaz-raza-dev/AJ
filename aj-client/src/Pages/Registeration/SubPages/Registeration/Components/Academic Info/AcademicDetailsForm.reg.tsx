@@ -59,12 +59,14 @@ const RegAcademicDetailsForm: FC<{ edit: boolean }> = ({ edit }) => {
       <RegLabelWrapper className="w-[48%]" title="Current Section">
         <Controller
           name="CurrentSection"
+          rules={{ required: "Section is Required" }}
           control={control}
-          render={({ field }) => (
+          render={({ field, fieldState: { error } }) => (
+            <>
             <Select 
              className="antd-selectBarDark rounded-md  custom-select dark:bg-dark dark:border-darker dark:text-white dark:placeholder-gray-600"
-                showSearch={false}
-                {...field}
+             showSearch={false}
+             {...field}
                 placeholder="A"
                 options={
                   Class?
@@ -75,8 +77,10 @@ const RegAcademicDetailsForm: FC<{ edit: boolean }> = ({ edit }) => {
               ):[]
             }
               />
-          )}
-        />
+              {error && <p className="text-red-500 text-xs">{error.message}</p>}
+              </>
+            )}
+            />
       </RegLabelWrapper>
       <RegLabelWrapper className="w-[48%]" title="Admission Type">
         <Controller

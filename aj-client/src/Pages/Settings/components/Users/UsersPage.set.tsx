@@ -25,7 +25,7 @@ const UsersPage = () => {
               No users found
             </h1>
           )}
-          {data?.payload.Users.map((e) => {
+          {data?.payload?.Users?.map((e) => {
             return (
               <EachUserComp
                 data={e}

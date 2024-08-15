@@ -5,8 +5,8 @@ import RegAcademicDetailsForm from "./AcademicDetailsForm.reg"
 const RegAcademicInfoForm:FC<{edit:boolean}> = ({edit}) => {
   return (
     <RegFormWrapper title="Academic Information" >
-        <RegAcademicDetailsForm edit={edit}/>
-        </RegFormWrapper>
+    <RegAcademicDetailsForm edit={edit}/>
+    </RegFormWrapper>
   )
 }
 

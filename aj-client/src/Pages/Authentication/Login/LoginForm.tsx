@@ -24,6 +24,7 @@ const LoginForm = () => {
           <Mail className="text-[var(--dark)]" />
         </div>
         <input
+        autoFocus
           {...register("usernameOrEmail", {
             required: "Email or username is required",
           })}

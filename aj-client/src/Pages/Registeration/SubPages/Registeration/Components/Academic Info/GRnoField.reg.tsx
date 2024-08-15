@@ -4,12 +4,12 @@ import { Controller, useFormContext } from "react-hook-form";
 import RequestLoading from "@/Global/Loaders/RequestLoding";
 import { ArrowRight } from "lucide-react";
 import { useDebouncedCallback } from "use-debounce";
-import useValidateGRno from "@/Hooks/Registeration/useValdiateGR";
+import useValidateGRno from "@/Hooks/Student Registeration/useValdiateGR";
 import { FaBan } from "react-icons/fa";
 import { MdVerified } from "react-icons/md";
 import { FC } from "react";
 import { useAppSelector } from "@/app/ReduxHooks";
-import useAssignAutoGR from "@/Hooks/Registeration/useAssignAutoGR";
+import useAssignAutoGR from "@/Hooks/Student Registeration/useAssignAutoGR";
 const GRnoRegisterationFormField: FC<{ edit: boolean }> = ({ edit }) => {
   const { control, setValue } = useFormContext();
   const { autoGR } = useAppSelector((s) => s.global.AdvancedSettings);

@@ -111,4 +111,29 @@ async function FilterStudents(req, res) {
   }
 }
 
-module.exports = { ReadStudents, SearchStudents, FilterStudents };
+async function SearchStudentNames(req, res) {
+  let {q } = req.body;
+  try {
+ 
+
+      const students = await Students.find(
+        { $text: { $search: q } ,TerminateEnrollment:false},
+        { score: { $meta: "textScore" } }
+      ).select("FirstName LastName GRNO")
+
+      res.json({
+        payload:students,
+        success:true,
+      });
+  } catch (err) {
+    console.log(err);
+    res
+      .status(500)
+      .json({
+        success: false,
+        message: "Failed to filter students by class",
+        error: err.message,
+      });
+  }
+}
+module.exports = { ReadStudents, SearchStudents, FilterStudents,SearchStudentNames };

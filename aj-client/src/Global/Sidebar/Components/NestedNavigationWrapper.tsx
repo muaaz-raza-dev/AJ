@@ -8,7 +8,7 @@ import useScreenSizeTracker from "@/utils/useScreenSizeTracker";
 import { FC, ReactNode, useState } from "react"
 import { Link } from "react-router-dom";
   
-const NestedNavigationWrapper:FC<{children:ReactNode;labels:{label:string,url:string}[]}> = ({children,labels}) => {
+const NestedNavigationWrapper:FC<{children:ReactNode;labels:{label:string,url:string;icon?:ReactNode;}[]}> = ({children,labels}) => {
     const [Toggle,setToggle] =useState(false)
     const size =useScreenSizeTracker()
     
@@ -25,7 +25,9 @@ const NestedNavigationWrapper:FC<{children:ReactNode;labels:{label:string,url:st
     {labels.map(lb=> (
         <>
         <DropdownMenuItem key={lb.label} onClick={()=>setToggle(false)}>
-            <Link to={lb.url} className="font-bold pr-4 ">
+
+            <Link to={lb.url} className="font-bold pr-4 py-1 flex gap-3 items-center">
+            {lb.icon}
             {lb.label}
             </Link>
             </DropdownMenuItem>

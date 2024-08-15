@@ -4,26 +4,12 @@ import TextArea from "antd/es/input/TextArea";
 import { useFormContext ,Controller } from "react-hook-form";
 import { BsWhatsapp } from "react-icons/bs";
 import { BiPhone } from "react-icons/bi";
+import StudentFirstNameFormField from "./StudentFirstNameFormField.reg";
 const RegPersonalDetailsForm = () => {
   let { control ,setValue} = useFormContext();
   return (
     <div className="flex w-full  flex-wrap  gap-x-4 gap-y-6">
-   <RegLabelWrapper className="w-[48%] self-end" title="First Name">
-        <Controller
-          rules={{required:"First Name is required"}}
-          name="FirstName"
-          control={control}
-          render={({ field ,fieldState:{error} }) => (
-            <>
-            <Input {...field} placeholder="Osman" className="active:border-[var(--dark)] dark:bg-dark dark:border-darker
-             dark:text-white  dark:placeholder:text-gray-600" />
-            {
-              error && <p className="text-red-500 text-xs">{error.message}</p>
-            }
-            </>
-          )}
-        />
-      </RegLabelWrapper>
+      <StudentFirstNameFormField/>
       <RegLabelWrapper className="w-[48%] self-end" title="Last Name">
         <Controller
           name="LastName"

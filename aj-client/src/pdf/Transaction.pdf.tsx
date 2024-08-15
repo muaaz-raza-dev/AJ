@@ -135,14 +135,12 @@ const Transaction:FC<{data:ItransactionDetail|undefined}> = ({data}) => {
             <View style={{...styles.tableHeader,borderBottom:"1px black solid",paddingBottom:2}}>
               <Text style={{...styles.tableCell,width:"10%"}}>S.No</Text>
               <Text style={{...styles.tableCell,width:"45%"}}>Purpose</Text>
-              <Text style={{...styles.tableCell,width:"20%"}}>Session</Text>
               <Text style={{...styles.tableCell,width:"20%"}}>Amount</Text>
             </View>
             {data.Transactions.map((tr, index) => (
-              <View key={"asdf"} style={styles.tableHeader}>
+              <View key={index+"pdf tr"} style={styles.tableHeader}>
                 <Text style={{...styles.tableCell,width:"10%",fontSize:8}}>{index+1}</Text>
                 <Text style={{...styles.tableCell,width:"45%"}}>{tr?.month} {tr?.year} {!tr?.month&&tr?.session} {tr.paymentTitle}</Text>
-                <Text style={{...styles.tableCell,width:"20%"}}>{tr.session?.split(" ")[1]} </Text>
                 <Text style={{...styles.tableCell,width:"20%"}}>{tr.amount.totalAmount}</Text>
               </View>
               

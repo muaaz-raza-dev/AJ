@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
 import useActiveRoute from "@/Hooks/Common/ActiveRoute";
-import { FaRegChartBar, FaSchool } from "react-icons/fa";
+import { FaReceipt, FaRegChartBar, FaSchool } from "react-icons/fa";
 import { useAppSelector } from "@/app/ReduxHooks";
 import SubSidebarLinks_Shrinked from "./SubSidebarLinks";
 import { MdCurrencyExchange, MdOutlinePayments } from "react-icons/md";
-import { FaCalendarMinus, FaUsersLine } from "react-icons/fa6";
+import { FaCalendarMinus, FaUsersGear, FaUsersLine } from "react-icons/fa6";
 import RoleBasedAccess from "../Middleware Hooks/RoleBasedAccess";
 import NestedNavigationWrapper from "./Components/NestedNavigationWrapper";
-
+import { BsCurrencyExchange, BsPersonFillAdd } from "react-icons/bs";
+import { IoStatsChart } from "react-icons/io5";
 const SidebarLinks = () => {
   let { ValidateRoute } = useActiveRoute();
   let Expanded = useAppSelector((e) => e.global.Expand_Navbar);
@@ -17,6 +18,7 @@ const SidebarLinks = () => {
              md:hover:bg-[var(--light)] md:hover:border-transparent md:hover:text-[var(--dark)]
             text-[var(--light)] rounded  transition-all   items-center border-[var(--primary)] md:py-3 max-md:py-2 
             flex gap-x-4 max-md:flex-col gap-y-1`;
+  const SubIconStyle ="text-dark  text-xl max-md:3xl"
   return (
     <ul
       className={`flex w-full  items-center  h-full flex-col max-md:flex-row ${
@@ -25,8 +27,26 @@ const SidebarLinks = () => {
     >
       <NestedNavigationWrapper
         labels={[
-          { label: "Register Student", url: "/students/registeration" },
-          { label: "Students", url: "/students" },
+          {
+            label: "Register Student",
+            url: "/students/registeration",
+            icon: (
+              <BsPersonFillAdd
+                size={22}
+                className={SubIconStyle}
+              />
+            ),
+          },
+          {
+            label: "Students",
+            url: "/students",
+            icon: (
+              <FaUsersLine
+                size={22}
+                className={SubIconStyle}
+              />
+            ),
+          },
         ]}
       >
         <SubSidebarLinks_Shrinked label="Students">
@@ -52,8 +72,14 @@ const SidebarLinks = () => {
 
       <NestedNavigationWrapper
         labels={[
-          { label: "Transactions", url: "/transactions" },
-          { label: "Create Transaction", url: "/transactions/create" },
+          {
+            label: "Transactions",
+            url: "/transactions",
+            icon: (
+              <MdCurrencyExchange className={SubIconStyle} />
+            ),
+          },
+          { label: "Create Transaction", url: "/transactions/create",icon:<FaReceipt className={SubIconStyle} /> },
         ]}
       >
         <RoleBasedAccess roleToGiveAccess={["admin", "chief admin"]}>
@@ -158,8 +184,9 @@ const SidebarLinks = () => {
 
       <NestedNavigationWrapper
         labels={[
-          { label: "General Stats", url: "/stats" },
-          { label: "Student Fee Report", url: "/stats/feereport" },
+          { label: "General Stats", url: "/stats" ,icon:<IoStatsChart className={SubIconStyle} />},
+          { label: "Student Fee Report", url: "/stats/feereport" ,icon:<FaUsersGear className={SubIconStyle} />},
+          { label: "Detailed Revenue Report", url: "/stats/revenue" , icon:<BsCurrencyExchange className={SubIconStyle} /> },
         ]}
       >
         <RoleBasedAccess roleToGiveAccess={["chief admin"]}>

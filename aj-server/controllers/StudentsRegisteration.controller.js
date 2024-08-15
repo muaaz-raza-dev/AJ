@@ -3,6 +3,7 @@ const Sections_Class = require("../models/Sections_Class");
 const Session = require("../models/Session");
 const Respond = require("../Helpers/ResponseHandler");
 const GlobalConfig = require("../models/GlobalConfig");
+const { redis } = require("../db");
 async function RegisterStudent(req, res) {
   let { payload  } = req.body;
   try {
@@ -10,6 +11,15 @@ async function RegisterStudent(req, res) {
     let student = await Students.create({...payload,firstSession:currentSession._id,firstClass:payload.CurrentClass}); 
     await Sections_Class.findByIdAndUpdate(payload.CurrentSection,{$addToSet:{Students:student._id}})  
     await GlobalConfig.findOneAndUpdate({},{isSorted:false})
+
+    // Delete Students from Redis db (cached)
+    const reply = await redis?.scan(0, 'MATCH', 'students:*', 'COUNT', '100');
+    const keys = reply[1];
+    if (keys.length) {
+      await redis?.del(keys);
+    }
+    await redis?.del(`totalstudents`)
+
     // to register the student to section to keep the history and records
     res.json({
       success: true,
