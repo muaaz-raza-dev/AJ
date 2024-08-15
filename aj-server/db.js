@@ -8,11 +8,11 @@ const MongoConnection = ()=>{
 const RedisConnection = ()=>{
     const port = process.env.Redis_Port
     const host = process.env.Redis_Host
-    // const password = process.env.Redis_Password
+    const password = process.env.Redis_Password
     const redis = new Redis({
         host,
         port,
-        // password
+        password
 
     })
     redis.on('connect', () => {
