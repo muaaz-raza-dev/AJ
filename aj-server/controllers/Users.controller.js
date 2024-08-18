@@ -13,6 +13,11 @@ const getUsers = async (req, res) => {
         ).map((user) => ({ ...user._doc, isStaff: user.StaffId ? true : false }));
         await redis?.set("users",JSON.stringify(Users))  
     }
+    else {
+      let temp_user = Users
+      Users = JSON?.parse(temp_user)||temp_user
+    }
+
   let config = await GlobalConfig.countDocuments();
   if (config == 0) await GlobalConfig.create({ isTemporaryBlocked: false });
   let isTemporaryBlocked = await GlobalConfig.findOne({});

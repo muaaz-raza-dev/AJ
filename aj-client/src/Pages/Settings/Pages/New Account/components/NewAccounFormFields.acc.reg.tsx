@@ -26,7 +26,7 @@ const NewAccountFormFields:FC<{loading:boolean;edit?:boolean}> = ({loading,edit}
       <LabelWrapper required label="Full Name" >
         <input type="text" id="Full Name"  placeholder="Muaaz Raza" 
         {...register("Name")}
-    className=" dark:bg-darker dark:border-darker dark:text-white border rounded-md  w-full p-2  border-[#8080806b] focus:border-dark  transition-all outline-none "
+    className=" dark:bg-dark dark:border-darker dark:text-white border rounded-md  w-full p-2  border-[#8080806b] focus:border-dark  transition-all outline-none "
         />
 
       </LabelWrapper>
@@ -34,7 +34,7 @@ const NewAccountFormFields:FC<{loading:boolean;edit?:boolean}> = ({loading,edit}
         <input type="email" id="Email Address"
         {...register("email")}
         placeholder="muaaz@dior.com"
-    className=" dark:bg-darker dark:border-darker dark:text-white border rounded-md  w-full p-2  border-[#8080806b] focus:border-dark  transition-all outline-none "
+    className="  dark:border-darker dark:bg-dark dark:text-white border rounded-md  w-full p-2  border-[#8080806b] focus:border-dark  transition-all outline-none "
         />
 
       </LabelWrapper>

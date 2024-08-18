@@ -23,15 +23,16 @@ const {
   FetchClassBasedPaymentConfigInfo,
   UpdateClassBasedPaymentConfig,
 } = require("../controllers/Classes.controller");
+const { AuthenticateRole } = require("../middlewares/AuthenticateRole.middleware");
 const router = express.Router();
 
 //? Teachers
-router.post("/teacher_registeration", Authenticate, RegsiterMember);
-router.get("/teachers", Authenticate, ReadTeachers_short);
-router.post("/teachers/filtered", Authenticate, ReadTeachers_Filtered);
-router.get("/teacher/:id", Authenticate, ReadTeachers_detailed);
+router.post("/teacher_registeration", Authenticate,AuthenticateRole("chief admin"), RegsiterMember);
+router.get("/teachers", Authenticate,AuthenticateRole("chief admin"), ReadTeachers_short);
+router.post("/teachers/filtered", Authenticate,AuthenticateRole("chief admin"), ReadTeachers_Filtered);
+router.get("/teacher/:id", Authenticate,AuthenticateRole("chief admin"), ReadTeachers_detailed);
 router.post("/validate/username", Authenticate, ValidateUserName);
-router.put("/teacher/edit",Authenticate,EditMember_Admin)
+router.put("/teacher/edit",Authenticate,AuthenticateRole("chief admin"),EditMember_Admin)
 router.get("/teacher/raw/:id",Authenticate,FetchTeacherRaw)
 router.get("/staff/raw/:id",Authenticate,FetchStaffRaw)
 router.put("/reset/photo/",Authenticate,EditMember_Personal_Photo)
@@ -44,12 +45,12 @@ router.post("/classes/filtered", Authenticate, Filter_Read_Classes);
 //Create
 router.post("/class/register", Authenticate, ClassRegisteration);
 //update
-router.post("/class/edit", Authenticate, Edit_Class);
+router.post("/class/edit", Authenticate,AuthenticateRole("chief admin"), Edit_Class);
 
 router.get("/classes/", Authenticate, Read_all_Classes);
 router.get("/class/:id", Authenticate, Read_Class_details);
 // ClassBased Payment Config Info
-router.get("/paymentConfigs/:id",Authenticate,FetchClassBasedPaymentConfigInfo)
-router.put("/class/paymentConfigs",Authenticate,UpdateClassBasedPaymentConfig)
+router.get("/paymentConfigs/:id",Authenticate,AuthenticateRole("chief admin"),FetchClassBasedPaymentConfigInfo)
+router.put("/class/paymentConfigs",Authenticate,AuthenticateRole("chief admin"),UpdateClassBasedPaymentConfig)
 
 module.exports = router;

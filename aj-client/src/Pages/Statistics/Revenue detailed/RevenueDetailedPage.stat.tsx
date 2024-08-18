@@ -8,7 +8,6 @@ const RevenueDetailedPage = () => {
         <FilterBarRD/>
       <div className="flex justify-between">
       <RevenueLabelFormRD/>
-        
     <ChartFormRD/>
       </div>
   </div>

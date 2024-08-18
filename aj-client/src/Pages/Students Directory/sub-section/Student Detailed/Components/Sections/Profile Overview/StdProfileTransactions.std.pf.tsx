@@ -5,7 +5,7 @@ import { ChevronRight } from "lucide-react"
 import { Link } from "react-router-dom"
 
 const StdProfileTransactions = () => {
-  let {Transactions}=useAppSelector(s=>s.stdExclusive.overview)
+  const {Transactions}=useAppSelector(s=>s.stdExclusive.overview)
   return (
     <div className="bg-[var(--box)] dark:bg-darker dark:text-white rounded-lg py-4 flex flex-col gap-y-3">
     <h1 className="text-xl text-[var(--darker)] font-bold hFont px-4 dark:text-white">Recent Transactions</h1>

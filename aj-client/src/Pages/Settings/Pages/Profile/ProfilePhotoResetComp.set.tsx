@@ -55,7 +55,7 @@ const ProfilePhotoResetComp = () => {
            ` dropzone h-20 max-md:h-16 rounded-full aspect-square   border-2 center `,
         })}>
         <input {...getInputProps({ type: "image", })} />
-        <img src={ImageState.sample||"/images/upload_image.png"} alt="" className="w-full shadow rounded-full h-full object-cover" />
+        <img src={ImageState.sample||"/images/sample.png"} alt="" className="w-full shadow rounded-full h-full object-cover" />
             </div>
         <div className="flex gap-3 text-sm">
             <Button type="button"  onClick={()=>setImageState(e=>({...e,sample:"",file:null}))} className="text-danger hover:text-white hover:bg-danger bg-[var(--box)] shadow shadow-red-100 dark:shadow-none dark:bg-danger dark:text-white">Remove</Button>

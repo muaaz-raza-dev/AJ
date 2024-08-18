@@ -14,6 +14,8 @@ const RevenueLabelFormRD = () => {
         </div>
 
         <div className="flex gap-1  flex-wrap h-[90%]">'
+          {payload.length==0&&
+          <div className="w-full font-bold hFont text-gray-500 text-xl text-center">No data found</div>}
             {payload.map(pay=>{
       return <div className="flex flex-col w-[32%] h-20 p-4 text-white rounded justify-center bg-gradient-to-bl to-dark from-darker">
     <div className="text-sm font-semibold text-gray-300">{pay.Name}</div>

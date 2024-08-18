@@ -8,7 +8,7 @@ import ErrorPage from "@/Global/Loaders/ErrorPage"
 import StudentDetailedSkeletonLoader from "../Students Directory/sub-section/Student Detailed/StudentDetailedSkeletonLoader"
 
 const StudentHistoryFile = () => { 
- let {isLoading,error,isError} = useFetchStdHistoryMeta()
+ const {isLoading,error,isError} = useFetchStdHistoryMeta()
  if(isError&&NotFoundValidator(error))return <ErrorPage title="Student not found" message="The student you're looking for is not exist" navigate="/students"/>
  if(isLoading) return <StudentDetailedSkeletonLoader/>
   return (

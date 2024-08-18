@@ -6,9 +6,8 @@ import { useDebouncedCallback } from 'use-debounce'
 import RequestLoading from '@/Global/Loaders/RequestLoding'
 
 const AccountBasicInfoSection = () => {
-  let {watch,register} =useFormContext<IaccountInfo>()
-  let Role= watch("Info.Role")
-  console.log(watch("Info"))
+  const {watch,register} =useFormContext<IaccountInfo>()
+  const Role= watch("Info.Role")
   return (
     <>
    <ProfilePhotoResetComp/>
@@ -45,12 +44,12 @@ import ProfilePhotoResetComp from '../Profile/ProfilePhotoResetComp.set'
 import SettingsLabelWrapper from '../../components/Components/SettingsLabelWrapper.set'
 
 const UsernameField = ()=>{
-  let {setValue,watch} =useFormContext<IaccountInfo>()
-  let {data:vData,mutate,isLoading} = useValidateUsername()
-  let {data} =useGetAccountInfo()
-  let username= watch("Info.username")
+  const {setValue,watch} =useFormContext<IaccountInfo>()
+  const {data:vData,mutate,isLoading} = useValidateUsername()
+  const {data} =useGetAccountInfo()
+  const username= watch("Info.username")
     const [loading, setloading] = useState(false)
-  let debounced = useDebouncedCallback((value)=>{
+  const debounced = useDebouncedCallback((value)=>{
       if(value&&data&& data.payload.username!=value){
           mutate(value)
         }
@@ -66,7 +65,7 @@ return  (<div className="flex items-center dark:bg-dark dark:border-none dark:te
 }
 
 const ValidationComp:FC<{username:string,isLoading:boolean;loading:boolean;vData:any;data:any}> = ({data,isLoading,loading,username,vData})=>{
-  let {setValue} =useFormContext<IaccountInfo>()
+  const {setValue} =useFormContext<IaccountInfo>()
   useEffect(()=>{
     if(vData?.success){
         setValue("isVerified",true)

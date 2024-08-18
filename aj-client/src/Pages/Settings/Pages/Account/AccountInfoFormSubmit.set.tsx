@@ -25,7 +25,6 @@ const AccountInfoFormSubmit: FC<{ isLoading: boolean;isSuccess:boolean }> = ({ i
     }
     return disable;
   };
-  console.log(changes,isVerified)
   return (
     <div className="flex items-center  justify-between py-4  gap-3  w-[90%] max-md:w-full">
       <UpdatePasswordToggle />

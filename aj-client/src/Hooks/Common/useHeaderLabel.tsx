@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 
 let RouteForLabel: { [key: string]: string } = {
   "/students/*/edit": "Edit Student Details",
+  "/students/*": "Student Details",
   "/": "Students Directory",
   "/settings/user/edit/*" : "Edit user credentials",
   "/students": "Students Directory",
@@ -31,7 +32,7 @@ let RouteForLabel: { [key: string]: string } = {
   "/settings" : "Personal Information ",
   "/guide":"Workspace setup guideline",
   "/settings/accounts" : "Account Settings ",
-  "/settings/new-account" : "Create new user account",
+  "/settings/users/new" : "Create new user account",
   "/settings/advanced" : "Advanced Settings ",
   "/stats" : "Acedmic Stats"
 };

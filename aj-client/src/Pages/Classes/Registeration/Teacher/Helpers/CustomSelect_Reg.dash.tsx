@@ -9,7 +9,7 @@ const CustomSelect_Reg:FC<{className?:string;disabled?:boolean,data?:string[],op
   {... (nosearch&& { onChange:setState })}
   onSelect={setState}
   placeholder={placeholder}
-  className={`w-full h-full antd-selectBar ${className}`}
+  className={`w-full h-full antd-selectBarDark ${className}`}
   filterOption={(input, option) => (option?.label ?? '').toLowerCase().includes(input.toLowerCase()) }
   options={optimumData|| data?.map(e=>({label:e,value:e}))}
   />

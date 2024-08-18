@@ -12,7 +12,7 @@ const NewAccPasswordField:FC<{edit?:boolean}> = ({edit}) => {
     <LabelWrapper required label="Password" labelClassName=" ">
       <div className="flex gap-2 items-center">
 
-    <Input.Password value={password} required={!edit}
+    <Input.Password className='dark:bg-dark dark:border-darker dark:text-white' value={password} required={!edit}
     onChange={({target:{value}})=>setValue("password",value)}
     placeholder="Pick the Stronger password"/>
 {edit&&

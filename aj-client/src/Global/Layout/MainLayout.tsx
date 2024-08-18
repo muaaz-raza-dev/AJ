@@ -26,7 +26,7 @@ const MainLayout = () => {
 };
 
 const MainLayoutRoutes = () => {
-  let Expanded = useAppSelector((s) => s.global.Expand_Navbar);
+  const Expanded = useAppSelector((s) => s.global.Expand_Navbar);
   return (
     <main
     className={` ${

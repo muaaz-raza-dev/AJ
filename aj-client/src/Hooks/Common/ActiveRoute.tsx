@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 const useActiveRoute = () => {
-  let {pathname} = useLocation()
+  const {pathname} = useLocation()
   const [ActiveRoute, setActiveRoute] = useState(pathname);
   useEffect(() => {
     setActiveRoute(pathname);
@@ -12,24 +12,32 @@ const useActiveRoute = () => {
     classesToApply,
     exact=true
   }: {
-    toCompare: string;
+    toCompare: string|string[];
     index?:boolean;
     classesToApply: string;
   exact?:boolean    
   }) => {
-    let Route = pathname;
-    let ifIndex = (Route == "/" || Route=="")? index ? classesToApply:"" : ""
+    const Route = pathname;
+    const ifIndex = (Route == "/" || Route=="")? index ? classesToApply:"" : ""
     
-    if (toCompare.includes("/")) {
-      if (exact===false) {
-        return Route.includes(toCompare) ? classesToApply : ifIndex;
-      }
-      else{
-        return Route == toCompare ? classesToApply : ifIndex;
-      }
-    } else {
-        Route.split("/").some((elm) => toCompare == elm) ? classesToApply :  ifIndex;
+    if(Array.isArray(toCompare)){
+      return toCompare.includes(Route) ? classesToApply : ifIndex;
     }
+    else {
+      if (toCompare.includes("/")) {
+        
+        if (exact===false) {
+          return Route.includes(toCompare) ? classesToApply : ifIndex;
+        }
+        else{
+          return Route == toCompare ? classesToApply : ifIndex;
+          }
+          
+          
+        } else {
+          Route.split("/").some((elm) => toCompare == elm) ? classesToApply :  ifIndex;
+        }
+      }
   };
 
   return { ValidateRoute, ActiveRoute };

@@ -4,17 +4,18 @@ import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 const Menubar = () => {
-  let { Sections } = useAppSelector((s) => s.dashboard.Filters);
-  let location =useLocation()
+  const { Sections } = useAppSelector((s) => s.dashboard.Filters);
+  const location =useLocation()
   
-  let dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
   const SelectSection = (value: string) => {
     dispatch(RedDashFilters({ fields_name: "Sections", selected: value }));
     //Also run the fetch command to fetch another's type data
   };
   useEffect(() => {
-    let route = location.pathname.split("/")[2]
-    dispatch(RedDashFilters({ fields_name: "Sections", selected:(route =="classes" || !route)?"Classes":"Teachers" }));
+    const route = location.pathname.split("/")[2]
+    console.log(route)
+    dispatch(RedDashFilters({ fields_name: "Sections", selected:(route =="classes" || !route)?"Classes":" Staffs" }));
   }, [])
   return (
     <div className="  dark:border-darker p-2 text-black rounded-lg gap-3 flex w-1/2  max-md:w-full">

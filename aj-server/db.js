@@ -13,7 +13,6 @@ const RedisConnection = ()=>{
         host,
         port,
         password
-
     })
     redis.on('connect', () => {
         console.log('Connected to Redis')
@@ -24,5 +23,5 @@ const RedisConnection = ()=>{
     return redis
 }
 const redis = RedisConnection()
-// null
+
 module.exports = {MongoConnection,redis}

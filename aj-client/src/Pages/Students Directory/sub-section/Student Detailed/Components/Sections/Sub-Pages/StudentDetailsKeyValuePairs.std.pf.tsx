@@ -1,4 +1,5 @@
 import { useAppSelector } from "@/app/ReduxHooks";
+import RoleBasedAccess from "@/Global/Middleware Hooks/RoleBasedAccess";
 import { Button } from "@/shdcn/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import moment from "moment";
@@ -22,6 +23,7 @@ let {Student:{FirstName,fatherName,LastName,Address,DOA,DOB,Gender,NewAdmission,
         <EachKVBlock label="Father CNIC" value={fCNIC} />
         <EachKVBlock label="Date of Admission" value={DOA} />
         <EachKVBlock label="Address" value={Address} />
+        <RoleBasedAccess roleToGiveAccess={["admin","chief admin"]}>
         <div className="justify-end pt-3 flex w-full px-6">
             <Link to={"edit"}>
             <Button className="bg-dark hover:text-white text-white hover:bg-dark transition-colors shadow flex gap-1 justify-center items-center">
@@ -29,6 +31,7 @@ let {Student:{FirstName,fatherName,LastName,Address,DOA,DOB,Gender,NewAdmission,
             </Button>
             </Link>
         </div>
+        </RoleBasedAccess>
         </div>
         </>
     )

@@ -6,9 +6,10 @@ import NotFoundValidator from "@/Api/404Validator";
 import SessionDetails from "./Components/Schedule_Details/SessionDetails.class";
 import RecentAdmissions from "./Components/Class&Payment Details/RecentAdmissions.class";
 import PaymentConfigDetails from "./Components/Class&Payment Details/PaymentConfigDetails.class";
+import RoleBasedAccess from "@/Global/Middleware Hooks/RoleBasedAccess";
 
 const ClassDetailsPage = () => {
-  let { isError, error, isLoading } = useFetchClassDetaills();
+  const { isError, error, isLoading } = useFetchClassDetaills();
   if (isError && NotFoundValidator(error))
     return (
       <ErrorPage
@@ -25,7 +26,9 @@ const ClassDetailsPage = () => {
         <SessionDetails/>
       </div>
       <div className='w-[35%] max-md:w-full flex flex-col max-md:flex-col-reverse gap-2 '>
+        <RoleBasedAccess roleToGiveAccess={"chief admin"}>
       <PaymentConfigDetails/>
+        </RoleBasedAccess>
       <RecentAdmissions />
     </div>
     </div>

@@ -4,8 +4,9 @@ import { ArrowRight, EditIcon, UserPlus } from "lucide-react"
 import { FC } from "react"
 import { IstudentShort } from "@/app/Types/IstudentsDir.t"
 import { Link } from "react-router-dom"
+import RoleBasedAccess from "@/Global/Middleware Hooks/RoleBasedAccess"
 const RecentAdmissions = () => {
-  let Students = useAppSelector(s=>s.classDetailed.payload.Students)
+  const Students = useAppSelector(s=>s.classDetailed.payload.Students)
   return (
     
     
@@ -44,8 +45,10 @@ const EachStudent_Comp :FC<{data:IstudentShort}>= ({data})=>{
 </div>
 </div>
 <div className="text-gray-600 dark:text-gray-200 flex gap-3 ">
-  <button><EditIcon size={16}   className="hover:text-darker dark:hover:text-gray-300 transition-colors"/></button>
-  <button><ArrowRight size={16} className="hover:text-darker dark:hover:text-gray-300 transition-colors"/></button>
+  <RoleBasedAccess roleToGiveAccess={"chief admin"}>
+  <Link to={`/students/${data.GRNO}/edit`}><EditIcon size={16}   className="hover:text-darker dark:hover:text-gray-300 transition-colors"/></Link>
+  </RoleBasedAccess>
+  <Link to={`/students/${data.GRNO}`}><ArrowRight size={16} className="hover:text-darker dark:hover:text-gray-300 transition-colors"/></Link>
 </div>
 
   

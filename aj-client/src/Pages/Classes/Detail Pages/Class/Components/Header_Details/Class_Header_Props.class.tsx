@@ -1,4 +1,5 @@
 import { useAppSelector } from "@/app/ReduxHooks";
+import RoleBasedAccess from "@/Global/Middleware Hooks/RoleBasedAccess";
 import moment from "moment";
 import { BsBoxes } from "react-icons/bs";
 import { FaUsers } from "react-icons/fa";
@@ -47,9 +48,13 @@ const Class_Header_Props = () => {
           >
             {Session?.acedmic_year}
           </Link>
+          {
+            <RoleBasedAccess roleToGiveAccess={"chief admin"}>
   <Link to={`/dashboard/class/edit/${_id}`} className="bg-darker h-9 center max-md:hidden whitespace-nowrap active:scale-95 transition-transform text-white  rounded font-bold hFont px-3 py-1 w-max">
   Update Class Details
   </Link>
+            </RoleBasedAccess>
+          }
         </div>
       </div>
 

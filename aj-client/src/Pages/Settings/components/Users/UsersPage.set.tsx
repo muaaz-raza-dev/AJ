@@ -4,8 +4,7 @@ import useGetUsers from "@/Hooks/Settings/useGetUsers";
 import NotFoundHandler from "@/Global/Middleware Hooks/NotFoundHandler";
 
 const UsersPage = () => {
-  let { isLoading, data, isError, error } = useGetUsers();
-
+  const { isLoading, data, isError, error } = useGetUsers();
   return (
     <NotFoundHandler
       ErrorPageProps={{
@@ -25,7 +24,8 @@ const UsersPage = () => {
               No users found
             </h1>
           )}
-          {data?.payload?.Users?.map((e) => {
+          {data?.payload.Users&&
+          data?.payload?.Users?.map((e) => {
             return (
               <EachUserComp
                 data={e}

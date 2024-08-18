@@ -61,7 +61,7 @@ const Account_Username: FC<{ edit?: boolean; fieldName?: string }> = ({
     }
   }, [edit, username, s_username, isLoading, isSuccess, data]);
   return (
-    <div className="flex items-center  border border-[#8080806b] dark:border-darker rounded bg-light  w-full">
+    <div className="flex items-center  border border-[#8080806b] dark:border-darker rounded bg-light dark:bg-dark dark:text-white w-full">
       <input
         required
         value={username}
@@ -69,7 +69,7 @@ const Account_Username: FC<{ edit?: boolean; fieldName?: string }> = ({
           debounced(value);
           form.setValue(fieldName || "usename", value);
         }}
-        className=" p-2 w-[85%]  outline-none dark:bg-darker dark:text-white dark:border-darker"
+        className=" p-2 w-[85%]  outline-none dark:bg-dark dark:text-white dark:border-darker"
         id="username"
         placeholder="muaaz"
       />

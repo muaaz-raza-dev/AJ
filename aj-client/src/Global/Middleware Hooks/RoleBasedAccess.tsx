@@ -3,7 +3,7 @@ import {FC, ReactNode} from 'react'
 import { Navigate } from 'react-router-dom';
 
 const RoleBasedAccess:FC<{redirect?:string; roleToGiveAccess?:"admin"|"chief admin"|"user"|(("admin"|"chief admin"|"user")[]),children:ReactNode}> = ({roleToGiveAccess,children,redirect}) => {
-    let {Role} =useAppSelector(s=>s.credits.Info)
+    const {Role} =useAppSelector(s=>s.credits.Info)
     if(!Role){
         return children
     }
@@ -14,7 +14,7 @@ const RoleBasedAccess:FC<{redirect?:string; roleToGiveAccess?:"admin"|"chief adm
         else if(Array.isArray(roleToGiveAccess) && roleToGiveAccess.includes(Role)) {
             return children
        }
-    return redirect ? <Navigate to={redirect||""}/>:null
+    return redirect ? <Navigate to={redirect||location.pathname}/>:null
     }
 
 }

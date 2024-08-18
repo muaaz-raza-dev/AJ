@@ -5,8 +5,8 @@ import { useAppDispatch, useAppSelector } from "@/app/ReduxHooks";
 import { InsertGlobalValues } from "@/app/Slices/globalSlice";
 const SidebarFile = () => {
   useLoadGlobalState();
-  let toggle= useAppSelector(e=>e.global.Expand_Navbar)
-  let dispatch = useAppDispatch()
+  const toggle= useAppSelector(e=>e.global.Expand_Navbar)
+  const dispatch = useAppDispatch()
   const Switcher =()=>{
     dispatch(InsertGlobalValues({Expand_Navbar:!toggle}))
   }

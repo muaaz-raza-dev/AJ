@@ -46,7 +46,7 @@ const FilterBar = () => {
         </div>
     <div className="flex gap-2 max-md:w-full max-md:hidden">
     <CustomSelectComponent label="Data Type" state={DataTypes.selected} rawData={DataTypes.available} setState={handleDataTypesSelection} />
-          <Button className="rounded-lg max-md:hidden bg-dark  px-8  text-white hover:bg-dark  ">Export</Button>
+          {/* <Button className="rounded-lg max-md:hidden bg-dark  px-8  text-white hover:bg-dark  ">Export</Button> */}
       </div>
     </div>
   )

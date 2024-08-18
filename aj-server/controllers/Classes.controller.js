@@ -90,6 +90,8 @@ const ClassRegisteration = async (req, res) => {
   }
 };
 
+let Data = []
+
 const Read_all_Classes = async (req, res) => {
   try {
     let result = await redis?.get("classes")
@@ -123,7 +125,7 @@ const Read_all_Classes = async (req, res) => {
 
     let Payload =await PaymentConfigClassValidator(Classes,ActiveSession._id,payload)
     result = { payload:Payload, Filters: Sessions  }
-    await redis?.set("classes",JSON.stringify(result),"EX",60*3)
+    await redis?.set("classes",JSON.stringify(result),"EX",60*3) // 3 minutes
 
   return  Respond({
       res,

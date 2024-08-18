@@ -1,18 +1,18 @@
 import { Link } from "react-router-dom";
 import useActiveRoute from "@/Hooks/Common/ActiveRoute";
-import { FaReceipt, FaRegChartBar, FaSchool } from "react-icons/fa";
+import {  FaReceipt, FaRegChartBar, FaSchool, FaUserTie } from "react-icons/fa";
 import { useAppSelector } from "@/app/ReduxHooks";
 import SubSidebarLinks_Shrinked from "./SubSidebarLinks";
-import { MdCurrencyExchange, MdOutlinePayments } from "react-icons/md";
-import { FaCalendarMinus, FaUsersGear, FaUsersLine } from "react-icons/fa6";
+import { MdAddCircleOutline, MdCurrencyExchange, MdGroupAdd, MdOutlinePayments } from "react-icons/md";
+import { FaCalendarDays, FaCalendarMinus, FaUsersGear, FaUsersLine } from "react-icons/fa6";
 import RoleBasedAccess from "../Middleware Hooks/RoleBasedAccess";
 import NestedNavigationWrapper from "./Components/NestedNavigationWrapper";
 import { BsCurrencyExchange, BsPersonFillAdd } from "react-icons/bs";
 import { IoStatsChart } from "react-icons/io5";
 const SidebarLinks = () => {
-  let { ValidateRoute } = useActiveRoute();
-  let Expanded = useAppSelector((e) => e.global.Expand_Navbar);
-  let ActiveClassName =
+  const { ValidateRoute } = useActiveRoute();
+  const Expanded = useAppSelector((e) => e.global.Expand_Navbar);
+  const ActiveClassName =
     "!bg-[var(--light)] !text-[var(--dark)] !dark:text-light border-none rounded-md";
   const EachLinkClass = `md:w-full max-md:px-2 duration-50
              md:hover:bg-[var(--light)] md:hover:border-transparent md:hover:text-[var(--dark)]
@@ -22,7 +22,7 @@ const SidebarLinks = () => {
   return (
     <ul
       className={`flex w-full  items-center  h-full flex-col max-md:flex-row ${
-        Expanded ? "gap-y-1" : "gap-y-4"
+        Expanded ? "gap-y-1" : "gap-y-3"
       } gap-x-2   max-md:justify-around  `}
     >
       <NestedNavigationWrapper
@@ -105,10 +105,11 @@ const SidebarLinks = () => {
 
       <NestedNavigationWrapper
         labels={[
-          { label: "Classes", url: "/dashboard/classes" },
-          { label: "Teacher & Staffs ", url: "/dashboard/staffs" },
-          { label: "Register Class", url: "/dashboard/class/register" },
-          { label: "Register Staff", url: "/dashboard/teacher/register" },
+          { label: "Classes", url: "/dashboard/classes" ,icon:<FaSchool className={SubIconStyle} /> },
+          { label: "Teacher & Staffs ", url: "/dashboard/staffs",roleToAccess:"chief admin", icon:<FaUserTie className={SubIconStyle} />},
+          { label: "Register Class", url: "/dashboard/class/register",roleToAccess:["admin","chief admin"], icon:
+          <MdAddCircleOutline   className={SubIconStyle}/> },
+          { label: "Register Staff", url: "/dashboard/teacher/register",roleToAccess:"chief admin", icon:<MdGroupAdd className={SubIconStyle} />},
         ]}
       >
         <SubSidebarLinks_Shrinked label="Classes & Teachers ">
@@ -136,7 +137,7 @@ const SidebarLinks = () => {
           { label: "Register Payment Config", url: "/payment-settings/setup" },
         ]}
       >
-        <RoleBasedAccess roleToGiveAccess={["admin", "chief admin"]}>
+        <RoleBasedAccess roleToGiveAccess={ "chief admin"}>
           <SubSidebarLinks_Shrinked label="Payment Configurations ">
             <Link
               to={"/payment-settings"}
@@ -160,8 +161,9 @@ const SidebarLinks = () => {
         </RoleBasedAccess>
       </NestedNavigationWrapper>
 
+      <RoleBasedAccess roleToGiveAccess={["chief admin"]}>
       <NestedNavigationWrapper
-        labels={[{ label: "Yearly Sessions", url: "/sessions" }]}
+        labels={[{ label: "Yearly Sessions", url: "/sessions",icon:<FaCalendarDays className={SubIconStyle} /> }]}
       >
         <SubSidebarLinks_Shrinked label="Yearly Sessions and Year cycles">
           <div
@@ -181,6 +183,7 @@ const SidebarLinks = () => {
           </div>
         </SubSidebarLinks_Shrinked>
       </NestedNavigationWrapper>
+        </RoleBasedAccess>
 
       <NestedNavigationWrapper
         labels={[
