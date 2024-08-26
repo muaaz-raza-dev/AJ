@@ -11,7 +11,7 @@ import DeleteTransactionBlock from "./Pupose table/DeleteTransactionBlock.tr";
 
 const TransactionPurposeTableRow: FC<{ index: number; data: ItransactionField }> = ({index
 }) => {
-  let Field_name = `Transactions[${index}]`
+  const Field_name = `Transactions[${index}]`
   return (
     <TableRow >
       <TableCell className="w-max ">

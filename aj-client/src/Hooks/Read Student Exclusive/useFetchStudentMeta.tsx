@@ -7,13 +7,14 @@ import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 
 const useFetchStudentMeta = () => {
-  let GRNO = useParams().student;
-  let dispatch = useAppDispatch();
+  const GRNO = useParams().student;
+  const dispatch = useAppDispatch();
   return useQuery({
     queryFn: () => StudentMeta(GRNO ?? 1),
     queryKey: ["student exclusive", GRNO],
-    staleTime: 1e3 * 60 * 5,
+    staleTime: 1e3 * 60,
     refetchOnWindowFocus: false,
+    refetchOnMount:true,
     onSuccess({ payload }) {
       dispatch(
         RedInsertStudentOverview({
