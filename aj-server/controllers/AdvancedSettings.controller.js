@@ -1,3 +1,4 @@
+const { redis } = require("../db")
 const Respond = require("../Helpers/ResponseHandler")
 const GlobalConfig = require("../models/GlobalConfig")
 const Students = require("../models/Students")
@@ -57,6 +58,12 @@ await AssignTempGR()
 await SortGRNO()
 await GlobalConfig.findOneAndUpdate({},{isSorted:true})
 //? Respond with a success message
+const reply = await redis?.scan(0, 'MATCH', 'students:*', 'COUNT', '100');
+const keys = reply[1];
+if (keys.length) {
+  await redis?.del(keys);
+}
+await redis?.del(`totalstudents`)
 return res.status(200).json({ message: "Students have assigned sorted GRNO successfully." });
 }
 

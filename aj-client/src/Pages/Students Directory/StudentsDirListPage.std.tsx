@@ -4,7 +4,7 @@ import StudentsTable from "./sub-section/Students Directory List/StudentsTable.s
 import useLoadStudents from "@/Hooks/Students Dir/useLoadStudents";
 
 const StudentsDirListPage = () => {
-  let {mutate} = useLoadStudents()
+  const {mutate} = useLoadStudents()
 useEffect(() => {
   mutate(1); // by default
 }, []);
