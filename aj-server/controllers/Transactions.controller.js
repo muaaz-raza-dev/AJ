@@ -16,7 +16,7 @@ async function CreateTransaction(req, res) {
     let Payload = { ...payload, RecievedBy: req.AdminId };
     if(payload.Time){ Payload.Time = new Date(Payload.Time).toISOString(); Payload.isDelayedRegistory = true}
     else {Payload.Time = new Date().toISOString()}
-
+    
     const savedTransaction = await Transactions.create(Payload);
     let transaction = await TransactionsScema.findById(savedTransaction._id)
     .populate({ path: "Student", select: "FirstName LastName GRNO" })

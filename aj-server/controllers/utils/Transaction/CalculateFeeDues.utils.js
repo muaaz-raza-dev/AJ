@@ -129,7 +129,7 @@ async function CalculateTotalTransactions (studentId,paymentconfigs,customLookUp
 async function AnalyzeFeeInfo(Dues,studentInfo){
   let dues = [...Dues]
   let Sessions = {} ;
-  (await Session.find()).forEach(doc=>(Sessions[doc._id.toString()]=`${doc.session_name} ${doc.acedmic_year}`)) ;
+  (await Session.find()).forEach(doc=>(Sessions[doc._id.toString()]=`${doc.acedmic_year}`)) ;
   let CurrentSession = await Session.findOne({isActive:true}).select("_id") ;
  (await PaymentConfig.find({isDeprecated:false,session:CurrentSession._id})).map(config=>{
     if(config.feeFrequency=="Monthly"|| config.feeFrequency=="Custom"){
