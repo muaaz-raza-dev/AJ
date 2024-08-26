@@ -25,7 +25,7 @@ const SectionRegisteration = async (sections) => {
     );
     return new_sections;
   } catch (err) {
-    console.log(err);
+    console.log(err);ind
     return false;
   }
 };

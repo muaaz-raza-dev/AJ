@@ -1,7 +1,6 @@
 const User = require('../models/User')
 const { StatusCodes } = require('http-status-codes')
 const HandleJWTToken = require('../Helpers/HandleTokenExpiry')
-let JWT_Secret = process.env.jwt_Secret
  async function Authenticate (req,res,next)  {
     let token = req.header('token')
     if (!token) {

@@ -1,14 +1,15 @@
 require('dotenv').config()
 const app = require("express")()
 const express = require("express")
-const {MongoConnection, RedisConnection }= require('./db');
+const {MongoConnection }= require('./db');
 const cors = require('cors');
+const AuthenticateStudents = require('./middlewares/AuthenticateStudents.middleware');
 const Port = 6900 || process.env.PORT;
 const server = require('http').createServer(app)
 
 app.use(express.json())
 app.use(cors({
-  origin:["http://localhost:5173","http://localhost:5174","https://ajfoundation.site"],
+  origin:["http://localhost:5173","http://localhost:3000","https://ajfoundation.site"],
   credentials:true,
 }))
 
@@ -16,7 +17,13 @@ app.use(cors({
 app.get('/', (req, res)=>{
   res.send("Testing")
 })
+//Student
+app.use("/api/std/auth",require("./routes/Student/StudentAuth"))
+app.use("/api/std/info",AuthenticateStudents,require("./routes/Student/StudentInfo"))
+app.use("/api/std/class",AuthenticateStudents,require("./routes/Student/StudentClass"))
+app.use("/api/std/transactions",AuthenticateStudents,require("./routes/Student/StudentTransactions"))
 
+//Staffs/Admins
 app.use("/api/auth",require("./routes/Auth"))
 app.use("/api/studentRegisteration",require("./routes/StudentRegisteration"))
 app.use("/api/students",require("./routes/ReadStudents"))

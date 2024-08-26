@@ -13,7 +13,7 @@ import useAssignAutoGR from "@/Hooks/Student Registeration/useAssignAutoGR";
 const GRnoRegisterationFormField: FC<{ edit: boolean }> = ({ edit }) => {
   const { control, setValue } = useFormContext();
   const { autoGR } = useAppSelector((s) => s.global.AdvancedSettings);
-  let {
+  const {
     mutate,
     error: Error,
     isError,

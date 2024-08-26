@@ -36,11 +36,10 @@ else{
 
 // to get the information on the edit page
 async function StudentInformationExclusive(req,res){
-  let {GRNO} = req.params
+let {GRNO} = req.params
 let Student = await Students.findOne({GRNO}).select("-__v -createdAt -updatedAt ")
 if(!Student) return res.status(404).json({message:"Student Not Found"})
-let Response = {...(Student?._doc||Student)}
-Respond({res,payload:Response,message:"Student Fetched"})
+Respond({res,payload:Student,message:"Student Fetched"})
 }
 
 
@@ -51,15 +50,17 @@ try{
   let Student= await Students.findOne({GRNO:+payload.GRNO})
   if(!Student){Respond({res, message: "Student not found", status: 404, success: false});}
   else{
-    if(payload.CurrentSection!=Student.CurrentSection.toString()) {
-      await Sections_Class.findById(Student.CurrentSection,{$pull:Student._id})
-      await Sections_Class.findById(payload.CurrentSection,{$addToset:Student._id})
+    if (payload.CurrentSection !== Student.CurrentSection.toString()) {
+      await Sections_Class.findByIdAndUpdate(Student.CurrentSection, { $pull: { Students: Student._id } });
+      await Sections_Class.findByIdAndUpdate(payload.CurrentSection, { $addToSet: { Students: Student._id } });
     }
      await Students.findOneAndUpdate({GRNO: +payload.GRNO}, {$set: payload});
     Respond({res,message:"updated Successfully",success:true})
   }
 }
-catch(err){console.log(err  );Respond({res,status:501,message:"Internal Server Error",error:err,success:false})}
+catch(err){
+  console.log(err  );
+  Respond({res,status:501,message:"Internal Server Error",error:err,success:false})}
 }
 
 

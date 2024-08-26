@@ -9,12 +9,12 @@ import { useFormContext } from "react-hook-form"
 import toast from "react-hot-toast"
 
 const ProfilePhotoResetComp = () => {
-    let {watch} =useFormContext<IaccountInfo>()
-  let {upload,isLoading} =useUploadMedia()
-  let {mutate,isLoading:loading} = useResetPhoto()
-    let photo = watch("Info.photo")
- const [ImageState,setImageState] =useState<{file:File|null,sample:string,changes:boolean}>({file:null,sample:photo,changes:false})
- let { getRootProps, getInputProps, } = useDropzone({
+let {watch} =useFormContext<IaccountInfo>()
+let {upload,isLoading} =useUploadMedia()
+let {mutate,isLoading:loading} = useResetPhoto()
+let photo = watch("Info.photo")
+const [ImageState,setImageState] =useState<{file:File|null,sample:string,changes:boolean}>({file:null,sample:photo,changes:false})
+let { getRootProps, getInputProps, } = useDropzone({
  maxSize: 1024 * 1024* 10,
  multiple: false,
  accept:{'image/*':[".png",".jpg",".jpeg"]},
@@ -26,6 +26,7 @@ const ProfilePhotoResetComp = () => {
  }
  }
     });
+    
     useEffect(() => {
         if(photo!=ImageState.sample) setImageState(e=>({...e,changes:true}))
     }, [ImageState.sample])

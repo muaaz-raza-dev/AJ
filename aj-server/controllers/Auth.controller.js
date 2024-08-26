@@ -32,20 +32,24 @@ async function LoginController(req, res) {
                 message: "You are blocked by the server , Contact your admin .",
               });
         }
-      }
-      if (isRestricted)
-        return res
+        else {
+          return res
           .status(403)
           .json({
             success: false,
             message: "Access temporarily blocked. Please try again later.",
           });
-
-      bcrypt.compare(password, searchedUser.password, async (err, result) => {
-        if (result) {
-          await User.findByIdAndUpdate(searchedUser._id, {
-            isLogOutRequired: false,
+        }
+      }
+      
+        // Use the isPasswordCorrect method
+        const isPasswordMatch = await searchedUser.isPasswordCorrect(password);
+        if (isPasswordMatch) {
+          if(searchedUser.isLogOutRequired){
+            await User.findByIdAndUpdate(searchedUser._id, {
+              isLogOutRequired: false,
           });
+        }
           let token = jwt.sign({ userId: searchedUser._id }, secretKey, {
             expiresIn: "7 days",
           });
@@ -53,16 +57,15 @@ async function LoginController(req, res) {
             .status(OK)
             .json({
               success: true,
-              message: "Logined Successfully ",
+              message: "Logined Successfully",
               token: token,
               payload: searchedUser,
             });
         } else {
           res
             .status(401)
-            ?.json({ success: false, message: "Invalid password" });
+            .json({ success: false, message: "Invalid password" });
         }
-      });
     } else {
       res
         ?.status(401)
@@ -77,10 +80,11 @@ async function LoginController(req, res) {
 async function VerificationController(req, res) {
   try {
     let token = req.header("auth-token");
-    if (!token)
-      res
-        .status(401)
-        .json({ success: false, message: "Try with valid credentials" });
+    if (!token) {
+      return res
+      .status(401)
+      .json({ success: false, message: "Try with valid credentials" });
+    }
     let { decodedToken, response } = HandleJWTToken(token, res);
     if (!decodedToken && token) return response;
     let user = await User.findById(decodedToken.userId);
@@ -110,14 +114,15 @@ async function VerificationController(req, res) {
         }
       }
 
-      if (isRistricted)
+      if (isRistricted) {
         return res
-          .status(403)
+        .status(403)
           .json({
             success: false,
             message: "Access temporarily blocked,Logging you out.",
           });
-
+        }
+        
       await User.findByIdAndUpdate(decodedToken.userId, {
         LastLogin: new Date().toISOString(),
       }).select("-password -LastLogin -isBlocked -isLogOutRequired");

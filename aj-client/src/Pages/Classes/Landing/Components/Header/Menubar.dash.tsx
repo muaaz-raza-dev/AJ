@@ -14,7 +14,6 @@ const Menubar = () => {
   };
   useEffect(() => {
     const route = location.pathname.split("/")[2]
-    console.log(route)
     dispatch(RedDashFilters({ fields_name: "Sections", selected:(route =="classes" || !route)?"Classes":" Staffs" }));
   }, [])
   return (

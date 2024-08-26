@@ -4,10 +4,11 @@ import { Button } from "@/shdcn/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import moment from "moment";
 import { FC } from "react"
+import { FaEdit } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const StudentDetailsKeyValuePairs = () => {
-let {Student:{FirstName,fatherName,LastName,Address,DOA,DOB,Gender,NewAdmission,sCNIC,mCNIC,fCNIC}} =useAppSelector(s=>s.stdExclusive.overview)
+const {Student:{FirstName,fatherName,LastName,Address,DOA,DOB,Gender,NewAdmission,sCNIC,mCNIC,fCNIC}} =useAppSelector(s=>s.stdExclusive.overview)
     return (
         <>
         <div className="flex gap-y-1 gap-x-1 flex-wrap w-full p-4 py-4">
@@ -27,7 +28,8 @@ let {Student:{FirstName,fatherName,LastName,Address,DOA,DOB,Gender,NewAdmission,
         <div className="justify-end pt-3 flex w-full px-6">
             <Link to={"edit"}>
             <Button className="bg-dark hover:text-white text-white hover:bg-dark transition-colors shadow flex gap-1 justify-center items-center">
-                <p>Update</p> <ArrowRight size={18} />
+                <FaEdit size={18}/>
+                <p>Update</p> 
             </Button>
             </Link>
         </div>

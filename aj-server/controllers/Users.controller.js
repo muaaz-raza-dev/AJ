@@ -93,6 +93,7 @@ const GetUserInfo = async (req, res) => {
     return res.status(404).json({ success: false, message: "User not found" });
   res.status(200).json({ payload: user });
 };
+
 const UpdateUserInfo = async (req, res) => {
   let {
     body: { payload },
@@ -135,6 +136,8 @@ const DeleteUserAccount = async (req, res) => {
   await redis?.del("users")
   Respond({ res, message: "user no longer exists." });
 };
+
+
 module.exports = {
   getUsers,
   ToggleGlobalRestriction,

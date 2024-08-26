@@ -20,7 +20,7 @@ const registerFormSchema = new mongoose.Schema({
   mCNIC: { type: String, },
   WA:{type:String}, //whastapp number
   firstSession:{type:ObjectId,ref:"YearlySession"}, //first Session of when it is registered in db
-  firstClass:{type:ObjectId,ref:"Class"}, //first Class of when it is registered in db
+  firstClass:{type:ObjectId,ref:"Classes"}, //first Class of when it is registered in db
   firstAdmittedClass:{type:String}, //* When student took admission in case of past admission. 
   //? only when NewAdmission is false. Otherwise firstAdmitted Class will be firstClass auto
   ConsiderOneTimeFee:Boolean,

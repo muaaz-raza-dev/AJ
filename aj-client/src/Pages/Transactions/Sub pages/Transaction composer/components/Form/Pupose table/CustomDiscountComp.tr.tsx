@@ -4,10 +4,10 @@ import { useFormContext } from "react-hook-form"
 import { GetPercentage } from "react-simpler"
 
 const CustomDiscountComp:FC<{fieldName:string}> = ({fieldName}) => {
-    let {watch,setValue} =useFormContext()
+    const {watch,setValue} =useFormContext()
     const [discounts,setDiscounts] = useState<{type:"%"|"amount",value:number}>({type:"amount",value:0})
-    let totalAmount = watch(`${fieldName}.amount.realAmount`)
-    let handleTypeChange = (val:string)=>{
+    const totalAmount = watch(`${fieldName}.amount.realAmount`)
+    const handleTypeChange = (val:string)=>{
         if(val=="%"||val=="amount"){
             setDiscounts(e=>({...e,type:val}))
             handleAmountChange({discountType:val})
@@ -15,9 +15,9 @@ const CustomDiscountComp:FC<{fieldName:string}> = ({fieldName}) => {
     }
     function handleAmountChange( {val,discountType}:{val ?: ChangeEvent<HTMLInputElement>,discountType?:string}): void {
       if(val) setDiscounts(e=>({...e,value:+val?.target.value}))
-      let value = val?.target.value || discounts.value
+        const value = val?.target.value || discounts.value
         let result = 0
-        let Type = discountType|| discounts.type
+        const Type = discountType|| discounts.type
         if(Type=="%") {
         result = GetPercentage({mode:"amount",total:totalAmount,percent:+value}) as number          
         }
@@ -30,8 +30,7 @@ const CustomDiscountComp:FC<{fieldName:string}> = ({fieldName}) => {
   return (
     <>
          <input type="number" placeholder={`${discounts.type}`} 
-         maxLength={3}
-         max={100}
+         max={discounts.type=="%"? 100:Infinity}
          value={discounts.value||""}
          className=' 
          border min-w-28  rounded-md dark:bg-dark dark:text-white dark:border-dark dark:placeholder:text-gray-500  px-2 h-full py-2  border-[#8080806b]  transition-all outline-none '

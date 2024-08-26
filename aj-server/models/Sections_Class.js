@@ -6,8 +6,8 @@ const SectionSchema = new mongoose.Schema({
     Class: { type: ObjectId, ref: "Classes", required: true },
     ClassTeacher: { type: ObjectId, ref: "Teacher"},
     Students:{type: [ObjectId], ref: "Students"  },
-    subjects: {type:[String],},
-    capacity  : Number,
+    subjects: {type:[String]},
+    capacity : Number,
     start_date : {type:String,required:true},
     end_date : {type:String,},
     Subjects_teachers: [{

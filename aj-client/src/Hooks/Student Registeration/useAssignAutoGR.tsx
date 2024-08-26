@@ -5,11 +5,9 @@ import { useQuery } from "react-query";
 
 const useAssignAutoGR = (edit:boolean,setValue:(val1:string,val:string)=>void) => {
     const {autoGR} = useAppSelector(s=>s.global.AdvancedSettings)
-    console.log(autoGR,edit)
     const query = useQuery({
         queryKey: ["Student GRNO","auto"],
         queryFn: () => autoGR&&!edit&&  AutoGRAssignment(),
-        staleTime:1000*30, //30 seconds,
         refetchOnWindowFocus:false,
         refetchOnMount:true,
         onSuccess({payload}) {

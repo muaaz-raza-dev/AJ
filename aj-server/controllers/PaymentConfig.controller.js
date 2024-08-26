@@ -4,7 +4,6 @@ const PaymentConfig = require("../models/PaymentConfigs");
 const Session = require("../models/Session");
 const { OptimizeDates } = require("./utils/OptimizeSessionDates_SchoolPayment");
 const PaymentConfigSpecificStat = require("./utils/Payments/PaymentConfigSpecificStat");
-const CalculateAllStatFilters = require("./utils/Stats/FilteredData/CalculateAllStatFilters");
 const RegisterPayment = async(req,res)=>{
     let {payload} = req.body;
     try{

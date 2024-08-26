@@ -3,7 +3,7 @@ import CustomInputs_Reg from "@/Pages/Classes/Registeration/Teacher/Helpers/Cust
 import { useFormContext } from "react-hook-form"
 
 const MutableInfoForm = () => {
-    let form =useFormContext()
+    const form =useFormContext()
   return (
     <>
 
