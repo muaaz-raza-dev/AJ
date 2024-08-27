@@ -8,7 +8,7 @@ async function RegisterStudent(req, res) {
   let { payload  } = req.body;
   try {
     let currentSession =await Session.findOne({isActive:true}).select("_id")
-    let student = await Students.create({...payload,firstSession:currentSession._id,firstClass:payload.CurrentClass}); 
+    let student = await Students.create({...payload,GRNO:(+payload.GRNO).toString(),firstSession:currentSession._id,firstClass:payload.CurrentClass}); 
     await Sections_Class.findByIdAndUpdate(payload.CurrentSection,{$addToSet:{Students:student._id}})  
     await GlobalConfig.findOneAndUpdate({},{isSorted:false})
 
