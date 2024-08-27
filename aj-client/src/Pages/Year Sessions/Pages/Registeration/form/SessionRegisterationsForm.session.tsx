@@ -10,11 +10,11 @@ import NotFoundValidator from "@/Api/404Validator";
 import  { SkeletonLoader } from "@/Pages/Students Directory/sub-section/Student Detailed/StudentDetailedSkeletonLoader";
 
 const SessionRegisterations:FC<{edit?:boolean}> = ({edit}) => {
-  let form  =useForm<Isessions>({defaultValues:defaultSession})
-  let {mutate:Edit,isLoading:isUpdating} = useUpdateSession()
-  let  {mutate,isLoading} =useRegisterSession(form.reset)
-  let {isLoading:loading,isError,error}=useFetchSession(form.reset)
-  let formSubmit  :SubmitHandler<Isessions> = (data) =>{
+  const form  =useForm<Isessions>({defaultValues:defaultSession})
+  const {mutate:Edit,isLoading:isUpdating} = useUpdateSession()
+  const  {mutate,isLoading} =useRegisterSession(form.reset)
+  const {isLoading:loading,isError,error}=useFetchSession(form.reset)
+  const formSubmit  :SubmitHandler<Isessions> = (data) =>{
     if(edit) Edit(data)
     else mutate(data)
   }
@@ -37,7 +37,6 @@ if (isError && NotFoundValidator(error))
 
   return (
     <div className="w-full flex flex-col gap-y-4">
-<SkeletonLoader/>
     <FormProvider {...form}>
     <form 
     onSubmit={form.handleSubmit(formSubmit)}

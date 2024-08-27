@@ -5,7 +5,7 @@ import { TableCell, TableRow } from "@/shdcn/components/ui/table";
 import { History, Mail, Phone } from "lucide-react";
 import { FC } from "react";
 import { FaWhatsapp } from "react-icons/fa";
-import { FaArrowRight } from "react-icons/fa6";
+import { ImProfile } from "react-icons/im";
 import { Link } from "react-router-dom";
 
 const StudentsTableRow: FC<{ data: IstudentShort }> = ({ data }) => {
@@ -65,7 +65,7 @@ const StudentsTableRow: FC<{ data: IstudentShort }> = ({ data }) => {
             to={`/students/${data.GRNO}`}
             className="center text-dark dark:text-light"
           >
-            <FaArrowRight size={22} />
+            <ImProfile size={22}/>
           </Link>
         </div>
       </TableCell>
