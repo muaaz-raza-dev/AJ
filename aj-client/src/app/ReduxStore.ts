@@ -16,6 +16,7 @@ import { Stats } from "./Slices/StatsSlice";
 import { Fstats } from "./Slices/FilterableStatsSlice";
 import { stdFeeReport } from "./Slices/StdFeeReportSlice";
 import { detailedRevenue } from "./Slices/RevenueDetailedSlice";
+import { diarySlice } from "./Slices/DiarySlice";
 
 
 
@@ -37,7 +38,8 @@ reducer:{
     stats: Stats,
     fStats:Fstats, // FilterableStats
     stdFeeReport,
-    detailedRevenue
+    detailedRevenue,
+    diarySlice
 },
 });
 
