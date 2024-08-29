@@ -10,8 +10,9 @@ import { MdVerified } from "react-icons/md";
 import { FC } from "react";
 import { useAppSelector } from "@/app/ReduxHooks";
 import useAssignAutoGR from "@/Hooks/Student Registeration/useAssignAutoGR";
+import { IRegisterFormState } from "@/app/Types/IStdregisterForm.t";
 const GRnoRegisterationFormField: FC<{ edit: boolean }> = ({ edit }) => {
-  const { control, setValue } = useFormContext();
+  const { control, setValue } = useFormContext<IRegisterFormState>();
   const { autoGR } = useAppSelector((s) => s.global.AdvancedSettings);
   const {
     mutate,

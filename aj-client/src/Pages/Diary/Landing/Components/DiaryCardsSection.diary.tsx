@@ -1,4 +1,3 @@
-import React from 'react'
 import EachDiaryCard from './EachDiaryCard.diary'
 
 export default function DiaryCardsSection() {

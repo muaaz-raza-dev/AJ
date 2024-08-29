@@ -32,7 +32,7 @@ export default function CreateDiaryPage() {
         data.images.some((img) => img instanceof File)
       ) {
         upload(
-          data.images.filter((img) => img instanceof File),
+          data.images.filter((img) => img instanceof File) as File[],
           onSuccess
         );
       } else {

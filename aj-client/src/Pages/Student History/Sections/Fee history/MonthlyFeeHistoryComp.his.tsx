@@ -6,8 +6,8 @@ import { Tooltip } from "antd"
 import {  useNavigate } from "react-router-dom"
 const MonthlyFeeHistoryComp = () => {
   const [state, setstate] = useState<{[key:string]:IfeeHistory[]}>({})
-  let {FeeHistory} = useAppSelector(s=>s.studentHistory.payload)
-  let Classes = useAppSelector(s=>s.global.Classes)
+  const {FeeHistory} = useAppSelector(s=>s.studentHistory.payload)
+  const Classes = useAppSelector(s=>s.global.Classes)
   useEffect(() => { setstate(lod.groupBy(FeeHistory,(({year})=>year)))}, [FeeHistory])
   return (
     <div className="flex gap-2 w-full  items-start flex-col bg-box
@@ -50,8 +50,8 @@ return <Tooltip title={assets.title}>
 </Tooltip>
 }
 const EachMonthlyFeeHistoryComp:FC<{data:IfeeHistory}> = ({data}) =>{
-      let navigate = useNavigate()
-      let handleClick = ()=>{
+      const navigate = useNavigate()
+      const handleClick = ()=>{
         if(data.transactionId && data.status =="Paid") {navigate(`/transactions/transaction/${data.transactionId}`)}
       }
     return <div onClick={handleClick} className="w-[24%] max-lg:w-[32%] max-md:w-[49%] max-sm:w-full h-28 p-2 bg-[var(--primary)]  shadow text-dark dark:text-light dark:bg-darker  rounded-md flex flex-col gap-1">
