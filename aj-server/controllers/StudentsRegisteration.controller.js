@@ -56,18 +56,10 @@ async function GRValidation(req, res) {
 }
 
 async function AutoGR(req,res){
-let GRNO ;
 const Config = await GlobalConfig.findOne({})
 if(!Config) {res.status(403).json({success:false,message:"Auto GRNO is off."})}
-const Student = await Students.find({}).limit(1).sort("-GRNO").select("GRNO")
-if(Student){
-  GRNO = +Student?.[0].GRNO + 1
-  console.log()
-} 
-else {
-  GRNO = 1
-} 
-  
+const Student = await Students.findOne({}).sort("-GRNO").select("GRNO").lean();
+let GRNO = Student ? (+Student.GRNO + 1) : 1;
 return Respond({res,payload:GRNO})
 
 }
