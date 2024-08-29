@@ -5,8 +5,8 @@ import OneTimeFeeHistoryCom from "./OneTimeFeeHistoryComp.his"
 import DuesDetails from "./DuesDetails.his"
 
 const FeeHistorySection = () => {
-  let {selected:feeType} = useAppSelector(s=>s.studentHistory.filters.feeTypes)
-  let {selected:dataType} = useAppSelector(s=>s.studentHistory.filters.DataTypes)
+  const {selected:feeType} = useAppSelector(s=>s.studentHistory.filters.feeTypes)
+  const {selected:dataType} = useAppSelector(s=>s.studentHistory.filters.DataTypes)
 
   const FeeHistoryComponents = ()=>{
     if(feeType =="Yearly"){

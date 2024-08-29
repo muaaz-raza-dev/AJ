@@ -34,6 +34,7 @@ return Dues
 }
 
 const CalculateFrequentDues = async(studentInfo) =>{
+  console.log("I am hitting here!")
 let Dues = [] //fee frequency,feeTitle,amount,session,month,year ,Classs,
 let Classes = (await Sections_Class.find({Students:studentInfo}).populate({path:"Class",select:"_id"}).select("_id")).map(e=>e.Class._id)
 let Sessions = (await Session.find({Classes:{$in:Classes}}).select("_id Classes"))
@@ -63,16 +64,11 @@ SessionPaymentConfigs.forEach(config=>{
             let paymentDate = moment (pay.paymentDate)
             let DOA = moment (new Date(studentInfo.DOA).toISOString())
             if(paymentDate.isSameOrBefore(moment())  ){ 
-              if(paymentDate.year()==DOA.year() ) {
-                if( paymentDate.month()>= DOA.month()) {
-                Dues.push({_id:config._id, feeTitle:config.feeTitle, dueDate:pay.dueDate,feeFrequency:config.feeFrequency,
-                  amount:amount,session:config.session,class:ClassSessionPair[config.session.toString()],month:pay.month,year:pay.year})
-                }
-              }
-                else if(DOA.year() <= paymentDate.year()) {
+              if(DOA.isSameOrBefore(paymentDate)){
                 Dues.push({_id:config._id, feeTitle:config.feeTitle, dueDate:pay.dueDate,feeFrequency:config.feeFrequency,
                   amount:amount,session:config.session,class:ClassSessionPair[config.session.toString()],month:pay.month,year:pay.year})
               }
+           
               }
           }
       })    

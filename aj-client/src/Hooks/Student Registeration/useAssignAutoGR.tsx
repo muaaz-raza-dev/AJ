@@ -1,9 +1,11 @@
 import AutoGRAssignment from "@/Api/Student Registeration/autoGRAssign.api";
 import {  useAppSelector } from "@/app/ReduxHooks";
+import { IRegisterFormState } from "@/app/Types/IStdregisterForm.t";
 import { useEffect } from "react";
+import { UseFormSetValue } from "react-hook-form";
 import { useQuery } from "react-query";
 
-const useAssignAutoGR = (edit:boolean,setValue:(val1:string,val:string)=>void) => {
+const useAssignAutoGR = (edit:boolean,setValue:UseFormSetValue<IRegisterFormState>) => {
     const {autoGR} = useAppSelector(s=>s.global.AdvancedSettings)
     const query = useQuery({
         queryKey: ["Student GRNO","auto"],

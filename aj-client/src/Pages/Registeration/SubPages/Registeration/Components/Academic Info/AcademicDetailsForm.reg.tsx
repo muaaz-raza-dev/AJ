@@ -10,8 +10,9 @@ import FirstAcademicClassField from "./FirstAcademicClassField.reg";
 
 const RegAcademicDetailsForm: FC<{ edit: boolean }> = ({ edit }) => {
   const { control ,watch } = useFormContext();
-  let Class  = watch("CurrentClass")
-  let { Classes , Sections} = useAppSelector((state) => state.global);
+  
+  const Class  = watch("CurrentClass")
+  const { Classes , Sections} = useAppSelector((state) => state.global);
   return (
     <div className="flex w-full flex-wrap gap-x-4 gap-y-6 pb-4">
       <GRnoRegisterationFormField edit={edit} />

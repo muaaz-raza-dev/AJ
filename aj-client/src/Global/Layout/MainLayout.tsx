@@ -13,6 +13,7 @@ import RoleBasedAccess from "../Middleware Hooks/RoleBasedAccess";
 import CustomSuspense from "../Middleware Hooks/CustomSuspense";
 import StatsFile from "../../Pages/Statistics/StatsFile.stat";
 import GuideFile from "@/Pages/Guide/GuideFile.guide";
+import DiaryFile from "@/Pages/Diary/DiaryFile.diary";
 
 const MainLayout = () => {
   return (
@@ -96,8 +97,12 @@ const MainLayoutRoutes = () => {
           <GuideFile/>
         </CustomSuspense>
         } path="/guide/*" />
+        
+            <Route element={<DiaryFile/>} path="/diary/*" />
 
     </Routes>
+
+
         </main>
   );
 };

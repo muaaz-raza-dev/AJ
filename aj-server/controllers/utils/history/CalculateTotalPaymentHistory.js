@@ -63,9 +63,14 @@ RegisteredPayments_AllTime.forEach(config=>{
         if(config.feeFrequency=="Monthly"||config.feeFrequency=="Custom") {
                 config.paymentMonths.map(pay=>{
                     let paymentDate = moment (pay.paymentDate)
+                    const DOA = moment(StudentDetails.DOA)
                     let currentDate = moment ()
-                    if(pay.isPayment&&paymentDate.isSameOrBefore(currentDate)){
-                        totalAmountToPay += amountToPay 
+                    if(pay.isPayment){
+                      if(DOA.isSameOrBefore(paymentDate)){
+                        if(paymentDate.isSameOrBefore(currentDate)){
+                          totalAmountToPay += amountToPay 
+                        }
+                      }
                     }
                 })
         }

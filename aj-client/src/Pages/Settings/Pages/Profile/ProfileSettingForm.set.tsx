@@ -8,10 +8,10 @@ import useGetPersonalInformation from '@/Hooks/Settings/useGetPersonalInformatio
 import useUpdatePersonalInformation from '@/Hooks/Settings/useUpdatePersonalInformation'
 
 const ProfileSettingForm = () => {
-    let form  = useForm<IStaffInformationEditForm>({defaultValues:defaultStaffInformationEditForm})
-    let {isLoading,isError,error} =useGetPersonalInformation(form.reset)
-    let {mutate,isLoading:loading,isSuccess:success} =useUpdatePersonalInformation()
-    let formSubmit  :SubmitHandler<IStaffInformationEditForm> = (data) =>{
+    const form  = useForm<IStaffInformationEditForm>({defaultValues:defaultStaffInformationEditForm})
+    const {isLoading,isError,error} =useGetPersonalInformation(form.reset)
+    const {mutate,isLoading:loading,isSuccess:success} =useUpdatePersonalInformation()
+    const formSubmit  :SubmitHandler<IStaffInformationEditForm> = (data) =>{
         mutate(data)
       }
   return (

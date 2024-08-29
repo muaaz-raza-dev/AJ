@@ -1,7 +1,7 @@
 import { Select } from "antd"
 import { FC } from "react"
 
-const CustomSelect_Reg:FC<{className?:string;disabled?:boolean,data?:string[],optimumData?:{value:string,label:string}[],placeholder?:string,setState: (value: string) => void ,state:string,nosearch?:boolean}> = ({data,placeholder,state,setState,nosearch,className,optimumData,disabled}) => {
+const CustomSelect_Reg:FC<{className?:string;disabled?:boolean,data?:string[],optimumData?:{value:string,label:string}[],placeholder?:string,setState: (value: string) => void ,state?:string,nosearch?:boolean}> = ({data,placeholder,state,setState,nosearch,className,optimumData,disabled}) => {
   return <Select
   showSearch={nosearch?false:true}
   value={state}

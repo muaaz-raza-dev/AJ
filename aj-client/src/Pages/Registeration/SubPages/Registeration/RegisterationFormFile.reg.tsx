@@ -10,13 +10,13 @@ import { useEditStudentInformationExclusive } from "@/Hooks/Read Student Exclusi
 import ImageUpload from "./util/ImageUpload.middleware"
 
 const RegisterationFormFile:FC<{edit?:boolean}> = ({edit}) => {
-  let state = useAppSelector(s=>s.stdExclusive.Information.Details)
-  let form  = useForm<IRegisterFormState>({defaultValues:!edit?defaultRegisterFormState:state})
+  const state = useAppSelector(s=>s.stdExclusive.Information.Details)
+  const form  = useForm<IRegisterFormState>({defaultValues:!edit?defaultRegisterFormState:state})
   const [Loading, setLoading] = useState(false)
-  let {mutate,isLoading} =useRegisterStudent(form.getValues("GRNO"),form.reset)
-  let {mutate:Edit,isLoading:loading}=  useEditStudentInformationExclusive()
+  const {mutate,isLoading} =useRegisterStudent(form.getValues("GRNO"),form.reset,form.setValue)
+  const {mutate:Edit,isLoading:loading}=  useEditStudentInformationExclusive()
   useEffect(() => {edit&&form.reset(state)}, [state])
-  let FormHandler:SubmitHandler<IRegisterFormState> = ()=>{
+  const FormHandler:SubmitHandler<IRegisterFormState> = ()=>{
     if (!edit) {
       ImageUpload(mutate,form,setLoading)
     }

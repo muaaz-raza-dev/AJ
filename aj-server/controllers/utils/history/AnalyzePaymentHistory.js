@@ -29,10 +29,11 @@ async function CalculateOneTimeFeeHistory (studentInfo){
     }
     let transactions  = totalTransactions.filter(tr=>tr.Transactions.paymentConfigId._id.toString()==fee._id.toString())
     let Transaction = transactions.find(tr=> tr.Transactions.paymentConfigId._id.toString()==fee._id.toString())
-    let isPaid= Transactions ? true:false
+
+    let isPaid= Transaction ? true:false
     let payload = {status:"",feeTitle:fee.feeTitle,amount,session:studentInfo.firstSession ,_id:fee._id.toString(),
-    feeFrequency:fee.feeFrequency,transactionId:Transaction._id}
-    if(isPaid) payload.status = "Paid"
+    feeFrequency:fee.feeFrequency,}
+    if(isPaid){ payload.status = "Paid" ; payload.transactionId=Transaction?._id}
     else payload.status = "Not Paid"
     History.push(payload)
     })
@@ -74,17 +75,12 @@ function CalculateFrequentHistory(Config,totalTransactions,ClassSessionPair,stud
                 if(paymentDate.isSameOrBefore(moment())  ){ 
                     if(isPaid) { payload.status="Paid"}
                     else {
-                    if( paymentDate.year() ==DOA.year()) {
-                        if(paymentDate.month>= DOA.month) {
+                    if( DOA.isSameOrBefore(paymentDate)) {
                         payload.status = "Not paid"
-                    }
-                    else {
-                        payload.status = "Not applicable"
-                    }  
-                  }
-                    else {
-                        payload.status = "Not paid"
-                    }
+                      }
+                      else {
+                          payload.status = "Not applicable"
+                      }  
                  }
                 }
                  else {

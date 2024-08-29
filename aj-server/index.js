@@ -37,6 +37,7 @@ app.use("/api/history",require("./routes/StudentHistroy"))
 app.use("/api/users",require("./routes/Users"))
 app.use("/api/stats",require("./routes/Stats"))
 app.use("/api/settings/advanced",require("./routes/Settings-Advanced"))
+app.use("/api/diary",require("./routes/Diary"))
 
 
 MongoConnection()
