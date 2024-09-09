@@ -20,7 +20,7 @@ const TransactionRow = ({data}:{data:IShortTransactions}) => {
 </Tooltip>
 </TableCell>
 <TableCell className=' font-bold'>#{data?.Student?.GRNO}</TableCell>
-<TableCell className=' font-bold'>{data?.Student?.FirstName}</TableCell>
+<TableCell className=' font-bold'>{data?.Student?.FirstName } {data?.Student?.LastName }</TableCell>
 <TableCell className=' font-bold'>{data?.PayorsName}</TableCell>
 <TableCell className=' font-bold'>{data?.RecievedBy?.Name}</TableCell>
 <TableCell className=' font-bold'>
