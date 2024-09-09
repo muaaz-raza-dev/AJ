@@ -26,7 +26,7 @@ export default function CreateDiaryPage({ edit =false }: { edit?: boolean }) {
   }
 
   function onSuccess(images: string[]) {
-    const Images:string[] =  form.watch("images").filter(img=>typeof img == "string").concat(images)
+    const Images:string[] =  form.watch("images").filter(img=>typeof img == "string").concat(images) as string[]
    form.setValue("images",Images);
    edit? Edit({ ...form.watch(),images: Images }) : mutate({ ...form.watch(),images:Images });
   }

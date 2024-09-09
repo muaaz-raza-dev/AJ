@@ -37,14 +37,14 @@ export default function ImageUpload() {
       setImgSamples([])
     }
     else {
-      const isUploaded = imagesG.every(img=> typeof img =="string")
+      const isUploaded = imagesG.every(img=> typeof img =="string") 
       if(isUploaded){
-        setImgSamples(imagesG)
-        console.log(imagesG)
+        setImgSamples(imagesG as string[])
         setErr("")
       }
     }
    }, [imagesG])
+
   return (
     <section className="w-full px-2 max-lg:w-full flex flex-col gap-y-2">
       <h1 className="hFont font-semibold text-lg">Upload Images</h1>
