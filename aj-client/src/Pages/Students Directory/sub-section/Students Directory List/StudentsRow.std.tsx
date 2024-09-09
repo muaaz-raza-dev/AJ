@@ -47,7 +47,7 @@ const StudentsTableRow: FC<{ data: IstudentShort }> = ({ data }) => {
           {Classes[data?.CurrentClass]}
         </Link>
       </TableCell>
-      <TableCell className="font-bold text-center center">
+      <TableCell className="font-bold text-center ">
         {Sections?.[data.CurrentClass]?.[data?.CurrentSection]}
       </TableCell>
 

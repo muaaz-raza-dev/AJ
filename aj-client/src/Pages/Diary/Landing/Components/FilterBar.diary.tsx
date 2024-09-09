@@ -2,9 +2,12 @@ import { useAppDispatch, useAppSelector } from "@/app/ReduxHooks";
 import { ReddlInsertFilters } from "@/app/Slices/DiarySlice";
 import useGetDiaries from "@/Hooks/Diary/useFetchDiary";
 import CustomSelect_Reg from "@/Pages/Classes/Registeration/Teacher/Helpers/CustomSelect_Reg.dash";
+import { Button } from "@/shdcn/components/ui/button";
 import { Label } from "@/shdcn/components/ui/label";
 import { Input } from "antd";
 import { useEffect } from "react";
+import { FaRegAddressBook } from "react-icons/fa";
+import { Link } from "react-router-dom";
 export default function FilterBar() {
   const dispatch = useAppDispatch();
   const {mutate}= useGetDiaries();
@@ -46,12 +49,14 @@ export default function FilterBar() {
     dispatch(ReddlInsertFilters({ type: "selected", section }));
   };
   return (
-    <header className="flex gap-3 ">
+    
+    <header className="flex justify-between items-end  gap-2  flex-wrap">
+      <section className="flex gap-4 flex-wrap ">
       <div className="flex flex-col gap-2">
         <Label className="hFont">Select Yearly Session</Label>
         <CustomSelect_Reg
           state={session}
-          className="!min-w-[180px]"
+          className="!min-w-[180px] max-md:!min-w-[170px]"
           setState={handleSessionChange}
           optimumData={Object.entries(sessions ?? {}).map((ses) => ({
             label: ses[1],
@@ -64,7 +69,7 @@ export default function FilterBar() {
         <Label className="hFont">Select Class</Label>
         <CustomSelect_Reg
           state={Class}
-          className="!min-w-[180px]"
+          className="!min-w-[180px] max-md:!min-w-[170px]"
           setState={handleClassChange}
           optimumData={Object.entries(classes[session] ?? {}).map((ses) => ({
             label: ses[1],
@@ -77,7 +82,7 @@ export default function FilterBar() {
         <Label className="hFont">Select Section</Label>
         <CustomSelect_Reg
           state={section}
-          className="!min-w-[180px]"
+          className="!min-w-[180px] max-md:!min-w-[170px]"
           setState={handleSectionChange}
           optimumData={Object.entries(sections[Class] ?? {}).map((ses) => ({
             label: ses[1],
@@ -89,7 +94,7 @@ export default function FilterBar() {
       <div className="flex flex-col gap-2">
         <Label className="hFont">Pick Date </Label>
         <Input
-          className="min-w-[180px]"
+          className="min-w-[180px] max-md:min-w-[170px]"
           type="date"
           value={date}
           onChange={({ target: { value } }) => {
@@ -98,6 +103,13 @@ export default function FilterBar() {
           }
         />
       </div>
+</section>
+<Link to={"create"}>
+<Button className="bg-gradient-to-br from-dark to-darker hover:bg-darker text-white flex gap-2 shadow-md">
+  <FaRegAddressBook/>
+  Create Diary
+</Button>
+</Link>
     </header>
   );
 }

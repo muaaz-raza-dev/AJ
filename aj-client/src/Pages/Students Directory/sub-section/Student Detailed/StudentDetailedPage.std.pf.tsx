@@ -8,11 +8,7 @@ const StudentDetailedPage = () => {
   return (
     <Routes>
       <Route index path="/" element={<StudentProfileOverviewPage/>}/>
-      <Route path="/edit" element={
-        <RoleBasedAccess roleToGiveAccess={["admin","chief admin"]}>
-          <EditStdDetailsPage/>
-        </RoleBasedAccess>
-        } />
+      <Route path="/edit" element={<RoleBasedAccess roleToGiveAccess={["admin","chief admin"]}><EditStdDetailsPage/></RoleBasedAccess>} />
     </Routes>
   )
 }

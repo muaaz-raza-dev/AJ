@@ -23,17 +23,22 @@ const TransactionRow = ({data}:{data:IShortTransactions}) => {
 <TableCell className=' font-bold'>{data?.Student?.FirstName}</TableCell>
 <TableCell className=' font-bold'>{data?.PayorsName}</TableCell>
 <TableCell className=' font-bold'>{data?.RecievedBy?.Name}</TableCell>
-<TableCell className=' font-bold'>{
-data.Transactions.map(tr=>{
-if(tr.paymentType == "Registered") {
-return <Tooltip title={GetTransactionPurposes(tr)}>
-  <Link to={"/payment-settings"} className='cursor-pointer bg-darker text-sm text-white rounded-xl font-bold w-max px-2 mx-2 py-1'>{tr.paymentTitle}</Link>
+<TableCell className=' font-bold'>
+  <div className="flex flex-wrap gap-2">
+  {
+    data.Transactions.map(tr=>{
+      if(tr.paymentType == "Registered") {
+        return <Tooltip title={GetTransactionPurposes(tr)}>
+  <Link to={"/payment-settings"} className='cursor-pointer bg-darker text-sm text-white rounded-xl font-bold w-max px-2 mx-2 py-1'>
+  {tr.paymentTitle} </Link>
 </Tooltip>
 }
 else {
-return <div className='cursor-pointer border-dark border text-sm text-dark  rounded-xl font-bold w-max px-2 py-1'>{tr.paymentTitle}</div>
+  return <div className='cursor-pointer border-dark border text-sm text-dark  rounded-xl font-bold w-max px-2 py-1'>{tr.paymentTitle}</div>
 }
-})}</TableCell>
+})}
+</div>
+</TableCell>
 <TableCell className='text-[var(--dark)] dark:text-white dark:group-hover:text-black text-base items-end ml-auto  font-bold'>{data?.amount.totalAmount} PKR</TableCell>
 <TableCell className='center'>
 <Link to={`transaction/${data?._id}`} className="bg-darker hover:translate-x-0.5 transition-transform text-white rounded-md p-2 cursor-pointer">

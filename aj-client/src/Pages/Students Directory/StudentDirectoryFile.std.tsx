@@ -1,9 +1,9 @@
-import { Route, Routes } from 'react-router-dom'
-import StudentsDirListPage from './StudentsDirListPage.std'
-import StudentDetailedPage from './sub-section/Student Detailed/StudentDetailedPage.std.pf'
-import StudentRegisterationPage from '../Registeration/SubPages/Registeration/RegisterationPage.reg'
-import StudentHistoryFile from '../Student History/StudentHistoryFile.his'
-import RoleBasedAccess from '@/Global/Middleware Hooks/RoleBasedAccess'
+import { Route, Routes } from 'react-router-dom';
+import StudentsDirListPage from './StudentsDirListPage.std';
+import StudentDetailedPage from './sub-section/Student Detailed/StudentDetailedPage.std.pf';
+import StudentRegisterationPage from '../Registeration/SubPages/Registeration/RegisterationPage.reg';
+import StudentHistoryFile from '../Student History/StudentHistoryFile.his';
+import RoleBasedAccess from '@/Global/Middleware Hooks/RoleBasedAccess';
 const StudentsDirectoryFile = () => {
   return (
    <Routes>
@@ -19,4 +19,4 @@ const StudentsDirectoryFile = () => {
   )
 }
 
-export default StudentsDirectoryFile
+export default StudentsDirectoryFile;

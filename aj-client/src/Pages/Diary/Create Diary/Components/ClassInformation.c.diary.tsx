@@ -19,6 +19,11 @@ export default function ClassInformation() {
     }
   };
 
+  const addAllClass = () => {
+      setValue("classes", Object.keys(Classes).map((cl)=>({class:cl,sections:Object.keys(Sections[cl])})));
+      setinput("");
+  };
+
   const deleteClass = (id: number) => {{
     setValue(
       "classes",
@@ -39,7 +44,8 @@ export default function ClassInformation() {
             state={input}
             setState={(val) => setinput(val)}
           />
-          <Button onClick={addClass}>Add</Button>
+          <Button  htmlType="button"   onClick={addClass}>Add</Button>
+          <Button  htmlType="button" className="bg-box text-dark" onClick={addAllClass}>Select All</Button>
         </div>
         <div className="flex  gap-2 flex-wrap">
           {classes.map((cl, i) => (

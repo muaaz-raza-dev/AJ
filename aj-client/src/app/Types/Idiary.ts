@@ -20,6 +20,7 @@ export interface Idiary {
     tags: Array<string>;
     publishedBy: { Name: string };
     date: Date;
+    seenBy:{FirstName:string;LastName:string;photo:string;GRNO:string}[]
 }
 
 export const defaultIdiaryPageState: IdiaryPageState = {

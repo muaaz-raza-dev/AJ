@@ -2,6 +2,8 @@ import { PayloadAction } from "@reduxjs/toolkit";
 import { Idiary, IdiaryPageState } from "../Types/Idiary";
 interface Ipayload {
   payload: Array<Idiary>;
+  isLoading?:boolean
+
 }
 interface IfiltersSelected {
   type: "selected";
@@ -9,6 +11,7 @@ interface IfiltersSelected {
   session?: string;
   Class?: string;
   section?: string;
+  isLoading?:boolean
 }
 interface IfiltersAvailable {
   type: "available";
@@ -17,12 +20,15 @@ interface IfiltersAvailable {
   sections?: { [key: string]: { [key: string]: string } };
 }
 
+
+
 type Ifilters = IfiltersSelected | IfiltersAvailable;
 
 export const InsertDiaryPayloadFn = (
   state: IdiaryPageState,
   { payload }: PayloadAction<Ipayload>
 ) => {
+  if(payload.isLoading !=undefined) state.isLoading = payload.isLoading
   state.diaries = payload.payload;
 };
 
@@ -31,7 +37,8 @@ export const InsertFiltersFn = (
   { payload }: PayloadAction<Ifilters>
 ) => {
   if (payload.type == "selected") {
-    const { date, session, section, Class } = payload;
+    const { date,isLoading, session, section, Class } = payload;
+    if(isLoading !=undefined) state.isLoading = isLoading
     if (date) state.filters.selected.date = date;
     if (session) state.filters.selected.session = session;
     if (section) state.filters.selected.section = section;

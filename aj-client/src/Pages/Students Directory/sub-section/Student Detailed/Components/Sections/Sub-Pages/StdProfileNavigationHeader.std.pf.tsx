@@ -11,7 +11,7 @@ import { useAppSelector } from "@/app/ReduxHooks";
 
 
 const StdProfileNavigationHeader:FC<{navigation?:boolean;title:string}> = ({title,navigation}) => {
-  let {_id} =useAppSelector(s=>s.stdExclusive.overview.Student)
+  const {_id} =useAppSelector(s=>s.stdExclusive.overview.Student)
   return (
     <div className="w-full p-4 items-center flex gap-x-2 rounded-md bg-gradient-to-r text-md hFont from-[var(--darker)] to-[var(--dark)] text-white justify-between">
         <h1 className="text-lg hFont font-semibold ">{title}</h1>

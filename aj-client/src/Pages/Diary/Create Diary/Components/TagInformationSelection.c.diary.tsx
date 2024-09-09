@@ -30,7 +30,7 @@ export default function TagInformationSelection() {
             value={input}
             onChange={({ target: { value: val } }) => setinput(val)}
           />
-          <Button onClick={()=>addTag()}>Add</Button>
+          <Button htmlType="button" onClick={()=>addTag()}>Add</Button>
         </div>
         <div className="flex gap-2 flex-wrap">
           {tags.map((t, i) => (

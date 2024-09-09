@@ -8,7 +8,7 @@ const DiaryFilters= async ()=>{
     if(payload) return  JSON.parse(payload)
 
     
-    let Sessions = await Session.find().sort("-start_date")
+    let Sessions = await Session.find().sort("-isActive -start_date")
     let Classes = await Class.find({SessionId:{$in:Sessions.map(se=>se._id)}})
     let Sections  =await Sections_Class.find({Class:{$in:Classes.map(e=>e?._id)}})
 

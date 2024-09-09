@@ -79,7 +79,7 @@ const EachSectionComp = ({
       </div>
       <div className="flex gap-2">
         <CustomSelect_Reg
-          optimumData={Object.entries(Sections[cl.class]).map((e) => ({
+          optimumData={Object.entries(Sections?.[cl.class]||{}).map((e) => ({
             label: e[1],
             value: e[0],
           }))}
@@ -87,14 +87,14 @@ const EachSectionComp = ({
           setState={(val) => setinput(val)}
           nosearch
         />
-        <Button onClick={() => addSection(input, cl.class, setinput)}>
+        <Button  htmlType="button"  onClick={() => addSection(input, cl.class, setinput)}>
           Add
         </Button>
       </div>
       {cl.sections.map((sec) => {
         return (
           <div className="bg-dark text-white font-medium px-4 py-1 rounded-md w-max relative">
-            <p className="hFont">{Sections[cl.class][sec]}</p>
+            <p className="hFont">{Sections?.[cl.class]?.[sec]}</p>
             <button
               type="button"
               onClick={() => deleteSection(sec, cl.class)}

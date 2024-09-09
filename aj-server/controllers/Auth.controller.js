@@ -18,28 +18,23 @@ async function LoginController(req, res) {
     let searchedUser = await User.findOne({
       $or: [{ username: usernameOrEmail }, { email: usernameOrEmail }],
     });
-    if (searchedUser) {
-      let isRestricted = false;
+    if(!searchedUser) {
+      return res.status(401).json({ success: false, message: "Username or email not exists" });
+    }
+
+
       if (searchedUser.Role != "chief admin") {
-        isRestricted = await GlobalRestrictionValidator(searchedUser);
-        if (!isRestricted) {
-          isRestricted = UserSpecificRestrictionValidator(searchedUser);
-          if (isRestricted)
-            return res
-              .status(403)
-              .json({
-                success: false,
-                message: "You are blocked by the server , Contact your admin .",
-              });
+        {
+          const {isRestricted,response} = await GlobalRestrictionValidator(res);
+          if(isRestricted){return response}
         }
-        else {
-          return res
-          .status(403)
-          .json({
-            success: false,
-            message: "Access temporarily blocked. Please try again later.",
-          });
-        }
+
+          {
+
+            const {isRestricted,response} = UserSpecificRestrictionValidator(searchedUser,res);
+            if(isRestricted){return response}
+          }
+        
       }
       
         // Use the isPasswordCorrect method
@@ -66,11 +61,8 @@ async function LoginController(req, res) {
             .status(401)
             .json({ success: false, message: "Invalid password" });
         }
-    } else {
-      res
-        ?.status(401)
-        ?.json({ success: false, message: "Username or email not exists" });
-    }
+    
+
   } catch (err) {
     console.log(err)
     res.status(500).json({ success: false, message: "Internal server error" });
@@ -86,54 +78,32 @@ async function VerificationController(req, res) {
       .json({ success: false, message: "Try with valid credentials" });
     }
     let { decodedToken, response } = HandleJWTToken(token, res);
-    if (!decodedToken && token) return response;
+    if (!decodedToken) return response;
+
     let user = await User.findById(decodedToken.userId);
-    if (user) {
-      let isRistricted = false;
+    if (!user) {   return res.status(401).json({ success: false, message: "Account verification failed" }); }
 
-      isRistricted = await GlobalRestrictionValidator(user); // Check the global Restriction
-      if (!isRistricted) {
-        isRistricted = UserSpecificRestrictionValidator(user); //Check the user specific restriction
-        if (isRistricted)
-          return res
-            .status(403)
-            .json({
-              success: false,
-              message: "You are blocked by the server , Contact your admin .",
-            });
-        else {
-          isRistricted = isLogOutRequired(user); // isLogoutRequired
-          if (isRistricted)
-            return res
-              .status(403)
-              .json({
-                success: false,
-                message:
-                  "Re-login required , Login with your valid credentails again.",
-              });
-        }
-      }
 
-      if (isRistricted) {
-        return res
-        .status(403)
-          .json({
-            success: false,
-            message: "Access temporarily blocked,Logging you out.",
-          });
-        }
-        
-      await User.findByIdAndUpdate(decodedToken.userId, {
-        LastLogin: new Date().toISOString(),
-      }).select("-password -LastLogin -isBlocked -isLogOutRequired");
-      res.json({ success: true, message: "Verifed", payload: user });
-    } 
-    
-    else {
-      res
-        .status(401)
-        .json({ success: false, message: "User verification failed" });
-    }
+      
+{
+  const {isRestricted,response} = await GlobalRestrictionValidator(res); // Check the global Restriction
+  if(isRestricted) return response;
+}
+{
+  const {isRestricted,response} = UserSpecificRestrictionValidator(user,res); //Check the user specific restriction
+  if(isRestricted) return response;
+}
+{
+const {isRestricted,response} = isLogOutRequired(user,res); // isLogoutRequired
+if(isRestricted) return response;
+}
+
+
+ await User.findByIdAndUpdate(decodedToken.userId, {
+ LastLogin: new Date().toISOString(),
+ }).select("-password -LastLogin -isBlocked -isLogOutRequired");
+ res.json({ success: true, message: "Verifed", payload: user });
+ 
   } catch (error) {
     console.log(error);
     res.status(500).json({ success: false, message: "Internal server error" });

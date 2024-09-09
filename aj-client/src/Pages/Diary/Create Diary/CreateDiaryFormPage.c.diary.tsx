@@ -6,11 +6,16 @@ import useUploadMultipleMedia from "@/Hooks/Global/useUploadMultipleMedia";
 import SubmitDiary from "./Components/DiarySubmit.c.diary";
 import toast from "react-hot-toast";
 import useCreateDiary from "@/Hooks/Diary/useCreateDiary";
+import useRequestEditDiary from "@/Hooks/Diary/useRequestEditDiary";
+import NotFoundHandler from "@/Global/Middleware Hooks/NotFoundHandler";
+import useEditDiary from "@/Hooks/Diary/useEditDiary";
 
-export default function CreateDiaryPage() {
+export default function CreateDiaryPage({ edit =false }: { edit?: boolean }) {
   const form = useForm<IdiaryCreate>({ defaultValues: defaultIdiaryCreate });
+  const { isLoading: isFetchingPrevData,error,isError } = useRequestEditDiary(edit || false,form.reset);
   const { upload, isLoading } = useUploadMultipleMedia();
   const { mutate, isLoading: isMutating } = useCreateDiary(form.reset);
+  const {mutate:Edit,isLoading:isEditing} = useEditDiary()
   function ValidateFields() {
     const values = form.watch();
     if (!values.classes.length || !values.content) {
@@ -21,8 +26,9 @@ export default function CreateDiaryPage() {
   }
 
   function onSuccess(images: string[]) {
-    form.setValue("images", images);
-    mutate({ ...form.watch(), images });
+    const Images:string[] =  form.watch("images").filter(img=>typeof img == "string").concat(images)
+   form.setValue("images",Images);
+   edit? Edit({ ...form.watch(),images: Images }) : mutate({ ...form.watch(),images:Images });
   }
   const formSubmit: SubmitHandler<IdiaryCreate> = (data) => {
     const valid = ValidateFields();
@@ -32,26 +38,25 @@ export default function CreateDiaryPage() {
         data.images.some((img) => img instanceof File)
       ) {
         upload(
-          data.images.filter((img) => img instanceof File) as File[],
-          onSuccess
-        );
+          data.images.filter((img) => img instanceof File) as File[],onSuccess);
       } else {
-        mutate(data);
+        edit ? Edit(data) : mutate(data);
       }
     }
   };
-
   return (
+    <NotFoundHandler isLoading={edit&&isFetchingPrevData} isError={edit&&isError} error={error}>
     <FormProvider {...form}>
       <form onSubmit={form.handleSubmit(formSubmit)} className="py-8">
         <main className="flex gap-1 justify-between w-full">
           <ContentSection />
           <section className="flex flex-col w-[33%]  gap-2">
             <SecondaryInformation />
-            <SubmitDiary isLoading={isLoading || isMutating} />
+            <SubmitDiary isLoading={isLoading || isMutating||isEditing} edit={edit} />
           </section>
         </main>
       </form>
     </FormProvider>
+    </NotFoundHandler>
   );
 }

@@ -6,7 +6,7 @@ import { useQuery } from "react-query"
 
 const useFetchDiaryMeta = ()=>{
     const dispatch = useAppDispatch();
-    return useQuery({queryKey:"Diary Meta Data",queryFn:getDiaryFiltersMeta,refetchOnWindowFocus:false,staleTime:1000*60*5 ,
+    return useQuery({queryKey:"Diary Meta Data",queryFn:getDiaryFiltersMeta,refetchOnWindowFocus:false,refetchOnMount:true,
         onSuccess({payload}) {
         dispatch(ReddlInsertFilters({type:"available",...payload.filters}))    
         dispatch(ReddlInsertFilters({type:"selected",...payload.defaultState}))    

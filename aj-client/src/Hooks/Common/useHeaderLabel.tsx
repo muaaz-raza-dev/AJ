@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
-let RouteForLabel: { [key: string]: string } = {
+const RouteForLabel: { [key: string]: string } = {
   "/students/*/edit": "Edit Student Details",
   "/students/*": "Student Details",
   "/": "Students Directory",
+  "/diary":"Student Daily Diary",
+  "/diary/create":"Create new diary",
+  "/diary/*":"Diary details",
   "/settings/user/edit/*" : "Edit user credentials",
   "/students": "Students Directory",
   "/stats/feereport":"Student Fee Report",
@@ -36,21 +39,22 @@ let RouteForLabel: { [key: string]: string } = {
   "/settings/advanced" : "Advanced Settings ",
   "/stats" : "Acedmic Stats"
 };
+
 const useHeaderLabel = () => {
-  let { pathname } = useLocation();
+  const { pathname } = useLocation();
   const [ActiveLabel, setActiveLabel] = useState<string>("");
-  let Validate = () => {
-    let route_exists = RouteForLabel[pathname];
+  const Validate = () => {
+    const route_exists = RouteForLabel[pathname];
     if(route_exists) { setActiveLabel(route_exists) }
     else{
       
       let isRouteSelected = false;
       Object.keys(RouteForLabel).map((elm) => {
         if(!isRouteSelected){
-          let Route_Stored = elm.split("/")
-          let Route_Real = pathname.split("/")
+          const Route_Stored = elm.split("/")
+          const Route_Real = pathname.split("/")
           if(elm.includes("*") && Route_Stored.length == Route_Real.length){
-            let Route_Flags :number[] = [] //to get the *th indexes
+            const Route_Flags :number[] = [] //to get the *th indexes
             Route_Stored.forEach((value,i)=>{ if(value=="*") Route_Flags.push(i)})
               Route_Stored.map((route,i)=>{ 
                 if (!Route_Flags.includes(i)) {

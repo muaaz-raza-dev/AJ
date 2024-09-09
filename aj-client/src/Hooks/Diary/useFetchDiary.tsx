@@ -1,6 +1,6 @@
 import getDiaries from "@/Api/Diary/getDiaries.api";
 import { useAppDispatch, useAppSelector } from "@/app/ReduxHooks";
-import { ReddlInsertPayload } from "@/app/Slices/DiarySlice";
+import { ReddlInsertFilters, ReddlInsertPayload } from "@/app/Slices/DiarySlice";
 import { useMutation } from "react-query";
 const useGetDiaries = () => {
   const dispatch = useAppDispatch();
@@ -8,8 +8,13 @@ const useGetDiaries = () => {
     return useMutation({
       mutationKey: "Fetch DIaries",
       mutationFn: () =>getDiaries(selected),
+      onMutate(){
+        dispatch(ReddlInsertFilters({ type:"selected",isLoading: true }));
+
+      },
       onSuccess({payload}) {
-dispatch(ReddlInsertPayload({payload}))        
+  dispatch(ReddlInsertPayload({payload,isLoading:false}))        
+
       },
     });
 };

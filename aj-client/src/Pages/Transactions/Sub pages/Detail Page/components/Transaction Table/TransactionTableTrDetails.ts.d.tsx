@@ -4,8 +4,8 @@ import TableRowTrDetails from "./TableRowTrDetails.tr.d"
 import useFetchTransactionDetailed from "@/Hooks/Transactions/useFetchTransactionDetailed"
 
 const TransactionTableTrDetails = () => {
-  let {data  } = useFetchTransactionDetailed()
-  let q =data?.payload
+  const {data  } = useFetchTransactionDetailed()
+  const q =data?.payload
   return (
     <Table className="w-full ">
   <TableHeaderTrDetails/>

@@ -5,10 +5,11 @@ import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { IdiaryCreate } from "@/app/Types/IdiaryCreate";
 export default function ImageUpload() {
-  const {setValue} =useFormContext<IdiaryCreate>()
+  const {setValue,watch} =useFormContext<IdiaryCreate>()
+  const imagesG = watch("images")
   const [err, setErr] = useState("");
   const [imgSamples,setImgSamples] = useState<string[]>([])
-  const [imgFiles,setImgFiles] = useState<File[]>([])
+ 
   const { getRootProps, getInputProps } = useDropzone({
     maxSize: 1024 * 1024 * 10,
     multiple: true,
@@ -16,7 +17,7 @@ export default function ImageUpload() {
     onDrop(acceptedFiles, fileRejections) {
       if (fileRejections.length == 0) {
         setImgSamples(img=>img.concat(acceptedFiles.map(f=>URL.createObjectURL(f))))
-        setImgFiles(img=>img.concat(acceptedFiles))
+        setValue("images",imagesG.concat(acceptedFiles))
         setErr("");
       } else {
         setErr(fileRejections[0].errors[0].message);
@@ -25,11 +26,25 @@ export default function ImageUpload() {
   });
 
  const cancelImage= (id:number)=>{
-    setImgFiles(img=>(img.filter((_,i)=>i!=id)))
     setImgSamples(img=>(img.filter((_,i)=>i!=id)))
+    setValue("images",imagesG.filter((_,i)=>id!=i))
  }
 
-  useEffect(() => {setValue("images",imgFiles)}, [imgFiles,setValue])
+
+
+  useEffect(() => {
+    if(!imagesG.length){
+      setImgSamples([])
+    }
+    else {
+      const isUploaded = imagesG.every(img=> typeof img =="string")
+      if(isUploaded){
+        setImgSamples(imagesG)
+        console.log(imagesG)
+        setErr("")
+      }
+    }
+   }, [imagesG])
   return (
     <section className="w-full px-2 max-lg:w-full flex flex-col gap-y-2">
       <h1 className="hFont font-semibold text-lg">Upload Images</h1>

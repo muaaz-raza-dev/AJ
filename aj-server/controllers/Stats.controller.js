@@ -29,7 +29,7 @@ const GeneralStats = async (req, res) => {
       stats.totalStudents = await CalculateTotalStudents();
       stats.newAdmissions = await CalculateNewAdmissions();
       stats.MonthlyRevenue = await CalculateTotalRevenue();
-      await redis?.set("stats:overview", JSON.stringify(stats),'EX',3600/4); //15 minutes
+      await redis?.set("stats:overview", JSON.stringify(stats),'EX',60*5); //5 minutes
     } else {
       const cachedStat = stats;
       stats = JSON.parse(cachedStat);

@@ -1,5 +1,5 @@
 const express = require('express');
-const { LoginStudent, VerifyTokenStudent, RequestPasswordChange, VerifyOTP, ResetPhoto, ResetPublicInfo, CheckPasswordSkip, ResetPassword } = require('../../controllers/StudentAuth.controller');
+const { LoginStudent, VerifyTokenStudent, RequestPasswordChange, VerifyOTP, ResetPhoto, ResetPublicInfo, CheckPasswordSkip, ResetPassword, LogOut, GetConnectedDevices, KickDevice, SwitchAccount } = require('../../controllers/Students/StudentAuth.controller');
 const AuthenticateStudents = require('../../middlewares/AuthenticateStudents.middleware');
 const router =express.Router()
 
@@ -11,11 +11,15 @@ router.post("/otp/verify",VerifyOTP)
 router.get("/",VerifyTokenStudent)
 //* request password change
 router.post("/otp",RequestPasswordChange)
-//* request password change
+//* Log Out
+router.post("/logout",AuthenticateStudents,LogOut) 
 
 router.put("/photo",AuthenticateStudents,ResetPhoto)
 router.put("/reset/public",AuthenticateStudents,ResetPublicInfo)
 router.post("/password/skip",AuthenticateStudents,CheckPasswordSkip)
 router.put("/reset/password",AuthenticateStudents,ResetPassword)
+router.get("/connected/devices",AuthenticateStudents,GetConnectedDevices)
+router.put("/kick/device",AuthenticateStudents,KickDevice)
 
+router.post("/switch",AuthenticateStudents,SwitchAccount) 
 module.exports = router;

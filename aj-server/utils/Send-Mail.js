@@ -50,7 +50,8 @@ const transporter = nodemailer.createTransport({
   console.log("Message sent: %s", info.messageId);
   }
   catch (error) {
-   console.error(error) 
+    console.error(error) 
+    throw new Error(error)
   }
 }
 

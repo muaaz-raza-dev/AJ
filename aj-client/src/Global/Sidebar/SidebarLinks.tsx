@@ -3,8 +3,9 @@ import useActiveRoute from "@/Hooks/Common/ActiveRoute";
 import {  FaReceipt, FaRegChartBar, FaSchool, FaUserTie } from "react-icons/fa";
 import { useAppSelector } from "@/app/ReduxHooks";
 import SubSidebarLinks_Shrinked from "./SubSidebarLinks";
+import { GiNotebook } from "react-icons/gi";
 import { MdAddCircleOutline, MdCurrencyExchange, MdGroupAdd, MdOutlinePayments } from "react-icons/md";
-import { FaCalendarDays, FaCalendarMinus, FaUsersGear, FaUsersLine } from "react-icons/fa6";
+import { FaBookOpenReader, FaCalendarDays, FaCalendarMinus, FaUsersGear, FaUsersLine } from "react-icons/fa6";
 import RoleBasedAccess from "../Middleware Hooks/RoleBasedAccess";
 import NestedNavigationWrapper from "./Components/NestedNavigationWrapper";
 import { BsCurrencyExchange, BsPersonFillAdd } from "react-icons/bs";
@@ -103,6 +104,33 @@ const SidebarLinks = () => {
         </RoleBasedAccess>
       </NestedNavigationWrapper>
 
+
+      <NestedNavigationWrapper
+        labels={[
+          { label: "Daily Diary", url: "/diary" ,icon:<FaBookOpenReader className={SubIconStyle} />},
+          { label: "Create Diary", url: "/diary/create" ,icon:<GiNotebook  className={SubIconStyle} />},
+        ]}
+      >
+          <SubSidebarLinks_Shrinked label="Diary & Annoucments">
+            <Link
+              to={"/diary"}
+              className={`${EachLinkClass} ${
+                Expanded ? "px-4" : "justify-center"
+              }  ${ValidateRoute({
+                toCompare: "/diary",
+                exact: false,
+                classesToApply: ActiveClassName,
+              })}  `}
+            >
+              <FaBookOpenReader  className="text-2xl max-md:3xl" />
+              <p className="max-md:text-[0.8rem] max-[400px]:text-[0.67rem]  md:hidden leading-relaxed ">
+              Diary 
+              </p>
+              {Expanded && <p className="max-md:hidden">Diary & Annoucements</p>}
+            </Link>
+          </SubSidebarLinks_Shrinked>
+      </NestedNavigationWrapper>
+
       <NestedNavigationWrapper
         labels={[
           { label: "Classes", url: "/dashboard/classes" ,icon:<FaSchool className={SubIconStyle} /> },
@@ -112,6 +140,7 @@ const SidebarLinks = () => {
           { label: "Register Staff", url: "/dashboard/teacher/register",roleToAccess:"chief admin", icon:<MdGroupAdd className={SubIconStyle} />},
         ]}
       >
+        
         <SubSidebarLinks_Shrinked label="Classes & Teachers ">
           <div
             className={`${EachLinkClass} ${
@@ -185,6 +214,10 @@ const SidebarLinks = () => {
       </NestedNavigationWrapper>
         </RoleBasedAccess>
 
+
+
+
+
       <NestedNavigationWrapper
         labels={[
           { label: "General Stats", url: "/stats" ,icon:<IoStatsChart className={SubIconStyle} />},
@@ -212,7 +245,9 @@ const SidebarLinks = () => {
             </Link>
           </SubSidebarLinks_Shrinked>
         </RoleBasedAccess>
+
       </NestedNavigationWrapper>
+      
     </ul>
   );
 };
