@@ -13,7 +13,7 @@ const requestIp = require('request-ip');
 app.use(express.json())
 app.use(requestIp.mw())
 app.use(cors({
-  origin:["http://localhost:5173","http://localhost:3000","https://ajfoundation.site"],
+  origin:["http://localhost:5173","http://localhost:3000","https://ajfoundation.site","https://admin.ajfoundation.site"],
   credentials:true,
 }))
 //? testing
