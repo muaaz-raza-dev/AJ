@@ -83,6 +83,8 @@ async function LoginStudent(req, res) {
       return res.cookie(cookieKey, token, {
           secure: process.env.NODE_ENV === "production",
           expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+          domain:".ajfoundation.site",
+          path:"/",
         })
         .status(OK)
         .json({
@@ -203,6 +205,8 @@ if(isRestricted) return response
     res.cookie(forgotKey, token, {
       secure: process.env.NODE_ENV === "production",
       expires: new Date(Date.now() + 15 * 60 * 1000),
+      domain:".ajfoundation.site",
+      path:"/",
     });
     return res.json({
       token,
@@ -261,6 +265,8 @@ let login_token = jwt.sign(tokenPayload,secretKey,{expiresIn: "30 days",});
   res.cookie(cookieKey, login_token, {
     secure: process.env.NODE_ENV === "production",
     expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), //30 days
+    domain:".ajfoundation.site",
+    path:"/",
   });
   return res.json({
     success: true,
@@ -395,6 +401,8 @@ async function LogOut(req, res) {
       return res.cookie(cookieKey, login_token, {
         secure: process.env.NODE_ENV === "production",
         expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), //30 days
+        domain:".ajfoundation.site",
+        path:"/",
       }).json({ success: true, message: "Logged Out Successfully.",payload:activeAccountDetails });
 
     }
@@ -471,6 +479,8 @@ let account = await Account.findById(id).select("-isBlocked -isLogOutRequired -L
 return res.cookie(cookieKey, token, {
     secure: process.env.NODE_ENV === "production",
     expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+    domain:".ajfoundation.site",
+    path:"/",
   })
 .status(OK)
 .json({
