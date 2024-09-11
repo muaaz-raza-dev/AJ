@@ -3,8 +3,8 @@ import { IoReceiptSharp } from 'react-icons/io5'
 import ActionBarTrDetails from './ActionBarTrDetails.tr.d'
 
 const HeaderTransactionDetail = () => {
-  let {data  } = useFetchTransactionDetailed()
-  let q =data?.payload 
+  const {data  } = useFetchTransactionDetailed()
+  const q =data?.payload 
   return (
       <div className="flex justify-between md:items-center bg-[var(--box)] gap-4 max-md:flex-col dark:bg-darker dark:text-white p-2 md:px-4 rounded-md">
     <section className="flex flex-col justify-center gap-2 w-full">
@@ -12,7 +12,6 @@ const HeaderTransactionDetail = () => {
     <IoReceiptSharp  />
     <p>Invoice</p>
     </div>
-
     <div className="flex gap-3 items-end font-medium text-lg">
     <h1 className=" font-medium text-4xl">Inv-{q?.Invoice}</h1>
     <p>for</p>

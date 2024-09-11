@@ -1,21 +1,31 @@
 import  { useState, useEffect } from "react";
 function useTrackChanges(stateToCompare: any) {
-  const [initialState, setInitialState] = useState<any>(null);
+  const [initialState, setInitialState] = useState<null>(null);
   const [changes, setChanges] = useState(false);
   
-  useEffect(() => {
-    if (stateToCompare !== null&&initialState!=null) {
-      const sortedInitialState = sortObjectKeys(DeepCopy(initialState));
-      const sortedCompareableState = sortObjectKeys(DeepCopy(stateToCompare));
-      setChanges(!(JSON.stringify(sortedInitialState)==JSON.stringify(sortedCompareableState)));
+    function Compare(){
+      if (stateToCompare !== null&&initialState!=null) {
+        const sortedInitialState = sortObjectKeys(DeepCopy(initialState));
+        const sortedCompareableState = sortObjectKeys(DeepCopy(stateToCompare));
+        const change = !(JSON.stringify(sortedInitialState)==JSON.stringify(sortedCompareableState))
+        setChanges(change);
+        console.log((JSON.stringify(sortedInitialState),JSON.stringify(sortedCompareableState)),change)
+      }
     }
-  },[DeepCopy(stateToCompare)]); 
+  useEffect(() => {
+    Compare();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[stateToCompare,initialState]); 
 
+useEffect(() => {
+if(!initialState) setInitialState(stateToCompare)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, [stateToCompare])
 
-const UpdateState = (updatedState: any) => {
+const UpdateState = (updatedState:any) => {
     setInitialState(DeepCopy(updatedState));
+    Compare();
 };
-
   return { changes, UpdateState };
 }
 

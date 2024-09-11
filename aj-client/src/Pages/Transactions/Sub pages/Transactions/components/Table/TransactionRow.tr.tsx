@@ -2,13 +2,13 @@ import { IShortTransactions } from '@/app/Types/ItransactionsRead'
 import { TableCell, TableRow } from '@/shdcn/components/ui/table'
 import { GetTransactionPurposes } from '@/utils/GetEachTransactionPurpose'
 import { Tooltip } from 'antd'
-import { ArrowRight } from 'lucide-react'
 import moment from 'moment'
+import { FaReceipt, FaRegEdit } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 
 const TransactionRow = ({data}:{data:IShortTransactions}) => {
   return (
-    <TableRow className='hover:bg-gray-200 dark:hover:text-dark group transition-colors dark:text-white'>
+<TableRow className='hover:bg-gray-200 dark:hover:text-dark group transition-colors dark:text-white'>
 <TableCell className='text-[var(--dark)] font-bold  '>
 <div className="bg-darker text-white  w-8 h-8 font-bold center rounded-full aspect-square ">
 {data.Invoice}
@@ -40,9 +40,12 @@ else {
 </div>
 </TableCell>
 <TableCell className='text-[var(--dark)] dark:text-white dark:group-hover:text-black text-base items-end ml-auto  font-bold'>{data?.amount.totalAmount} PKR</TableCell>
-<TableCell className='center'>
+<TableCell className='center gap-2'>
 <Link to={`transaction/${data?._id}`} className="bg-darker hover:translate-x-0.5 transition-transform text-white rounded-md p-2 cursor-pointer">
-<ArrowRight size={17} strokeWidth={"4"}/>
+<FaReceipt size={17} strokeWidth={"4"}/>
+</Link>
+<Link to={`edit/${data?.Invoice}`} className="bg-darker hover:translate-x-0.5 transition-transform text-white rounded-md p-2 cursor-pointer">
+<FaRegEdit size={17} strokeWidth={"4"}/>
 </Link>
 </TableCell>
     </TableRow>

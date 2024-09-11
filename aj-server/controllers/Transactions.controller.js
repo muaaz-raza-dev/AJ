@@ -148,10 +148,10 @@ async function getDetailedTransactions(req, res) {
       populate: { path: "session", select: "acedmic_year session_name" },
     });
   if (!Transaction)
-    return res.status(404).json({ message: "Transaction Not Found" });
+  return res.status(404).json({ message: "Transaction Not Found" });
   let Payload = JSON.parse(JSON.stringify(Transaction));
   Payload.Transactions.forEach((tr, i) => {
-    if (tr.paymentType == "Registered") {
+    if (tr.paymentType == "Registered"&&tr.paymentConfigId?.session) {
       Payload.Transactions[i]["session"] =
         tr.paymentConfigId?.session?.session_name +
         " " +
@@ -180,12 +180,65 @@ async function CancelnRestoreTransaction(req, res) {
   }
 }
 
+async function fetchRawTransactionDetails(req, res) {
+  let { invoice } = req.params;
+  try {
+    const Transaction = await Transactions.findOne({Invoice:+invoice}).populate({path:"Transactions.paymentConfigId",select:"feeTitle _id sessionId feeFrequency",populate:{path:"session",select:"acedmic_year"}}).select("-isCancelled")
+    if(!Transaction) return Respond({res,message:"not found",status:404})
+    const Student = await Students.findById(Transaction.Student).select("GRNO")
+    const FeeInfo =  {Dates:{},Purposes:{},Amounts:{}};
+    Transaction.Transactions.forEach((pay,i)=>{
+      if(pay.paymentType=="Registered"){
+        const q = pay.paymentConfigId
+        if(q.feeFrequency!="Yearly") {
+        if(!FeeInfo["Dates"][q._id]){
+          FeeInfo["Dates"][q._id] = {[pay.year]:[pay.month]};
+        }
+        else {
+        FeeInfo["Dates"][q._id][pay.year].push(pay.month)
+      } 
+    }
+      
+      FeeInfo["Amounts"][q._id]= pay.amount.realAmount;
+      
+      FeeInfo["Purposes"][q._id]={feeFrequency:q.feeFrequency,feeTitle:q.feeTitle,value:q._id,label:`${q.feeTitle} ${q.session.acedmic_year}` , sessionId:q.session._id};
+      Transaction.Transactions[i].paymentConfigId = q._id
+    }
+    })
+      FeeInfo["Purposes"] = Object.values(FeeInfo.Purposes)
+    Respond({ res, payload:{Transaction,Student,FeeInfo} });
+  } catch (error) {
+    console.log(error)
+    res
+      .status(500)
+      .json({ success: false, message: "Error while fetching transaction" });
+  }
+}
+
+async function editTransaction(req,res){
+  const {invoice,payload} = req.body;
+  try {
+    delete payload.Invoice
+    const tr = await Transactions.findOneAndUpdate({ Invoice: +invoice }, payload, { new: true });
+    if (!tr) return Respond({ res, message: "Transaction not found", status: 404 });
+    Respond({ res, message: "Transaction updated successfully" });
+  }
+  catch (error) {
+    res
+     .status(500)
+     .json({ success: false, message: "Error updating transaction" });
+  }
+
+}
 module.exports = {
-  CreateTransaction: CreateTransaction,
+  CreateTransaction,
   ReadTransactions,
+  editTransaction,
   SearchStudent,
+  fetchRawTransactionDetails,
   ReadTransactionsMeta,
   SetTransactionConfig,
   getDetailedTransactions,
   CancelnRestoreTransaction,
 };
+

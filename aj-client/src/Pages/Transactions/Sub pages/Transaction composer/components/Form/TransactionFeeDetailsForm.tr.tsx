@@ -2,12 +2,12 @@ import { FC } from 'react'
 import TransactionComposerFooter from './TransactionComposerFooter.tr'
 import TransactionPurposeSection from './TransactionPurposeSection.tr'
 import TransactionsBasicDetailsSection from './TransactionsBasicDetailsSection.tr'
-const TransactionFeeDetailsForm:FC<{isLoading:boolean,}> = ({isLoading}) => {
+const TransactionFeeDetailsForm:FC<{isLoading:boolean,edit?:boolean}> = ({isLoading,edit=true}) => {
   return (
 <div className="flex flex-col gap-y-3 w-full">
-  <TransactionsBasicDetailsSection/>
+  <TransactionsBasicDetailsSection edit={edit}/>
   <TransactionPurposeSection/>
-  <TransactionComposerFooter isLoading={isLoading} />
+  <TransactionComposerFooter edit={edit} isLoading={isLoading} />
 </div>
   )
 }

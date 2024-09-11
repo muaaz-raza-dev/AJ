@@ -3,9 +3,9 @@ import  { FC, useEffect } from 'react'
 import { useFormContext } from 'react-hook-form'
 
 const CustomAmountSelection:FC<{fieldName:string}> = ({fieldName}) => {
-    let {watch,setValue} = useFormContext()
-    let paymentType = watch(`${fieldName}.paymentType`)
-    let amount = watch(`${fieldName}.amount.realAmount`)
+    const {watch,setValue} = useFormContext()
+    const paymentType = watch(`${fieldName}.paymentType`)
+    const amount = watch(`${fieldName}.amount.realAmount`)
   return (
     <>
     <input type="number" placeholder="Amount" className='
@@ -23,12 +23,13 @@ const CustomAmountSelection:FC<{fieldName:string}> = ({fieldName}) => {
 }
 
 export const TotalAmountSelection:FC<{fieldName:string}> = ({fieldName}) => {
-  let {watch,setValue} = useFormContext()
-  let amounts = watch(`${fieldName}.amount`)
-  let Transactions = watch("Transactions")
+  const {watch,setValue} = useFormContext()
+  const amounts = watch(`${fieldName}.amount`)
+  const Transactions = watch("Transactions")
   useEffect(() => {
     setValue(`${fieldName}.amount.totalAmount`,amounts?.realAmount-amounts?.discount)
   }, [amounts.discount ,amounts.realAmount])
+
   useEffect(() => {
     let totalAmount = 0
     let discount = 0 

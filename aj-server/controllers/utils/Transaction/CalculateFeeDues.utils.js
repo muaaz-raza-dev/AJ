@@ -34,7 +34,6 @@ return Dues
 }
 
 const CalculateFrequentDues = async(studentInfo) =>{
-  console.log("I am hitting here!")
 let Dues = [] //fee frequency,feeTitle,amount,session,month,year ,Classs,
 let Classes = (await Sections_Class.find({Students:studentInfo}).populate({path:"Class",select:"_id"}).select("_id")).map(e=>e.Class._id)
 let Sessions = (await Session.find({Classes:{$in:Classes}}).select("_id Classes"))
@@ -74,7 +73,7 @@ SessionPaymentConfigs.forEach(config=>{
       })    
   }
   else if(config.feeFrequency == "Yearly") {
-    let isPaid =transactions.some(tr=>tr.Transactions.paymentConfigId.toString()==config._id.toString())
+    let isPaid =transactions.some(tr=>tr.Transactions.paymentConfigId._id.toString()==config._id.toString())
     let paymentDate =moment(config.paymentDate)
     let currentDate =moment()
     if(!isPaid&&paymentDate.isSameOrBefore(currentDate)){

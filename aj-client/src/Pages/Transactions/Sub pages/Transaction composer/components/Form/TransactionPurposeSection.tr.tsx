@@ -8,7 +8,7 @@ import { ItransactionField } from "@/app/Types/ItransactionForm";
 import { Info } from "lucide-react";
 
 
-let defaultTransactionBlock = {paymentType: "Registered", paymentConfigId : "", month : "",year:"",
+const defaultTransactionBlock = {paymentType: "Registered", paymentConfigId : "", month : "",year:"",
   amount:  {
     discount : 0 ,  //Just in numbers
     realAmount :0 , //without discount 
@@ -16,12 +16,12 @@ let defaultTransactionBlock = {paymentType: "Registered", paymentConfigId : "", 
   
 } }
 function TransactionPurposeSectionFooter() {
-  let {watch , setValue}  =useFormContext()
-  let {totalAmount,discount,realAmount} = watch("amount")
-  let Transactions = watch("Transactions")
+  const {watch , setValue}  =useFormContext()
+  const {totalAmount,discount,realAmount} = watch("amount")
+  const Transactions = watch("Transactions")
   
-  let handlePuropseAddition = ()=> {
-    let totalPurposes = Transactions.length
+  const handlePuropseAddition = ()=> {
+    const totalPurposes = Transactions.length
   
     if(Transactions[totalPurposes-1]?.amount?.realAmount!=0 || Transactions.length==0) {
       setValue("Transactions",[...Transactions,defaultTransactionBlock])
@@ -57,7 +57,7 @@ function TransactionPurposeSectionFooter() {
 }
 
 function TransactionComposeAdditionalInputs() {
-  let {control} = useFormContext()
+  const {control} = useFormContext()
   return (
     <div className="flex flex-wrap gap-3">
       <RegLabelWrapper title="Amount Paid" className="w-[33%] max-sm:w-full max-lg:w-[48%]">

@@ -8,14 +8,16 @@ import StudentDetailedSkeletonLoader from "@/Pages/Students Directory/sub-sectio
 import NotFoundValidator from "@/Api/404Validator"
 
 const TransactionDetailsPage = () => {
-  let {isLoading ,error,isError} = useFetchTransactionDetailed()
+  const {isLoading ,error,isError} = useFetchTransactionDetailed()
   if(isError&&NotFoundValidator(error))return <ErrorPage title="Transaction not found" 
   message="The transaction you're looking for is not exist" navigate="/transactions"/>
   if(isLoading) return <StudentDetailedSkeletonLoader/>
   return (
     <>
-    {isLoading ? <div className="center"> <RequestLoading dark /> </div> : 
-    <main className="flex flex-col gap-2 py-4 max-md:py-0 w-full">
+{isLoading ?
+<div className="center"> <RequestLoading dark /> </div> 
+: 
+<main className="flex flex-col gap-2 py-4 max-md:py-0 w-full">
 <HeaderTransactionDetail />
 <SummaryDetailsTrDetails />
 <TransactionDetails />

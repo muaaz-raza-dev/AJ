@@ -1,6 +1,8 @@
+import { Button } from "@/shdcn/components/ui/button"
 import ToggleTransactionStatus from "./ToggleTransactionStatus.tr.d"
 import TransactionTableTrDetails from "./Transaction Table/TransactionTableTrDetails.ts.d"
 import TransactionPaymentListing from "./TransactionPaymentListing.tr.d"
+import { FaEdit } from "react-icons/fa"
 
 const TransactionDetails = () => {
   return (
@@ -10,7 +12,12 @@ const TransactionDetails = () => {
   <TransactionTableTrDetails/>
 </section>
   <TransactionPaymentListing/>
+  <div className="flex gap-4 justify-end">
+  <Button className="bg-dark text-white hover:bg-darker flex gap-2">
+    <FaEdit/> Edit
+  </Button>
   <ToggleTransactionStatus/>
+  </div>
     </>
   )
 }

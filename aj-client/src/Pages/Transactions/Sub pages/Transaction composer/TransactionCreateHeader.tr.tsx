@@ -1,8 +1,9 @@
-import { useAppSelector } from "@/app/ReduxHooks"
+import { ItransactionForm } from "@/app/Types/ItransactionForm"
 import moment from "moment"
+import { useFormContext } from "react-hook-form"
 
 const TransactionCreateHeader = () => {
-  let {Invoice} = useAppSelector(s=>s.trComposeFilters)
+  const Invoice = useFormContext<ItransactionForm>().watch("Invoice")
   return (
     <div className="flex w-full border-b border-light dark:border-dark pb-4 ">
         <div className="flex min-w-[40%] whitespace-nowrap font-bold text-sm items-center gap-x-1 ">

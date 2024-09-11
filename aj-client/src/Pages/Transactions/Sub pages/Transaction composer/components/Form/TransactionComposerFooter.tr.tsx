@@ -1,6 +1,9 @@
 import { useAppDispatch } from "@/app/ReduxHooks";
 import { RedTrcInsertFilters } from "@/app/Slices/TransactionComposeSlice";
+import { ItransactionForm } from "@/app/Types/ItransactionForm";
 import RequestLoading from "@/Global/Loaders/RequestLoding";
+import { useTrackChanges } from "@/Hooks/Common/useTrackChanges";
+import useFetchTransactionDetailsTobeUpdated from "@/Hooks/Transactions/useGetTransactoionDetailsTobeUpdated";
 import { Button } from "@/shdcn/components/ui/button";
 import {
   Dialog,
@@ -12,22 +15,21 @@ import {
   DialogTrigger,
 } from "@/shdcn/components/ui/dialog";
 import { DialogClose } from "@radix-ui/react-dialog";
-import { FC, useRef } from "react";
+import { FC, useEffect, useRef } from "react";
 import { useFormContext } from "react-hook-form";
 
 const FormDialogComponents: FC<{
   elm: string;
-  submitCb: any;
+  submitCb: React.RefObject<HTMLButtonElement>;
   isLoading: boolean;
-  isPrint:boolean
-}> = ({ elm, isLoading, submitCb,isPrint }) => {
-  let dispatch =useAppDispatch()
-  let {
-    formState: { isValid },
-  } = useFormContext();
+  isPrint:boolean;
+  disabled?:boolean
+}> = ({ elm, isLoading, submitCb,isPrint,disabled }) => {
+  const dispatch =useAppDispatch();
+  const { formState: { isValid }} = useFormContext();
   return (
     <Dialog>
-      <DialogTrigger disabled={!isValid}>
+      <DialogTrigger disabled={disabled||!isValid}>
         <Button
           disabled={!isValid}
           type="button"
@@ -52,20 +54,19 @@ const FormDialogComponents: FC<{
           <DialogClose>
             <Button
               type="button"
-              className="active:scale-95 transition-all  text-black hover:text-black border-2 hover:border-[var(--darker)] border-[var(--dark)]"
+              className="active:scale-95 transition-all w-full  text-black hover:text-black border-2 hover:border-[var(--darker)] border-[var(--dark)]"
             >
               Cancel
             </Button>
           </DialogClose>
 
           <Button
-            className="active:scale-95 transition-all  text-white hover:text-white hover:bg-[var(--darker)] bg-[var(--dark)]"
+            className="active:scale-95 transition-all my-2  text-white hover:text-white hover:bg-[var(--darker)] bg-[var(--dark)]"
             onClick={() => {
-              console.log(isPrint);
               if (isPrint)  dispatch(RedTrcInsertFilters({isPrint:true}))
               else { dispatch(RedTrcInsertFilters({isPrint:false}))}
             setTimeout(() => {
-              submitCb.click();
+              submitCb.current?.click();
             }, 300);
             }}
           >
@@ -78,28 +79,39 @@ const FormDialogComponents: FC<{
 };
 
 const TransactionComposerFooter: FC<{
+  edit?:boolean
   isLoading: boolean;
-}> = ({ isLoading }) => {
-  let button = useRef<HTMLButtonElement>(null);
+}> = ({ isLoading,edit }) => {
+  const form =useFormContext<ItransactionForm>()
+  const formState=form.watch()
+  const {isSuccess,isLoading:isFetching} = useFetchTransactionDetailsTobeUpdated(false)
+  const {changes,UpdateState} =useTrackChanges(formState);
+  
+  useEffect(() => {
+    if(isSuccess && edit && !isFetching){ UpdateState(formState)}
+    }, [edit,isSuccess,isFetching])
+
+  
+  const button = useRef<HTMLButtonElement>(null);
   return (
     <div className="pt-5 flex justify-end gap-x-4">
       
           <FormDialogComponents
-            submitCb={button.current}
-            elm={"Confirm and Print"}
-            key={"Confirm and Print"}
-            isLoading={isLoading}
-            isPrint ={true}
-
-          />
+          submitCb={button}
+          elm={"Confirm and Print"}
+          key={"Confirm and Print"}
+          isLoading={isLoading}
+          disabled = {edit && !changes}
+          isPrint ={true}
+            />
           <FormDialogComponents
-            submitCb={button.current}
-            elm={"Confirm"}
-            key={"Confirm"}
-            isLoading={isLoading}
-            isPrint ={false}
-
-          />
+          submitCb={button}
+          elm={"Confirm and save"}
+          key={"Confirm and save"}
+          disabled = {edit && !changes}
+          isLoading={isLoading}
+          isPrint ={false}
+            />
       <button ref={button} hidden></button>
     </div>
   );

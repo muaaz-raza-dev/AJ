@@ -2,7 +2,7 @@
 export interface ItransactionField {
         paymentType: "Custom"|"Registered",
         paymentConfigId ?: string,
-        paymentTitle:String,
+        paymentTitle:string,
         month ?: string,
         sessionId?:string, //For yearly payments
         year ?: string,
@@ -19,9 +19,9 @@ PayorsName:string,
 Time:string;
 PaidAmount:number|string,
 amount:{
-  realAmount:number,
-  discount:number,
-  totalAmount:number,
+realAmount:number,
+discount:number,
+totalAmount:number,
 }
 Note:string,
 Student:string,

@@ -4,26 +4,22 @@ import Ld from "lodash";
 import "react-loading-skeleton/dist/skeleton.css";
 import moment from "moment";
 const TransactionStudentDisplay = () => {
-  let {isLoading, StudentInfo:student, ClassbasedFeeInfo: history  } = useAppSelector(
+  const {isLoading, StudentInfo:student, ClassbasedFeeInfo: history  } = useAppSelector(
     (state) => state.trComposeFilters
   );
-  let {Classes }= useAppSelector(s=>s.global)
-  let Class = Classes[student?.CurrentClass||""] ||""
+  const {Classes }= useAppSelector(s=>s.global)
+  const Class = Classes[student?.CurrentClass||""] ||""
   return (
     <>
       {!isLoading && Ld.size(student) != 0 ? (
         <div className="flex gap-x-4 gap-2 w-full max-md:flex-wrap">
           <div className="flex shadow-inner border-2 dark:border-dark gap-2 rounded-md px-4 py-4  w-[50%] max-md:w-full">
             <div className="w-[20%] h-full center aspect-square rounded ">
-              {student?.photo ? (
                 <img
-                  src={student?.photo}
+                  src={student?.photo||"/images/sample.png"}
                   alt=""
                   className="bg-white rounded-md border aspect-square "
                 />
-              ) : (
-                <Skeleton className="h-full w-full" />
-              )}
             </div>
             <div className="w-[80%] flex flex-col gap-2">
               <h1 className="text-lg font-bold hFont">

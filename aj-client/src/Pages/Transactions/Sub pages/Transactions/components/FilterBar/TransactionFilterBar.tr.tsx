@@ -8,11 +8,11 @@ import TransactionDateRangeFilter from "./TransactionDateRangeFilter.tr";
 import { FaFilter } from "react-icons/fa";
 
 const TransactionFilterBar = () => {
-  let {Filters ,TransactionTypes} = useAppSelector(s=>s.transactions)
-  const [AdvancedFilters,setAdvancedFilters] =useState(false)
-  let {mutate} = useReadPageTransactions()
+  const {Filters ,TransactionTypes} = useAppSelector(s=>s.transactions)
+  const [AdvancedFilters,setAdvancedFilters] =useState(true)
+  const {mutate} = useReadPageTransactions()
  useEffect(() => {
-  let {transactionType}= Filters
+  const {transactionType}= Filters
   if(transactionType!=""){
     mutate(Filters)
   }

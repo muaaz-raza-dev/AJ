@@ -5,6 +5,7 @@ const RouteForLabel: { [key: string]: string } = {
   "/students/*/edit": "Edit Student Details",
   "/students/*": "Student Details",
   "/": "Students Directory",
+  "/transactions/edit/*":"Edit Transaction Receipt",
   "/diary":"Student Daily Diary",
   "/diary/create":"Create new diary",
   "/diary/*":"Diary details",
