@@ -5,6 +5,7 @@ import useCreateTransaction from "@/Hooks/Transactions/useCreateTransaction"
 import useFetchTransactionDetailsTobeUpdated from "@/Hooks/Transactions/useGetTransactoionDetailsTobeUpdated";
 import TransactionCreateHeader from "../../TransactionCreateHeader.tr";
 import useUpdateTransaction from "@/Hooks/Transactions/useUpdateTransaction";
+import TransactionLoader from "../../TransactionDetailSkeletonLoader.tr";
 
 const TransactionComposeForm = ({edit=false}:{edit?:boolean}) => {
     const form = useForm<ItransactionForm>({defaultValues:defaultTransactionForm})
@@ -15,7 +16,7 @@ const TransactionComposeForm = ({edit=false}:{edit?:boolean}) => {
       if(edit){letsEdit(payload)}
       else { mutate(payload)}
     }
-    if(edit&&isFetching) return <>loadng..</>
+    if(edit&&isFetching) return <TransactionLoader/>
   return (
     <FormProvider {...form}>
     <form className="flex flex-wrap w-full" onSubmit={form.handleSubmit(handleTransaction)}>

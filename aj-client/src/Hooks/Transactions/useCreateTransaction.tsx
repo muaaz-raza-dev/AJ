@@ -6,22 +6,23 @@ import { useMutation } from "react-query"
 import { useNavigate } from "react-router-dom"
 import usePrintTransaction from "./usePrintTransaction"
 import { ItransactionDetail } from "@/app/Types/ItransactionDetail"
-import { RedTrcInsertFilters } from "@/app/Slices/TransactionComposeSlice"
+import { RedTrcClearData } from "@/app/Slices/TransactionComposeSlice"
 
 
 const useCreateTransaction = (reset:any) => {
-let navigate= useNavigate()
-let Student = useAppSelector(s=>s.trComposeFilters.StudentInfo)
-let {isPrint} =useAppSelector(s=>s.trComposeFilters)
-let {Print} = usePrintTransaction()
-let dispatch= useAppDispatch()
+const navigate= useNavigate()
+const Student = useAppSelector(s=>s.trComposeFilters.StudentInfo)
+const {isPrint} =useAppSelector(s=>s.trComposeFilters)
+const {Print} = usePrintTransaction()
+const dispatch= useAppDispatch()
 return useMutation({mutationKey:"Transaction",
 mutationFn:(payload:ItransactionForm)=>CreateTransaction({...payload,Student :Student?._id}),
 onSuccess({payload}:{payload:ItransactionDetail}) {
 reset()
 toast.success("Transaction created !")
 if(isPrint) {Print(payload)}
-dispatch(RedTrcInsertFilters({StudentInfo:null,isPrint:false}))
+
+dispatch(RedTrcClearData())
 navigate("/transactions")
 },
 onError(){

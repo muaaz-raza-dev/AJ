@@ -5,11 +5,11 @@ import { IDuesTrCompose } from "@/app/Types/IcomposeTransactionFilters";
 import { Tooltip } from "antd";
 const TransactionDuesDetailsSection = () => {
     const [data,setData] =useState<{[key:string]:IDuesTrCompose[]}>({})
-    let {Dues} = useAppSelector(s=>s.trComposeFilters)
-    let {Sessions} = useAppSelector(s=>s.global)
-    let {StudentInfo} =useAppSelector(s=>s.trComposeFilters)
+    const {Dues} = useAppSelector(s=>s.trComposeFilters)
+    const {Sessions} = useAppSelector(s=>s.global)
+    const {StudentInfo} =useAppSelector(s=>s.trComposeFilters)
     useEffect(() => {
-        let grouped = lod.groupBy(Dues,(({_id})=>_id))
+        const grouped = lod.groupBy(Dues,(({_id})=>_id))
         setData(grouped)
     }, [Dues])
     if(StudentInfo?.FirstName) {
@@ -21,8 +21,8 @@ const TransactionDuesDetailsSection = () => {
         {
             data &&
             Object.entries(data).map(([id,docs])=> (
-              <div key={id}  className="w-[32%] max-lg:w-[48%] max-sm:w-full shadow dark:bg-dark  flex flex-col min-h-28 p-2 px-4 rounded-lg   gap-1 bg-[var(--box)]">
-                <div className="font-bold text-base flex justify-between rounded-md  min-h-[30%] ">
+              <div key={id}  className="w-[32%] max-lg:w-[48%] max-sm:w-full shadow dark:bg-dark  flex flex-col min-h-36 p-2 px-4 rounded-lg   gap-1 bg-[var(--box)]">
+                <div className="font-bold text-base flex justify-between rounded-md  min-h-[20%] ">
                     <h1>
                     {docs[0].feeTitle} {docs[0].feeFrequency!="One Time"&&`(${Sessions[docs[0].session]})`}
                     </h1>
@@ -30,7 +30,7 @@ const TransactionDuesDetailsSection = () => {
                         {docs[0].amount}
                     </p>
                     </div>
-                <div className=" flex flex-wrap w-full gap-1 h-[65%]">
+                <div className=" flex flex-wrap w-full gap-1 h-[75%]">
                   {docs.map((e) => (
                     <Tooltip title={e.amount+" " + "PKR"}>
                       <div className=" bg-danger h-max cursor-pointer min-w-[30%] text-sm text-white px-4 rounded-md ">

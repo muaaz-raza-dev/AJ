@@ -11,13 +11,13 @@ export interface IDuesTrCompose {
 export interface IcomposeTransactionFilters {
 isLoading:boolean , 
 StudentInfo?:IstudentExclusive|null ,
-ClassbasedFeeInfo : ClassBasedFeeDetails ,
+ClassbasedFeeInfo : ClassBasedFeeDetails|null ,
 isPrint:boolean;
 FeeInfo:{
 Purposes:{value:string,feeTitle:string,label:string,feeFrequency:"One Time"|"Custom"|"Yearly"|"Monthly";sessionId:string}[],
 Dates : {[key:string]:{[key:string]: string[] }},
 Amounts : {[key:string]:number} },
-Invoice:string ,
+Invoice:string,
 Dues:IDuesTrCompose[],
 DiscountedTotal : number, 
 }

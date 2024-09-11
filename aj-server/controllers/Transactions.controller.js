@@ -9,6 +9,7 @@ const {
 } = require("./utils/Transaction/CalculateReadTransactionMetaFilters");
 const { CalculateFeeDues } = require("./utils/Transaction/CalculateFeeDues.utils");
 const Transactions = require("../models/Transactions");
+const { redis } = require("../db");
 
 async function CreateTransaction(req, res) {
   let { payload } = req.body;
@@ -21,6 +22,7 @@ async function CreateTransaction(req, res) {
     let transaction = await TransactionsScema.findById(savedTransaction._id)
     .populate({ path: "Student", select: "FirstName LastName GRNO" })
     .populate({ path: "RecievedBy", select: "Name" })
+    await redis?.delete('stats:overview')
     Respond({res,payload:transaction,success:true})
   } catch (error) {
     console.log(error);

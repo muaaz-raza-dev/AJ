@@ -17,7 +17,7 @@ interface ItrComposeFilterInsert {
 }
 
 export const InsertTrComposeFiltersFn = (state:IcomposeTransactionFilters,{payload}:PayloadAction<ItrComposeFilterInsert>)=>{
-let {isLoading,StudentInfo,ClassbasedFeeInfo,FeeInfo,Invoice ,Dues,isPrint} = payload
+const {isLoading,StudentInfo,ClassbasedFeeInfo,FeeInfo,Invoice ,Dues,isPrint} = payload
 if(isLoading!=undefined) state.isLoading = isLoading
 if(StudentInfo!=undefined) state.StudentInfo = StudentInfo
 if(ClassbasedFeeInfo!=undefined) state.ClassbasedFeeInfo = ClassbasedFeeInfo
@@ -34,11 +34,26 @@ interface IcalculateDiscountedTotal {
     }[]
 }
 export const CalculateDiscountedTotalFn = (state:IcomposeTransactionFilters,{payload}:PayloadAction<IcalculateDiscountedTotal>)=>{
-    let {Amounts} = payload 
+    const {Amounts} = payload 
     let totalDiscount = 0
     Amounts.map(e=>{
-        let discount = e.discount || 0
+        const discount = e.discount || 0
         totalDiscount += discount
     })
     state.DiscountedTotal = totalDiscount
+}
+
+export const ClearDataFn = (state:IcomposeTransactionFilters)=>{
+    state.StudentInfo = null
+    state.ClassbasedFeeInfo = null
+    state.FeeInfo =   {
+        Purposes: [],
+        Dates: {},
+        Amounts: {},
+      }
+    state.Invoice = ""
+    state.Dues = []
+    state.isPrint = false
+    state.DiscountedTotal = 0
+    state.isLoading = false
 }
