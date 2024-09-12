@@ -1,5 +1,6 @@
 const GlobalConfig = require("../../../models/GlobalConfig");
 
+const cookieKey = process.env.STD_COOKIE_KEY;
 
 const GlobalRestrictionValidator = async (res) => {
   let isTemporaryBlocked = false;
@@ -10,7 +11,12 @@ const GlobalRestrictionValidator = async (res) => {
      isTemporaryBlocked = globalConfig.isTemporaryBlocked;
      if(globalConfig.isTemporaryBlocked) {
       isRestricted = true;
-      response = res.status(403).json({success: false,message: "Access denied , Contact your admin .",});
+      response = res.status(403).clearCookie(cookieKey, {
+        secure: process.env.NODE_ENV === "production",
+        domain: ".ajfoundation.site",
+        path: "/",
+      }).json({success: false,message: "Access denied , Contact your admin .",});
+      
      }
   }
 
@@ -23,7 +29,12 @@ const UserSpecificRestrictionValidator = (user,res) => {
   let response = null
   if (!user.Role || user.Role != "chief admin") {
     if (user?.isBlocked){
-      response =  res.status(403).json({success: false,message: "Access denied , Contact your admin .",});
+      response =  res.status(403).clearCookie(cookieKey, {
+        secure: process.env.NODE_ENV === "production",
+        domain: ".ajfoundation.site",
+        path: "/",
+      }).json({success: false,message: "Access denied , Contact your admin .",});
+     
       isRestricted = true
     } 
   }
@@ -34,7 +45,11 @@ const isLogOutRequired = (user,res) => {
   let isRestricted = false
   let response = null
   if (user?.isLogOutRequired){ isRestricted= true
-    response =  res.status(403).json({success: false,message: "Re-login required, login with your credentials again.",});
+    response = res.status(403).clearCookie(cookieKey, {
+      secure: process.env.NODE_ENV === "production",
+      domain: ".ajfoundation.site",
+      path: "/",
+    }).json({ success: false, message: "Re-login required, login with your credentials again." });
   };
   return {isRestricted,response};
 };

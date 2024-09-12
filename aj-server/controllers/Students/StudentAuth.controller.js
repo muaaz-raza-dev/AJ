@@ -5,7 +5,6 @@ const Account = require("../../models/StdAcconts");
 const {
   GlobalRestrictionValidator,
   UserSpecificRestrictionValidator,
-  StdRestrictionValidator,
   isLogOutRequired,
 } = require("../utils/Auth/GlobalRestrictionValidator");
 const { OK } = require("http-status-codes");
