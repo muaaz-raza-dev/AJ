@@ -9,7 +9,6 @@ function useTrackChanges(stateToCompare: any) {
         const sortedCompareableState = sortObjectKeys(DeepCopy(stateToCompare));
         const change = !(JSON.stringify(sortedInitialState)==JSON.stringify(sortedCompareableState))
         setChanges(change);
-        console.log((JSON.stringify(sortedInitialState),JSON.stringify(sortedCompareableState)),change)
       }
     }
   useEffect(() => {

@@ -57,13 +57,13 @@ const TransactionStudentDisplay = () => {
                   <h1 className="text-dark dark:text-gray-300 hFont text-md font-semibold">
                     Payment title
                   </h1>
-                  {Object.keys(history).map((e,i)=><p className=" font-semibold ">{i+1}. {e}</p>)}
+                  {Object.keys(history||{}).map((e,i)=><p className=" font-semibold ">{i+1}. {e}</p>)}
                 </div>
                 <div className="w-[48%] flex flex-col gap-2">
                   <h1 className="text-[var(--dark)] hFont dark:text-gray-300 text-md font-semibold ">
                     Amount
                   </h1>
-                  {Object.values(history).map(e=><p className=" font-semibold ">{e}</p>)}
+                  {Object.values(history||{}).map(e=><p className=" font-semibold ">{e}</p>)}
                 </div>
               </div>
             </div>

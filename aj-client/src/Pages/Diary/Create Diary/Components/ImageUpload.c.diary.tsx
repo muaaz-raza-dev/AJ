@@ -46,8 +46,8 @@ export default function ImageUpload() {
    }, [imagesG])
 
   return (
-    <section className="w-full px-2 max-lg:w-full flex flex-col gap-y-2">
-      <h1 className="hFont font-semibold text-lg">Upload Images</h1>
+    <section className="w-full px-2 max-lg:w-full flex flex-col gap-y-2 ">
+      <h1 className="hFont font-semibold text-lg dark:text-white">Upload Images</h1>
       <div className={`lg:w-full rounded flex-wrap  flex gap-2`}>
         {
           imgSamples.map((img,id)=>{

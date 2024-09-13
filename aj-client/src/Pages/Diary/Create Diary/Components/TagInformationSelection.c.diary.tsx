@@ -28,9 +28,10 @@ export default function TagInformationSelection() {
         <div className="flex gap-2">
           <Input
             value={input}
+            className="dark:text-white dark:bg-dark "
             onChange={({ target: { value: val } }) => setinput(val)}
           />
-          <Button htmlType="button" onClick={()=>addTag()}>Add</Button>
+          <Button htmlType="button" className="dark:text-white" onClick={()=>addTag()}>Add</Button>
         </div>
         <div className="flex gap-2 flex-wrap">
           {tags.map((t, i) => (

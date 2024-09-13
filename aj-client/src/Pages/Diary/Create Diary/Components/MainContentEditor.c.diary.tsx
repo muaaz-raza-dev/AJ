@@ -27,7 +27,7 @@ export default function MainContentEditor() {
   return (
     <div>
         <ReactQuill
-        className='bg-box min-h-[30vh]'
+        className='bg-box min-h-[30vh] '
         theme='snow'
         onChange={(val)=>setValue("content",val)}
         placeholder='Write your diary content here'

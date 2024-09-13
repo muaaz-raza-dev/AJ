@@ -38,6 +38,7 @@ async function CreateAndLoginNewStdAccount(res,student,userDetails,password,isCo
         return res
           .cookie(cookieKey, token, {
             secure: process.env.NODE_ENV === "production",
+            // domain:".ajfoundation.site",
             expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
           })
           .status(OK)

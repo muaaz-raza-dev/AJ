@@ -11,12 +11,13 @@ export interface IglobalState  {
 export interface IadvancedActions{
     autoGR:boolean;
     sortGR:boolean;
+    isStdBlocked:boolean;
     isTemporaryBlocked:boolean;
 }
-export let DefaultGlobalState :IglobalState  = {
+export const DefaultGlobalState :IglobalState  = {
     Expand_Navbar:false ,
     Classes: {},
-    AdvancedSettings:{autoGR:false,sortGR:false,isTemporaryBlocked:false},
+    AdvancedSettings:{autoGR:false,sortGR:false,isTemporaryBlocked:false,isStdBlocked:false},
     Sections:{},
     Sessions:{} ,
     GlobalFees:{},

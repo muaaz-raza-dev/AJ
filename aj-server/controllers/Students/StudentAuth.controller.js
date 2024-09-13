@@ -39,7 +39,7 @@ async function LoginStudent(req, res) {
     let account = await Account.findOne({ Student: student._id });
 
     {
-      const { isRestricted, response } = await GlobalRestrictionValidator(res);
+      const { isRestricted, response } = await StdGlobalRestrictionValidator(res);
       if (isRestricted){ return response;}
     }
 

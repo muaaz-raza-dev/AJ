@@ -8,9 +8,7 @@ export default function DiaryDate() {
   return (
     <div>
           <h1 className="hFont font-semibold  pb-1 ">Diary Date (Optional)</h1>
-          <Controller control={control} name='date' render={({field})=> {
-            return <> <Input type='date' {...field}  /> </>
-          }
+          <Controller  control={control} name='date' render={({field})=> { return <> <Input className='dark:bg-dark dark:text-white' type='date' {...field}  /> </>}
           }
           />
     </div>

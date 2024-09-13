@@ -72,8 +72,8 @@ const EachSectionComp = ({
   const { Classes, Sections } = useAppSelector((s) => s.global);
   return (
     <div className="flex flex-col gap-2">
-      <div className="bg-primary justify-between">
-        <h2 className="hFont font-medium text-dark bg-primary p-2 ">
+      <div className=" justify-between">
+        <h2 className="hFont font-medium text-dark bg-primary dark:bg-dark rounded-md dark:text-white p-2 ">
           Class {Classes[cl.class]} Sections
         </h2>
       </div>
@@ -83,11 +83,12 @@ const EachSectionComp = ({
             label: e[1],
             value: e[0],
           }))}
+          className="dark:border rounded-md"
           state={input}
           setState={(val) => setinput(val)}
           nosearch
         />
-        <Button  htmlType="button"  onClick={() => addSection(input, cl.class, setinput)}>
+        <Button  htmlType="button" className="dark:text-white" onClick={() => addSection(input, cl.class, setinput)}>
           Add
         </Button>
       </div>

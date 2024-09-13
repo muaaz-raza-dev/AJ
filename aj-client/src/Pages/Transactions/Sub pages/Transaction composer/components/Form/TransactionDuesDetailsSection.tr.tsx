@@ -9,8 +9,8 @@ const TransactionDuesDetailsSection = () => {
     const {Sessions} = useAppSelector(s=>s.global)
     const {StudentInfo} =useAppSelector(s=>s.trComposeFilters)
     useEffect(() => {
-        const grouped = lod.groupBy(Dues,(({_id})=>_id))
-        setData(grouped)
+    const grouped = lod.groupBy(Dues,(({_id})=>_id))
+    setData(grouped)
     }, [Dues])
     if(StudentInfo?.FirstName) {
 

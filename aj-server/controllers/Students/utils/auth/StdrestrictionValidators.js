@@ -2,6 +2,7 @@ const { ExtractIpAddress } = require("../../../../utils/getLocationFromIp");
 const Account = require("../../../../models/StdAcconts");
 const GlobalConfig = require("../../../../models/GlobalConfig");
 
+const cookieKey = process.env.STD_COOKIE_KEY;
 const StdGlobalRestrictionValidator = async (res) => {
   let isRestricted = false;
   let response = false
@@ -11,7 +12,11 @@ const StdGlobalRestrictionValidator = async (res) => {
   } 
   else {
     if(globalConfig.isStdBlocked){
-      response = res.status(403).json({success: false,message: "Access denied , Contact your admin .",});
+      response = res.clearCookie(cookieKey, {
+        secure: process.env.NODE_ENV === "production",
+        domain: ".ajfoundation.site",
+        path: "/",
+      }).status(403).json({success: false,message: "Access denied , Contact your admin .",});
       isRestricted = true;
    }
   }
@@ -28,7 +33,11 @@ const StdIpValidator = async (req,res) => {
   const isLoginInfo = req.details?.logins?.find(l=>l.ip==ip)??null;
     if(!isLoginInfo){
       await Account.findByIdAndUpdate(req.details._id, { $pull: { logins: { ip: ip } } });
-      response = res.status(403).json({success: false,message: "Re-login is required ,Try with valid credentials .",});
+      response = res.clearCookie(cookieKey, {
+        secure: process.env.NODE_ENV === "production",
+        domain: ".ajfoundation.site",
+        path: "/",
+      }).status(403).json({success: false,message: "Re-login is required ,Try with valid credentials .",});
       isRestricted = true;
     }
   

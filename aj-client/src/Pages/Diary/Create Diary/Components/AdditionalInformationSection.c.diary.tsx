@@ -7,16 +7,16 @@ export default function SecondaryInformation() {
   return (
     
     <section className="flex flex-col w-full gap-2">
-    <div className="bg-box p-2 py-4 rounded-md">
+    <div className="bg-box dark:bg-darker dark:text-white p-2 py-4 rounded-md">
       <TagInformationSelection/>
     </div>
-    <div className="bg-box p-2 py-4 rounded-md">
+    <div className="bg-box p-2  dark:bg-darker dark:text-white py-4 rounded-md">
       <ClassInformation/>
     </div>
-    <div className="bg-box p-2 py-4 rounded-md">
+    <div className="bg-box p-2  dark:bg-darker dark:text-white py-4 rounded-md">
       <SectionInformation/>
     </div>
-    <div className="bg-box p-2 py-4 rounded-md">
+    <div className="bg-box p-2  dark:bg-darker dark:text-white py-4 rounded-md">
       <DiaryDate/>
     </div>
     </section>

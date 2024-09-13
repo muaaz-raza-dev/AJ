@@ -10,8 +10,8 @@ const GetGlobalConfigs = async (req,res)=>{
 }
 
 const UpdateGlobalConfigs = async (req,res)=>{
-    let {autoGR,sortGR,isTemporaryBlocked} = req.body
-    let globalConfigs = await GlobalConfig.findOneAndUpdate({},{autoGR,sortGR,isTemporaryBlocked},{new:true})
+    let {autoGR,sortGR,isTemporaryBlocked,isStdBlocked} = req.body
+    let globalConfigs = await GlobalConfig.findOneAndUpdate({},{autoGR,sortGR,isTemporaryBlocked,isStdBlocked},{new:true})
     Respond({res,payload:globalConfigs, success:true, message:"Global configurations updated successfully!"})
 }
 

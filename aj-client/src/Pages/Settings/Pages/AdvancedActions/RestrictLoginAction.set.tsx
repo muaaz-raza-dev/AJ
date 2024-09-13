@@ -14,7 +14,7 @@ dispatch(InsertGlobalValues({AdvancedActions:{isTemporaryBlocked:value}}))
 mutate({...AdvancedSettings,isTemporaryBlocked:value})
 }
   return (
-    <SettingsLabelWrapper className="!w-[70%] text-lg "  label="Restrict Login" description="
+    <SettingsLabelWrapper className="!w-[70%] text-lg "  label="Restrict Login admins/users" description="
     It will block all the un-logined user to login to thier accounts .Additionally Already logined users will be logged out automatically. ">
     <div className="flex justify-end gap-2  items-center w-[30%] ">
       {isLoading&&<RequestLoading size='16' stroke='2' dark/>}

@@ -44,8 +44,8 @@ export default function ClassInformation() {
             state={input}
             setState={(val) => setinput(val)}
           />
-          <Button  htmlType="button"   onClick={addClass}>Add</Button>
-          <Button  htmlType="button" className="bg-box text-dark" onClick={addAllClass}>Select All</Button>
+          <Button  htmlType="button" className="dark:text-white "   onClick={addClass}>Add</Button>
+          <Button  htmlType="button" className="bg-box text-dark dark:bg-darker dark:text-white" onClick={addAllClass}>Select All</Button>
         </div>
         <div className="flex  gap-2 flex-wrap">
           {classes.map((cl, i) => (

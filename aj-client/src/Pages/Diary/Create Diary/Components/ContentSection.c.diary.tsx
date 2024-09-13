@@ -8,7 +8,7 @@ import { IdiaryCreate } from "@/app/Types/IdiaryCreate";
 export default function ContentSection() {
   const { control } = useFormContext<IdiaryCreate>();
   return (
-    <section className="flex gap-4 flex-col w-[65%]">
+    <section className="flex gap-4 flex-col w-[65%] max-lg:w-full ">
       <div className="">
         <Label
           htmlFor="title"
@@ -26,7 +26,7 @@ export default function ContentSection() {
                 <Input
                   {...field}
                   id="title"
-                  className="w-full"
+                  className="w-full dark:bg-dark dark:text-white dark:placeholder:text-gray-400"
                   placeholder="English Home work Diary"
                 />
                 {formState.errors && (
