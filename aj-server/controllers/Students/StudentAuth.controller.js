@@ -11,7 +11,6 @@ const { OK } = require("http-status-codes");
 const HandleJWTToken = require("../../Helpers/HandleTokenExpiry");
 const SendMail = require("../../utils/Send-Mail");
 const Students = require("../../models/Students");
-const moment = require("moment");
 const { getExtensiveLoginInfo } = require("../../utils/getLocationFromIp");
 const {
   CreateAndLoginNewStdAccount,
@@ -62,11 +61,12 @@ async function LoginStudent(req, res) {
        .status(401)
        .json({ success: false, message: "Invalid Credentials" });
     }
-
+    const isExist = account.logins.find(d=>d.ip==userDetails.ip)
       const updateData = {
         isLogOutRequired: false,
-        $addToSet: { logins: userDetails },
+        ...(!isExist&&{$addToSet: { logins: userDetails }})
       };
+
       await Account.findByIdAndUpdate(account._id, updateData, { new: true });
 
       let tokenPayload = { accounts: [accountId], activeId: accountId };
